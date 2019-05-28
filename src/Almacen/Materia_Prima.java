@@ -5,16 +5,24 @@
  */
 package Almacen;
 
+import Principal.NuevoCargo;
+import conexion.BaseDeDatos;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Alicer
  */
-public class RegistroAlmacen extends javax.swing.JDialog {
+public class Materia_Prima extends javax.swing.JDialog {
 
     /**
      * Creates new form Almacen_materia_prima
      */
-    public RegistroAlmacen(java.awt.Frame parent, boolean modal) {
+    public Materia_Prima(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -31,9 +39,7 @@ public class RegistroAlmacen extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         txtDescripcion = new javax.swing.JTextField();
-        jcCategoria = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         txtMax = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -43,6 +49,8 @@ public class RegistroAlmacen extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         txtMinOnzas = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        txtCosto = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -55,56 +63,65 @@ public class RegistroAlmacen extends javax.swing.JDialog {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Descripcion:");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 70, 154, 27));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Categoría:");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 112, 151, 27));
         jPanel2.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 70, 224, 28));
-
-        jcCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(jcCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 112, 224, 28));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Stock Máximo en libras:");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 154, 154, 27));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 140, 154, 27));
 
         txtMax.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtMaxKeyReleased(evt);
             }
         });
-        jPanel2.add(txtMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 154, 84, 28));
+        jPanel2.add(txtMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 140, 84, 28));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Total en Onzas:");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(266, 154, 98, 27));
-        jPanel2.add(txtMaxOnzas, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 154, 84, 28));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(266, 140, 98, 27));
+        jPanel2.add(txtMaxOnzas, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 140, 84, 28));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Stock Mínimo en libras: ");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 196, 154, 27));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 182, 154, 27));
 
         txtMin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtMinKeyReleased(evt);
             }
         });
-        jPanel2.add(txtMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 196, 84, 28));
+        jPanel2.add(txtMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 182, 84, 28));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Total en Onzas:");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(266, 196, 98, 27));
-        jPanel2.add(txtMinOnzas, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 196, 84, 28));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(266, 182, 98, 27));
+        jPanel2.add(txtMinOnzas, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 182, 84, 28));
 
         jButton1.setText("Guardar");
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(238, 252, 98, 42));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 266, 98, 42));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 546, 350));
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel7.setText("Costo: ");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 224, 154, 27));
+
+        txtCosto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCostoKeyReleased(evt);
+            }
+        });
+        jPanel2.add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 224, 84, 28));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 546, 336));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,6 +151,32 @@ public class RegistroAlmacen extends javax.swing.JDialog {
         txtMinOnzas.setText(Integer.toString(onzas));
     }//GEN-LAST:event_txtMinKeyReleased
 
+    private void txtCostoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostoKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCostoKeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        try {
+            BaseDeDatos cone = new BaseDeDatos();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            PreparedStatement ps = null;
+            ps = conn.prepareStatement("INSERT  (?)");
+            ps.setString(1, txtDescripcion.getText());
+            ps.setInt(1, 0);
+            ps.setString(1, txtMaxOnzas.getText());
+            ps.setString(1, txtMinOnzas.getText());
+            ps.setString(1, txtCosto.getText());
+            ps.execute();
+            JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(NuevoCargo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -151,21 +194,23 @@ public class RegistroAlmacen extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegistroAlmacen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Materia_Prima.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegistroAlmacen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Materia_Prima.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegistroAlmacen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Materia_Prima.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegistroAlmacen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Materia_Prima.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                RegistroAlmacen dialog = new RegistroAlmacen(new javax.swing.JFrame(), true);
+                Materia_Prima dialog = new Materia_Prima(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -180,14 +225,14 @@ public class RegistroAlmacen extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JComboBox<String> jcCategoria;
+    private javax.swing.JTextField txtCosto;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtMax;
     private javax.swing.JTextField txtMaxOnzas;

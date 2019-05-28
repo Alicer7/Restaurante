@@ -9,12 +9,12 @@ package Almacen;
  *
  * @author Alicer
  */
-public class Compra_Almacen extends javax.swing.JDialog {
+public class Factura_Compra extends javax.swing.JDialog {
 
     /**
      * Creates new form Compra_Almacen
      */
-    public Compra_Almacen(java.awt.Frame parent, boolean modal) {
+    public Factura_Compra(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -170,20 +170,21 @@ public class Compra_Almacen extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Compra_Almacen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Factura_Compra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Compra_Almacen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Factura_Compra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Compra_Almacen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Factura_Compra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Compra_Almacen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Factura_Compra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Compra_Almacen dialog = new Compra_Almacen(new javax.swing.JFrame(), true);
+                Factura_Compra dialog = new Factura_Compra(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

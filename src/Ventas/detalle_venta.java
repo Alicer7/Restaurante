@@ -138,7 +138,7 @@ public class detalle_venta extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Ventas.listado_bebidas bebidas = new Ventas.listado_bebidas(null, true);
+        frames.listado_bebidas bebidas = new frames.listado_bebidas(null, true);
         bebidas.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -148,7 +148,7 @@ public class detalle_venta extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        Ventas.listado_platillos platillos = new Ventas.listado_platillos(null, true);
+        frames.listado_platillos platillos = new frames.listado_platillos(null, true);
         platillos.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 

@@ -5,7 +5,7 @@
  */
 package restaurante;
 
-import Principal.MenuPrincipal;
+import frames.MenuPrincipal;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;

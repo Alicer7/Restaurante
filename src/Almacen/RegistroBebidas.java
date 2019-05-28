@@ -34,10 +34,10 @@ public class RegistroBebidas extends javax.swing.JDialog {
         txtDescripcion = new javax.swing.JTextField();
         jcCategoria = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jcStockMaximo = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        txtStockMinimo = new javax.swing.JTextField();
+        txtPrecio = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jcReceta = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -60,18 +60,20 @@ public class RegistroBebidas extends javax.swing.JDialog {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Stock Máximo:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 154, 154, 27));
-        jPanel1.add(jcStockMaximo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 154, 84, 28));
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("Stock Mínimo:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 196, 154, 27));
-        jPanel1.add(txtStockMinimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 196, 84, 28));
+        jLabel3.setText("Precio:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 196, 154, 27));
+        jPanel1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 196, 84, 28));
 
         btnGuardar.setText("Guardar");
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(266, 252, 98, 42));
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 266, 98, 42));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel4.setText("Receta:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 154, 151, 27));
+
+        jcReceta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(jcReceta, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 154, 224, 28));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,11 +139,11 @@ public class RegistroBebidas extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JComboBox<String> jcCategoria;
-    private javax.swing.JTextField jcStockMaximo;
+    private javax.swing.JComboBox<String> jcReceta;
     private javax.swing.JTextField txtDescripcion;
-    private javax.swing.JTextField txtStockMinimo;
+    private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 }

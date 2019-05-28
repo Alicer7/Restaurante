@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Principal;
+package frames;
 
 /**
  *
@@ -110,24 +110,24 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        Almacen.Inventarios inventario = new Almacen.Inventarios(null, true);
+        frames.menu_inventario inventario = new frames.menu_inventario(null, true);
         inventario.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
-        Almacen.Compra_Almacen compras = new Almacen.Compra_Almacen(null, true);
+        Almacen.Factura_Compra compras = new Almacen.Factura_Compra(null, true);
         compras.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
-        Principal.Receta receta = new Principal.Receta(null, true);
+        Principal.Ingredientes receta = new Principal.Ingredientes(null, true);
         receta.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        Principal.Catalogos catalogo = new Principal.Catalogos(null, true);
+        frames.Catalogos catalogo = new frames.Catalogos(null, true);
         catalogo.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 
