@@ -137,7 +137,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        Ventas.detalle_venta detalle = new Ventas.detalle_venta(null, true);
+        Ventas.almacen_factura detalle = new Ventas.almacen_factura(null, true);
         detalle.setVisible(true);
 
     }//GEN-LAST:event_jButton8ActionPerformed
