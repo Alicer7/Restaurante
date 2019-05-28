@@ -5,11 +5,26 @@
  */
 package Principal;
 
+import com.mysql.jdbc.Connection;
+import conexion.BaseDeDatos;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Alicer
  */
 public class Ingredientes extends javax.swing.JDialog {
+
+    DefaultTableModel modelo = new DefaultTableModel();
+    int IdMaterial =0; 
+    Double costoMat=0.0;
 
     /**
      * Creates new form Receta
@@ -17,6 +32,58 @@ public class Ingredientes extends javax.swing.JDialog {
     public Ingredientes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        try {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            BaseDeDatos cone = new BaseDeDatos();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            //------------------------
+            String corrArticulo = "Select nombre from receta order by(id)";
+            ps = conn.prepareStatement(corrArticulo);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                this.jcReceta.addItem(rs.getString("nombre"));
+            }
+            //_______________________________________________
+            try {
+
+                jtMateriaPrima.setModel(modelo);
+
+                String sql = "select id, nombre, stock, costo from materiaprima ";
+                ps = conn.prepareStatement(sql);
+                rs = ps.executeQuery();
+
+                ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
+                int cantidadColumnas = rsMd.getColumnCount();
+
+                modelo.addColumn("id.");
+                modelo.addColumn("Nombre");
+                modelo.addColumn("Existencia");
+                modelo.addColumn("Costo");
+
+                int[] anchos = {10, 30, 70, 70};
+                for (int i = 0; i < jtMateriaPrima.getColumnCount(); i++) {
+                    jtMateriaPrima.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+                }
+
+                while (rs.next()) {
+                    Object[] filas = new Object[cantidadColumnas];
+                    for (int i = 0; i < cantidadColumnas; i++) {
+                        filas[i] = rs.getObject(i + 1);
+                    }
+                    modelo.addRow(filas);
+                }
+
+            } catch (SQLException ex) {
+                System.err.println(ex.toString());
+            }
+
+        } catch (Exception ex) {
+            System.err.println(ex.toString());
+        }
+
     }
 
     /**
@@ -29,12 +96,12 @@ public class Ingredientes extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jcReceta = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtCantidad = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtMateriaPrima = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -43,25 +110,24 @@ public class Ingredientes extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ingredientes", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 56, 308, 28));
+        jcReceta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(jcReceta, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 56, 308, 28));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Cantidad en onzas:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 112, 154, 28));
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(238, 112, 70, 28));
+        txtCantidad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(238, 112, 70, 28));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Receta:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 56, 98, 28));
 
-        jTable1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtMateriaPrima.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jtMateriaPrima.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -72,12 +138,22 @@ public class Ingredientes extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jtMateriaPrima.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtMateriaPrimaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jtMateriaPrima);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 210, 574, 224));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Agregar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(322, 112, 98, 28));
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -97,6 +173,51 @@ public class Ingredientes extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jtMateriaPrimaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtMateriaPrimaMouseClicked
+
+ PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conexion.BaseDeDatos objCon = new conexion.BaseDeDatos();
+            Connection conn = (Connection) objCon.conectar();
+
+            int Fila = jtMateriaPrima.getSelectedRow();
+            String codigo = jtMateriaPrima.getValueAt(Fila, 0).toString();
+            ps = conn.prepareStatement("select id, costo from materiaprima where id =?");
+            ps.setString(1, codigo);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                IdMaterial  = (rs.getInt("id"));
+                costoMat = (rs.getDouble("costo"));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+
+
+    }//GEN-LAST:event_jtMateriaPrimaMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        int cantidad = Integer.parseInt(txtCantidad.getText());
+        Double total = cantidad * costoMat;
+        try {
+            BaseDeDatos cone = new BaseDeDatos();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            PreparedStatement ps = null;
+            ps = conn.prepareStatement("INSERT INTO `ingredientes` (`receta_id`, `materiaprima_id`, `cantidad`) VALUES (?,?,?)");
+            ps.setInt(1, jcReceta.getSelectedIndex()+1);
+            ps.setInt(2, IdMaterial);
+            ps.setDouble(3, total);
+            ps.execute();
+            JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(NuevaReceta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -144,12 +265,12 @@ public class Ingredientes extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JComboBox<String> jcReceta;
+    private javax.swing.JTable jtMateriaPrima;
+    private javax.swing.JTextField txtCantidad;
     // End of variables declaration//GEN-END:variables
 }
