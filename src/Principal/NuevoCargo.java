@@ -88,7 +88,7 @@ public class NuevoCargo extends javax.swing.JDialog {
             BaseDeDatos cone = new BaseDeDatos();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
             PreparedStatement ps = null;
-            ps = conn.prepareStatement("INSERT INTO cargos (descripcion) VALUES (?)");
+            ps = conn.prepareStatement("INSERT INTO cargo (descripcion) VALUES (?)");
             ps.setString(1, txtDescripcion.getText());
             ps.execute();
             JOptionPane.showMessageDialog(null, "Ingresado Correctamente");

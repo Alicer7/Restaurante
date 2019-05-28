@@ -5,6 +5,15 @@
  */
 package Almacen;
 
+import Principal.NuevoCargo;
+import conexion.BaseDeDatos;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Alicer
@@ -35,17 +44,17 @@ public class Factura_Compra extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtFactura = new javax.swing.JTextField();
+        txtDescripcion = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtProveedor = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtEncargado = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txtMonto = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jcFecha = new com.toedter.calendar.JDateChooser();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -88,11 +97,11 @@ public class Factura_Compra extends javax.swing.JDialog {
         jLabel2.setText("Factura No.");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 28, 98, 31));
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 28, 126, 31));
+        txtFactura.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel2.add(txtFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 28, 126, 31));
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 322, 31));
+        txtDescripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel2.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 322, 31));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -104,34 +113,41 @@ public class Factura_Compra extends javax.swing.JDialog {
         jLabel4.setText("Proveedor:");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 112, 98, 31));
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 112, 322, 31));
+        txtProveedor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel2.add(txtProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 112, 322, 31));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Encargado:");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 28, 98, 31));
 
-        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel2.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(574, 28, 266, 31));
+        txtEncargado.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel2.add(txtEncargado, new org.netbeans.lib.awtextra.AbsoluteConstraints(574, 28, 266, 31));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Fecha:");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 112, 98, 31));
 
-        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel2.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(574, 70, 266, 31));
+        txtMonto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel2.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(574, 70, 266, 31));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Monto:");
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 70, 98, 31));
-        jPanel2.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(574, 112, 266, 28));
+
+        jcFecha.setDateFormatString("yyyy-MM-dd");
+        jPanel2.add(jcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(574, 112, 266, 28));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 42, 896, 168));
 
         jButton2.setText("Guardar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 560, 112, 42));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -152,6 +168,26 @@ public class Factura_Compra extends javax.swing.JDialog {
         Principal.lista_articulos lista = new Principal.lista_articulos(null, true);
         lista.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+try {
+            BaseDeDatos cone = new BaseDeDatos();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            PreparedStatement ps = null;
+            ps = conn.prepareStatement("INSERT INTO `factura_compra` (`NoFactura`, `Descripcion`, `Proveedor`, `Encargado`, `Monto`, `fecha`) VALUES (?,?,?,?,?,?)");
+            ps.setInt(1, Integer.parseInt(txtFactura.getText()));
+            ps.setString(2, txtDescripcion.getText());
+            ps.setString(3, txtProveedor.getText());
+            ps.setString(4, txtEncargado.getText());
+            ps.setString(5, txtMonto.getText());
+            ps.setString(6, ((JTextField) jcFecha.getDateEditor().getUiComponent()).getText());
+            ps.execute();
+            JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(NuevoCargo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,7 +235,6 @@ public class Factura_Compra extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -211,10 +246,11 @@ public class Factura_Compra extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private com.toedter.calendar.JDateChooser jcFecha;
+    private javax.swing.JTextField txtDescripcion;
+    private javax.swing.JTextField txtEncargado;
+    private javax.swing.JTextField txtFactura;
+    private javax.swing.JTextField txtMonto;
+    private javax.swing.JTextField txtProveedor;
     // End of variables declaration//GEN-END:variables
 }

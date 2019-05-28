@@ -107,11 +107,11 @@ public class Materia_Prima extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 266, 98, 42));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 280, 98, 42));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel7.setText("Costo: ");
+        jLabel7.setText("Costo por Unidad:");
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 224, 154, 27));
 
         txtCosto.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -157,16 +157,17 @@ public class Materia_Prima extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
+        
         try {
             BaseDeDatos cone = new BaseDeDatos();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
             PreparedStatement ps = null;
-            ps = conn.prepareStatement("INSERT  (?)");
+            ps = conn.prepareStatement("INSERT INTO `materiaprima` (`nombre`, `stock`, `stock_min`, `stock_max`, `costo`) VALUES (?,?,?,?,?)");
             ps.setString(1, txtDescripcion.getText());
-            ps.setInt(1, 0);
-            ps.setString(1, txtMaxOnzas.getText());
-            ps.setString(1, txtMinOnzas.getText());
-            ps.setString(1, txtCosto.getText());
+            ps.setInt(2, 0);
+            ps.setString(3, txtMin.getText());
+            ps.setString(4, txtMax.getText());
+            ps.setString(5, txtCosto.getText());
             ps.execute();
             JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
 

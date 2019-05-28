@@ -7,6 +7,7 @@ package Principal;
 
 import conexion.BaseDeDatos;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +23,32 @@ public class NuevoPersonal extends javax.swing.JDialog {
     public NuevoPersonal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        try {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            BaseDeDatos cone = new BaseDeDatos();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            //------------------------
+            String corrArticulo = "Select descripcion from cargo";
+            ps = conn.prepareStatement(corrArticulo);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                this.jcCargo.addItem(rs.getString("descripcion"));
+            }
+            //_______________________________________________
+            String codigoinv = "select descripcion from turno";
+            ps = conn.prepareStatement(codigoinv);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                this.jcTurno.addItem(rs.getString("descripcion"));
+            }
+
+        } catch (Exception ex) {
+            System.err.println(ex.toString());
+        }
 
     }
 
@@ -120,7 +147,6 @@ public class NuevoPersonal extends javax.swing.JDialog {
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 364, 126, 28));
 
         jcCargo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jcCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
         jPanel1.add(jcCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 322, 266, 28));
 
         jcSexo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -136,8 +162,9 @@ public class NuevoPersonal extends javax.swing.JDialog {
         jPanel1.add(jcEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 448, 266, 28));
 
         jcTurno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jcTurno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
         jPanel1.add(jcTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 364, 266, 28));
+
+        jcFecha.setDateFormatString("yyyy-MM-dd");
         jPanel1.add(jcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 406, 266, 28));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -198,21 +225,25 @@ public class NuevoPersonal extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
+        int turno = jcTurno.getSelectedIndex() + 1;
+        int cargo = jcCargo.getSelectedIndex() + 1;
+        int estado = jcEstado.getSelectedIndex() + 1;
+
         try {
             BaseDeDatos cone = new BaseDeDatos();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
             PreparedStatement ps = null;
-            ps = conn.prepareStatement("INSERT INTO cargos (descripcion) VALUES (?)");
-            ps.setString(1, txtNombre.getText());
-            ps.setString(1, txtAPellidos.getText());
-            ps.setString(1, txtDpi.getText());
-            ps.setString(1, txtDireccion.getText());
-            ps.setString(1, jcSexo.getSelectedItem().toString());
-            ps.setString(1, txtTelefono.getText());
-            ps.setString(1, jcCargo.getSelectedItem().toString());
-            ps.setString(1, jcTurno.getSelectedItem().toString());
-            ps.setString(1, ((JTextField) jcFecha.getDateEditor().getUiComponent()).getText());
-            ps.setString(1, jcEstado.getSelectedItem().toString());
+            ps = conn.prepareStatement("INSERT INTO `empleado` ( `cargo_id`, `estado_id`, `nombre`, `apellidos`, `dpi`, `genero`, `telefono`, `fecha_inicio`, `fecha_fin`, `turno_id`) VALUES (?,?,?,?,?,?,?,?,?,?)");
+            ps.setInt(1, cargo);
+            ps.setInt(2, estado);
+            ps.setString(3, txtNombre.getText());
+            ps.setString(4, txtAPellidos.getText());
+            ps.setString(5, txtDpi.getText());
+            ps.setString(6, jcSexo.getSelectedItem().toString());
+            ps.setString(7, txtTelefono.getText());
+            ps.setString(8, ((JTextField) jcFecha.getDateEditor().getUiComponent()).getText());
+            ps.setString(9, ((JTextField) jcFecha.getDateEditor().getUiComponent()).getText());
+            ps.setInt(10, turno);
             ps.execute();
             JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
 
