@@ -92,7 +92,7 @@ public class Catalogos extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        Principal.Ingreso_Personal ingreso = new Principal.Ingreso_Personal(null, true);
+        Principal.NuevoPersonal ingreso = new Principal.NuevoPersonal(null, true);
         ingreso.setVisible(true);
 
     }//GEN-LAST:event_jButton1ActionPerformed

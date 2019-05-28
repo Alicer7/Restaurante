@@ -5,18 +5,23 @@
  */
 package Principal;
 
+import conexion.BaseDeDatos;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Alicer
  */
-public class Ingreso_Personal extends javax.swing.JDialog {
+public class NuevoPersonal extends javax.swing.JDialog {
 
-    
-    public Ingreso_Personal(java.awt.Frame parent, boolean modal) {
+    public NuevoPersonal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
-
 
     }
 
@@ -38,7 +43,7 @@ public class Ingreso_Personal extends javax.swing.JDialog {
         txtDireccion = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jcTelefono = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -53,6 +58,8 @@ public class Ingreso_Personal extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        txtDpi = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -79,68 +86,68 @@ public class Ingreso_Personal extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Sexo:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 196, 126, 28));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 238, 126, 28));
 
         txtDireccion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 154, 266, 28));
+        jPanel1.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 196, 266, 28));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Dirección:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 154, 126, 28));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 196, 126, 28));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Cargo:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 280, 126, 28));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 322, 126, 28));
 
-        jcTelefono.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(jcTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 238, 266, 28));
+        txtTelefono.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 280, 266, 28));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Teléfono:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 238, 126, 28));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 280, 126, 28));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Estado:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 406, 126, 28));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 448, 126, 28));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Turno:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 322, 126, 28));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 364, 126, 28));
 
         jcCargo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jcCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
-        jPanel1.add(jcCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 280, 266, 28));
+        jPanel1.add(jcCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 322, 266, 28));
 
         jcSexo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jcSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
-        jPanel1.add(jcSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 196, 266, 28));
+        jPanel1.add(jcSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 238, 266, 28));
 
         jComboBox3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
-        jPanel1.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 280, 266, 28));
+        jPanel1.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 322, 266, 28));
 
         jcEstado.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jcEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
-        jPanel1.add(jcEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 406, 266, 28));
+        jPanel1.add(jcEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 448, 266, 28));
 
         jcTurno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jcTurno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
-        jPanel1.add(jcTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 322, 266, 28));
-        jPanel1.add(jcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 364, 266, 28));
+        jPanel1.add(jcTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 364, 266, 28));
+        jPanel1.add(jcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 406, 266, 28));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("Fecha de Ingreso:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 364, 126, 28));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 406, 126, 28));
 
         jComboBox6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
-        jPanel1.add(jComboBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 322, 266, 28));
+        jPanel1.add(jComboBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 364, 266, 28));
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -160,7 +167,20 @@ public class Ingreso_Personal extends javax.swing.JDialog {
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(448, 70, 770, 364));
 
         jButton1.setText("Guardar");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 462, 126, 42));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 504, 126, 42));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel10.setText("DPI:");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 154, 126, 28));
+
+        txtDpi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(txtDpi, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 154, 266, 28));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -175,6 +195,32 @@ public class Ingreso_Personal extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        try {
+            BaseDeDatos cone = new BaseDeDatos();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            PreparedStatement ps = null;
+            ps = conn.prepareStatement("INSERT INTO cargos (descripcion) VALUES (?)");
+            ps.setString(1, txtNombre.getText());
+            ps.setString(1, txtAPellidos.getText());
+            ps.setString(1, txtDpi.getText());
+            ps.setString(1, txtDireccion.getText());
+            ps.setString(1, jcSexo.getSelectedItem().toString());
+            ps.setString(1, txtTelefono.getText());
+            ps.setString(1, jcCargo.getSelectedItem().toString());
+            ps.setString(1, jcTurno.getSelectedItem().toString());
+            ps.setString(1, ((JTextField) jcFecha.getDateEditor().getUiComponent()).getText());
+            ps.setString(1, jcEstado.getSelectedItem().toString());
+            ps.execute();
+            JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(NuevoCargo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -193,20 +239,21 @@ public class Ingreso_Personal extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Ingreso_Personal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoPersonal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Ingreso_Personal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoPersonal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Ingreso_Personal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoPersonal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Ingreso_Personal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoPersonal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Ingreso_Personal dialog = new Ingreso_Personal(new javax.swing.JFrame(), true);
+                NuevoPersonal dialog = new NuevoPersonal(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -223,6 +270,7 @@ public class Ingreso_Personal extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -238,10 +286,11 @@ public class Ingreso_Personal extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> jcEstado;
     private com.toedter.calendar.JDateChooser jcFecha;
     private javax.swing.JComboBox<String> jcSexo;
-    private javax.swing.JTextField jcTelefono;
     private javax.swing.JComboBox<String> jcTurno;
     private javax.swing.JTextField txtAPellidos;
     private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtDpi;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }
