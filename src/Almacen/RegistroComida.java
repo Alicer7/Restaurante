@@ -5,6 +5,16 @@
  */
 package Almacen;
 
+import Principal.NuevaReceta;
+import conexion.BaseDeDatos;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Alicer
@@ -17,6 +27,33 @@ public class RegistroComida extends javax.swing.JDialog {
     public RegistroComida(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        try {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            BaseDeDatos cone = new BaseDeDatos();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            //------------------------
+            String corrArticulo = "Select nombre from receta order by(id)";
+            ps = conn.prepareStatement(corrArticulo);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                this.jcReceta.addItem(rs.getString("nombre"));
+            }
+            //_______________________________________________
+            String cat = "Select nombre from categoria order by(id)";
+            ps = conn.prepareStatement(cat);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                this.jcCategoria.addItem(rs.getString("nombre"));
+            }
+
+        } catch (Exception ex) {
+            System.err.println(ex.toString());
+        }
+
     }
 
     /**
@@ -41,7 +78,7 @@ public class RegistroComida extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro de Platillos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro de Comida", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -55,7 +92,6 @@ public class RegistroComida extends javax.swing.JDialog {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 112, 151, 27));
         jPanel1.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 224, 28));
 
-        jcCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel1.add(jcCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 112, 224, 28));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -65,14 +101,18 @@ public class RegistroComida extends javax.swing.JDialog {
         jPanel1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 196, 84, 28));
 
         btnGuardar.setText("Guardar");
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 266, 98, 42));
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 252, 98, 42));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Receta:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 154, 151, 27));
 
-        jcReceta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel1.add(jcReceta, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 154, 224, 28));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -88,6 +128,25 @@ public class RegistroComida extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+
+        try {
+            BaseDeDatos cone = new BaseDeDatos();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            PreparedStatement ps = null;
+            ps = conn.prepareStatement("INSERT INTO `comida` (`categoria_id`, `receta_id`, `nombre`, `precio`) VALUES  (?,?,?,?)");
+            ps.setInt(1, jcCategoria.getSelectedIndex() + 1);
+            ps.setInt(2, jcReceta.getSelectedIndex() + 1);
+            ps.setString(3, txtDescripcion.getText());
+            ps.setString(4, txtPrecio.getText());
+            ps.execute();
+            JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(NuevaReceta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
