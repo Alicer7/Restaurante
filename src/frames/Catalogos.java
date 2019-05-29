@@ -80,19 +80,19 @@ public class Catalogos extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        Principal.NuevoTurno turnos = new Principal.NuevoTurno(null, true);
+        Administrativo.NuevoTurno turnos = new Administrativo.NuevoTurno(null, true);
         turnos.setVisible(true);
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        Principal.NuevoCargo cargo = new Principal.NuevoCargo(null, true);
+        Administrativo.NuevoCargo cargo = new Administrativo.NuevoCargo(null, true);
         cargo.setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        Principal.NuevoPersonal ingreso = new Principal.NuevoPersonal(null, true);
+        Administrativo.NuevoPersonal ingreso = new Administrativo.NuevoPersonal(null, true);
         ingreso.setVisible(true);
 
     }//GEN-LAST:event_jButton1ActionPerformed

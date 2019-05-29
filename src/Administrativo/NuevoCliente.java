@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Principal;
+package Administrativo;
 
 import conexion.BaseDeDatos;
 import java.sql.PreparedStatement;
@@ -17,9 +17,9 @@ import javax.swing.JTextField;
  *
  * @author Alicer
  */
-public class NuevoUsuario extends javax.swing.JDialog {
+public class NuevoCliente extends javax.swing.JDialog {
 
-    public NuevoUsuario(java.awt.Frame parent, boolean modal) {
+    public NuevoCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
@@ -36,22 +36,14 @@ public class NuevoUsuario extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        txtNit = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
-        txtAPellidos = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtDireccion = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtTelefono = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jcEstado = new javax.swing.JComboBox<>();
-        jcFecha = new com.toedter.calendar.JDateChooser();
-        jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        txtDpi = new javax.swing.JTextField();
+        txtDireccion = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -61,50 +53,19 @@ public class NuevoUsuario extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("Empleado:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 70, 126, 28));
+        jLabel1.setText("Nit del Cliente:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 140, 126, 28));
+
+        txtNit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(txtNit, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 140, 266, 28));
 
         txtNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 70, 266, 28));
-
-        txtAPellidos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(txtAPellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 112, 266, 28));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 182, 266, 28));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Cargo:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 112, 126, 28));
-
-        txtDireccion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 196, 266, 28));
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("Contraseña:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 196, 126, 28));
-
-        txtTelefono.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 238, 266, 28));
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("Repita la Contraseña:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 238, 140, 28));
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel7.setText("Estado:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 322, 126, 28));
-
-        jcEstado.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jcEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
-        jPanel1.add(jcEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 322, 266, 28));
-        jPanel1.add(jcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 280, 266, 28));
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel9.setText("Fecha de Ingreso:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 280, 126, 28));
+        jLabel2.setText("Nombre:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 182, 126, 28));
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -129,15 +90,15 @@ public class NuevoUsuario extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(238, 378, 126, 42));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(238, 266, 126, 42));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel10.setText("Nombre de Usuario:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 154, 126, 28));
+        jLabel10.setText("Dirección:");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 224, 126, 28));
 
-        txtDpi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(txtDpi, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 154, 266, 28));
+        txtDireccion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 224, 266, 28));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -149,9 +110,7 @@ public class NuevoUsuario extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 24, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
         );
 
         pack();
@@ -163,14 +122,10 @@ public class NuevoUsuario extends javax.swing.JDialog {
             BaseDeDatos cone = new BaseDeDatos();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
             PreparedStatement ps = null;
-            ps = conn.prepareStatement("INSERT INTO cargos (descripcion) VALUES (?)");
-            ps.setString(1, txtNombre.getText());
-            ps.setString(1, txtAPellidos.getText());
-            ps.setString(1, txtDpi.getText());
-            ps.setString(1, txtDireccion.getText());
-            ps.setString(1, txtTelefono.getText());
-            ps.setString(1, ((JTextField) jcFecha.getDateEditor().getUiComponent()).getText());
-            ps.setString(1, jcEstado.getSelectedItem().toString());
+            ps = conn.prepareStatement("INSERT INTO cliente (nit, nombre, direccion) VALUES (?,?,?)");
+            ps.setString(1, txtNit.getText());
+            ps.setString(2, txtNombre.getText());
+            ps.setString(3, txtDireccion.getText());
             ps.execute();
             JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
 
@@ -197,21 +152,23 @@ public class NuevoUsuario extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NuevoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NuevoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NuevoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NuevoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                NuevoUsuario dialog = new NuevoUsuario(new javax.swing.JFrame(), true);
+                NuevoCliente dialog = new NuevoCliente(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -228,19 +185,11 @@ public class NuevoUsuario extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JComboBox<String> jcEstado;
-    private com.toedter.calendar.JDateChooser jcFecha;
-    private javax.swing.JTextField txtAPellidos;
     private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtDpi;
+    private javax.swing.JTextField txtNit;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,8 +5,6 @@
  */
 package frames;
 
-import Principal.*;
-
 /**
  *
  * @author Alicer

@@ -3,7 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Principal;
+package Z_Sin_Usar;
+
+import Ventas_Compras_facturas.Factura_ingreso;
+import conexion.BaseDeDatos;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -11,12 +21,68 @@ package Principal;
  */
 public class lista_articulos extends javax.swing.JDialog {
 
+    DefaultTableModel modelo = new DefaultTableModel();
+    int ID_ARTICULO = 0;
+    String NOMBRE_ARTICULO = null;
+
     /**
      * Creates new form lista_articulos
      */
     public lista_articulos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        try {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            BaseDeDatos cone = new BaseDeDatos();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            //------------------------
+//            String corrArticulo = "Select nombre from receta order by(id)";
+//            ps = conn.prepareStatement(corrArticulo);
+//            rs = ps.executeQuery();
+//
+//            while (rs.next()) {
+//                this.jcReceta.addItem(rs.getString("nombre"));
+//            }
+            //_______________________________________________
+            try {
+
+                jtArticulos.setModel(modelo);
+
+                String sql = "select id, nombre, stock, costo from materiaprima ";
+                ps = conn.prepareStatement(sql);
+                rs = ps.executeQuery();
+
+                ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
+                int cantidadColumnas = rsMd.getColumnCount();
+
+                modelo.addColumn("id.");
+                modelo.addColumn("Nombre");
+                modelo.addColumn("Existencia");
+                modelo.addColumn("Costo");
+
+                int[] anchos = {10, 30, 70, 70};
+                for (int i = 0; i < jtArticulos.getColumnCount(); i++) {
+                    jtArticulos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+                }
+
+                while (rs.next()) {
+                    Object[] filas = new Object[cantidadColumnas];
+                    for (int i = 0; i < cantidadColumnas; i++) {
+                        filas[i] = rs.getObject(i + 1);
+                    }
+                    modelo.addRow(filas);
+                }
+
+
+        } catch (SQLException ex) {
+            System.err.println(ex.toString());
+        }
+             } catch (SQLException ex) {
+            System.err.println(ex.toString());
+        }
+
     }
 
     /**
@@ -30,19 +96,18 @@ public class lista_articulos extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        jtArticulos = new javax.swing.JTable();
+        txtCantidad = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtPrecio = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Artículos en Inventario", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtArticulos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -53,25 +118,22 @@ public class lista_articulos extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 70, 644, 266));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 364, 84, 28));
-
-        jLabel1.setText("Cantidad: ");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 364, -1, 28));
-
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        jtArticulos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtArticulosMouseClicked(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(364, 378, -1, 28));
+        jScrollPane1.setViewportView(jtArticulos);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 70, 644, 266));
+        jPanel1.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 364, 84, 28));
+
+        jLabel1.setText("Cantidad: ");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(98, 364, -1, 28));
 
         jLabel2.setText("Precio de Compra:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 406, -1, 28));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 406, 84, 28));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(294, 364, -1, 28));
+        jPanel1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 364, 84, 28));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,9 +149,16 @@ public class lista_articulos extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-dispose(); 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jtArticulosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtArticulosMouseClicked
+
+        int Fila = jtArticulos.getSelectedRow();
+        String codigo = jtArticulos.getValueAt(Fila, 0).toString();
+        String nombre = jtArticulos.getValueAt(Fila, 1).toString();
+        ID_ARTICULO = Integer.parseInt(codigo);
+        NOMBRE_ARTICULO = nombre;
+        System.out.println("id " + ID_ARTICULO);
+        System.out.println("Nombre: " + NOMBRE_ARTICULO);
+    }//GEN-LAST:event_jtArticulosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -134,13 +203,12 @@ dispose();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTable jtArticulos;
+    private javax.swing.JTextField txtCantidad;
+    private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 }

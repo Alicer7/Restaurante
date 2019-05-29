@@ -5,8 +5,6 @@
  */
 package Ventas;
 
-import Principal.*;
-
 /**
  *
  * @author Alicer

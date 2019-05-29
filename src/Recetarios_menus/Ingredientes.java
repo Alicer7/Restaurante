@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Principal;
+package Recetarios_menus;
 
+import Recetarios_menus.NuevaReceta;
 import com.mysql.jdbc.Connection;
 import conexion.BaseDeDatos;
 import java.sql.PreparedStatement;
@@ -80,7 +81,7 @@ public class Ingredientes extends javax.swing.JDialog {
                 System.err.println(ex.toString());
             }
 
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             System.err.println(ex.toString());
         }
 

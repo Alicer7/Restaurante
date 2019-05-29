@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Principal;
+package Administrativo;
 
 import conexion.BaseDeDatos;
 import java.sql.Connection;
@@ -17,12 +17,12 @@ import javax.swing.JOptionPane;
  *
  * @author Alicer
  */
-public class NuevaReceta extends javax.swing.JDialog {
+public class NuevoCargo extends javax.swing.JDialog {
 
     /**
      * Creates new form NuevoCargo
      */
-    public NuevaReceta(java.awt.Frame parent, boolean modal) {
+    public NuevoCargo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -64,9 +64,8 @@ public class NuevaReceta extends javax.swing.JDialog {
         jPanel1.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 154, 84, 28));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Nueva Receta");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(98, 70, 224, 28));
+        jLabel2.setText("Agregue un Nuevo Cargo");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 70, -1, 28));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,18 +83,18 @@ public class NuevaReceta extends javax.swing.JDialog {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
 
+        
         try {
             BaseDeDatos cone = new BaseDeDatos();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
             PreparedStatement ps = null;
-            ps = conn.prepareStatement("INSERT INTO receta (nombre, costo) VALUES (?,?)");
+            ps = conn.prepareStatement("INSERT INTO cargo (descripcion) VALUES (?)");
             ps.setString(1, txtDescripcion.getText());
-            ps.setInt(2, 0);
             ps.execute();
             JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
-
+            
         } catch (SQLException ex) {
-            Logger.getLogger(NuevaReceta.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NuevoCargo.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btnAceptarActionPerformed
@@ -117,21 +116,20 @@ public class NuevaReceta extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NuevaReceta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoCargo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NuevaReceta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoCargo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NuevaReceta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoCargo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NuevaReceta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoCargo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                NuevaReceta dialog = new NuevaReceta(new javax.swing.JFrame(), true);
+                NuevoCargo dialog = new NuevoCargo(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

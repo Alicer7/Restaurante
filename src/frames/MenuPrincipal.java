@@ -116,13 +116,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
-        Almacen.Factura_Compra compras = new Almacen.Factura_Compra(null, true);
-        compras.setVisible(true);
+     
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
-        Principal.Ingredientes receta = new Principal.Ingredientes(null, true);
+        Recetarios_menus.Ingredientes receta = new Recetarios_menus.Ingredientes(null, true);
         receta.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 

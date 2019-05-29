@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Almacen;
+package IngresoAlmacen;
 
-import Principal.NuevoCargo;
+import Administrativo.NuevoCargo;
 import conexion.BaseDeDatos;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

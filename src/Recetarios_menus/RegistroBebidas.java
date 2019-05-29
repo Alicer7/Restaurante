@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Almacen;
+package Recetarios_menus;
 
-import Principal.NuevaReceta;
 import conexion.BaseDeDatos;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,12 +18,12 @@ import javax.swing.JOptionPane;
  *
  * @author Alicer
  */
-public class RegistroComida extends javax.swing.JDialog {
+public class RegistroBebidas extends javax.swing.JDialog {
 
     /**
      * Creates new form NewJDialog
      */
-    public RegistroComida(java.awt.Frame parent, boolean modal) {
+    public RegistroBebidas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
@@ -78,7 +77,7 @@ public class RegistroComida extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro de Comida", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro de Bebidas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -135,7 +134,7 @@ public class RegistroComida extends javax.swing.JDialog {
             BaseDeDatos cone = new BaseDeDatos();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
             PreparedStatement ps = null;
-            ps = conn.prepareStatement("INSERT INTO `comida` (`categoria_id`, `receta_id`, `nombre`, `precio`) VALUES  (?,?,?,?)");
+            ps = conn.prepareStatement("INSERT INTO `bebida` (`categoria_id`, `receta_id`, `nombre`, `precio`) VALUES  (?,?,?,?)");
             ps.setInt(1, jcCategoria.getSelectedIndex() + 1);
             ps.setInt(2, jcReceta.getSelectedIndex() + 1);
             ps.setString(3, txtDescripcion.getText());
@@ -165,18 +164,14 @@ public class RegistroComida extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegistroComida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroBebidas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegistroComida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroBebidas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegistroComida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroBebidas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegistroComida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroBebidas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -185,7 +180,7 @@ public class RegistroComida extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                RegistroComida dialog = new RegistroComida(new javax.swing.JFrame(), true);
+                RegistroBebidas dialog = new RegistroBebidas(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Almacen;
+package Recetarios_menus;
 
-import Principal.NuevaReceta;
 import conexion.BaseDeDatos;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,12 +18,12 @@ import javax.swing.JOptionPane;
  *
  * @author Alicer
  */
-public class CrearMenú extends javax.swing.JDialog {
+public class RegistroComida extends javax.swing.JDialog {
 
     /**
      * Creates new form NewJDialog
      */
-    public CrearMenú(java.awt.Frame parent, boolean modal) {
+    public RegistroComida(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
@@ -34,7 +33,7 @@ public class CrearMenú extends javax.swing.JDialog {
             BaseDeDatos cone = new BaseDeDatos();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
             //------------------------
-            String corrArticulo = "Select nombre from comida order by(id)";
+            String corrArticulo = "Select nombre from receta order by(id)";
             ps = conn.prepareStatement(corrArticulo);
             rs = ps.executeQuery();
 
@@ -42,7 +41,7 @@ public class CrearMenú extends javax.swing.JDialog {
                 this.jcReceta.addItem(rs.getString("nombre"));
             }
             //_______________________________________________
-            String cat = "Select nombre from bebida order by(id)";
+            String cat = "Select nombre from categoria order by(id)";
             ps = conn.prepareStatement(cat);
             rs = ps.executeQuery();
 
@@ -70,13 +69,15 @@ public class CrearMenú extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         txtDescripcion = new javax.swing.JTextField();
         jcCategoria = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        txtPrecio = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jcReceta = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro de Bebidas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro de Comida", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -91,6 +92,12 @@ public class CrearMenú extends javax.swing.JDialog {
         jPanel1.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 224, 28));
 
         jPanel1.add(jcCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 112, 224, 28));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("Precio:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 196, 154, 27));
+        jPanel1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 196, 84, 28));
 
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -123,15 +130,15 @@ public class CrearMenú extends javax.swing.JDialog {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
-        
         try {
             BaseDeDatos cone = new BaseDeDatos();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
             PreparedStatement ps = null;
-            ps = conn.prepareStatement("INSERT INTO `menu` (`bebida_id`, `comida_id`, `nombre`) VALUES  (?,?,?)");
+            ps = conn.prepareStatement("INSERT INTO `comida` (`categoria_id`, `receta_id`, `nombre`, `precio`) VALUES  (?,?,?,?)");
             ps.setInt(1, jcCategoria.getSelectedIndex() + 1);
             ps.setInt(2, jcReceta.getSelectedIndex() + 1);
             ps.setString(3, txtDescripcion.getText());
+            ps.setString(4, txtPrecio.getText());
             ps.execute();
             JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
 
@@ -157,13 +164,13 @@ public class CrearMenú extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CrearMenú.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroComida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CrearMenú.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroComida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CrearMenú.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroComida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CrearMenú.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroComida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -177,7 +184,7 @@ public class CrearMenú extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                CrearMenú dialog = new CrearMenú(new javax.swing.JFrame(), true);
+                RegistroComida dialog = new RegistroComida(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -193,10 +200,12 @@ public class CrearMenú extends javax.swing.JDialog {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JComboBox<String> jcCategoria;
     private javax.swing.JComboBox<String> jcReceta;
     private javax.swing.JTextField txtDescripcion;
+    private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 }

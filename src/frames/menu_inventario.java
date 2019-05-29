@@ -70,13 +70,13 @@ public class menu_inventario extends javax.swing.JDialog {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-        Almacen.Materia_Prima almacen = new Almacen.Materia_Prima(null, true);
+        IngresoAlmacen.Materia_Prima almacen = new IngresoAlmacen.Materia_Prima(null, true);
         almacen.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        Almacen.RegistroBebidas bebidas = new Almacen.RegistroBebidas(null, true);
+        Recetarios_menus.RegistroBebidas bebidas = new Recetarios_menus.RegistroBebidas(null, true);
         bebidas.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
