@@ -233,7 +233,7 @@ public class NuevoPersonal extends javax.swing.JDialog {
             BaseDeDatos cone = new BaseDeDatos();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
             PreparedStatement ps = null;
-            ps = conn.prepareStatement("INSERT INTO `empleado` ( `cargo_id`, `estado_id`, `nombre`, `apellidos`, `dpi`, `genero`, `telefono`, `fecha_inicio`, `fecha_fin`, `turno_id`) VALUES (?,?,?,?,?,?,?,?,?,?)");
+            ps = conn.prepareStatement("INSERT INTO `empleado` ( `cargo_id`, `estado_id`, `nombre`, `apellido`, `dpi`, `genero`, `telefono`, `fecha_inicio`, `fecha_fin`, `turno_id`) VALUES (?,?,?,?,?,?,?,?,?,?)");
             ps.setInt(1, cargo);
             ps.setInt(2, estado);
             ps.setString(3, txtNombre.getText());
@@ -249,6 +249,7 @@ public class NuevoPersonal extends javax.swing.JDialog {
 
         } catch (SQLException ex) {
             Logger.getLogger(NuevoCargo.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("datos: " +turno + " "+  cargo +" " + estado +" ");
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed

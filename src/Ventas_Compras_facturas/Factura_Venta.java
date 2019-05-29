@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Alicer
  */
-public class Factura_ingreso extends javax.swing.JFrame {
+public class Factura_Venta extends javax.swing.JFrame {
     
     int ID_ARTICULO = 0;
     String NOMBRE_ARTICULO = null;
@@ -69,7 +69,7 @@ public class Factura_ingreso extends javax.swing.JFrame {
     /**
      * Creates new form Factura_ingreso
      */
-    public Factura_ingreso() {
+    public Factura_Venta() {
         initComponents();
         tabla();
         popuptable();
@@ -154,7 +154,7 @@ public class Factura_ingreso extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Factura No.");
+        jLabel2.setText("Comanda No.");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 28, 98, 31));
 
         txtFactura.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -392,20 +392,21 @@ public class Factura_ingreso extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Factura_ingreso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Factura_Venta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Factura_ingreso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Factura_Venta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Factura_ingreso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Factura_Venta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Factura_ingreso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Factura_Venta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Factura_ingreso().setVisible(true);
+                new Factura_Venta().setVisible(true);
             }
         });
     }

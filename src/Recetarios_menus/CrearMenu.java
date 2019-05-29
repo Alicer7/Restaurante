@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Ventas_Compras_facturas;
+package Recetarios_menus;
 
-import com.mysql.jdbc.Connection;
 import conexion.BaseDeDatos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,11 +23,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Alicer
  */
-public class Factura_ingreso extends javax.swing.JFrame {
-    
+public class CrearMenu extends javax.swing.JFrame {
+
     int ID_ARTICULO = 0;
     String NOMBRE_ARTICULO = null;
-    
+    Double PRECIO = 0.0;
+
     public void tabla() {
         DefaultTableModel modelo = new DefaultTableModel();
         jtProductos.setModel(modelo);
@@ -38,7 +38,7 @@ public class Factura_ingreso extends javax.swing.JFrame {
         modelo.addColumn("Precio");
         modelo.addColumn("Totalw");
     }
-    
+
     public void popuptable() {
         JPopupMenu popmenu = new JPopupMenu();
         JMenuItem menuitem = new JMenuItem("Eliminar", new ImageIcon(getClass().getResource("/iconos/eli.png")));
@@ -60,56 +60,72 @@ public class Factura_ingreso extends javax.swing.JFrame {
                 }
             }
         });
-        
+
         popmenu.add(menuitem);
-        
+
         jtProductos.setComponentPopupMenu(popmenu);
     }
 
     /**
      * Creates new form Factura_ingreso
      */
-    public Factura_ingreso() {
+    public CrearMenu() {
         initComponents();
         tabla();
         popuptable();
-        
+
         try {
-            PreparedStatement ps = null;
-            ResultSet rs = null;
             BaseDeDatos cone = new BaseDeDatos();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
-            DefaultTableModel modelo2 = new DefaultTableModel();
-            jtArticulos.setModel(modelo2);
-            
-            String sql = "select id, nombre, stock, costo from materiaprima ";
-            ps = conn.prepareStatement(sql);
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            String corrArticulo = "select id From empleado where cargo_id = '1' order by(id)";
+            ps = conn.prepareStatement(corrArticulo);
             rs = ps.executeQuery();
-            
-            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
-            int cantidadColumnas = rsMd.getColumnCount();
-            
-            modelo2.addColumn("id.");
-            modelo2.addColumn("Nombre");
-            modelo2.addColumn("Existencia");
-            modelo2.addColumn("Costo");
-            
-            int[] anchos = {10, 30, 70, 70};
-            for (int i = 0; i < jtArticulos.getColumnCount(); i++) {
-                jtArticulos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
-            }
-            
+
             while (rs.next()) {
-                Object[] filas = new Object[cantidadColumnas];
-                for (int i = 0; i < cantidadColumnas; i++) {
-                    filas[i] = rs.getObject(i + 1);
-                }
-                modelo2.addRow(filas);
+                this.jcMesero.addItem(rs.getString("id"));
             }
-            
+
         } catch (SQLException ex) {
             System.err.println(ex.toString());
         }
+
+//            PreparedStatement ps = null;
+//            ResultSet rs = null;
+//            BaseDeDatos cone = new BaseDeDatos();
+//            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+//            DefaultTableModel modelo2 = new DefaultTableModel();
+//            jtArticulos.setModel(modelo2);
+//
+//            String sql = "select id, nombre, stock, costo from materiaprima ";
+//            ps = conn.prepareStatement(sql);
+//            rs = ps.executeQuery();
+//
+//            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
+//            int cantidadColumnas = rsMd.getColumnCount();
+//
+//            modelo2.addColumn("id.");
+//            modelo2.addColumn("Nombre");
+//            modelo2.addColumn("Existencia");
+//            modelo2.addColumn("Costo");
+//
+//            int[] anchos = {10, 30, 70, 70};
+//            for (int i = 0; i < jtArticulos.getColumnCount(); i++) {
+//                jtArticulos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+//            }
+//
+//            while (rs.next()) {
+//                Object[] filas = new Object[cantidadColumnas];
+//                for (int i = 0; i < cantidadColumnas; i++) {
+//                    filas[i] = rs.getObject(i + 1);
+//                }
+//                modelo2.addRow(filas);
+//            }
+//
+//        } catch (SQLException ex) {
+//            System.err.println(ex.toString());
+//        }
     }
 
     /**
@@ -123,20 +139,10 @@ public class Factura_ingreso extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        txtFactura = new javax.swing.JTextField();
-        txtDescripcion = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        txtProveedor = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        txtEncargado = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        txtMonto = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jcFecha = new com.toedter.calendar.JDateChooser();
-        jLabel8 = new javax.swing.JLabel();
-        txtNit = new javax.swing.JTextField();
+        txtComanda = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jcMesero = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtProductos = new javax.swing.JTable();
@@ -144,6 +150,8 @@ public class Factura_ingreso extends javax.swing.JFrame {
         jtArticulos = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -152,63 +160,24 @@ public class Factura_ingreso extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detalles de la Factura", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Factura No.");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 28, 98, 31));
+        txtComanda.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel2.add(txtComanda, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 42, 182, 28));
 
-        txtFactura.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel2.add(txtFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 28, 126, 31));
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel9.setText("Comanda No. ");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 42, 126, 28));
 
-        txtDescripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel2.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 70, 364, 31));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel1.setText("Código de Mesero:");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 84, 126, 28));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Descripción:");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 70, 98, 31));
+        jcMesero.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jcMesero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel2.add(jcMesero, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 84, 280, 28));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("Proveedor:");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 112, 98, 31));
-
-        txtProveedor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel2.add(txtProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 112, 364, 31));
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("Encargado:");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 28, 98, 31));
-
-        txtEncargado.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel2.add(txtEncargado, new org.netbeans.lib.awtextra.AbsoluteConstraints(672, 28, 266, 31));
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("Fecha:");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 112, 98, 31));
-
-        txtMonto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel2.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(672, 70, 266, 31));
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel7.setText("Monto:");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 70, 98, 31));
-
-        jcFecha.setDateFormatString("yyyy-MM-dd");
-        jPanel2.add(jcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(672, 112, 266, 28));
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel8.setText("Nit Proveedor:");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 28, 98, 31));
-
-        txtNit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel2.add(txtNit, new org.netbeans.lib.awtextra.AbsoluteConstraints(364, 28, 126, 31));
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 28, 1078, 168));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 56, 1078, 140));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -264,7 +233,23 @@ public class Factura_ingreso extends javax.swing.JFrame {
         });
         jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 294, 112, 42));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 210, 1190, 350));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 252, 1190, 350));
+
+        jButton3.setText("Bebidas");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 224, -1, -1));
+
+        jButton4.setText("platillos");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 224, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -290,15 +275,11 @@ public class Factura_ingreso extends javax.swing.JFrame {
             BaseDeDatos cone = new BaseDeDatos();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
             PreparedStatement ps = null;
-            ps = conn.prepareStatement("INSERT INTO `factura_compra` (`nit`, `factura_num`, `descripcion`, `proveedor`, `encargado`, `monto`, `fecha`) VALUES (?,?,?,?,?,?,?)");
-            
-            ps.setInt(1, Integer.parseInt(txtNit.getText()));
-            ps.setInt(2, Integer.parseInt(txtFactura.getText()));
-            ps.setString(3, txtDescripcion.getText());
-            ps.setString(4, txtProveedor.getText());
-            ps.setString(5, txtEncargado.getText());
-            ps.setString(6, txtMonto.getText());
-            ps.setString(7, ((JTextField) jcFecha.getDateEditor().getUiComponent()).getText());
+            ps = conn.prepareStatement("INSERT INTO `pedido_numero_temporal` (`NoComanda`, `CodigoMesero`) VALUES  (?,?)");
+
+            ps.setInt(1, Integer.parseInt(txtComanda.getText()));
+            ps.setString(2, jcMesero.getSelectedItem().toString());
+
             ps.execute();
 //            JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
             System.out.println("ya, factura");
@@ -314,15 +295,17 @@ public class Factura_ingreso extends javax.swing.JFrame {
             int filas = jtProductos.getRowCount();
             System.out.println("filas jc " + filas);
             for (int row = 0; row < filas; row++) {
-                ps = conn.prepareStatement("INSERT INTO `almacen_factura` (`factura_compra_id`, `materiaprima_id`, `cantidad`, `precio`) VALUES (?,?,?,?)");
-                int idmaterial = (int) jtProductos.getValueAt(row, 0);
+                ps = conn.prepareStatement("INSERT INTO `cafebar`.`pedido_temporal` (`id_plato`, `Nombre`, `Cantidad`, `Precio`, `NoComanda`) VALUES (?,?,?,?,?)");
+                int idPlato = (int) jtProductos.getValueAt(row, 0);
+                String nombre = (String) jtProductos.getValueAt(row, 1);
                 int cant = (int) jtProductos.getValueAt(row, 2);
                 Double precio = (double) jtProductos.getValueAt(row, 3);
-                
-                ps.setInt(1, Integer.parseInt(txtFactura.getText()));
-                ps.setInt(2, idmaterial);
+
+                ps.setInt(1, idPlato);
+                ps.setString(2, nombre);
                 ps.setInt(3, cant);
                 ps.setDouble(4, precio);
+                ps.setDouble(5, Integer.parseInt(txtComanda.getText()));
                 ps.execute();
                 System.out.println("ya, asdfasdf");
             }
@@ -331,48 +314,135 @@ public class Factura_ingreso extends javax.swing.JFrame {
             limpiar();
         } catch (SQLException ex) {
         }
-        
+
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jtArticulosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtArticulosMouseClicked
-        
+
         int Fila = jtArticulos.getSelectedRow();
         String codigo = jtArticulos.getValueAt(Fila, 0).toString();
         String nombre = jtArticulos.getValueAt(Fila, 1).toString();
+        String precio = jtArticulos.getValueAt(Fila, 3).toString();
         ID_ARTICULO = Integer.parseInt(codigo);
         NOMBRE_ARTICULO = nombre;
+        PRECIO = Double.parseDouble(precio);
+
         System.out.println("id " + ID_ARTICULO);
         System.out.println("Nombre: " + NOMBRE_ARTICULO);
+        System.out.println("precio" + PRECIO);
     }//GEN-LAST:event_jtArticulosMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
         String cant = JOptionPane.showInputDialog(null, "Ingrese la cantidad", JOptionPane.WARNING_MESSAGE);
-        String price = JOptionPane.showInputDialog(null, "Ingrese el Precio");
         int cantidad = Integer.parseInt(cant);
-        Double precio = Double.parseDouble(price);
-        Double total = precio * cantidad;
+        Double total = PRECIO * cantidad;
         DefaultTableModel modelo = (DefaultTableModel) jtProductos.getModel();
         Object[] fila = new Object[5];
         fila[0] = ID_ARTICULO;
         fila[1] = NOMBRE_ARTICULO;
         fila[2] = cantidad;
-        fila[3] = precio;
+        fila[3] = PRECIO;
         fila[4] = total;
         modelo.addRow(fila);
 //        jtProductos.setModel(modelo);
 
     }//GEN-LAST:event_jButton1ActionPerformed
-    
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            BaseDeDatos cone = new BaseDeDatos();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            DefaultTableModel modelo2 = new DefaultTableModel();
+            jtArticulos.setModel(modelo2);
+
+            String sql = "SELECT\n"
+                    + "     bebida.`id` AS bebida_id,\n"
+                    + "     bebida.`nombre` AS bebida_nombre,\n"
+                    + "     categoria.`nombre` AS categoria_nombre,\n"
+                    + "     bebida.`precio` AS bebida_precio\n"
+                    + "FROM\n"
+                    + "     `categoria` categoria INNER JOIN `bebida` bebida ON categoria.`id` = bebida.`categoria_id` ";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
+            int cantidadColumnas = rsMd.getColumnCount();
+
+            modelo2.addColumn("id.");
+            modelo2.addColumn("Nombre");
+            modelo2.addColumn("Categoría");
+            modelo2.addColumn("Precio");
+
+            int[] anchos = {10, 150, 70, 70};
+            for (int i = 0; i < jtArticulos.getColumnCount(); i++) {
+                jtArticulos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+            }
+
+            while (rs.next()) {
+                Object[] filas = new Object[cantidadColumnas];
+                for (int i = 0; i < cantidadColumnas; i++) {
+                    filas[i] = rs.getObject(i + 1);
+                }
+                modelo2.addRow(filas);
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.toString());
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        try {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            BaseDeDatos cone = new BaseDeDatos();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            DefaultTableModel modelo2 = new DefaultTableModel();
+            jtArticulos.setModel(modelo2);
+
+            String sql = "SELECT\n"
+                    + "     comida.`id` AS comida_id,\n"
+                    + "     comida.`nombre` AS comida_nombre,\n"
+                    + "     categoria.`nombre` AS categoria_nombre,\n"
+                    + "     comida.`precio` AS comida_precio\n"
+                    + "FROM\n"
+                    + "     `categoria` categoria INNER JOIN `comida` comida ON categoria.`id` = comida.`categoria_id` ";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
+            int cantidadColumnas = rsMd.getColumnCount();
+
+            modelo2.addColumn("id.");
+            modelo2.addColumn("Nombre");
+            modelo2.addColumn("Categoría");
+            modelo2.addColumn("Precio");
+
+            int[] anchos = {10, 150, 70, 70};
+            for (int i = 0; i < jtArticulos.getColumnCount(); i++) {
+                jtArticulos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+            }
+
+            while (rs.next()) {
+                Object[] filas = new Object[cantidadColumnas];
+                for (int i = 0; i < cantidadColumnas; i++) {
+                    filas[i] = rs.getObject(i + 1);
+                }
+                modelo2.addRow(filas);
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.toString());
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     private void limpiar() {
-        txtDescripcion.setText("");
-        txtEncargado.setText("");
-        txtFactura.setText("");
-        txtMonto.setText("");
-        txtProveedor.setText("");
-        txtNit.setText("");
-        
+        txtComanda.setText("");
+
     }
 
     /**
@@ -392,20 +462,21 @@ public class Factura_ingreso extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Factura_ingreso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CrearMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Factura_ingreso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CrearMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Factura_ingreso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CrearMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Factura_ingreso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CrearMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Factura_ingreso().setVisible(true);
+                new CrearMenu().setVisible(true);
             }
         });
     }
@@ -413,26 +484,18 @@ public class Factura_ingreso extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private com.toedter.calendar.JDateChooser jcFecha;
+    private javax.swing.JComboBox<String> jcMesero;
     private javax.swing.JTable jtArticulos;
     private javax.swing.JTable jtProductos;
-    private javax.swing.JTextField txtDescripcion;
-    private javax.swing.JTextField txtEncargado;
-    private javax.swing.JTextField txtFactura;
-    private javax.swing.JTextField txtMonto;
-    private javax.swing.JTextField txtNit;
-    private javax.swing.JTextField txtProveedor;
+    private javax.swing.JTextField txtComanda;
     // End of variables declaration//GEN-END:variables
 }
