@@ -299,6 +299,7 @@ public class PedidoMesas extends javax.swing.JFrame {
             System.out.println("filas jc " + filas);
             for (int row = 0; row < filas; row++) {
                 ps = conn.prepareStatement("INSERT INTO `cafebar`.`pedido_temporal` (`id_plato`, `Nombre`, `Cantidad`, `Precio`, `NoComanda`, total) VALUES (?,?,?,?,?,?)");
+                
                 int idPlato = (int) jtProductos.getValueAt(row, 0);
                 String nombre = (String) jtProductos.getValueAt(row, 1);
                 int cant = (int) jtProductos.getValueAt(row, 2);

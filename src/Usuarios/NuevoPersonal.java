@@ -31,21 +31,21 @@ public class NuevoPersonal extends javax.swing.JDialog {
             BaseDeDatos cone = new BaseDeDatos();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
             //------------------------
-            String corrArticulo = "Select descripcion from cargo";
-            ps = conn.prepareStatement(corrArticulo);
-            rs = ps.executeQuery();
-
-            while (rs.next()) {
-                this.jcCargo.addItem(rs.getString("descripcion"));
-            }
+//            String corrArticulo = "Select descripcion from cargo";
+//            ps = conn.prepareStatement(corrArticulo);
+//            rs = ps.executeQuery();
+//
+//            while (rs.next()) {
+//                this.jcCargo.addItem(rs.getString("descripcion"));
+//            }
             //_______________________________________________
-            String codigoinv = "select descripcion from turno";
-            ps = conn.prepareStatement(codigoinv);
-            rs = ps.executeQuery();
-
-            while (rs.next()) {
-                this.jcTurno.addItem(rs.getString("descripcion"));
-            }
+//            String codigoinv = "select descripcion from turno";
+//            ps = conn.prepareStatement(codigoinv);
+//            rs = ps.executeQuery();
+//
+//            while (rs.next()) {
+//                this.jcTurno.addItem(rs.getString("descripcion"));
+//            }
 
         } catch (Exception ex) {
             System.err.println(ex.toString());
@@ -68,21 +68,11 @@ public class NuevoPersonal extends javax.swing.JDialog {
         txtAPellidos = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtDireccion = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jcCargo = new javax.swing.JComboBox<>();
         jcSexo = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jcEstado = new javax.swing.JComboBox<>();
-        jcTurno = new javax.swing.JComboBox<>();
         jcFecha = new com.toedter.calendar.JDateChooser();
         jLabel9 = new javax.swing.JLabel();
-        jComboBox6 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
@@ -114,68 +104,27 @@ public class NuevoPersonal extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Sexo:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 238, 126, 28));
-
-        txtDireccion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 196, 266, 28));
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("Dirección:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 196, 126, 28));
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("Cargo:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 322, 126, 28));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 196, 126, 28));
 
         txtTelefono.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 280, 266, 28));
+        jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 238, 266, 28));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Teléfono:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 280, 126, 28));
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel7.setText("Estado:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 448, 126, 28));
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel8.setText("Turno:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 364, 126, 28));
-
-        jcCargo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(jcCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 322, 266, 28));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 238, 126, 28));
 
         jcSexo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jcSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
-        jPanel1.add(jcSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 238, 266, 28));
-
-        jComboBox3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
-        jPanel1.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 322, 266, 28));
-
-        jcEstado.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jcEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
-        jPanel1.add(jcEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 448, 266, 28));
-
-        jcTurno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(jcTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 364, 266, 28));
+        jPanel1.add(jcSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 196, 266, 28));
 
         jcFecha.setDateFormatString("yyyy-MM-dd");
-        jPanel1.add(jcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 406, 266, 28));
+        jPanel1.add(jcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 280, 266, 28));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("Fecha de Ingreso:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 406, 126, 28));
-
-        jComboBox6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
-        jPanel1.add(jComboBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 364, 266, 28));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 280, 126, 28));
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -200,7 +149,7 @@ public class NuevoPersonal extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 504, 126, 42));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 336, 126, 42));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -226,31 +175,30 @@ public class NuevoPersonal extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        int turno = jcTurno.getSelectedIndex() + 1;
-        int cargo = jcCargo.getSelectedIndex() + 1;
-        int estado = jcEstado.getSelectedIndex() + 1;
+//        int turno = jcTurno.getSelectedIndex() + 1;
+//        int cargo = jcCargo.getSelectedIndex() + 1;
+//        int estado = jcEstado.getSelectedIndex() + 1;
 
         try {
             BaseDeDatos cone = new BaseDeDatos();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
             PreparedStatement ps = null;
-            ps = conn.prepareStatement("INSERT INTO `empleado` ( `cargo_id`, `estado_id`, `nombre`, `apellido`, `dpi`, `genero`, `telefono`, `fecha_inicio`, `fecha_fin`, `turno_id`) VALUES (?,?,?,?,?,?,?,?,?,?)");
-            ps.setInt(1, cargo);
-            ps.setInt(2, estado);
-            ps.setString(3, txtNombre.getText());
-            ps.setString(4, txtAPellidos.getText());
-            ps.setString(5, txtDpi.getText());
-            ps.setString(6, jcSexo.getSelectedItem().toString());
-            ps.setString(7, txtTelefono.getText());
-            ps.setString(8, ((JTextField) jcFecha.getDateEditor().getUiComponent()).getText());
-            ps.setString(9, ((JTextField) jcFecha.getDateEditor().getUiComponent()).getText());
-            ps.setInt(10, turno);
+            ps = conn.prepareStatement("INSERT INTO `empleado` ( `nombre`, `apellido`, `dpi`, `genero`, `telefono`, `fecha_inicio`, `fecha_fin`) VALUES (?,?,?,?,?,?,?)");
+//            ps.setInt(1, cargo);
+//            ps.setInt(2, estado);
+            ps.setString(1, txtNombre.getText());
+            ps.setString(2, txtAPellidos.getText());
+            ps.setString(3, txtDpi.getText());
+            ps.setString(4, jcSexo.getSelectedItem().toString());
+            ps.setString(5, txtTelefono.getText());
+            ps.setString(6, ((JTextField) jcFecha.getDateEditor().getUiComponent()).getText());
+            ps.setString(7, ((JTextField) jcFecha.getDateEditor().getUiComponent()).getText());
+//            ps.setInt(10, turno);
             ps.execute();
             JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
 
         } catch (SQLException ex) {
             Logger.getLogger(NuevoCargo.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("datos: " +turno + " "+  cargo +" " + estado +" ");
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -300,28 +248,18 @@ public class NuevoPersonal extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JComboBox<String> jcCargo;
-    private javax.swing.JComboBox<String> jcEstado;
     private com.toedter.calendar.JDateChooser jcFecha;
     private javax.swing.JComboBox<String> jcSexo;
-    private javax.swing.JComboBox<String> jcTurno;
     private javax.swing.JTextField txtAPellidos;
-    private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtDpi;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;

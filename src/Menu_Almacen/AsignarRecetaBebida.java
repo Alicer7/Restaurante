@@ -41,13 +41,13 @@ public class AsignarRecetaBebida extends javax.swing.JDialog {
                 this.jcReceta.addItem(rs.getString("nombre"));
             }
             //_______________________________________________
-            String cat = "Select nombre from categoria order by(id)";
-            ps = conn.prepareStatement(cat);
-            rs = ps.executeQuery();
-
-            while (rs.next()) {
-                this.jcCategoria.addItem(rs.getString("nombre"));
-            }
+//            String cat = "Select nombre from categoria order by(id)";
+//            ps = conn.prepareStatement(cat);
+//            rs = ps.executeQuery();
+//
+//            while (rs.next()) {
+//                this.jcCategoria.addItem(rs.getString("nombre"));
+//            }
 
         } catch (Exception ex) {
             System.err.println(ex.toString());
@@ -66,9 +66,7 @@ public class AsignarRecetaBebida extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         txtDescripcion = new javax.swing.JTextField();
-        jcCategoria = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         txtPrecio = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
@@ -85,20 +83,13 @@ public class AsignarRecetaBebida extends javax.swing.JDialog {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Descripcion:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 70, 154, 27));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Categoría:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 112, 151, 27));
         jPanel1.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 224, 28));
-
-        jPanel1.add(jcCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 112, 224, 28));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Precio:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 196, 154, 27));
-        jPanel1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 196, 84, 28));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 154, 154, 27));
+        jPanel1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 154, 84, 28));
 
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -106,14 +97,14 @@ public class AsignarRecetaBebida extends javax.swing.JDialog {
                 btnGuardarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 252, 98, 42));
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 210, 98, 42));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Receta:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 154, 151, 27));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 112, 151, 27));
 
-        jPanel1.add(jcReceta, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 154, 224, 28));
+        jPanel1.add(jcReceta, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 112, 224, 28));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -135,11 +126,10 @@ public class AsignarRecetaBebida extends javax.swing.JDialog {
             BaseDeDatos cone = new BaseDeDatos();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
             PreparedStatement ps = null;
-            ps = conn.prepareStatement("INSERT INTO `bebida` (`categoria_id`, `receta_id`, `nombre`, `precio`) VALUES  (?,?,?,?)");
-            ps.setInt(1, jcCategoria.getSelectedIndex() + 1);
-            ps.setInt(2, jcReceta.getSelectedIndex() + 1);
-            ps.setString(3, txtDescripcion.getText());
-            ps.setString(4, txtPrecio.getText());
+            ps = conn.prepareStatement("INSERT INTO `bebida` (`receta_id`, `nombre`, `precio`) VALUES  (?,?,?)");
+            ps.setInt(1, jcReceta.getSelectedIndex() + 1);
+            ps.setString(2, txtDescripcion.getText());
+            ps.setString(3, txtPrecio.getText());
             ps.execute();
             JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
 
@@ -200,11 +190,9 @@ public class AsignarRecetaBebida extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JComboBox<String> jcCategoria;
     private javax.swing.JComboBox<String> jcReceta;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtPrecio;

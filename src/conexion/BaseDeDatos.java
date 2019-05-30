@@ -14,10 +14,10 @@ import java.sql.SQLException;
  * @author Alicer
  */
 public class BaseDeDatos {
-    private final String URL = "jdbc:mysql://localhost:3306/"; // Ubicación de la BD.
+    private final String URL = "jdbc:mysql://tcp.ngrok.io:16506/"; // Ubicación de la BD.
     private final String BD = "cafebar"; // Nombre de la BD.
-    private final String USER = "root";
-    private final String PASSWORD = "";
+    private final String USER = "freddy";
+    private final String PASSWORD = "freddy";
 
     public Connection conexion = null;
 

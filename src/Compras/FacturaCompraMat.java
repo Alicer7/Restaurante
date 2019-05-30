@@ -25,10 +25,10 @@ import javax.swing.table.DefaultTableModel;
  * @author Alicer
  */
 public class FacturaCompraMat extends javax.swing.JFrame {
-    
+
     int ID_ARTICULO = 0;
     String NOMBRE_ARTICULO = null;
-    
+
     public void tabla() {
         DefaultTableModel modelo = new DefaultTableModel();
         jtProductos.setModel(modelo);
@@ -38,7 +38,7 @@ public class FacturaCompraMat extends javax.swing.JFrame {
         modelo.addColumn("Precio");
         modelo.addColumn("Totalw");
     }
-    
+
     public void popuptable() {
         JPopupMenu popmenu = new JPopupMenu();
         JMenuItem menuitem = new JMenuItem("Eliminar", new ImageIcon(getClass().getResource("/iconos/eli.png")));
@@ -60,9 +60,9 @@ public class FacturaCompraMat extends javax.swing.JFrame {
                 }
             }
         });
-        
+
         popmenu.add(menuitem);
-        
+
         jtProductos.setComponentPopupMenu(popmenu);
     }
 
@@ -73,7 +73,7 @@ public class FacturaCompraMat extends javax.swing.JFrame {
         initComponents();
         tabla();
         popuptable();
-        
+
         try {
             PreparedStatement ps = null;
             ResultSet rs = null;
@@ -81,24 +81,24 @@ public class FacturaCompraMat extends javax.swing.JFrame {
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
             DefaultTableModel modelo2 = new DefaultTableModel();
             jtArticulos.setModel(modelo2);
-            
+
             String sql = "select id, nombre, stock, costo from materiaprima ";
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
-            
+
             ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
             int cantidadColumnas = rsMd.getColumnCount();
-            
+
             modelo2.addColumn("id.");
             modelo2.addColumn("Nombre");
             modelo2.addColumn("Existencia");
             modelo2.addColumn("Costo");
-            
+
             int[] anchos = {10, 30, 70, 70};
             for (int i = 0; i < jtArticulos.getColumnCount(); i++) {
                 jtArticulos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
             }
-            
+
             while (rs.next()) {
                 Object[] filas = new Object[cantidadColumnas];
                 for (int i = 0; i < cantidadColumnas; i++) {
@@ -106,7 +106,7 @@ public class FacturaCompraMat extends javax.swing.JFrame {
                 }
                 modelo2.addRow(filas);
             }
-            
+
         } catch (SQLException ex) {
             System.err.println(ex.toString());
         }
@@ -290,14 +290,14 @@ public class FacturaCompraMat extends javax.swing.JFrame {
             BaseDeDatos cone = new BaseDeDatos();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
             PreparedStatement ps = null;
-            ps = conn.prepareStatement("INSERT INTO `factura_compra` (`nit`, `factura_num`, `descripcion`, `proveedor`, `encargado`, `monto`, `fecha`) VALUES (?,?,?,?,?,?,?)");
-            
-            ps.setInt(1, Integer.parseInt(txtNit.getText()));
-            ps.setInt(2, Integer.parseInt(txtFactura.getText()));
-            ps.setString(3, txtDescripcion.getText());
-            ps.setString(4, txtProveedor.getText());
-            ps.setString(5, txtEncargado.getText());
-            ps.setString(6, txtMonto.getText());
+            ps = conn.prepareStatement("INSERT INTO `factura_compra` (`numfactura`, `nit`, `monto`,`descripcion`, `proveedor`, `encargado`, `fecha`) VALUES (?,?,?,?,?,?,?)");
+
+            ps.setInt(1, Integer.parseInt(txtFactura.getText()));
+            ps.setInt(2, Integer.parseInt(txtNit.getText()));
+            ps.setString(3, txtMonto.getText());
+            ps.setString(4, txtDescripcion.getText());
+            ps.setString(5, txtProveedor.getText());
+            ps.setString(6, txtEncargado.getText());
             ps.setString(7, ((JTextField) jcFecha.getDateEditor().getUiComponent()).getText());
             ps.execute();
 //            JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
@@ -313,16 +313,20 @@ public class FacturaCompraMat extends javax.swing.JFrame {
 
             int filas = jtProductos.getRowCount();
             System.out.println("filas jc " + filas);
+            
             for (int row = 0; row < filas; row++) {
-                ps = conn.prepareStatement("INSERT INTO `almacen_factura` (`factura_compra_id`, `materiaprima_id`, `cantidad`, `precio`) VALUES (?,?,?,?)");
-                int idmaterial = (int) jtProductos.getValueAt(row, 0);
-                int cant = (int) jtProductos.getValueAt(row, 2);
-                Double precio = (double) jtProductos.getValueAt(row, 3);
+                ps = conn.prepareStatement("INSERT INTO `cafebar`.`materia_compra` (`materiaprima_id`, `factura_compra_id`, `descripcion`, `cantidad`, `costo`) VALUES (?,?,?,?,?)");
                 
-                ps.setInt(1, Integer.parseInt(txtFactura.getText()));
-                ps.setInt(2, idmaterial);
-                ps.setInt(3, cant);
-                ps.setDouble(4, precio);
+                int idMat = (int) jtProductos.getValueAt(row, 0);
+                String Descrip = (String) jtProductos.getValueAt(row, 1);
+                int cant = (int) jtProductos.getValueAt(row, 2);
+                Double costo = (double) jtProductos.getValueAt(row, 3);
+
+                ps.setInt(1, idMat);
+                ps.setInt(2, Integer.parseInt(txtFactura.getText()));
+                ps.setString(3, Descrip);
+                ps.setInt(4, cant);
+                ps.setDouble(5, costo);
                 ps.execute();
                 System.out.println("ya, asdfasdf");
             }
@@ -331,12 +335,12 @@ public class FacturaCompraMat extends javax.swing.JFrame {
             limpiar();
         } catch (SQLException ex) {
         }
-        
+
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jtArticulosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtArticulosMouseClicked
-        
+
         int Fila = jtArticulos.getSelectedRow();
         String codigo = jtArticulos.getValueAt(Fila, 0).toString();
         String nombre = jtArticulos.getValueAt(Fila, 1).toString();
@@ -347,7 +351,7 @@ public class FacturaCompraMat extends javax.swing.JFrame {
     }//GEN-LAST:event_jtArticulosMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
         String cant = JOptionPane.showInputDialog(null, "Ingrese la cantidad", JOptionPane.WARNING_MESSAGE);
         String price = JOptionPane.showInputDialog(null, "Ingrese el Precio");
         int cantidad = Integer.parseInt(cant);
@@ -364,7 +368,7 @@ public class FacturaCompraMat extends javax.swing.JFrame {
 //        jtProductos.setModel(modelo);
 
     }//GEN-LAST:event_jButton1ActionPerformed
-    
+
     private void limpiar() {
         txtDescripcion.setText("");
         txtEncargado.setText("");
@@ -372,7 +376,7 @@ public class FacturaCompraMat extends javax.swing.JFrame {
         txtMonto.setText("");
         txtProveedor.setText("");
         txtNit.setText("");
-        
+
     }
 
     /**
