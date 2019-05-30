@@ -28,6 +28,7 @@ public class FacturaCompraMat extends javax.swing.JFrame {
 
     int ID_ARTICULO = 0;
     String NOMBRE_ARTICULO = null;
+    Double COSTO = 0.0;
 
     public void tabla() {
         DefaultTableModel modelo = new DefaultTableModel();
@@ -285,48 +286,28 @@ public class FacturaCompraMat extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-//
+
         try {
             BaseDeDatos cone = new BaseDeDatos();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
             PreparedStatement ps = null;
-            ps = conn.prepareStatement("INSERT INTO `factura_compra` (`numfactura`, `nit`, `monto`,`descripcion`, `proveedor`, `encargado`, `fecha`) VALUES (?,?,?,?,?,?,?)");
+            ps = conn.prepareStatement("INSERT INTO `factura_compra` (`numfactura`, `nit`, `monto`) VALUES (?,?,?)");
 
             ps.setInt(1, Integer.parseInt(txtFactura.getText()));
             ps.setInt(2, Integer.parseInt(txtNit.getText()));
             ps.setString(3, txtMonto.getText());
-            ps.setString(4, txtDescripcion.getText());
-            ps.setString(5, txtProveedor.getText());
-            ps.setString(6, txtEncargado.getText());
-            ps.setString(7, ((JTextField) jcFecha.getDateEditor().getUiComponent()).getText());
             ps.execute();
 //            JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
-            System.out.println("ya, factura");
+            System.out.println("gen factura");
 //
-//        } catch (SQLException ex) {
-//        }
-//
-//        try {
-//            BaseDeDatos cone = new BaseDeDatos();
-//            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
-//            PreparedStatement ps = null;
-
             int filas = jtProductos.getRowCount();
-            System.out.println("filas jc " + filas);
-            
             for (int row = 0; row < filas; row++) {
-                ps = conn.prepareStatement("INSERT INTO `cafebar`.`materia_compra` (`materiaprima_id`, `factura_compra_id`, `descripcion`, `cantidad`, `costo`) VALUES (?,?,?,?,?)");
-                
-                int idMat = (int) jtProductos.getValueAt(row, 0);
-                String Descrip = (String) jtProductos.getValueAt(row, 1);
-                int cant = (int) jtProductos.getValueAt(row, 2);
-                Double costo = (double) jtProductos.getValueAt(row, 3);
-
-                ps.setInt(1, idMat);
+                ps = conn.prepareStatement("INSERT INTO `materia_compra` (`materiaprima_id`, `factura_compra_id`, `descripcion`, `cantidad`, `costo`) VALUES (?,?,?,?,?)");
+                ps.setInt(1, (int) jtProductos.getValueAt(row, 0));
                 ps.setInt(2, Integer.parseInt(txtFactura.getText()));
-                ps.setString(3, Descrip);
-                ps.setInt(4, cant);
-                ps.setDouble(5, costo);
+                ps.setString(3, (String) jtProductos.getValueAt(row, 1));
+                ps.setInt(4, (int) jtProductos.getValueAt(row, 2));
+                ps.setDouble(5, (double) jtProductos.getValueAt(row, 3));
                 ps.execute();
                 System.out.println("ya, asdfasdf");
             }
@@ -344,25 +325,28 @@ public class FacturaCompraMat extends javax.swing.JFrame {
         int Fila = jtArticulos.getSelectedRow();
         String codigo = jtArticulos.getValueAt(Fila, 0).toString();
         String nombre = jtArticulos.getValueAt(Fila, 1).toString();
+        String CANTIDAD = jtArticulos.getValueAt(Fila, 3).toString();
         ID_ARTICULO = Integer.parseInt(codigo);
         NOMBRE_ARTICULO = nombre;
+        COSTO = Double.parseDouble(CANTIDAD);
+
         System.out.println("id " + ID_ARTICULO);
         System.out.println("Nombre: " + NOMBRE_ARTICULO);
+        System.out.println("CA: " + CANTIDAD);
     }//GEN-LAST:event_jtArticulosMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         String cant = JOptionPane.showInputDialog(null, "Ingrese la cantidad", JOptionPane.WARNING_MESSAGE);
-        String price = JOptionPane.showInputDialog(null, "Ingrese el Precio");
         int cantidad = Integer.parseInt(cant);
-        Double precio = Double.parseDouble(price);
-        Double total = precio * cantidad;
+        Double costos = COSTO;
+        Double total = costos * cantidad;
         DefaultTableModel modelo = (DefaultTableModel) jtProductos.getModel();
         Object[] fila = new Object[5];
         fila[0] = ID_ARTICULO;
         fila[1] = NOMBRE_ARTICULO;
         fila[2] = cantidad;
-        fila[3] = precio;
+        fila[3] = costos;
         fila[4] = total;
         modelo.addRow(fila);
 //        jtProductos.setModel(modelo);
