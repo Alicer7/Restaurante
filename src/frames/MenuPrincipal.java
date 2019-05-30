@@ -47,7 +47,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        panelControl.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 224, 154, 45));
+        panelControl.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 182, 154, 45));
 
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton4.setText("compras ");
@@ -56,7 +56,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        panelControl.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 154, 45));
+        panelControl.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 98, 154, 45));
 
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton5.setText("Creacion de recetas");
@@ -65,7 +65,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        panelControl.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 56, 154, 45));
+        panelControl.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 42, 154, 45));
 
         jButton7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/obrero(1).png"))); // NOI18N
@@ -75,7 +75,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        panelControl.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 112, 154, 42));
+        panelControl.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 98, 154, 42));
 
         jButton6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton6.setText("Pedidos");
@@ -84,26 +84,26 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        panelControl.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 154, 45));
+        panelControl.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 42, 154, 45));
 
         jButton8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton8.setText("Ventas");
+        jButton8.setText("Facturación");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
             }
         });
-        panelControl.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 168, 154, 45));
+        panelControl.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 98, 154, 45));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelControl, javax.swing.GroupLayout.DEFAULT_SIZE, 873, Short.MAX_VALUE)
+            .addComponent(panelControl, javax.swing.GroupLayout.PREFERRED_SIZE, 663, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelControl, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
+            .addComponent(panelControl, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -116,11 +116,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
-     
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-
+        Recetarios_menus.NuevaReceta recipe = new Recetarios_menus.NuevaReceta(null, true);
+        recipe.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -130,6 +131,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
 
+        
 
     }//GEN-LAST:event_jButton6ActionPerformed
 

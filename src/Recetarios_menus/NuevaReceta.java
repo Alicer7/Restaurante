@@ -8,10 +8,13 @@ package Recetarios_menus;
 import conexion.BaseDeDatos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -41,7 +44,7 @@ public class NuevaReceta extends javax.swing.JDialog {
         txtDescripcion = new javax.swing.JTextField();
         btnAceptar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtRecetas = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         txtCosto = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -68,7 +71,7 @@ public class NuevaReceta extends javax.swing.JDialog {
         });
         jPanel1.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 252, 84, 28));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtRecetas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -79,7 +82,7 @@ public class NuevaReceta extends javax.swing.JDialog {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtRecetas);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 70, -1, 266));
 
@@ -92,6 +95,11 @@ public class NuevaReceta extends javax.swing.JDialog {
         jPanel1.add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 210, 228, 28));
 
         jButton1.setText("Actualizar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 39, 98, 28));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -126,6 +134,46 @@ public class NuevaReceta extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        try {
+            BaseDeDatos cone = new BaseDeDatos();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            DefaultTableModel modelo = new DefaultTableModel();
+            jtRecetas.setModel(modelo);
+
+            String sql = "select id, nombre, costo from receta ";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
+            int cantidadColumnas = rsMd.getColumnCount();
+
+            modelo.addColumn("id.");
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Costo");
+
+            int[] anchos = { 30, 70, 70};
+            for (int i = 0; i < jtRecetas.getColumnCount(); i++) {
+                jtRecetas.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+            }
+
+            while (rs.next()) {
+                Object[] filas = new Object[cantidadColumnas];
+                for (int i = 0; i < cantidadColumnas; i++) {
+                    filas[i] = rs.getObject(i + 1);
+                }
+                modelo.addRow(filas);
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.toString());
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,7 +225,7 @@ public class NuevaReceta extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jtRecetas;
     private javax.swing.JTextField txtCosto;
     private javax.swing.JTextField txtDescripcion;
     // End of variables declaration//GEN-END:variables
