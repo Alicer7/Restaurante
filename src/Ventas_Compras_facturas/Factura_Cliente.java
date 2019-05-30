@@ -13,6 +13,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -38,6 +40,11 @@ public class Factura_Cliente extends javax.swing.JFrame {
         modelo.addColumn("Precio");
         modelo.addColumn("Totalw");
     }
+    public void horario() {
+        initComponents();
+        Calendar c2 = new GregorianCalendar();
+        jcFecha.setCalendar(c2);
+}
 
     public void popuptable() {
         JPopupMenu popmenu = new JPopupMenu();
@@ -71,45 +78,10 @@ public class Factura_Cliente extends javax.swing.JFrame {
      */
     public Factura_Cliente() {
         initComponents();
-        tabla();
-        popuptable();
+//        tabla();
+//        popuptable();
+        horario();
 
-        try {
-            PreparedStatement ps = null;
-            ResultSet rs = null;
-            BaseDeDatos cone = new BaseDeDatos();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
-            DefaultTableModel modelo2 = new DefaultTableModel();
-            jtArticulos.setModel(modelo2);
-
-            String sql = "select id, nombre, stock, costo from materiaprima ";
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
-
-            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
-            int cantidadColumnas = rsMd.getColumnCount();
-
-            modelo2.addColumn("id.");
-            modelo2.addColumn("Nombre");
-            modelo2.addColumn("Existencia");
-            modelo2.addColumn("Costo");
-
-            int[] anchos = {10, 30, 70, 70};
-            for (int i = 0; i < jtArticulos.getColumnCount(); i++) {
-                jtArticulos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
-            }
-
-            while (rs.next()) {
-                Object[] filas = new Object[cantidadColumnas];
-                for (int i = 0; i < cantidadColumnas; i++) {
-                    filas[i] = rs.getObject(i + 1);
-                }
-                modelo2.addRow(filas);
-            }
-
-        } catch (SQLException ex) {
-            System.err.println(ex.toString());
-        }
     }
 
     /**
@@ -124,13 +96,11 @@ public class Factura_Cliente extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        txtFactura = new javax.swing.JTextField();
+        txtComanda = new javax.swing.JTextField();
         txtDescripcion = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtProveedor = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        txtEncargado = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtMonto = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -138,10 +108,8 @@ public class Factura_Cliente extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtProductos = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jtArticulos = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -152,53 +120,45 @@ public class Factura_Cliente extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Factura No.");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 28, 98, 31));
+        jLabel2.setText("Comanda No.");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 28, 98, 31));
 
-        txtFactura.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel2.add(txtFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 28, 126, 31));
+        txtComanda.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel2.add(txtComanda, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 28, 126, 31));
 
         txtDescripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel2.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 322, 31));
+        jPanel2.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 70, 322, 31));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Descripción:");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 70, 98, 31));
+        jLabel3.setText("Nit Cliente:");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 98, 31));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("Proveedor:");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 112, 98, 31));
+        jLabel4.setText("Nombre Cliente:");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 112, 98, 31));
 
         txtProveedor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel2.add(txtProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 112, 322, 31));
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("Encargado:");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 28, 98, 31));
-
-        txtEncargado.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel2.add(txtEncargado, new org.netbeans.lib.awtextra.AbsoluteConstraints(574, 28, 266, 31));
+        jPanel2.add(txtProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 112, 322, 31));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Fecha:");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 112, 98, 31));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(448, 112, 98, 31));
 
         txtMonto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel2.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(574, 70, 266, 31));
+        jPanel2.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 70, 266, 31));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Monto:");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 70, 98, 31));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(448, 70, 98, 31));
 
         jcFecha.setDateFormatString("yyyy-MM-dd");
-        jPanel2.add(jcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(574, 112, 266, 28));
+        jPanel2.add(jcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 112, 266, 28));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 28, 896, 168));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 28, 854, 168));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -216,27 +176,7 @@ public class Factura_Cliente extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jtProductos);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(518, 14, 658, 266));
-
-        jtArticulos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jtArticulos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtArticulosMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(jtArticulos);
-
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 14, 476, 266));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 14, 770, 266));
 
         jButton2.setText("Guardar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -244,25 +184,25 @@ public class Factura_Cliente extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(784, 294, 112, 42));
+        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(364, 294, 112, 42));
 
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 224, 826, 350));
+
+        jButton3.setText("jButton3");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton3ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 294, 112, 42));
-
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 210, 1190, 350));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 196, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1256, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 913, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,113 +220,114 @@ public class Factura_Cliente extends javax.swing.JFrame {
             BaseDeDatos cone = new BaseDeDatos();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
             PreparedStatement ps = null;
-            ps = conn.prepareStatement("INSERT INTO `factura_compra` (`NoFactura`, `Descripcion`, `Proveedor`, `Encargado`, `Monto`, `fecha`) VALUES (?,?,?,?,?,?)");
-            ps.setInt(1, Integer.parseInt(txtFactura.getText()));
-            ps.setString(2, txtDescripcion.getText());
-            ps.setString(3, txtProveedor.getText());
-            ps.setString(4, txtEncargado.getText());
-            ps.setString(5, txtMonto.getText());
-            ps.setString(6, ((JTextField) jcFecha.getDateEditor().getUiComponent()).getText());
+            ps = conn.prepareStatement("UPDATE `cafebar`.`pedido_numero_temporal` SET `estado` = 'Cancelado' WHERE nocomanda = '"+txtComanda.getText() + "'");
+            
             ps.execute();
-//            JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
+            JOptionPane.showMessageDialog(null, "Factura Generada");
             System.out.println("ya, factura");
 
         } catch (SQLException ex) {
         }
-
-        try {
-            BaseDeDatos cone = new BaseDeDatos();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
-            PreparedStatement ps = null;
-            ps = conn.prepareStatement("INSERT INTO `almacen_factura` (`materiaprima_id`, `factura_compra_id`, `cantidad`, `precio`) VALUES (?,?,?,?)");
-            int rows = jtProductos.getRowCount();
-            for (int row = 0; row < rows; row++) {
-                int idmaterial = (int) jtProductos.getValueAt(row, 0);
-                int factura = Integer.parseInt(txtFactura.getText());
-                int cant = (int) jtProductos.getValueAt(row, 2);
-                Double precio = (Double) jtProductos.getValueAt(row, 3);
-                System.out.println("ya, reg");
-
-                ps.setInt(1, idmaterial);
-                ps.setInt(2, Integer.parseInt(txtFactura.getText()));
-                ps.setInt(3, cant);
-                ps.setDouble(4, precio);
-                ps.execute();
-
-            }
-            JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
-            tabla();
-            limpiar();
-        } catch (SQLException ex) {
-        }
-
-//        try {
-//            BaseDeDatos cone = new BaseDeDatos();
-//            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
-//            PreparedStatement ps = null;
-//            int rows = jtProductos.getRowCount();
 //
-//            String queryco = "INSERT INTO `almacen_factura` (`materiaprima_id`, `factura_compra_id`, `cantidad`, `precio`) VALUES (?,?,?,?)";
-//            ps = conn.prepareStatement(queryco);
-//
-//            for (int row = 0; row < rows; row++) {
-//                int idmaterial = (int) jtProductos.getValueAt(row, 0);
-//                int factura = Integer.parseInt(txtFactura.getText());
-//                int cant = (int) jtProductos.getValueAt(row, 2);
-//                Double precio = (Double) jtProductos.getValueAt(row, 3);
-//
-//                ps.setInt(1, 1);
-//                ps.setInt(2, 2);
-//                ps.setInt(3, 3);
-//                ps.setDouble(4, 12.54);
-//
-//                ps.execute();
-//
-//            }
-//            JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
-//        } catch (SQLException ex) {
-//        }
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jtArticulosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtArticulosMouseClicked
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+//        
+//        try {
+//            PreparedStatement ps = null;
+//            ResultSet rs = null;
+//            BaseDeDatos cone = new BaseDeDatos();
+//            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+//            DefaultTableModel modelo2 = new DefaultTableModel();
+//            jtProductos.setModel(modelo2);
+//
+//            String sql = "select Nombre, cantidad, precio, Total from pedido_temporal where NoComanda = '"+  txtComanda.getText()+ "'";
+//            ps = conn.prepareStatement(sql);
+//            rs = ps.executeQuery();
+//
+//            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
+//            int cantidadColumnas = rsMd.getColumnCount();
+//
+//            modelo2.addColumn("Nombre.");
+//            modelo2.addColumn("cantidad");
+//            modelo2.addColumn("precio");
+//            modelo2.addColumn("Total");
+//
+//            int[] anchos = {10, 150, 70, 70};
+//            for (int i = 0; i < jtProductos.getColumnCount(); i++) {
+//                jtProductos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+//            }
+//
+//            while (rs.next()) {
+//                Object[] filas = new Object[cantidadColumnas];
+//                for (int i = 0; i < cantidadColumnas; i++) {
+//                    filas[i] = rs.getObject(i + 1);
+//                }
+//                modelo2.addRow(filas);
+//            }
+//
+//        } catch (SQLException ex) {
+//            System.err.println(ex.toString());
+//        }
+//
+//
+String comanda ="'"+ txtComanda.getText()+"'";
+try {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            BaseDeDatos cone = new BaseDeDatos();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            DefaultTableModel modelo = new DefaultTableModel();
+            jtProductos.setModel(modelo);
 
-        int Fila = jtArticulos.getSelectedRow();
-        String codigo = jtArticulos.getValueAt(Fila, 0).toString();
-        String nombre = jtArticulos.getValueAt(Fila, 1).toString();
-        ID_ARTICULO = Integer.parseInt(codigo);
-        NOMBRE_ARTICULO = nombre;
-        System.out.println("id " + ID_ARTICULO);
-        System.out.println("Nombre: " + NOMBRE_ARTICULO);
-    }//GEN-LAST:event_jtArticulosMouseClicked
+            String sql = "select Nombre, cantidad, precio, Total from pedido_temporal where NoComanda = "+comanda+"";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
+            int cantidadColumnas = rsMd.getColumnCount();
 
-        String cant = JOptionPane.showInputDialog(null, "Ingrese la cantidad", JOptionPane.WARNING_MESSAGE);
-        String price = JOptionPane.showInputDialog(null, "Ingrese la cantidad", JOptionPane.WARNING_MESSAGE);
-        int cantidad = Integer.parseInt(cant);
-        Double precio = Double.parseDouble(price);
-        Double total = precio * cantidad;
-        DefaultTableModel modelo = (DefaultTableModel) jtProductos.getModel();
-        Object[] fila = new Object[5];
-        fila[0] = ID_ARTICULO;
-        fila[1] = NOMBRE_ARTICULO;
-        fila[2] = cantidad;
-        fila[3] = precio;
-        fila[4] = total;
-        modelo.addRow(fila);
-//        jtProductos.setModel(modelo);
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Cantidad");
+            modelo.addColumn("Precio");
+            modelo.addColumn("Total");
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+            int[] anchos = {10, 150, 70,70};
+            for (int i = 0; i < jtProductos.getColumnCount(); i++) {
+                jtProductos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+            }
+
+            while (rs.next()) {
+                Object[] filas = new Object[cantidadColumnas];
+                for (int i = 0; i < cantidadColumnas; i++) {
+                    filas[i] = rs.getObject(i + 1);
+                }
+                modelo.addRow(filas);
+            }
+            
+//            String cod_proyecto = "select sum(Total) from pedido_temporal where Nocomanda ='"+ txtComanda.getText() + "'";
+//            ps = conn.prepareStatement(cod_proyecto);
+//            rs = ps.executeQuery();
+//            while (rs.next()) {
+//                txtMonto.setText(rs.getString("sum(Total)"));
+//            }
+        } catch (SQLException ex) {
+            System.err.println(ex.toString());
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void limpiar() {
         txtDescripcion.setText("");
-        txtEncargado.setText("");
-        txtFactura.setText("");
+        txtComanda.setText("");
         txtMonto.setText("");
         txtProveedor.setText("");
 
     }
+    
+    
+
+
 
     /**
      * @param args the command line arguments
@@ -425,25 +366,21 @@ public class Factura_Cliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private com.toedter.calendar.JDateChooser jcFecha;
-    private javax.swing.JTable jtArticulos;
     private javax.swing.JTable jtProductos;
+    private javax.swing.JTextField txtComanda;
     private javax.swing.JTextField txtDescripcion;
-    private javax.swing.JTextField txtEncargado;
-    private javax.swing.JTextField txtFactura;
     private javax.swing.JTextField txtMonto;
     private javax.swing.JTextField txtProveedor;
     // End of variables declaration//GEN-END:variables
