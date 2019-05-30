@@ -34,25 +34,26 @@ public class menu_inventario extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setText("Registro de Bebidas");
+        jButton1.setText("Bebidas Preparadas");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 112, 182, 38));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 140, 168, 38));
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton3.setText("Registro de Ingredientes");
+        jButton3.setText("Platillos y bebidas");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 56, -1, 38));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 84, 168, 38));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -75,9 +76,8 @@ public class menu_inventario extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        Recetarios_menus.RegistroBebidas bebidas = new Recetarios_menus.RegistroBebidas(null, true);
-        bebidas.setVisible(true);
+ IngresoAlmacen.Materia_Prima_bb almacen = new IngresoAlmacen.Materia_Prima_bb(null, true);
+        almacen.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

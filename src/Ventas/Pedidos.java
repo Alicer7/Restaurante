@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Recetarios_menus;
+package Ventas;
 
 import conexion.BaseDeDatos;
 import java.awt.event.ActionEvent;
@@ -23,43 +23,56 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Alicer
  */
-public class venta_pedidoTemporal extends javax.swing.JFrame {
+public class Pedidos extends javax.swing.JFrame {
 
     int ID_ARTICULO = 0;
     String NOMBRE_ARTICULO = null;
     Double PRECIO = 0.0;
 
-//
-//    public void popuptable() {
-//        JPopupMenu popmenu = new JPopupMenu();
-//        JMenuItem menuitem = new JMenuItem("Eliminar", new ImageIcon(getClass().getResource("/iconos/eli.png")));
-//        menuitem.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                DefaultTableModel model = (DefaultTableModel) jtProductos.getModel();
-//                int a = jtProductos.getSelectedRow();
-//                if (a < 0) {
-//                    JOptionPane.showMessageDialog(null,
-//                            "Debe seleccionar una fila de la tabla");
-//                } else {
-//                    int confirmar = JOptionPane.showConfirmDialog(null,
-//                            "Esta seguro que desea quitar el producto? ");
-//                    if (JOptionPane.OK_OPTION == confirmar) {
-//                        model.removeRow(a);
-//                        JOptionPane.showMessageDialog(null, "Registro Eliminado");
-//                    }
-//                }
-//            }
-//        });
-//        popmenu.add(menuitem);
-//
-//        jtProductos.setComponentPopupMenu(popmenu);
-//    }
+    public void tabla() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        jtProductos.setModel(modelo);
+        modelo.addColumn("id.");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("cantidad");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Totalw");
+    }
+
+    public void popuptable() {
+        JPopupMenu popmenu = new JPopupMenu();
+        JMenuItem menuitem = new JMenuItem("Eliminar", new ImageIcon(getClass().getResource("/iconos/eli.png")));
+        menuitem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DefaultTableModel model = (DefaultTableModel) jtProductos.getModel();
+                int a = jtProductos.getSelectedRow();
+                if (a < 0) {
+                    JOptionPane.showMessageDialog(null,
+                            "Debe seleccionar una fila de la tabla");
+                } else {
+                    int confirmar = JOptionPane.showConfirmDialog(null,
+                            "Esta seguro que desea quitar el producto? ");
+                    if (JOptionPane.OK_OPTION == confirmar) {
+                        model.removeRow(a);
+                        JOptionPane.showMessageDialog(null, "Registro Eliminado");
+                    }
+                }
+            }
+        });
+
+        popmenu.add(menuitem);
+
+        jtProductos.setComponentPopupMenu(popmenu);
+    }
+
     /**
      * Creates new form Factura_ingreso
      */
-    public venta_pedidoTemporal() {
+    public Pedidos() {
         initComponents();
+        tabla();
+        popuptable();
 
         try {
             BaseDeDatos cone = new BaseDeDatos();
@@ -130,21 +143,17 @@ public class venta_pedidoTemporal extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jcMesero = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        txtNit = new javax.swing.JTextField();
-        txtNombre = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        txtMonto = new javax.swing.JTextField();
-        jcFecha = new com.toedter.calendar.JDateChooser();
-        jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtProductos = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtArticulos = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -154,62 +163,41 @@ public class venta_pedidoTemporal extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtComanda.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel2.add(txtComanda, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 28, 182, 28));
+        jPanel2.add(txtComanda, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 42, 182, 28));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("Comanda No. ");
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 28, 126, 28));
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 42, 126, 28));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Código de Mesero:");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 70, 126, 28));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 84, 126, 28));
 
         jcMesero.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel2.add(jcMesero, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 70, 182, 28));
+        jPanel2.add(jcMesero, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 84, 280, 28));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Nit Cliente:");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 112, 98, 31));
-
-        txtNit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtNit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNitActionPerformed(evt);
-            }
-        });
-        jPanel2.add(txtNit, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 112, 126, 28));
-
-        txtNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel2.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 154, 322, 28));
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("Nombre Cliente:");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 154, 98, 31));
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel7.setText("Monto:");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 112, 98, 31));
-
-        txtMonto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel2.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(602, 112, 266, 28));
-
-        jcFecha.setDateFormatString("yyyy-MM-dd");
-        jPanel2.add(jcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(602, 154, 266, 28));
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("Fecha:");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 154, 98, 31));
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 28, 882, 196));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 56, 1078, 140));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jtProductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jtProductos);
+
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(518, 14, 658, 266));
 
         jtArticulos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -229,7 +217,7 @@ public class venta_pedidoTemporal extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jtArticulos);
 
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 14, 672, 266));
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 14, 476, 266));
 
         jButton2.setText("Guardar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -237,65 +225,98 @@ public class venta_pedidoTemporal extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(392, 294, 112, 42));
+        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(784, 294, 112, 42));
 
-        jButton3.setText("Ver detalle");
+        jButton1.setText("Agregar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 294, 112, 42));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 252, 1190, 350));
+
+        jButton3.setText("Bebidas");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 14, -1, -1));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 224, -1, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 266, 826, 350));
+        jButton4.setText("platillos");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 224, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 929, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1256, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 26, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+//
         try {
             BaseDeDatos cone = new BaseDeDatos();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
             PreparedStatement ps = null;
-            ps = conn.prepareStatement("INSERT INTO `cafebar`.`pedido_venta_facturatemporal` (`NitCliente`, `Nombre`, `ComandaNo`, `Mesero`, `Total`, `Fecha`) VALUES (?,?,?,?,?,?)");
-            ps.setString(1, txtNit.getText());
-            ps.setString(2, txtNombre.getText());
-            ps.setString(3, txtComanda.getText());
-            ps.setString(4, jcMesero.getSelectedItem().toString());
-            ps.setString(5, txtMonto.getText());
-            ps.setString(6, ((JTextField) jcFecha.getDateEditor().getUiComponent()).getText());
+            ps = conn.prepareStatement("INSERT INTO `pedido_numero_temporal` (`NoComanda`, `CodigoMesero`, estado) VALUES  (?,?,?)");
+
+            ps.setInt(1, Integer.parseInt(txtComanda.getText()));
+            ps.setString(2, jcMesero.getSelectedItem().toString());
+            ps.setString(3, "Pendiente");
 
             ps.execute();
 //            JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
             System.out.println("ya, factura");
+//
+//        } catch (SQLException ex) {
+//        }
+//
+//        try {
+//            BaseDeDatos cone = new BaseDeDatos();
+//            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+//            PreparedStatement ps = null;
 
-        } catch (SQLException ex) {
-        }
+            int filas = jtProductos.getRowCount();
+            System.out.println("filas jc " + filas);
+            for (int row = 0; row < filas; row++) {
+                ps = conn.prepareStatement("INSERT INTO `cafebar`.`pedido_temporal` (`id_plato`, `Nombre`, `Cantidad`, `Precio`, `NoComanda`, total) VALUES (?,?,?,?,?,?)");
+                int idPlato = (int) jtProductos.getValueAt(row, 0);
+                String nombre = (String) jtProductos.getValueAt(row, 1);
+                int cant = (int) jtProductos.getValueAt(row, 2);
+                Double precio = (double) jtProductos.getValueAt(row, 3);
+                Double total = (double) jtProductos.getValueAt(row, 4);
 
-        try {
-            BaseDeDatos cone = new BaseDeDatos();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
-            PreparedStatement ps = null;
-            ps = conn.prepareStatement("UPDATE `cafebar`.`pedido_numero_temporal` SET `estado` = 'Cancelado' WHERE nocomanda = '" + txtComanda.getText() + "'");
-
-            ps.execute();
-            JOptionPane.showMessageDialog(null, "Factura Generada");
-            System.out.println("ya, factura");
-
+                ps.setInt(1, idPlato);
+                ps.setString(2, nombre);
+                ps.setInt(3, cant);
+                ps.setDouble(4, precio);
+                ps.setDouble(5, Integer.parseInt(txtComanda.getText()));
+                 ps.setDouble(6, total);
+                ps.execute();
+                System.out.println("ya, asdfasdf");
+            }
+            JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
+            tabla();
+            limpiar();
         } catch (SQLException ex) {
         }
 
@@ -317,6 +338,23 @@ public class venta_pedidoTemporal extends javax.swing.JFrame {
         System.out.println("precio" + PRECIO);
     }//GEN-LAST:event_jtArticulosMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        String cant = JOptionPane.showInputDialog(null, "Ingrese la cantidad", JOptionPane.WARNING_MESSAGE);
+        int cantidad = Integer.parseInt(cant);
+        Double total = PRECIO * cantidad;
+        DefaultTableModel modelo = (DefaultTableModel) jtProductos.getModel();
+        Object[] fila = new Object[5];
+        fila[0] = ID_ARTICULO;
+        fila[1] = NOMBRE_ARTICULO;
+        fila[2] = cantidad;
+        fila[3] = PRECIO;
+        fila[4] = total;
+        modelo.addRow(fila);
+//        jtProductos.setModel(modelo);
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
             PreparedStatement ps = null;
@@ -326,19 +364,25 @@ public class venta_pedidoTemporal extends javax.swing.JFrame {
             DefaultTableModel modelo2 = new DefaultTableModel();
             jtArticulos.setModel(modelo2);
 
-            String sql = "select Nombre, cantidad, precio, Total from pedido_temporal where NoComanda ='" + txtComanda.getText() + "'";
+            String sql = "SELECT\n"
+                    + "     bebida.`id` AS bebida_id,\n"
+                    + "     bebida.`nombre` AS bebida_nombre,\n"
+                    + "     categoria.`nombre` AS categoria_nombre,\n"
+                    + "     bebida.`precio` AS bebida_precio\n"
+                    + "FROM\n"
+                    + "     `categoria` categoria INNER JOIN `bebida` bebida ON categoria.`id` = bebida.`categoria_id` ";
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
             ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
             int cantidadColumnas = rsMd.getColumnCount();
 
+            modelo2.addColumn("id.");
             modelo2.addColumn("Nombre");
-            modelo2.addColumn("Cantidad");
+            modelo2.addColumn("Categoría");
             modelo2.addColumn("Precio");
-            modelo2.addColumn("Total");
 
-            int[] anchos = {150, 60, 70, 70};
+            int[] anchos = {10, 150, 70, 70};
             for (int i = 0; i < jtArticulos.getColumnCount(); i++) {
                 jtArticulos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
             }
@@ -351,22 +395,55 @@ public class venta_pedidoTemporal extends javax.swing.JFrame {
                 modelo2.addRow(filas);
             }
 
-            String cod_proyecto = "select sum(Total) from pedido_temporal where Nocomanda ='" + txtComanda.getText() + "'";
-            ps = conn.prepareStatement(cod_proyecto);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                txtMonto.setText( rs.getString("sum(Total)"));
-                txtMonto.setEditable(false);
-            }
-
         } catch (SQLException ex) {
             System.err.println(ex.toString());
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void txtNitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNitActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNitActionPerformed
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        try {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            BaseDeDatos cone = new BaseDeDatos();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            DefaultTableModel modelo2 = new DefaultTableModel();
+            jtArticulos.setModel(modelo2);
+
+            String sql = "SELECT\n"
+                    + "     comida.`id` AS comida_id,\n"
+                    + "     comida.`nombre` AS comida_nombre,\n"
+                    + "     categoria.`nombre` AS categoria_nombre,\n"
+                    + "     comida.`precio` AS comida_precio\n"
+                    + "FROM\n"
+                    + "     `categoria` categoria INNER JOIN `comida` comida ON categoria.`id` = comida.`categoria_id` ";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
+            int cantidadColumnas = rsMd.getColumnCount();
+
+            modelo2.addColumn("id.");
+            modelo2.addColumn("Nombre");
+            modelo2.addColumn("Categoría");
+            modelo2.addColumn("Precio");
+
+            int[] anchos = {10, 150, 70, 70};
+            for (int i = 0; i < jtArticulos.getColumnCount(); i++) {
+                jtArticulos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+            }
+
+            while (rs.next()) {
+                Object[] filas = new Object[cantidadColumnas];
+                for (int i = 0; i < cantidadColumnas; i++) {
+                    filas[i] = rs.getObject(i + 1);
+                }
+                modelo2.addRow(filas);
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.toString());
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     private void limpiar() {
         txtComanda.setText("");
@@ -390,13 +467,13 @@ public class venta_pedidoTemporal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(venta_pedidoTemporal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Pedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(venta_pedidoTemporal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Pedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(venta_pedidoTemporal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Pedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(venta_pedidoTemporal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Pedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -406,30 +483,26 @@ public class venta_pedidoTemporal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new venta_pedidoTemporal().setVisible(true);
+                new Pedidos().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private com.toedter.calendar.JDateChooser jcFecha;
     private javax.swing.JComboBox<String> jcMesero;
     private javax.swing.JTable jtArticulos;
+    private javax.swing.JTable jtProductos;
     private javax.swing.JTextField txtComanda;
-    private javax.swing.JTextField txtMonto;
-    private javax.swing.JTextField txtNit;
-    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }

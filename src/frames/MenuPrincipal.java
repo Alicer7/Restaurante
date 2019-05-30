@@ -34,6 +34,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,13 +42,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         panelControl.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton3.setText("Inventarios");
+        jButton3.setText("Almacén");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        panelControl.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 182, 154, 45));
+        panelControl.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 224, 154, 45));
 
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton4.setText("compras ");
@@ -56,7 +57,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        panelControl.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 98, 154, 45));
+        panelControl.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 168, 154, 45));
 
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton5.setText("Creacion de recetas");
@@ -65,7 +66,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        panelControl.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 42, 154, 45));
+        panelControl.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 112, 154, 45));
 
         jButton7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/obrero(1).png"))); // NOI18N
@@ -75,7 +76,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        panelControl.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 98, 154, 42));
+        panelControl.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 280, 154, 42));
 
         jButton6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton6.setText("Pedidos");
@@ -84,7 +85,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        panelControl.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 42, 154, 45));
+        panelControl.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(476, 126, 154, 45));
 
         jButton8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton8.setText("Facturación");
@@ -93,7 +94,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jButton8ActionPerformed(evt);
             }
         });
-        panelControl.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 98, 154, 45));
+        panelControl.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(476, 56, 154, 45));
+
+        jButton9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton9.setText("Menús");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+        panelControl.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 56, 154, 45));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,12 +120,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        frames.menu_inventario inventario = new frames.menu_inventario(null, true);
-        inventario.setVisible(true);
+        frames.menu_inventario menu = new frames.menu_inventario(null, true);
+        menu.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
+        Ventas_Compras_facturas.Factura_ingreso ing = new Ventas_Compras_facturas.Factura_ingreso();
+        ing.setVisible(true);
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -130,16 +142,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        Ventas.Pedidos ped = new Ventas.Pedidos();
+        ped.setVisible(true);
 
-        
 
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        Ventas.Factura_Venta detalle = new Ventas.Factura_Venta(null, true);
-        detalle.setVisible(true);
-
+        Ventas.venta_pedidoTemporal temp = new Ventas.venta_pedidoTemporal();
+        temp.setVisible(true);
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        frames.addDrink dr = new frames.addDrink(null, true);
+        dr.setVisible(true
+        );
+
+    }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,6 +202,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JPanel panelControl;
     // End of variables declaration//GEN-END:variables
 }
