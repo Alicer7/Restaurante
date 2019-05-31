@@ -14,10 +14,17 @@ import java.sql.SQLException;
  * @author Alicer
  */
 public class Conexion {
-    private final String URL = "jdbc:mysql://tcp.ngrok.io:17152/"; // Ubicación de la BD.
+//    private final String URL = "jdbc:mysql://tcp.ngrok.io:17152/"; // Ubicación de la BD.
+//    private final String BD = "cafebar"; // Nombre de la BD.
+//    private final String USER = "freddy";
+//    private final String PASSWORD = "freddy";
+    
+    
+     private final String URL = "jdbc:mysql://localhost:3306/"; // Ubicación de la BD.
     private final String BD = "cafebar"; // Nombre de la BD.
-    private final String USER = "freddy";
-    private final String PASSWORD = "freddy";
+    private final String USER = "root";
+    private final String PASSWORD = "";
+
 
     public Connection conexion = null;
 
