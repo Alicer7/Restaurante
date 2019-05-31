@@ -12,7 +12,7 @@ import gui.MenuPrincipal;
  *
  * @author freddy
  */
-public class main {
+public class Main {
     
     public static void main(String[] args) {
         MenuPrincipal gui = new MenuPrincipal();
