@@ -24,9 +24,9 @@ public class Conexion2 {
         catch(ClassNotFoundException cnfe){
             System.out.println("Driver not found" + cnfe);
         }        
-        String url="jdbc:mysql://localhost:3306/wbeducar_java";        
+        String url="jdbc:mysql://0.tcp.ngrok.io:17152/cafebar";        
         try{
-          DBConnection=DriverManager.getConnection(url,"root","YOUR PASSWORD");
+          DBConnection=DriverManager.getConnection(url,"fredy","freddy");
           System.out.println("Database Connected");
         }
         catch(SQLException se){

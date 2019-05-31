@@ -7,6 +7,8 @@ package gui.venta;
 
 import java.util.ArrayList;
 import core.utils.Facturas;
+import core.utils.Pedidos;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -97,7 +99,10 @@ public class Factura extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_Cargar_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Cargar_ActionPerformed
+        ArrayList<Pedidos> listaPedidos= new ArrayList<Pedidos>();
         
+        DefaultTableModel modelPedidos= (DefaultTableModel) jTable1.getModel();
+        Object row[]= new Object[0];
     }//GEN-LAST:event_jButton_Cargar_ActionPerformed
 
     /**
