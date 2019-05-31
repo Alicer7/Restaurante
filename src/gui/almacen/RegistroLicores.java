@@ -45,12 +45,8 @@ public class RegistroLicores extends javax.swing.JDialog {
         txtDescripcion = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtMax = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtMaxOnzas = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtMin = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        txtMinOnzas = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         txtCosto = new javax.swing.JTextField();
@@ -64,19 +60,25 @@ public class RegistroLicores extends javax.swing.JDialog {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ingreso de Materia Prima", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro de Licores", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Descripcion:");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 70, 154, 27));
-        jPanel2.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 70, 224, 28));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 70, 154, 27));
+
+        txtDescripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDescripcionActionPerformed(evt);
+            }
+        });
+        jPanel2.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 280, 28));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Stock Máximo de botellas:");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 140, 154, 27));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 112, 168, 27));
 
         txtMax.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,18 +90,12 @@ public class RegistroLicores extends javax.swing.JDialog {
                 txtMaxKeyReleased(evt);
             }
         });
-        jPanel2.add(txtMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 140, 84, 28));
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("Total en Onzas:");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(266, 140, 98, 27));
-        jPanel2.add(txtMaxOnzas, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 140, 84, 28));
+        jPanel2.add(txtMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 112, 84, 28));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Stock Mínimo en botellas:");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 182, 154, 27));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 154, 168, 27));
 
         txtMin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,13 +107,7 @@ public class RegistroLicores extends javax.swing.JDialog {
                 txtMinKeyReleased(evt);
             }
         });
-        jPanel2.add(txtMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 182, 84, 28));
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("Total en Onzas:");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(266, 182, 98, 27));
-        jPanel2.add(txtMinOnzas, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 182, 84, 28));
+        jPanel2.add(txtMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 154, 84, 28));
 
         jButton1.setText("Guardar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -125,29 +115,29 @@ public class RegistroLicores extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(308, 252, 98, 42));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 252, 98, 42));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel7.setText("Costo por Unidad:");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 224, 154, 27));
+        jLabel7.setText("Precio de Compra:");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 196, 154, 27));
 
         txtCosto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtCostoKeyReleased(evt);
             }
         });
-        jPanel2.add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 224, 84, 28));
+        jPanel2.add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 196, 84, 28));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 42, 490, 308));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 42, 504, 308));
 
-        jButton2.setText("Actualizar");
+        jButton2.setText("Actualizar lista");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(518, 14, 98, 28));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 14, 126, 28));
 
         jtMateriaPrima.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -162,13 +152,13 @@ public class RegistroLicores extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(jtMateriaPrima);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(518, 56, 602, 294));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 56, 574, 294));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -268,6 +258,10 @@ public class RegistroLicores extends javax.swing.JDialog {
     private void txtMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMinActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMinActionPerformed
+
+    private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescripcionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -379,9 +373,7 @@ public class RegistroLicores extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -390,8 +382,6 @@ public class RegistroLicores extends javax.swing.JDialog {
     private javax.swing.JTextField txtCosto;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtMax;
-    private javax.swing.JTextField txtMaxOnzas;
     private javax.swing.JTextField txtMin;
-    private javax.swing.JTextField txtMinOnzas;
     // End of variables declaration//GEN-END:variables
 }

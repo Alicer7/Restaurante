@@ -24,6 +24,15 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FacturaCompraMat extends javax.swing.JFrame {
 
+    private void cerrar() {
+
+        String botones[] = {"Cerrar", "Cancelar"};
+        int eleccion = JOptionPane.showOptionDialog(this, "¿Desea cerrar la aplicación?", "Título", 0, 0, null, botones, this);
+        if (eleccion == JOptionPane.YES_OPTION) {
+            dispose();
+        } else if (eleccion == JOptionPane.NO_OPTION) {
+        }
+    }
     int ID_ARTICULO = 0;
     String NOMBRE_ARTICULO = null;
     Double COSTO = 0.0;
@@ -145,6 +154,11 @@ public class FacturaCompraMat extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -271,13 +285,17 @@ public class FacturaCompraMat extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1268, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1244, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -309,10 +327,10 @@ public class FacturaCompraMat extends javax.swing.JFrame {
             for (int row = 0; row < filas; row++) {
 
                 int idMateria = (int) jtProductos.getValueAt(row, 0);
-                String descripcion =  (String) jtProductos.getValueAt(row, 1);
+                String descripcion = (String) jtProductos.getValueAt(row, 1);
                 int cant = (int) jtProductos.getValueAt(row, 2);
-                Double precio =  (Double) jtProductos.getValueAt(row, 3);
-                
+                Double precio = (Double) jtProductos.getValueAt(row, 3);
+
                 ps = conn.prepareStatement("INSERT INTO `materia_compra` (`materiaprima_id`, `factura_compra_id`, `descripcion`, cantidad, `costo`) VALUES (?,?,?,?,?)");
                 ps.setInt(1, idMateria);
                 ps.setInt(2, ID_FACTURA);
@@ -363,6 +381,10 @@ public class FacturaCompraMat extends javax.swing.JFrame {
 //        jtProductos.setModel(modelo);
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        cerrar();
+    }//GEN-LAST:event_formWindowClosing
 
     private void limpiar() {
         txtDescripcion.setText("");

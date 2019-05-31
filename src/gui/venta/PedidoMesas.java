@@ -16,7 +16,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,6 +23,16 @@ import javax.swing.table.DefaultTableModel;
  * @author Alicer
  */
 public class PedidoMesas extends javax.swing.JFrame {
+    
+    private void cerrar() {
+
+        String botones[] = {"Cerrar", "Cancelar"};
+        int eleccion = JOptionPane.showOptionDialog(this, "¿Desea cerrar la aplicación?", "Título", 0, 0, null, botones, this);
+        if (eleccion == JOptionPane.YES_OPTION) {
+            dispose();
+        } else if (eleccion == JOptionPane.NO_OPTION) {
+        }
+    }
 
     int ID_ARTICULO = 0;
     String NOMBRE_ARTICULO = null;
@@ -41,7 +50,7 @@ public class PedidoMesas extends javax.swing.JFrame {
 
     public void popuptable() {
         JPopupMenu popmenu = new JPopupMenu();
-        JMenuItem menuitem = new JMenuItem("Eliminar", new ImageIcon(getClass().getResource("/iconos/eli.png")));
+        JMenuItem menuitem = new JMenuItem("Eliminar", new ImageIcon(getClass().getResource("/core/resources/icons/eli.png")));
         menuitem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -151,9 +160,13 @@ public class PedidoMesas extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -178,10 +191,9 @@ public class PedidoMesas extends javax.swing.JFrame {
         jcMesero.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel2.add(jcMesero, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 84, 280, 28));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 56, 1078, 140));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 28, 1190, 140));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jtProductos.setModel(new javax.swing.table.DefaultTableModel(
@@ -197,7 +209,7 @@ public class PedidoMesas extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jtProductos);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(518, 14, 658, 266));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 56, 630, 266));
 
         jtArticulos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -217,7 +229,7 @@ public class PedidoMesas extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jtArticulos);
 
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 14, 476, 266));
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 56, 490, 266));
 
         jButton2.setText("Guardar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -225,7 +237,7 @@ public class PedidoMesas extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(784, 294, 112, 42));
+        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 336, 112, 42));
 
         jButton1.setText("Agregar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -233,25 +245,18 @@ public class PedidoMesas extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 294, 112, 42));
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 336, 112, 42));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 252, 1204, 350));
-
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton3.setText("Bebidas");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 224, -1, -1));
+        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 14, 112, 42));
 
-        jButton4.setText("platillos");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 224, -1, -1));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 196, 1190, 392));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -261,7 +266,9 @@ public class PedidoMesas extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 26, Short.MAX_VALUE))
         );
 
         pack();
@@ -353,6 +360,7 @@ public class PedidoMesas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
         try {
             PreparedStatement ps = null;
             ResultSet rs = null;
@@ -397,50 +405,9 @@ public class PedidoMesas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        try {
-            PreparedStatement ps = null;
-            ResultSet rs = null;
-            Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
-            DefaultTableModel modelo2 = new DefaultTableModel();
-            jtArticulos.setModel(modelo2);
-
-            String sql = "SELECT\n"
-                    + "     comida.`id` AS comida_id,\n"
-                    + "     comida.`nombre` AS comida_nombre,\n"
-                    + "     categoria.`nombre` AS categoria_nombre,\n"
-                    + "     comida.`precio` AS comida_precio\n"
-                    + "FROM\n"
-                    + "     `categoria` categoria INNER JOIN `comida` comida ON categoria.`id` = comida.`categoria_id` ";
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
-
-            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
-            int cantidadColumnas = rsMd.getColumnCount();
-
-            modelo2.addColumn("id.");
-            modelo2.addColumn("Nombre");
-            modelo2.addColumn("Categoría");
-            modelo2.addColumn("Precio");
-
-            int[] anchos = {10, 150, 70, 70};
-            for (int i = 0; i < jtArticulos.getColumnCount(); i++) {
-                jtArticulos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
-            }
-
-            while (rs.next()) {
-                Object[] filas = new Object[cantidadColumnas];
-                for (int i = 0; i < cantidadColumnas; i++) {
-                    filas[i] = rs.getObject(i + 1);
-                }
-                modelo2.addRow(filas);
-            }
-
-        } catch (SQLException ex) {
-            System.err.println(ex.toString());
-        }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+ cerrar();
+    }//GEN-LAST:event_formWindowClosing
 
     private void limpiar() {
         txtComanda.setText("");
@@ -493,7 +460,6 @@ public class PedidoMesas extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

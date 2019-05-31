@@ -21,6 +21,16 @@ import javax.swing.JTextField;
  */
 public class NuevoEmpleado extends javax.swing.JDialog {
 
+    private void cerrar() {
+
+        String botones[] = {"Cerrar", "Cancelar"};
+        int eleccion = JOptionPane.showOptionDialog(this, "¿Desea cerrar la aplicación?", "Título", 0, 0, null, botones, this);
+        if (eleccion == JOptionPane.YES_OPTION) {
+            dispose();
+        } else if (eleccion == JOptionPane.NO_OPTION) {
+        }
+    }
+
     public NuevoEmpleado(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -80,6 +90,11 @@ public class NuevoEmpleado extends javax.swing.JDialog {
         txtDpi = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro de Personal", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
@@ -163,11 +178,17 @@ public class NuevoEmpleado extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1248, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -178,7 +199,6 @@ public class NuevoEmpleado extends javax.swing.JDialog {
 //        int turno = jcTurno.getSelectedIndex() + 1;
 //        int cargo = jcCargo.getSelectedIndex() + 1;
 //        int estado = jcEstado.getSelectedIndex() + 1;
-
         try {
             Conexion cone = new Conexion();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
@@ -202,6 +222,10 @@ public class NuevoEmpleado extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        cerrar();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
