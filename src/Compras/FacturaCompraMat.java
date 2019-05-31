@@ -297,17 +297,22 @@ public class FacturaCompraMat extends javax.swing.JFrame {
             ps.setInt(2, Integer.parseInt(txtNit.getText()));
             ps.setString(3, txtMonto.getText());
             ps.execute();
-//            JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
             System.out.println("gen factura");
 //
+           
+//           INSERT INTO `materia_compra` (`materiaprima_id`, `factura_compra_id`, `descripcion`, `cantidad`, `costo`) VALUES (?,?,?,?,?)
+            
             int filas = jtProductos.getRowCount();
+            System.out.println("filas jc " + filas);
             for (int row = 0; row < filas; row++) {
-                ps = conn.prepareStatement("INSERT INTO `materia_compra` (`materiaprima_id`, `factura_compra_id`, `descripcion`, `cantidad`, `costo`) VALUES (?,?,?,?,?)");
-                ps.setInt(1, (int) jtProductos.getValueAt(row, 0));
-                ps.setInt(2, Integer.parseInt(txtFactura.getText()));
-                ps.setString(3, (String) jtProductos.getValueAt(row, 1));
-                ps.setInt(4, (int) jtProductos.getValueAt(row, 2));
-                ps.setDouble(5, (double) jtProductos.getValueAt(row, 3));
+                ps = conn.prepareStatement("INSERT INTO `materia_compra` (`materiaprima_id`, `factura_compra_id`, `descripcion`, cantidad, `costo`) VALUES (?,?,?,?,?)");
+                int idMateria = (int) jtProductos.getValueAt(row, 0);
+                int id_materia = (int) jtProductos.getValueAt(row, 1);
+                int cant = (int) jtProductos.getValueAt(row, 2);
+
+                ps.setInt(1, idMateria);
+                ps.setInt(2, id_materia);
+                ps.setInt(3, cant);
                 ps.execute();
                 System.out.println("ya, asdfasdf");
             }
