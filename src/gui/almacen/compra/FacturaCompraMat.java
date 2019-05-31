@@ -5,7 +5,6 @@
  */
 package gui.almacen.compra;
 
-import com.mysql.jdbc.Connection;
 import core.database.Conexion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +16,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -42,7 +40,7 @@ public class FacturaCompraMat extends javax.swing.JFrame {
 
     public void popuptable() {
         JPopupMenu popmenu = new JPopupMenu();
-        JMenuItem menuitem = new JMenuItem("Eliminar", new ImageIcon(getClass().getResource("/iconos/eli.png")));
+        JMenuItem menuitem = new JMenuItem("Eliminar", new ImageIcon(getClass().getResource("/core/resources/icons/eli.png")));
         menuitem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -286,9 +284,10 @@ public class FacturaCompraMat extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        int ID_FACTURA = 0;
         try {
             Conexion cone = new Conexion();
+            ResultSet rs = null;
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
             PreparedStatement ps = null;
             ps = conn.prepareStatement("INSERT INTO `factura_compra` (`numfactura`, `nit`, `monto`) VALUES (?,?,?)");
@@ -297,22 +296,29 @@ public class FacturaCompraMat extends javax.swing.JFrame {
             ps.setInt(2, Integer.parseInt(txtNit.getText()));
             ps.setString(3, txtMonto.getText());
             ps.execute();
-            System.out.println("gen factura");
-//
-           
-//           INSERT INTO `materia_compra` (`materiaprima_id`, `factura_compra_id`, `descripcion`, `cantidad`, `costo`) VALUES (?,?,?,?,?)
-            
+
+            String id_factura = "select id from factura_compra where numfactura ='" + txtFactura.getText() + "'";
+            ps = conn.prepareStatement(id_factura);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ID_FACTURA = (rs.getInt("id"));
+            }
+
             int filas = jtProductos.getRowCount();
             System.out.println("filas jc " + filas);
             for (int row = 0; row < filas; row++) {
-                ps = conn.prepareStatement("INSERT INTO `materia_compra` (`materiaprima_id`, `factura_compra_id`, `descripcion`, cantidad, `costo`) VALUES (?,?,?,?,?)");
-                int idMateria = (int) jtProductos.getValueAt(row, 0);
-                int id_materia = (int) jtProductos.getValueAt(row, 1);
-                int cant = (int) jtProductos.getValueAt(row, 2);
 
+                int idMateria = (int) jtProductos.getValueAt(row, 0);
+                String descripcion =  (String) jtProductos.getValueAt(row, 1);
+                int cant = (int) jtProductos.getValueAt(row, 2);
+                Double precio =  (Double) jtProductos.getValueAt(row, 3);
+                
+                ps = conn.prepareStatement("INSERT INTO `materia_compra` (`materiaprima_id`, `factura_compra_id`, `descripcion`, cantidad, `costo`) VALUES (?,?,?,?,?)");
                 ps.setInt(1, idMateria);
-                ps.setInt(2, id_materia);
-                ps.setInt(3, cant);
+                ps.setInt(2, ID_FACTURA);
+                ps.setString(3, descripcion);
+                ps.setInt(4, cant);
+                ps.setDouble(5, precio);
                 ps.execute();
                 System.out.println("ya, asdfasdf");
             }
@@ -397,10 +403,8 @@ public class FacturaCompraMat extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FacturaCompraMat().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new FacturaCompraMat().setVisible(true);
         });
     }
 

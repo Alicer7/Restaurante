@@ -5,11 +5,6 @@
  */
 package core.utils;
 
-import core.database.Conexion;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author freddy
