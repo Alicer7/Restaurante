@@ -5,15 +5,27 @@
  */
 package gui;
 
+import core.database.Conexion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
-import static javax.swing.text.html.HTML.Tag.HEAD;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -59,7 +71,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         panelControl = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
-        jButton_ComprasInventarios = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -94,14 +106,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         panelControl.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 196, 182, 45));
 
-        jButton_ComprasInventarios.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton_ComprasInventarios.setText("Compras/Inventario");
-        jButton_ComprasInventarios.addActionListener(new java.awt.event.ActionListener() {
+        jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton4.setText("Compras/Inventario");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_ComprasInventariosActionPerformed(evt);
+                jButton4ActionPerformed(evt);
             }
         });
-        panelControl.add(jButton_ComprasInventarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 280, 182, 45));
+        panelControl.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 252, 182, 45));
 
         jButton5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton5.setText("Creacion de recetas");
@@ -245,12 +257,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
 
-    private void jButton_ComprasInventariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ComprasInventariosActionPerformed
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
         gui.almacen.compra.FacturaCompraMat ing = new gui.almacen.compra.FacturaCompraMat();
         ing.setVisible(true);
 
-    }//GEN-LAST:event_jButton_ComprasInventariosActionPerformed
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         gui.cocina.NuevaReceta recipe = new gui.cocina.NuevaReceta(null, true);
@@ -359,12 +371,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JButton jButton_Administracion_;
-    private javax.swing.JButton jButton_ComprasInventarios;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel panelControl;
