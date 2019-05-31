@@ -141,8 +141,7 @@ public class DetalleFacturacion extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtArticulos = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButton_Guardar_ = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -206,7 +205,7 @@ public class DetalleFacturacion extends javax.swing.JFrame {
         jLabel6.setText("Fecha:");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 154, 98, 31));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 28, 882, 196));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 882, 196));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -229,25 +228,17 @@ public class DetalleFacturacion extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jtArticulos);
 
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 14, 672, 266));
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 672, 266));
 
-        jButton2.setText("Guardar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButton_Guardar_.setText("Guardar e Imprimir");
+        jButton_Guardar_.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButton_Guardar_ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(392, 294, 112, 42));
+        jPanel3.add(jButton_Guardar_, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, 170, 42));
 
-        jButton3.setText("Ver detalle");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 14, -1, -1));
-
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 266, 826, 350));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 266, 850, 350));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -263,7 +254,7 @@ public class DetalleFacturacion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton_Guardar_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Guardar_ActionPerformed
 
         try {
             Conexion cone = new Conexion();
@@ -298,7 +289,7 @@ public class DetalleFacturacion extends javax.swing.JFrame {
         }
 
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButton_Guardar_ActionPerformed
 
     private void jtArticulosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtArticulosMouseClicked
 
@@ -314,53 +305,6 @@ public class DetalleFacturacion extends javax.swing.JFrame {
         System.out.println("Nombre: " + NOMBRE_ARTICULO);
         System.out.println("precio" + PRECIO);
     }//GEN-LAST:event_jtArticulosMouseClicked
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        try {
-            PreparedStatement ps = null;
-            ResultSet rs = null;
-            Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
-            DefaultTableModel modelo2 = new DefaultTableModel();
-            jtArticulos.setModel(modelo2);
-
-            String sql = "select Nombre, cantidad, precio, Total from pedido_temporal where NoComanda ='" + txtComanda.getText() + "'";
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
-
-            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
-            int cantidadColumnas = rsMd.getColumnCount();
-
-            modelo2.addColumn("Nombre");
-            modelo2.addColumn("Cantidad");
-            modelo2.addColumn("Precio");
-            modelo2.addColumn("Total");
-
-            int[] anchos = {150, 60, 70, 70};
-            for (int i = 0; i < jtArticulos.getColumnCount(); i++) {
-                jtArticulos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
-            }
-
-            while (rs.next()) {
-                Object[] filas = new Object[cantidadColumnas];
-                for (int i = 0; i < cantidadColumnas; i++) {
-                    filas[i] = rs.getObject(i + 1);
-                }
-                modelo2.addRow(filas);
-            }
-
-            String cod_proyecto = "select sum(Total) from pedido_temporal where Nocomanda ='" + txtComanda.getText() + "'";
-            ps = conn.prepareStatement(cod_proyecto);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                txtMonto.setText( rs.getString("sum(Total)"));
-                txtMonto.setEditable(false);
-            }
-
-        } catch (SQLException ex) {
-            System.err.println(ex.toString());
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void txtNitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNitActionPerformed
         // TODO add your handling code here:
@@ -414,8 +358,7 @@ public class DetalleFacturacion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton_Guardar_;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

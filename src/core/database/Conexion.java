@@ -20,10 +20,10 @@ public class Conexion {
 //    private final String PASSWORD = "freddy";
     
     
-     private final String URL = "jdbc:mysql://localhost:3306/"; // Ubicación de la BD.
+     private final String URL = "jdbc:mysql://192.168.1.2:3306/"; // Ubicación de la BD.
     private final String BD = "cafebar"; // Nombre de la BD.
-    private final String USER = "root";
-    private final String PASSWORD = "";
+    private final String USER = "freddy";
+    private final String PASSWORD = "freddy";
 
 
     public Connection conexion = null;
