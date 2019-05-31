@@ -13,6 +13,7 @@ import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import static javax.swing.text.html.HTML.Tag.HEAD;
 
 /**
  *
@@ -91,7 +92,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        panelControl.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 224, 182, 45));
+        panelControl.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 196, 182, 45));
 
         jButton_ComprasInventarios.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton_ComprasInventarios.setText("Compras/Inventario");
@@ -109,7 +110,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        panelControl.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 336, 182, 42));
+        panelControl.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 308, 182, 42));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("Ingreso de bebidas");
@@ -118,7 +119,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        panelControl.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 392, 182, 42));
+        panelControl.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 364, 182, 42));
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -161,13 +162,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(36, 36, 36)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(28, 28, 28)
                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(29, 29, 29)
                 .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,7 +182,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGap(32, 32, 32))
         );
 
-        panelControl.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 868, 112));
+        panelControl.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 882, 112));
 
         jButton_Administracion_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton_Administracion_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/obrero(1).png"))); // NOI18N
@@ -191,7 +192,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jButton_Administracion_ActionPerformed(evt);
             }
         });
-        panelControl.add(jButton_Administracion_, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 168, 182, 42));
+        panelControl.add(jButton_Administracion_, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 140, 182, 42));
 
         hora.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         hora.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -217,9 +218,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(panelControl, javax.swing.GroupLayout.PREFERRED_SIZE, 866, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(panelControl, javax.swing.GroupLayout.PREFERRED_SIZE, 870, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,8 +243,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             hora.setText(String.format(formato.format(sistemaHora), now));
         }
     }
-
-    
 
 
     private void jButton_ComprasInventariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ComprasInventariosActionPerformed
@@ -280,8 +277,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        gui.cocina.AsignarRecetaBebida menu = new gui.cocina.AsignarRecetaBebida(this, true);
-        menu.setVisible(true);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -294,12 +290,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // TODO add your handling code here:
+        gui.Reportes.ReporteVenta fact = new gui.Reportes.ReporteVenta(this, true);
+        fact.setVisible(true);
+
+// TODO add your handling code here:
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         if (JOptionPane.showConfirmDialog(this, "Esta a punto de\ncerrar la sesión\n¿Desea continuar?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION, 0,
-                new ImageIcon(getClass().getResource("/core/resources/icons/preg2.png"))) == JOptionPane.YES_OPTION) {
+                new ImageIcon(getClass().getResource("/core/resources/icons/eliminar.png"))) == JOptionPane.YES_OPTION) {
             this.dispose();
             new gui.Login_vista.login().setVisible(true);
         }
