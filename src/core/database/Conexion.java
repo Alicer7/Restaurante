@@ -26,20 +26,20 @@ public class Conexion {
     private final String PASSWORD = "";
 
 
-    public Connection conexion = null;
+    public Connection conexion_7 = null;
 
     @SuppressWarnings("finally")
     public Connection conectar() throws SQLException {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conexion = DriverManager.getConnection(URL + BD, USER, PASSWORD);
-            if (conexion != null) {
+            conexion_7 = DriverManager.getConnection(URL + BD, USER, PASSWORD);
+            if (conexion_7 != null) {
                 System.out.println("¡Conexión Exitosa!");
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            return conexion;
+            return conexion_7;
         }
     }
 }
