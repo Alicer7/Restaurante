@@ -101,10 +101,10 @@ public class login extends javax.swing.JFrame {
         jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 210, 168, -1));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/campoLoginPass.png"))); // NOI18N
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 196, 266, 56));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 196, 252, 56));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/campoLoginUs.png"))); // NOI18N
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 126, 266, 84));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 252, 56));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 588, 378));
 
