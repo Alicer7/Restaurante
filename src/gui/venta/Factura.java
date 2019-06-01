@@ -5,12 +5,8 @@
  */
 package gui.venta;
 
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.time;
 import java.util.ArrayList;
-import core.utils.Facturas;
 import core.utils.Pedidos;
-import core.utils.Pedidos;
-import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -121,7 +117,7 @@ public class Factura extends javax.swing.JFrame {
 
             },
             new String [] {
-                "# Pedido", "# Factura", "Menú", "# Menus", "Comida", "# Comidas", "Bebida", "# Bebidas", "Costo", "Hora", "Estado"
+                "id", "null", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10", "Title 11"
             }
         ));
         jScrollPane1.setViewportView(jTable_Pedidos_);
@@ -138,7 +134,7 @@ public class Factura extends javax.swing.JFrame {
                 jButton_Cargar_ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Cargar_, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 620, -1, -1));
+        getContentPane().add(jButton_Cargar_, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 610, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
