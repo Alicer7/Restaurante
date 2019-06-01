@@ -14,6 +14,12 @@ import java.sql.SQLException;
  * @author freddy
  */
 public class Conexion2 {
+    private final String port="3306";
+    private final String url = "jdbc:mysql://192.168.1.2:"+port+"/"; // Ubicación de la BD.
+    private final String db = "cafebar"; // Nombre de la BD.
+    private final String user = "freddy";
+    private final String password = "freddy";
+    
     private Connection DBConnection;
     public Connection connect(){
     
@@ -23,10 +29,9 @@ public class Conexion2 {
         }
         catch(ClassNotFoundException cnfe){
             System.out.println("Driver not found" + cnfe);
-        }        
-        String url="jdbc:mysql://0.tcp.ngrok.io:17152/cafebar";        
+        }                
         try{
-          DBConnection=DriverManager.getConnection(url,"fredy","freddy");
+          DBConnection=DriverManager.getConnection(url+db,user,password);
           System.out.println("Database Connected");
         }
         catch(SQLException se){

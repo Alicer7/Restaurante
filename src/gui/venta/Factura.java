@@ -5,9 +5,12 @@
  */
 package gui.venta;
 
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.time;
 import java.util.ArrayList;
 import core.utils.Facturas;
 import core.utils.Pedidos;
+import core.utils.Pedidos;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,8 +22,52 @@ public class Factura extends javax.swing.JFrame {
     /**
      * Creates new form Factura
      */
+    private void mostarPedidosDia ( String dia ){
+        
+        Pedidos pedidos = new Pedidos(null, null, null, null, null, null, null, null, null, null, null);
+        
+        ArrayList<Pedidos> lista = pedidos.listaPedidosDia(null);
+        
+        jTable_Pedidos_.setPreferredSize(new java.awt.Dimension(jTable_Pedidos_.getWidth(), lista.size()*16));
+        
+        DefaultTableModel model = (DefaultTableModel) jTable_Pedidos_.getModel();
+        
+        Object filaData []= new Object[lista.size()];
+        
+        for (int i=0 ; i < lista.size() ; i++){
+            System.out.println("setup for");
+            filaData[0]=lista.get(i).getIdPedido();
+            filaData[1]=lista.get(i).getFacturaId();
+            filaData[2]=lista.get(i).getMenuId();
+            filaData[3]=lista.get(i).getMenuCantidad();
+            filaData[4]=lista.get(i).getComidaId();
+            filaData[5]=lista.get(i).getComidaCantidad();
+            filaData[6]=lista.get(i).getBebidaId();
+            filaData[7]=lista.get(i).getBebidaCantidad();
+            filaData[8]=lista.get(i).getCosto();
+            filaData[9]=lista.get(i).getTiempo();
+            filaData[10]=lista.get(i).getSolvente();
+            
+            model.addRow(filaData);
+            System.out.println(filaData);
+        }
+    }
+    
+    private void limpiarPedidos (){
+        DefaultTableModel model = (DefaultTableModel) jTable_Pedidos_.getModel();
+        jTable_Pedidos_.setPreferredSize(new java.awt.Dimension(jTable_Pedidos_.getWidth(), 0 ));
+        
+        int rowCount = model.getRowCount();
+        for (int i = rowCount - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
+    }
+    
+    
     public Factura() {
         initComponents();
+        limpiarPedidos();
+        mostarPedidosDia( null);
     }
 
     /**
@@ -36,7 +83,7 @@ public class Factura extends javax.swing.JFrame {
         jPanel_Informacion_ = new javax.swing.JPanel();
         jPanel_Detalles_ = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable_Pedidos_ = new javax.swing.JTable();
         jButton_Cargar_ = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -71,15 +118,15 @@ public class Factura extends javax.swing.JFrame {
         jPanel_Detalles_.setPreferredSize(new java.awt.Dimension(900, 425));
         jPanel_Detalles_.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_Pedidos_.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-
+                "# Pedido", "# Factura", "Menú", "# Menus", "Comida", "# Comidas", "Bebida", "# Bebidas", "Costo", "Hora", "Estado"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTable_Pedidos_);
 
         jPanel_Detalles_.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 19, 870, 390));
 
@@ -99,10 +146,7 @@ public class Factura extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_Cargar_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Cargar_ActionPerformed
-        ArrayList<Pedidos> listaPedidos= new ArrayList<Pedidos>();
-        
-        DefaultTableModel modelPedidos= (DefaultTableModel) jTable1.getModel();
-        Object row[]= new Object[0];
+
     }//GEN-LAST:event_jButton_Cargar_ActionPerformed
 
     /**
@@ -146,6 +190,6 @@ public class Factura extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_Informacion_;
     private javax.swing.JPanel jPanel_Main_;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable_Pedidos_;
     // End of variables declaration//GEN-END:variables
 }

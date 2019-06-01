@@ -13,7 +13,7 @@ import java.sql.Timestamp;
  */
 public class Facturas {
     private Integer idFactura;
-    private String nitCliente;
+    private String nitCliente,solvente;
     private Double 
             costo,
             pagoEfectivo,
@@ -28,7 +28,8 @@ public class Facturas {
             Double pagoEfectifo,
             Double pagoElectronico,
             Double cambio,
-            Timestamp fecha
+            Timestamp fecha,
+            String solvente
         ) {
         this.idFactura=idFactura;
         this.nitCliente=nitCliente;
@@ -37,6 +38,7 @@ public class Facturas {
         this.pagoElectronico=pagoElectronico;
         this.cambio=cambio;
         this.fecha=fecha;
+        this.solvente=solvente;
     }
 
     public Integer getIdFactura() {
@@ -45,6 +47,10 @@ public class Facturas {
 
     public String getNitCliente() {
         return nitCliente;
+    }
+
+    public String getSolvente() {
+        return solvente;
     }
 
     public Double getCosto() {
