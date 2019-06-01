@@ -5,22 +5,27 @@
  */
 package core.utils;
 
+import core.database.Conexion2;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 /**
  *
  * @author freddy
  */
 public class Facturas {
-    private Integer idFactura;
-    private String nitCliente,solvente;
-    private Double 
+    private final Connection conn= new Conexion2().connect();
+    private final Integer idFactura;
+    private final String nitCliente,solvente,fecha;
+    private final Double 
             costo,
             pagoEfectivo,
             pagoElectronico,
             cambio;
-    private Timestamp fecha;
-
     public Facturas(
             Integer idFactura, 
             String nitCliente,
@@ -28,7 +33,7 @@ public class Facturas {
             Double pagoEfectifo,
             Double pagoElectronico,
             Double cambio,
-            Timestamp fecha,
+            String fecha,
             String solvente
         ) {
         this.idFactura=idFactura;
@@ -39,6 +44,38 @@ public class Facturas {
         this.cambio=cambio;
         this.fecha=fecha;
         this.solvente=solvente;
+    }
+    
+    public ArrayList<Facturas> listaFacturasDia (String fecha){
+        
+        ArrayList<Facturas> listaFacturases= new ArrayList<Facturas>();
+        String sql="SELECT * FROM `cafebar`.`factura_venta` WHERE date(fecha) ="+fecha;
+        
+        try {
+            Statement stm;
+            stm = conn.createStatement();
+            ResultSet rst;
+            rst = stm.executeQuery(sql);
+            
+            while (rst.next()){
+                Facturas factura= new Facturas (
+                        rst.getInt(1), 
+                        rst.getString(2), 
+                        rst.getDouble(3), 
+                        rst.getDouble(4), 
+                        rst.getDouble(5), 
+                        rst.getDouble(6), 
+                        rst.getString(7), 
+                        rst.getString(8)
+                );
+                
+                listaFacturases.add(factura);
+                
+            }
+        } catch (SQLException e) {
+            System.err.println("Error: "+e);
+        }
+        return listaFacturases;
     }
 
     public Integer getIdFactura() {
@@ -69,7 +106,7 @@ public class Facturas {
         return cambio;
     }
 
-    public Timestamp getFecha() {
+    public String getFecha() {
         return fecha;
     }
 

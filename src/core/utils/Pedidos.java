@@ -3,8 +3,8 @@ package core.utils;
 import core.database.Conexion2;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -12,18 +12,18 @@ import java.util.ArrayList;
  * @author freddy
  */
 public class Pedidos {
-    private Connection conn= new Conexion2().connect();
-    private Integer idPedido;
-    private Integer facturaId;
-    private Integer menuId;
-    private Integer menuCantidad;
-    private Integer comidaId;
-    private Integer comidaCantidad;
-    private Integer bebidaId;
-    private Integer bebidaCantidad;
-    private Double costo;
-    private Timestamp tiempo;
-    private String solvente;
+    private final Connection conn= new Conexion2().connect();
+    private final Integer idPedido;
+    private final Integer facturaId;
+    private final Integer menuId;
+    private final Integer menuCantidad;
+    private final Integer comidaId;
+    private final Integer comidaCantidad;
+    private final Integer bebidaId;
+    private final Integer bebidaCantidad;
+    private final Double costo;
+    private final String tiempo;
+    private final String solvente;
  
     public Pedidos(
             Integer idPedido,
@@ -35,7 +35,7 @@ public class Pedidos {
             Integer bebidaId,
             Integer bebidaCantidad,
             Double costo,
-            Timestamp tiempo,
+            String tiempo,
             String solvente
     ) {
         this.idPedido=idPedido;
@@ -43,47 +43,51 @@ public class Pedidos {
         this.menuId=menuId;
         this.menuCantidad=menuCantidad;
         this.comidaId=menuCantidad;
+        this.comidaCantidad=comidaCantidad;
         this.bebidaId=bebidaCantidad;
+        this.bebidaCantidad=bebidaCantidad;
         this.costo=costo;
         this.tiempo=tiempo;
         this.solvente=solvente;
     }
 
-    
-      public final ArrayList<Pedidos> listaPedidosDia (String dia){
+    public ArrayList<Pedidos> listaPedidosDia (String fecha){
         
         ArrayList<Pedidos> listaPedidos= new ArrayList<Pedidos>();
-            
-        String sql="SELECT * FROM `cafebar`.`factura_pedido` WHERE day(`time`) ="+dia;
+        String sql="SELECT * FROM `cafebar`.`factura_pedido` WHERE date(time) ="+fecha;
         
         try {
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-            System.out.println(rs);
-            Pedidos pedidos;
-            System.err.println("RS es: "+rs.next());;
-            while (rs.next()){
-                System.out.println(rs.getInt(idPedido));
-                pedidos = new Pedidos(
-                        rs.getInt(idPedido), 
-                        rs.getInt(facturaId), 
-                        rs.getInt(menuId), 
-                        rs.getInt(menuCantidad), 
-                        rs.getInt(comidaId), 
-                        rs.getInt(comidaCantidad), 
-                        rs.getInt(bebidaId), 
-                        rs.getInt(bebidaCantidad), 
-                        rs.getDouble(costo.toString()), 
-                        rs.getTimestamp(tiempo.toString()),
-                        rs.getString(solvente)
+            Statement stm;
+            stm = conn.createStatement();
+            ResultSet rst;
+            rst = stm.executeQuery(sql);
+            
+            while (rst.next()){
+                Pedidos pedido = new Pedidos(
+                        rst.getInt(1), 
+                        rst.getInt(2), 
+                        rst.getInt(3), 
+                        rst.getInt(4), 
+                        rst.getInt(5), 
+                        rst.getInt(6), 
+                        rst.getInt(7), 
+                        rst.getInt(8), 
+                        rst.getDouble(9), 
+                        rst.getString(10), 
+                        rst.getString(11)
                 );
-                listaPedidos.add(pedidos);
+                
+                listaPedidos.add(pedido);
+                
             }
-        } catch (Exception e) {
-            System.err.println(e);
+        } catch (SQLException e) {
+            System.err.println("Error: "+e);
         }
-        System.out.println("In clasee tamaño lista: "+listaPedidos.size());
         return listaPedidos;
+    }
+
+    public Connection getConn() {
+        return conn;
     }
 
     public Integer getIdPedido() {
@@ -121,21 +125,14 @@ public class Pedidos {
     public Double getCosto() {
         return costo;
     }
-    public String getCostoString() {
-        return costo.toString();
-    }
 
-    public Timestamp getTiempo() {
+    public String getTiempo() {
         return tiempo;
     }
-    
-    public String getTiempoString() {
-        return tiempo.toString();
-    }
-
 
     public String getSolvente() {
         return solvente;
     }
+
     
 }

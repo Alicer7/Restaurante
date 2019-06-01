@@ -24,32 +24,30 @@ public class Factura extends javax.swing.JFrame {
      */
     private void mostarPedidosDia ( String dia ){
         
-        Pedidos pedidos = new Pedidos(null, null, null, null, null, null, null, null, null, null, null);
+        Pedidos pedidos = new Pedidos(Integer.SIZE, Integer.SIZE, Integer.SIZE, Integer.SIZE, Integer.SIZE, Integer.SIZE, Integer.SIZE, Integer.SIZE, Double.NaN, null, null);
         
-        ArrayList<Pedidos> lista = pedidos.listaPedidosDia(null);
+        ArrayList<Pedidos> lista = pedidos.listaPedidosDia(dia);
         
         jTable_Pedidos_.setPreferredSize(new java.awt.Dimension(jTable_Pedidos_.getWidth(), lista.size()*16));
         
         DefaultTableModel model = (DefaultTableModel) jTable_Pedidos_.getModel();
         
-        Object filaData []= new Object[lista.size()];
+        Object filaData [][]= new Object[lista.size()][11];
         
         for (int i=0 ; i < lista.size() ; i++){
-            System.out.println("setup for");
-            filaData[0]=lista.get(i).getIdPedido();
-            filaData[1]=lista.get(i).getFacturaId();
-            filaData[2]=lista.get(i).getMenuId();
-            filaData[3]=lista.get(i).getMenuCantidad();
-            filaData[4]=lista.get(i).getComidaId();
-            filaData[5]=lista.get(i).getComidaCantidad();
-            filaData[6]=lista.get(i).getBebidaId();
-            filaData[7]=lista.get(i).getBebidaCantidad();
-            filaData[8]=lista.get(i).getCosto();
-            filaData[9]=lista.get(i).getTiempo();
-            filaData[10]=lista.get(i).getSolvente();
+            filaData[i][0]=lista.get(i).getIdPedido();
+            filaData[i][1]=lista.get(i).getFacturaId();
+            filaData[i][2]=lista.get(i).getMenuId();
+            filaData[i][3]=lista.get(i).getMenuCantidad();
+            filaData[i][4]=lista.get(i).getComidaId();
+            filaData[i][5]=lista.get(i).getComidaCantidad();
+            filaData[i][6]=lista.get(i).getBebidaId();
+            filaData[i][7]=lista.get(i).getBebidaCantidad();
+            filaData[i][8]=lista.get(i).getCosto();
+            filaData[i][9]=lista.get(i).getTiempo();
+            filaData[i][10]=lista.get(i).getSolvente();
             
-            model.addRow(filaData);
-            System.out.println(filaData);
+            model.addRow(filaData[i]);
         }
     }
     
