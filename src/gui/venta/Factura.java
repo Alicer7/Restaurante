@@ -47,7 +47,7 @@ public class Factura extends javax.swing.JFrame {
         }
     }
     
-    private void limpiarPedidos (){
+    private void limpiarTabla (){
         DefaultTableModel model = (DefaultTableModel) jTable_Pedidos_.getModel();
         jTable_Pedidos_.setPreferredSize(new java.awt.Dimension(jTable_Pedidos_.getWidth(), 0 ));
         
@@ -60,7 +60,7 @@ public class Factura extends javax.swing.JFrame {
     
     public Factura() {
         initComponents();
-        limpiarPedidos();
+        limpiarTabla();
         mostarPedidosDia( null);
     }
 

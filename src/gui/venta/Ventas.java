@@ -5,6 +5,13 @@
  */
 package gui.venta;
 
+import core.utils.Facturas;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  *
  * @author freddy
@@ -14,8 +21,69 @@ public class Ventas extends javax.swing.JFrame {
     /**
      * Creates new form Ventas
      */
+    private Date date= new Date();
+    private static final DateFormat fecha = new SimpleDateFormat("yyyy/MM/dd");
+    private static final DateFormat fechaHora = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+    
+    private void borderFacturaFecha (Date sFecha){
+        jPanel_Clientes_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Facturas "+fecha.format(sFecha), javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14)));
+    }
+    
+       private void borderDetallesFactura (String numeroFactura){
+        jPanel_Detalle_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detalle - Pedidos Factura #"+numeroFactura, javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14)));
+    }
+    
+    private void mostrarVentasActivas ( String dia ){
+        
+        Facturas facturas = new Facturas( Integer.SIZE, null, Double.NaN, Double.NaN, Double.NaN, Double.NaN, null, null);
+        
+        ArrayList<Facturas> lista = facturas.listaFacturasDia(dia);
+        
+        jTable_Factura_.setPreferredSize(new java.awt.Dimension(jTable_Factura_.getWidth(), lista.size()*16));
+        
+        DefaultTableModel model = (DefaultTableModel) jTable_Factura_.getModel();
+        
+        Object filaData [][]= new Object[lista.size()][5];
+        
+        for (int i=0 ; i < lista.size() ; i++){
+            filaData[i][0]="desc";
+            filaData[i][1]=lista.get(i).getIdFactura();
+            filaData[i][2]="Q "+lista.get(i).getCosto();
+            filaData[i][3]=lista.get(i).getFecha();
+            filaData[i][4]=lista.get(i).getSolvente();
+            
+            model.addRow(filaData[i]);
+        }
+    }
+    
+    private void limpiarTablaFacturas (){
+        DefaultTableModel modelF = (DefaultTableModel) jTable_Factura_.getModel();
+        jTable_Factura_.setPreferredSize(new java.awt.Dimension(jTable_Factura_.getWidth(), 0 ));
+        
+        int rowCount = modelF.getRowCount();
+        for (int i = rowCount - 1; i >= 0; i--) {
+            modelF.removeRow(i);
+        }
+    }
+    
+    private void limpiarTablaPedidos (){
+                
+        DefaultTableModel modelP = (DefaultTableModel) jTable_Pedidos_.getModel();
+        jTable_Pedidos_.setPreferredSize(new java.awt.Dimension(jTable_Pedidos_.getWidth(), 0 ));
+        
+        int rowCount = modelP.getRowCount();
+        for (int i = rowCount - 1; i >= 0; i--) {
+            modelP.removeRow(i);
+        }
+    }
+    
     public Ventas() {
         initComponents();
+        limpiarTablaFacturas();
+        limpiarTablaPedidos();
+        
+        mostrarVentasActivas(fecha.format(date));
+        borderFacturaFecha(date);
     }
 
     /**
@@ -31,37 +99,71 @@ public class Ventas extends javax.swing.JFrame {
         jPanel_Clientes_ = new javax.swing.JPanel();
         jScrollPane_Clientes_ = new javax.swing.JScrollPane();
         jTable_Factura_ = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jButton_ClienteNuevo_ = new javax.swing.JButton();
+        jTextField_NotaCliente_ = new javax.swing.JTextField();
+        jLabel_SetFecha_ = new javax.swing.JLabel();
         jPanel_Detalle_ = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable_Pedidos_ = new javax.swing.JTable();
+        jButton_NuevoPedido_ = new javax.swing.JButton();
+        jTextField_MontoDetalle_ = new javax.swing.JTextField();
+        jButton_Cobrar_ = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ventas");
         setMinimumSize(new java.awt.Dimension(1024, 700));
         setPreferredSize(new java.awt.Dimension(1024, 720));
-        setSize(new java.awt.Dimension(0, 0));
+        setSize(new java.awt.Dimension(1024, 720));
         getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
 
-        jPanel_Main_.setMinimumSize(new java.awt.Dimension(1024, 700));
+        jPanel_Main_.setMinimumSize(new java.awt.Dimension(1024, 650));
         jPanel_Main_.setPreferredSize(new java.awt.Dimension(1024, 720));
 
-        jPanel_Clientes_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Factura", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14))); // NOI18N
+        jPanel_Clientes_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Facturas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14))); // NOI18N
+        jPanel_Clientes_.setPreferredSize(new java.awt.Dimension(434, 708));
 
+        jTable_Factura_.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         jTable_Factura_.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nota", "# Factura", "Monto", "Fecha", "Estado"
             }
-        ));
-        jScrollPane_Clientes_.setViewportView(jTable_Factura_);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
 
-        jButton1.setText("Nuevo Cliente");
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable_Factura_.setToolTipText("");
+        jTable_Factura_.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable_Factura_MouseClicked(evt);
+            }
+        });
+        jScrollPane_Clientes_.setViewportView(jTable_Factura_);
+        if (jTable_Factura_.getColumnModel().getColumnCount() > 0) {
+            jTable_Factura_.getColumnModel().getColumn(0).setResizable(false);
+            jTable_Factura_.getColumnModel().getColumn(1).setResizable(false);
+            jTable_Factura_.getColumnModel().getColumn(1).setPreferredWidth(30);
+            jTable_Factura_.getColumnModel().getColumn(2).setResizable(false);
+            jTable_Factura_.getColumnModel().getColumn(2).setPreferredWidth(40);
+            jTable_Factura_.getColumnModel().getColumn(3).setResizable(false);
+            jTable_Factura_.getColumnModel().getColumn(4).setResizable(false);
+        }
+
+        jButton_ClienteNuevo_.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton_ClienteNuevo_.setText("Nuevo Cliente");
+
+        jTextField_NotaCliente_.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
+        jLabel_SetFecha_.setFont(new java.awt.Font("Dialog", 2, 14)); // NOI18N
+        jLabel_SetFecha_.setText("Fecha");
+        jLabel_SetFecha_.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanel_Clientes_Layout = new javax.swing.GroupLayout(jPanel_Clientes_);
         jPanel_Clientes_.setLayout(jPanel_Clientes_Layout);
@@ -70,36 +172,62 @@ public class Ventas extends javax.swing.JFrame {
             .addGroup(jPanel_Clientes_Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel_Clientes_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane_Clientes_, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
+                    .addComponent(jScrollPane_Clientes_, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel_Clientes_Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jButton_ClienteNuevo_)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_NotaCliente_, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel_SetFecha_)
+                        .addGap(0, 17, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel_Clientes_Layout.setVerticalGroup(
             jPanel_Clientes_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Clientes_Layout.createSequentialGroup()
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane_Clientes_, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jScrollPane_Clientes_, javax.swing.GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel_Clientes_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton_ClienteNuevo_)
+                    .addComponent(jLabel_SetFecha_)
+                    .addComponent(jTextField_NotaCliente_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         jPanel_Detalle_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detalle", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14))); // NOI18N
         jPanel_Detalle_.setToolTipText("");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_Pedidos_.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "# Pedido", "# Factura", "Menu", "# menus", "Alimento", "# Alimentos", "Bebida", "# Bebidas", "Costo", "Fecha", "Estado"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTable_Pedidos_);
+
+        jButton_NuevoPedido_.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton_NuevoPedido_.setText("Nuevo Pedido");
+        jButton_NuevoPedido_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_NuevoPedido_ActionPerformed(evt);
+            }
+        });
+
+        jTextField_MontoDetalle_.setEditable(false);
+        jTextField_MontoDetalle_.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTextField_MontoDetalle_.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jTextField_MontoDetalle_.setText("Q 0.0");
+
+        jButton_Cobrar_.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton_Cobrar_.setText("Cobrar");
+        jButton_Cobrar_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_Cobrar_ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel_Detalle_Layout = new javax.swing.GroupLayout(jPanel_Detalle_);
         jPanel_Detalle_.setLayout(jPanel_Detalle_Layout);
@@ -107,14 +235,26 @@ public class Ventas extends javax.swing.JFrame {
             jPanel_Detalle_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_Detalle_Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+                .addGroup(jPanel_Detalle_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Detalle_Layout.createSequentialGroup()
+                        .addComponent(jButton_NuevoPedido_)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                        .addComponent(jButton_Cobrar_)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField_MontoDetalle_, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel_Detalle_Layout.setVerticalGroup(
             jPanel_Detalle_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Detalle_Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel_Detalle_Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel_Detalle_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton_NuevoPedido_)
+                    .addComponent(jButton_Cobrar_)
+                    .addComponent(jTextField_MontoDetalle_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -133,16 +273,36 @@ public class Ventas extends javax.swing.JFrame {
             jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_Main_Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel_Clientes_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel_Detalle_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 7, Short.MAX_VALUE))
+                .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel_Clientes_, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
+                    .addComponent(jPanel_Detalle_, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         getContentPane().add(jPanel_Main_);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton_Cobrar_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Cobrar_ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_Cobrar_ActionPerformed
+
+    private void jButton_NuevoPedido_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_NuevoPedido_ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_NuevoPedido_ActionPerformed
+
+    private void jTable_Factura_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_Factura_MouseClicked
+        if (evt.getClickCount() == 2){
+            
+            int col = 1;
+            int row = jTable_Factura_.getSelectedRow();
+            Object obj = (Object) jTable_Factura_.getValueAt(row, col);
+            
+            borderDetallesFactura(obj.toString());
+            System.out.println("Número de Factura: "+obj);
+        }
+    }//GEN-LAST:event_jTable_Factura_MouseClicked
 
     /**
      * @param args the command line arguments
@@ -180,13 +340,19 @@ public class Ventas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton_ClienteNuevo_;
+    private javax.swing.JButton jButton_Cobrar_;
+    private javax.swing.JButton jButton_NuevoPedido_;
+    private javax.swing.JLabel jLabel_SetFecha_;
     private javax.swing.JPanel jPanel_Clientes_;
     private javax.swing.JPanel jPanel_Detalle_;
     private javax.swing.JPanel jPanel_Main_;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane_Clientes_;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable_Factura_;
+    private javax.swing.JTable jTable_Pedidos_;
+    private javax.swing.JTextField jTextField_MontoDetalle_;
+    private javax.swing.JTextField jTextField_NotaCliente_;
     // End of variables declaration//GEN-END:variables
+
 }

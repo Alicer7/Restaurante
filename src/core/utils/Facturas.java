@@ -48,7 +48,7 @@ public class Facturas {
     public ArrayList<Facturas> listaFacturasDia (String fecha){
         
         ArrayList<Facturas> listaFacturases= new ArrayList<Facturas>();
-        String sql="SELECT * FROM `cafebar`.`factura_venta` WHERE date(fecha) ="+fecha;
+        String sql="SELECT * FROM `cafebar`.`factura_venta` WHERE date(fecha) = \""+fecha+"\"";
         
         try {
             Statement stm;
