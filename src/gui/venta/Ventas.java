@@ -5,12 +5,18 @@
  */
 package gui.venta;
 
+import com.toedter.calendar.JDateChooser;
 import core.utils.Facturas;
+import core.utils.Pedidos;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.Date;
+import java.util.Locale;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,23 +27,52 @@ public class Ventas extends javax.swing.JFrame {
     /**
      * Creates new form Ventas
      */
+    private static String plantillaDia = "yyyy/MM/dd", plantillaHora = "HH:mm:ss";
     private Date date= new Date();
-    private static final DateFormat fecha = new SimpleDateFormat("yyyy/MM/dd");
-    private static final DateFormat fechaHora = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+    private static final SimpleDateFormat formatoFechaDia = new SimpleDateFormat(plantillaDia, Locale.ROOT);
+    private static final DateTimeFormatter diaFormato = DateTimeFormatter.ofPattern(plantillaDia);
+    private static final SimpleDateFormat formatoFechaHora = new SimpleDateFormat(plantillaDia+" "+plantillaHora, Locale.ROOT);
     
     private void borderFacturaFecha (Date sFecha){
-        jPanel_Clientes_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Facturas "+fecha.format(sFecha), javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14)));
+        jPanel_Clientes_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Facturas "+formatoFechaDia.format(sFecha), javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14)));
     }
     
        private void borderDetallesFactura (String numeroFactura){
         jPanel_Detalle_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detalle - Pedidos Factura #"+numeroFactura, javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14)));
     }
     
-    private void mostrarVentasActivas ( String dia ){
+    private void mostrarVentasDia ( String dia ){
+        
+        limpiarTablaFacturas();
         
         Facturas facturas = new Facturas( Integer.SIZE, null, Double.NaN, Double.NaN, Double.NaN, Double.NaN, null, null);
         
         ArrayList<Facturas> lista = facturas.listaFacturasDia(dia);
+        
+        jTable_Factura_.setPreferredSize(new java.awt.Dimension(jTable_Factura_.getWidth(), lista.size()*16));
+        
+        DefaultTableModel model = (DefaultTableModel) jTable_Factura_.getModel();
+        
+        Object filaData [][]= new Object[lista.size()][5];
+        
+        for (int i=0 ; i < lista.size() ; i++){
+            filaData[i][0]="desc:"+i;
+            filaData[i][1]=lista.get(i).getIdFactura();
+            filaData[i][2]="Q "+lista.get(i).getCosto();
+            filaData[i][3]=lista.get(i).getFecha();
+            filaData[i][4]=lista.get(i).getSolvente();
+            
+            model.addRow(filaData[i]);
+        }
+    }
+    
+    private void mostrarVentasActivas (  ){
+        limpiarTablaFacturas();
+        
+        Facturas facturas = new Facturas( Integer.SIZE, null, Double.NaN, Double.NaN, Double.NaN, Double.NaN, null, null);
+        
+        // SQL
+        ArrayList<Facturas> lista = facturas.listaFacturasActivas();
         
         jTable_Factura_.setPreferredSize(new java.awt.Dimension(jTable_Factura_.getWidth(), lista.size()*16));
         
@@ -55,6 +90,65 @@ public class Ventas extends javax.swing.JFrame {
             model.addRow(filaData[i]);
         }
     }
+    
+        private void mostrarVentasActivasDia ( String dia ){
+        limpiarTablaFacturas();
+        
+        Facturas facturas = new Facturas( Integer.SIZE, null, Double.NaN, Double.NaN, Double.NaN, Double.NaN, null, null);
+        
+        // SQL
+        ArrayList<Facturas> lista = facturas.listaFacturasDiaActivas(dia);
+        
+        jTable_Factura_.setPreferredSize(new java.awt.Dimension(jTable_Factura_.getWidth(), lista.size()*16));
+        
+        DefaultTableModel model = (DefaultTableModel) jTable_Factura_.getModel();
+        
+        Object filaData [][]= new Object[lista.size()][5];
+        
+        for (int i=0 ; i < lista.size() ; i++){
+            filaData[i][0]="desc";
+            filaData[i][1]=lista.get(i).getIdFactura();
+            filaData[i][2]="Q "+lista.get(i).getCosto();
+            filaData[i][3]=lista.get(i).getFecha();
+            filaData[i][4]=lista.get(i).getSolvente();
+            
+            model.addRow(filaData[i]);
+        }
+    }
+    
+    private void mostrarVentasDetalleNumeroFactura ( Integer numeroFactura ){
+        
+        Pedidos pedidos = new Pedidos(Integer.SIZE, Integer.SIZE, null, Integer.SIZE, null,Integer.SIZE, null, Integer.SIZE, Double.NaN, null, null);
+        
+        // SQL
+        ArrayList<Pedidos> lista = pedidos.listaPedidosNumeroFactura(numeroFactura);
+        
+        jTable_Pedidos_.setPreferredSize(new java.awt.Dimension(jTable_Pedidos_.getWidth(), lista.size()*16));
+        
+        DefaultTableModel model = (DefaultTableModel) jTable_Pedidos_.getModel();
+        
+        Object filaData [][]= new Object[lista.size()][11];
+        Double totalConsumo=0.999;
+        
+        for (int i=0 ; i < lista.size() ; i++){
+            filaData[i][0]=lista.get(i).getIdPedido();
+            filaData[i][1]=lista.get(i).getFacturaId();
+            filaData[i][2]=lista.get(i).getMenuId();
+            filaData[i][3]=lista.get(i).getMenuCantidad();
+            filaData[i][4]=lista.get(i).getComidaId();
+            filaData[i][5]=lista.get(i).getComidaCantidad();
+            filaData[i][6]=lista.get(i).getBebidaId();
+            filaData[i][7]=lista.get(i).getBebidaCantidad();
+            filaData[i][8]="Q "+lista.get(i).getCosto();
+            filaData[i][9]=lista.get(i).getTiempo();
+            filaData[i][10]=lista.get(i).getSolvente();
+            // Conseguir Total Consumo
+            totalConsumo+=lista.get(i).getCosto();
+            model.addRow(filaData[i]);
+        }
+        jTextField_MontoDetalle_.setText("Q "+totalConsumo.toString());
+    }
+    
     
     private void limpiarTablaFacturas (){
         DefaultTableModel modelF = (DefaultTableModel) jTable_Factura_.getModel();
@@ -82,7 +176,7 @@ public class Ventas extends javax.swing.JFrame {
         limpiarTablaFacturas();
         limpiarTablaPedidos();
         
-        mostrarVentasActivas(fecha.format(date));
+        mostrarVentasActivas();
         borderFacturaFecha(date);
     }
 
@@ -112,7 +206,6 @@ public class Ventas extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ventas");
         setMinimumSize(new java.awt.Dimension(1024, 700));
-        setPreferredSize(new java.awt.Dimension(1024, 720));
         setSize(new java.awt.Dimension(1024, 720));
         getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
 
@@ -147,13 +240,8 @@ public class Ventas extends javax.swing.JFrame {
         });
         jScrollPane_Clientes_.setViewportView(jTable_Factura_);
         if (jTable_Factura_.getColumnModel().getColumnCount() > 0) {
-            jTable_Factura_.getColumnModel().getColumn(0).setResizable(false);
-            jTable_Factura_.getColumnModel().getColumn(1).setResizable(false);
             jTable_Factura_.getColumnModel().getColumn(1).setPreferredWidth(30);
-            jTable_Factura_.getColumnModel().getColumn(2).setResizable(false);
             jTable_Factura_.getColumnModel().getColumn(2).setPreferredWidth(40);
-            jTable_Factura_.getColumnModel().getColumn(3).setResizable(false);
-            jTable_Factura_.getColumnModel().getColumn(4).setResizable(false);
         }
 
         jButton_ClienteNuevo_.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -164,6 +252,11 @@ public class Ventas extends javax.swing.JFrame {
         jLabel_SetFecha_.setFont(new java.awt.Font("Dialog", 2, 14)); // NOI18N
         jLabel_SetFecha_.setText("Fecha");
         jLabel_SetFecha_.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel_SetFecha_.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel_SetFecha_MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel_Clientes_Layout = new javax.swing.GroupLayout(jPanel_Clientes_);
         jPanel_Clientes_.setLayout(jPanel_Clientes_Layout);
@@ -275,7 +368,7 @@ public class Ventas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel_Clientes_, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
-                    .addComponent(jPanel_Detalle_, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE))
+                    .addComponent(jPanel_Detalle_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -294,15 +387,34 @@ public class Ventas extends javax.swing.JFrame {
 
     private void jTable_Factura_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_Factura_MouseClicked
         if (evt.getClickCount() == 2){
-            
-            int col = 1;
+            int colId = 1;
             int row = jTable_Factura_.getSelectedRow();
-            Object obj = (Object) jTable_Factura_.getValueAt(row, col);
-            
-            borderDetallesFactura(obj.toString());
-            System.out.println("Número de Factura: "+obj);
+            Object objId = (Object) jTable_Factura_.getValueAt(row, colId);
+            mostrarVentasDetalleNumeroFactura((Integer) objId);
         }
     }//GEN-LAST:event_jTable_Factura_MouseClicked
+
+    private void jLabel_SetFecha_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_SetFecha_MouseClicked
+        JDateChooser calendario = new JDateChooser();
+        Date fechaActual = new Date();
+        
+        calendario.setDate(fechaActual);
+        int selectFecha = JOptionPane.showOptionDialog(rootPane, add(calendario), "Selecciona la Fecha", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+        limpiarTablaFacturas();
+        limpiarTablaPedidos();
+        
+        try {
+            if (selectFecha == JOptionPane.OK_OPTION){
+                borderFacturaFecha(calendario.getDate());
+                mostrarVentasDia(formatoFechaDia.format(calendario.getDate()));
+                date=calendario.getDate();
+            }else{ }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        
+    }//GEN-LAST:event_jLabel_SetFecha_MouseClicked
 
     /**
      * @param args the command line arguments

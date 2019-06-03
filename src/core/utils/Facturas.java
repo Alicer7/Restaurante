@@ -45,6 +45,70 @@ public class Facturas {
         this.solvente=solvente;
     }
     
+        public ArrayList<Facturas> listaFacturasActivas (){
+        
+        ArrayList<Facturas> listaFacturases= new ArrayList<Facturas>();
+        String sql="SELECT * FROM `cafebar`.`factura_venta` WHERE `solvente` = \"Activa\"";
+        
+        try {
+            Statement stm;
+            stm = conn.createStatement();
+            ResultSet rst;
+            rst = stm.executeQuery(sql);
+            
+            while (rst.next()){
+                Facturas factura= new Facturas (
+                        rst.getInt(1), 
+                        rst.getString(2), 
+                        rst.getDouble(3), 
+                        rst.getDouble(4), 
+                        rst.getDouble(5), 
+                        rst.getDouble(6), 
+                        rst.getString(7), 
+                        rst.getString(8)
+                );
+                
+                listaFacturases.add(factura);
+                
+            }
+        } catch (SQLException e) {
+            System.err.println("Error: "+e);
+        }
+        return listaFacturases;
+    }
+    
+    public ArrayList<Facturas> listaFacturasDiaActivas (String fecha){
+        
+        ArrayList<Facturas> listaFacturases= new ArrayList<Facturas>();
+        String sql="SELECT * FROM `cafebar`.`factura_venta` WHERE date(`fecha`) = \""+fecha+"\"AND `solvente` = \"Activa\"";
+        
+        try {
+            Statement stm;
+            stm = conn.createStatement();
+            ResultSet rst;
+            rst = stm.executeQuery(sql);
+            
+            while (rst.next()){
+                Facturas factura= new Facturas (
+                        rst.getInt(1), 
+                        rst.getString(2), 
+                        rst.getDouble(3), 
+                        rst.getDouble(4), 
+                        rst.getDouble(5), 
+                        rst.getDouble(6), 
+                        rst.getString(7), 
+                        rst.getString(8)
+                );
+                
+                listaFacturases.add(factura);
+                
+            }
+        } catch (SQLException e) {
+            System.err.println("Error: "+e);
+        }
+        return listaFacturases;
+    }
+    
     public ArrayList<Facturas> listaFacturasDia (String fecha){
         
         ArrayList<Facturas> listaFacturases= new ArrayList<Facturas>();

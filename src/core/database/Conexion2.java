@@ -35,7 +35,7 @@ public class Conexion2 {
           System.out.println("Database Connected");
         }
         catch(SQLException se){
-          System.out.println("Database Not Found");  
+          System.err.println("Database Not Found");  
         }
         return DBConnection;        
     }
