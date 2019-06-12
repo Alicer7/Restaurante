@@ -8,17 +8,13 @@ package gui.venta;
 import com.toedter.calendar.JDateChooser;
 import core.utils.Facturas;
 import core.utils.Pedidos;
-import java.awt.FlowLayout;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.Date;
 import java.util.Locale;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 /**
  *

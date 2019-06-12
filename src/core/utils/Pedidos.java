@@ -58,7 +58,7 @@ public class Pedidos {
     public ArrayList<Pedidos> listaPedidosDia (String fecha){
         
         ArrayList<Pedidos> listaPedidos= new ArrayList<Pedidos>();
-        String sql="SELECT * FROM `cafebar`.`factura_pedido` WHERE date(`time`) = \""+fecha+"\"";
+        String sql="SELECT * FROM `factura_pedido` WHERE date(`time`) = \""+fecha+"\"";
         
         try {
             Statement stm;
@@ -93,7 +93,7 @@ public class Pedidos {
         public ArrayList<Pedidos> listaPedidosNumeroFactura ( Integer numeroFactura){
         
         ArrayList<Pedidos> listaPedidos= new ArrayList<Pedidos>();
-        String sql="SELECT * FROM `cafebar`.`factura_pedido` WHERE `factura_venta_id` = "+numeroFactura;
+        String sql="SELECT * FROM `factura_pedido` WHERE `factura_venta_id` = "+numeroFactura;
         
         try {
             Statement stm;
