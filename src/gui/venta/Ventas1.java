@@ -8,23 +8,22 @@ package gui.venta;
 import com.toedter.calendar.JDateChooser;
 import core.utils.Facturas;
 import core.utils.Pedidos;
-import java.awt.FlowLayout;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.Date;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.text.BadLocationException;
 
 /**
  *
  * @author freddy
  */
-public class Ventas extends javax.swing.JFrame {
+public class Ventas1 extends javax.swing.JFrame {
 
     /**
      * Creates new form Ventas
@@ -118,20 +117,19 @@ public class Ventas extends javax.swing.JFrame {
         }
     }
     
-    private void mostrarVentasDetalleNumeroFactura ( Integer numeroFactura ){
+    private void mostrarVentasDetalleNumeroFactura ( Integer numeroFactura ) throws BadLocationException{
+        
+        jEditorPane_Detalle_.setContentType("text/html");
         
         Pedidos pedidos = new Pedidos(Integer.SIZE, Integer.SIZE, null, Integer.SIZE, null,Integer.SIZE, null, Integer.SIZE, Double.NaN, null, null);
         
         // SQL
-        ArrayList<Pedidos> lista = pedidos.listaPedidosNumeroFactura(numeroFactura);
+        ArrayList<Pedidos> lista = pedidos.listaPedidosNumeroFactura(numeroFactura); 
         
-        jTable_Pedidos_.setPreferredSize(new java.awt.Dimension(jTable_Pedidos_.getWidth(), lista.size()*16));
-        
-        DefaultTableModel model = (DefaultTableModel) jTable_Pedidos_.getModel();
-        
-        Object filaData [][]= new Object[lista.size()][11];
         Double totalConsumo=0.999;
-        
+                        
+        Object filaData [][]= new Object[lista.size()][11];
+                
         for (int i=0 ; i < lista.size() ; i++){
             filaData[i][0]=lista.get(i).getIdPedido();
             filaData[i][1]=lista.get(i).getFacturaId();
@@ -146,7 +144,7 @@ public class Ventas extends javax.swing.JFrame {
             filaData[i][10]=lista.get(i).getSolvente();
             // Conseguir Total Consumo
             totalConsumo+=lista.get(i).getCosto();
-            model.addRow(filaData[i]);
+            jEditorPane_Detalle_.setText("<h1>"+(String) filaData[i][9]+"</h1>");
         }
         jTextField_MontoDetalle_.setText("Q "+totalConsumo.toString());
     }
@@ -163,17 +161,10 @@ public class Ventas extends javax.swing.JFrame {
     }
     
     private void limpiarTablaPedidos (){
-                
-        DefaultTableModel modelP = (DefaultTableModel) jTable_Pedidos_.getModel();
-        jTable_Pedidos_.setPreferredSize(new java.awt.Dimension(jTable_Pedidos_.getWidth(), 0 ));
-        
-        int rowCount = modelP.getRowCount();
-        for (int i = rowCount - 1; i >= 0; i--) {
-            modelP.removeRow(i);
-        }
+        jEditorPane_Detalle_.setText("");
     }
     
-    public Ventas() {
+    public Ventas1() {
         initComponents();
         limpiarTablaFacturas();
         limpiarTablaPedidos();
@@ -191,35 +182,19 @@ public class Ventas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDialog_NuevoCliente_ = new javax.swing.JDialog();
         jPanel_Main_ = new javax.swing.JPanel();
         jPanel_Clientes_ = new javax.swing.JPanel();
         jScrollPane_Clientes_ = new javax.swing.JScrollPane();
         jTable_Factura_ = new javax.swing.JTable();
         jButton_ClienteNuevo_ = new javax.swing.JButton();
+        jTextField_NotaCliente_ = new javax.swing.JTextField();
         jLabel_SetFecha_ = new javax.swing.JLabel();
         jPanel_Detalle_ = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable_Pedidos_ = new javax.swing.JTable();
         jButton_NuevoPedido_ = new javax.swing.JButton();
         jTextField_MontoDetalle_ = new javax.swing.JTextField();
         jButton_Cobrar_ = new javax.swing.JButton();
-
-        jDialog_NuevoCliente_.setTitle("Cliente Nuevo");
-        jDialog_NuevoCliente_.setMinimumSize(new java.awt.Dimension(848, 460));
-        jDialog_NuevoCliente_.setPreferredSize(new java.awt.Dimension(848, 460));
-        jDialog_NuevoCliente_.setType(java.awt.Window.Type.POPUP);
-
-        javax.swing.GroupLayout jDialog_NuevoCliente_Layout = new javax.swing.GroupLayout(jDialog_NuevoCliente_.getContentPane());
-        jDialog_NuevoCliente_.getContentPane().setLayout(jDialog_NuevoCliente_Layout);
-        jDialog_NuevoCliente_Layout.setHorizontalGroup(
-            jDialog_NuevoCliente_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 848, Short.MAX_VALUE)
-        );
-        jDialog_NuevoCliente_Layout.setVerticalGroup(
-            jDialog_NuevoCliente_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 460, Short.MAX_VALUE)
-        );
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jEditorPane_Detalle_ = new javax.swing.JEditorPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ventas");
@@ -270,8 +245,10 @@ public class Ventas extends javax.swing.JFrame {
             }
         });
 
+        jTextField_NotaCliente_.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
         jLabel_SetFecha_.setFont(new java.awt.Font("Dialog", 2, 14)); // NOI18N
-        jLabel_SetFecha_.setText("Buscar Por Fecha");
+        jLabel_SetFecha_.setText("Fecha");
         jLabel_SetFecha_.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel_SetFecha_.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -286,11 +263,14 @@ public class Ventas extends javax.swing.JFrame {
             .addGroup(jPanel_Clientes_Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel_Clientes_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane_Clientes_, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
+                    .addComponent(jScrollPane_Clientes_, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel_Clientes_Layout.createSequentialGroup()
                         .addComponent(jButton_ClienteNuevo_)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel_SetFecha_)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_NotaCliente_, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel_SetFecha_)
+                        .addGap(0, 17, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel_Clientes_Layout.setVerticalGroup(
@@ -301,22 +281,13 @@ public class Ventas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_Clientes_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_ClienteNuevo_)
-                    .addComponent(jLabel_SetFecha_))
+                    .addComponent(jLabel_SetFecha_)
+                    .addComponent(jTextField_NotaCliente_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         jPanel_Detalle_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detalle", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14))); // NOI18N
         jPanel_Detalle_.setToolTipText("");
-
-        jTable_Pedidos_.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "# Pedido", "# Factura", "Menu", "# menus", "Alimento", "# Alimentos", "Bebida", "# Bebidas", "Costo", "Fecha", "Estado"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable_Pedidos_);
 
         jButton_NuevoPedido_.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton_NuevoPedido_.setText("Nuevo Pedido");
@@ -339,6 +310,9 @@ public class Ventas extends javax.swing.JFrame {
             }
         });
 
+        jEditorPane_Detalle_.setEditable(false);
+        jScrollPane1.setViewportView(jEditorPane_Detalle_);
+
         javax.swing.GroupLayout jPanel_Detalle_Layout = new javax.swing.GroupLayout(jPanel_Detalle_);
         jPanel_Detalle_.setLayout(jPanel_Detalle_Layout);
         jPanel_Detalle_Layout.setHorizontalGroup(
@@ -346,13 +320,13 @@ public class Ventas extends javax.swing.JFrame {
             .addGroup(jPanel_Detalle_Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel_Detalle_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Detalle_Layout.createSequentialGroup()
+                    .addGroup(jPanel_Detalle_Layout.createSequentialGroup()
                         .addComponent(jButton_NuevoPedido_)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                         .addComponent(jButton_Cobrar_)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField_MontoDetalle_, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextField_MontoDetalle_, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
         jPanel_Detalle_Layout.setVerticalGroup(
@@ -402,16 +376,30 @@ public class Ventas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_NuevoPedido_ActionPerformed
 
+    private void jTable_Factura_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_Factura_MouseClicked
+        if (evt.getClickCount() == 2){
+            int colId = 1;
+            int row = jTable_Factura_.getSelectedRow();
+            Object objId = (Object) jTable_Factura_.getValueAt(row, colId);
+            limpiarTablaPedidos();
+            try {
+                mostrarVentasDetalleNumeroFactura((Integer) objId);
+            } catch (BadLocationException ex) {
+                Logger.getLogger(Ventas1.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jTable_Factura_MouseClicked
+
     private void jLabel_SetFecha_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_SetFecha_MouseClicked
         JDateChooser calendario = new JDateChooser();
         Date fechaActual = new Date();
-
+        
         calendario.setDate(fechaActual);
         int selectFecha = JOptionPane.showOptionDialog(rootPane, add(calendario), "Selecciona la Fecha", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-
+        
         limpiarTablaFacturas();
         limpiarTablaPedidos();
-
+        
         try {
             if (selectFecha == JOptionPane.OK_OPTION){
                 borderFacturaFecha(calendario.getDate());
@@ -421,22 +409,14 @@ public class Ventas extends javax.swing.JFrame {
         } catch (Exception e) {
             System.err.println(e);
         }
-
+        
     }//GEN-LAST:event_jLabel_SetFecha_MouseClicked
 
     private void jButton_ClienteNuevo_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ClienteNuevo_ActionPerformed
-        System.err.println("Visible?");
-    }//GEN-LAST:event_jButton_ClienteNuevo_ActionPerformed
+        gui.venta.FacturaNueva ped = new gui.venta.FacturaNueva();
+        ped.setVisible(true);
 
-    private void jTable_Factura_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_Factura_MouseClicked
-        if (evt.getClickCount() == 2){
-            int colId = 1;
-            int row = jTable_Factura_.getSelectedRow();
-            Object objId = (Object) jTable_Factura_.getValueAt(row, colId);
-            limpiarTablaPedidos();
-            mostrarVentasDetalleNumeroFactura((Integer) objId);
-        }
-    }//GEN-LAST:event_jTable_Factura_MouseClicked
+    }//GEN-LAST:event_jButton_ClienteNuevo_ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -455,20 +435,21 @@ public class Ventas extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Ventas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Ventas1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Ventas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Ventas1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Ventas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Ventas1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Ventas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Ventas1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Ventas().setVisible(true);
+                new Ventas1().setVisible(true);
             }
         });
     }
@@ -477,7 +458,7 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JButton jButton_ClienteNuevo_;
     private javax.swing.JButton jButton_Cobrar_;
     private javax.swing.JButton jButton_NuevoPedido_;
-    private javax.swing.JDialog jDialog_NuevoCliente_;
+    private javax.swing.JEditorPane jEditorPane_Detalle_;
     private javax.swing.JLabel jLabel_SetFecha_;
     private javax.swing.JPanel jPanel_Clientes_;
     private javax.swing.JPanel jPanel_Detalle_;
@@ -485,8 +466,8 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane_Clientes_;
     private javax.swing.JTable jTable_Factura_;
-    private javax.swing.JTable jTable_Pedidos_;
     private javax.swing.JTextField jTextField_MontoDetalle_;
+    private javax.swing.JTextField jTextField_NotaCliente_;
     // End of variables declaration//GEN-END:variables
 
 }
