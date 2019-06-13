@@ -16,8 +16,12 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.embed.swing.JFXPanel;
 import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebEvent;
+import javafx.scene.web.WebView;
 
 /**
  *
@@ -25,10 +29,12 @@ import javax.swing.text.BadLocationException;
  */
 public class Ventas1 extends javax.swing.JFrame {
 
+
     /**
      * Creates new form Ventas
      */
-    private static String plantillaDia = "yyyy/MM/dd", plantillaHora = "HH:mm:ss";
+    private static final String plantillaDia = "yyyy/MM/dd";
+    private static final String plantillaHora = "HH:mm:ss";
     private Date date= new Date();
     private static final SimpleDateFormat formatoFechaDia = new SimpleDateFormat(plantillaDia, Locale.ROOT);
     private static final DateTimeFormatter diaFormato = DateTimeFormatter.ofPattern(plantillaDia);
@@ -126,8 +132,8 @@ public class Ventas1 extends javax.swing.JFrame {
         // SQL
         ArrayList<Pedidos> lista = pedidos.listaPedidosNumeroFactura(numeroFactura); 
         
-        Double totalConsumo=0.999;
-                        
+        Double totalConsumo=0.999;    
+
         Object filaData [][]= new Object[lista.size()][11];
                 
         for (int i=0 ; i < lista.size() ; i++){

@@ -24,8 +24,7 @@ public class Conexion2 {
     public Connection connect(){
     
         try{
-            Class.forName("com.mysql.jdbc.Driver");
-            System.out.println("Driver Success");            
+            Class.forName("com.mysql.jdbc.Driver");         
         }
         catch(ClassNotFoundException cnfe){
             System.out.println("Driver not found" + cnfe);
@@ -37,6 +36,7 @@ public class Conexion2 {
         catch(SQLException se){
           System.err.println("Database Not Found");  
         }
+        System.out.println("Database Succesfull");
         return DBConnection;        
     }
 }
