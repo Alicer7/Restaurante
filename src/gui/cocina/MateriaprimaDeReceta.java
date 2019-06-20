@@ -5,7 +5,6 @@
  */
 package gui.cocina;
 
-import com.mysql.jdbc.Connection;
 import core.database.Conexion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +16,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -35,13 +33,12 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
         modelo.addColumn("id.");
         modelo.addColumn("Nombre");
         modelo.addColumn("cantidad");
-      
-        
+
     }
 
     public void popuptable() {
         JPopupMenu popmenu = new JPopupMenu();
-        JMenuItem menuitem = new JMenuItem("Eliminar", new ImageIcon(getClass().getResource("/iconos/eli.png")));
+        JMenuItem menuitem = new JMenuItem("Eliminar", new ImageIcon(getClass().getResource("/core/resources/icons/eli.png")));
         menuitem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -140,6 +137,7 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
         jtArticulos = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        txtBuscar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -175,7 +173,7 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jtProductos);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(518, 14, 658, 266));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 70, 658, 266));
 
         jtArticulos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -195,7 +193,7 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jtArticulos);
 
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 14, 476, 266));
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 476, 266));
 
         jButton2.setText("Guardar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -203,7 +201,7 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(784, 294, 112, 42));
+        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 350, 112, 42));
 
         jButton1.setText("Agregar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -211,9 +209,16 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 294, 112, 42));
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 350, 112, 42));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 126, 1190, 350));
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
+            }
+        });
+        jPanel3.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 32, 320, 30));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 126, 1190, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -235,19 +240,18 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
             Conexion cone = new Conexion();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
             PreparedStatement ps = null;
-            
 
             int filas = jtProductos.getRowCount();
             System.out.println("filas jc " + filas);
             for (int row = 0; row < filas; row++) {
-                ps = conn.prepareStatement("INSERT INTO `receta_ingrediente` (`receta_id`, `materiaprima_id`, `cantidad`) VALUES (?,?,?)");
-                int id_receta = (int) jcReceta.getSelectedIndex() + 1;
-                int id_materia = (int) jtProductos.getValueAt(row, 0);
-                int cant = (int) jtProductos.getValueAt(row, 2);
 
+                int id_receta =jcReceta.getSelectedIndex() + 1;
+                int id_materia = (int) jtProductos.getValueAt(row, 0);
+                Double cant = (double) jtProductos.getValueAt(row, 2);
+                ps = conn.prepareStatement("INSERT INTO `receta_ingrediente` (`receta_categoria_id`, `materiaprima_id`, `cantidad`) VALUES (?,?,?)");
                 ps.setInt(1, id_receta);
                 ps.setInt(2, id_materia);
-                ps.setInt(3, cant);
+                ps.setDouble(3, cant);
                 ps.execute();
                 System.out.println("ya, asdfasdf");
             }
@@ -274,7 +278,7 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         String cant = JOptionPane.showInputDialog(null, "Ingrese la cantidad", JOptionPane.WARNING_MESSAGE);
-        int cantidad = Integer.parseInt(cant);
+        double cantidad = Double.parseDouble(cant);
         DefaultTableModel modelo = (DefaultTableModel) jtProductos.getModel();
         Object[] fila = new Object[5];
         fila[0] = ID_ARTICULO;
@@ -284,6 +288,46 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
 //        jtProductos.setModel(modelo);
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+
+        try {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            Conexion cone = new Conexion();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            DefaultTableModel modelo2 = new DefaultTableModel();
+            jtArticulos.setModel(modelo2);
+
+            //            String sql = "select id, nombre, precio from bebida order by(id) ";
+            String sql = "SELECT id, nombre, stock FROM materiaprima WHERE nombre LIKE '%" + txtBuscar.getText() + "%' order by(id) ";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
+            int cantidadColumnas = rsMd.getColumnCount();
+
+            modelo2.addColumn("id.");
+            modelo2.addColumn("Nombre");
+            modelo2.addColumn("Precio");
+
+            int[] anchos = {10, 150, 70};
+            for (int i = 0; i < jtArticulos.getColumnCount(); i++) {
+                jtArticulos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+            }
+
+            while (rs.next()) {
+                Object[] filas = new Object[cantidadColumnas];
+                for (int i = 0; i < cantidadColumnas; i++) {
+                    filas[i] = rs.getObject(i + 1);
+                }
+                modelo2.addRow(filas);
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.toString());
+        }
+    }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void limpiar() {
 
@@ -367,5 +411,6 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jcReceta;
     private javax.swing.JTable jtArticulos;
     private javax.swing.JTable jtProductos;
+    private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }
