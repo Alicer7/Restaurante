@@ -17,14 +17,18 @@ import java.util.ArrayList;
  * @author freddy
  */
 public class Facturas {
-    private final Connection conn= new Conexion2().connect();
-    private final Integer idFactura;
-    private final String nitCliente,solvente,fecha;
-    private final Double 
+    private Connection conn= new Conexion2().connect();
+    private Integer idFactura;
+    private String nitCliente,solvente,fecha;
+    private Double 
             costo,
             pagoEfectivo,
             pagoElectronico,
             cambio;
+
+    public Facturas() {
+    }
+    
     public Facturas(
             Integer idFactura, 
             String nitCliente,
@@ -111,7 +115,7 @@ public class Facturas {
     
     public ArrayList<Facturas> listaFacturasDia (String fecha){
         
-        ArrayList<Facturas> listaFacturases= new ArrayList<Facturas>();
+        ArrayList<Facturas> listaFacturases= new ArrayList<>();
         String sql="SELECT * FROM `factura_venta` WHERE date(fecha) = \""+fecha+"\"";
         
         try {
