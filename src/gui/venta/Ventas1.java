@@ -16,12 +16,10 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.embed.swing.JFXPanel;
 import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebEvent;
-import javafx.scene.web.WebView;
+import core.utils.FacturaHTML;
+import core.utils.themplate.FacturaV1;
 
 /**
  *
@@ -136,25 +134,26 @@ public class Ventas1 extends javax.swing.JFrame {
 
         Object filaData [][]= new Object[lista.size()][11];
                 
-        for (int i=0 ; i < lista.size() ; i++){
-            filaData[i][0]=lista.get(i).getIdPedido();
-            filaData[i][1]=lista.get(i).getFacturaId();
-            filaData[i][2]=lista.get(i).getMenuId();
-            filaData[i][3]=lista.get(i).getMenuCantidad();
-            filaData[i][4]=lista.get(i).getComidaId();
-            filaData[i][5]=lista.get(i).getComidaCantidad();
-            filaData[i][6]=lista.get(i).getBebidaId();
-            filaData[i][7]=lista.get(i).getBebidaCantidad();
-            filaData[i][8]="Q "+lista.get(i).getCosto();
-            filaData[i][9]=lista.get(i).getTiempo();
-            filaData[i][10]=lista.get(i).getSolvente();
-            // Conseguir Total Consumo
-            totalConsumo+=lista.get(i).getCosto();
-            jEditorPane_Detalle_.setText("<h1>"+(String) filaData[i][9]+"</h1>");
-        }
+//        for (int i=0 ; i < lista.size() ; i++){
+//            filaData[i][0]=lista.get(i).getIdPedido();
+//            filaData[i][1]=lista.get(i).getFacturaId();
+//            filaData[i][2]=lista.get(i).getMenuId();
+//            filaData[i][3]=lista.get(i).getMenuCantidad();
+//            filaData[i][4]=lista.get(i).getComidaId();
+//            filaData[i][5]=lista.get(i).getComidaCantidad();
+//            filaData[i][6]=lista.get(i).getBebidaId();
+//            filaData[i][7]=lista.get(i).getBebidaCantidad();
+//            filaData[i][8]="Q "+lista.get(i).getCosto();
+//            filaData[i][9]=lista.get(i).getTiempo();
+//            filaData[i][10]=lista.get(i).getSolvente();
+//            // Conseguir Total Consumo
+//            totalConsumo+=lista.get(i).getCosto();
+//            jEditorPane_Detalle_.setText("<h1>"+(String) filaData[i][9]+"</h1>");
+//        }
+        FacturaV1 factura = new FacturaV1();
+        jEditorPane_Detalle_.setText(factura.getTemplate());
         jTextField_MontoDetalle_.setText("Q "+totalConsumo.toString());
     }
-    
     
     private void limpiarTablaFacturas (){
         DefaultTableModel modelF = (DefaultTableModel) jTable_Factura_.getModel();

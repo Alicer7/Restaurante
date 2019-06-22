@@ -15,10 +15,10 @@ import java.sql.SQLException;
  */
 public class Conexion2 {
     private final String port="3306";
-    private final String url = "jdbc:mysql://remotemysql.com:"+port+"/"; // Ubicación de la BD.
-    private final String db = "Z28kCo2Gf2"; // Nombre de la BD.
-    private final String user = "Z28kCo2Gf2";
-    private final String password = "sUEdDnTcQF";
+    private final String url = "jdbc:mysql://192.168.1.2:"+port+"/"; // Ubicación de la BD.
+    private final String db = "cafebar"; // Nombre de la BD.
+    private final String user = "freddy";
+    private final String password = "freddy";
     
     private Connection DBConnection;
     public Connection connect(){

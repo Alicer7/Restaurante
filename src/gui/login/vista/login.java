@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.Login_vista;
+package gui.login.vista;
 
-import gui.Login_Modelo.Hash;
+import gui.login.modelo.Hash;
 import javax.swing.JOptionPane;
-import gui.Login_Modelo.SqlUsuarios;
-import gui.Login_Modelo.Usuarios;
+import gui.login.modelo.SqlUsuarios;
+import gui.login.modelo.Usuarios;
 
 /**
  *

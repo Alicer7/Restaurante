@@ -302,7 +302,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        gui.Reportes.ReporteVenta fact = new gui.Reportes.ReporteVenta(this, true);
+        gui.reportes.ReporteVenta fact = new gui.reportes.ReporteVenta(this, true);
         fact.setVisible(true);
 
 // TODO add your handling code here:
@@ -312,7 +312,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         if (JOptionPane.showConfirmDialog(this, "Esta a punto de\ncerrar la sesión\n¿Desea continuar?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION, 0,
                 new ImageIcon(getClass().getResource("/core/resources/icons/eliminar.png"))) == JOptionPane.YES_OPTION) {
             this.dispose();
-            new gui.Login_vista.login().setVisible(true);
+            new gui.login.vista.login().setVisible(true);
         }
     }//GEN-LAST:event_jLabel2MouseClicked
 

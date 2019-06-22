@@ -1,4 +1,4 @@
-package gui.Login_Modelo;
+package gui.login.modelo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

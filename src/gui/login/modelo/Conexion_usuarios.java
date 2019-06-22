@@ -1,5 +1,5 @@
 
-package gui.Login_Modelo;
+package gui.login.modelo;
 
 import com.mysql.jdbc.Connection;
 import java.sql.DriverManager;

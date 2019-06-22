@@ -1,5 +1,5 @@
 
-package gui.Login_Modelo;
+package gui.login.modelo;
 
 public class Usuarios {
     
