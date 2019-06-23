@@ -13,17 +13,20 @@ import java.util.ArrayList;
  */
 public class Pedidos {
     private final Connection conn= new Conexion2().connect();
-    private final Integer idPedido;
-    private final Integer facturaId;
-    private final Integer menuId;
-    private final Integer menuCantidad;
-    private final Integer comidaId;
-    private final Integer comidaCantidad;
-    private final Integer bebidaId;
-    private final Integer bebidaCantidad;
-    private final Double costo;
-    private final String tiempo;
-    private final String solvente;
+    private Integer idPedido;
+    private Integer facturaId;
+    private Integer menuId;
+    private Integer menuCantidad;
+    private Integer comidaId;
+    private Integer comidaCantidad;
+    private Integer bebidaId;
+    private Integer bebidaCantidad;
+    private Double costo;
+    private String tiempo;
+    private String solvente;
+
+    public Pedidos() {
+    }
  
     public Pedidos(
             Integer idPedido,

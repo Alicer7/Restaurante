@@ -6,18 +6,11 @@
 package gui.venta;
 
 import core.database.Conexion;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import javax.swing.ImageIcon;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *

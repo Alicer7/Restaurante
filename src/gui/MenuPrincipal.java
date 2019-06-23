@@ -20,13 +20,24 @@ import gui.reportes.ReporteVenta;
  * @author Alicer
  */
 public class MenuPrincipal extends javax.swing.JFrame {
+    
+    private void exit() {
+
+        String botones[] = {"Cerrar", "Cancelar"};
+        int eleccion = JOptionPane.showOptionDialog(this, "¿Desea cerrar la aplicación?", "", 0, 0, null, botones, this);
+        if (eleccion == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        } else if (eleccion == JOptionPane.NO_OPTION) {
+        }
+
+    }
 
     private void cerrar() {
 
         String botones[] = {"Cerrar", "Cancelar"};
-        int eleccion = JOptionPane.showOptionDialog(this, "¿Desea cerrar la aplicación?", "Título", 0, 0, null, botones, this);
+        int eleccion = JOptionPane.showOptionDialog(this, "¿Desea cerrar la aplicación?", "Cerrar Ventana?", 0, 0, null, botones, this);
         if (eleccion == JOptionPane.YES_OPTION) {
-            System.exit(0);
+            dispose();
         } else if (eleccion == JOptionPane.NO_OPTION) {
         }
 
@@ -268,7 +279,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
 
-        gui.venta.PedidoMesas ped = new gui.venta.PedidoMesas();
+        gui.venta.NuevoPedido ped = new gui.venta.NuevoPedido();
         ped.setVisible(true);
 
 
@@ -285,7 +296,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        cerrar();
+        exit();
     }//GEN-LAST:event_formWindowClosing
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
