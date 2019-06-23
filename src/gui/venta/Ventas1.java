@@ -18,7 +18,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
-import core.utils.FacturaHTML;
 import core.utils.themplate.FacturaV1;
 
 /**
@@ -452,10 +451,8 @@ public class Ventas1 extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Ventas1().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Ventas1().setVisible(true);
         });
     }
 

@@ -26,7 +26,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         String botones[] = {"Cerrar", "Cancelar"};
         int eleccion = JOptionPane.showOptionDialog(this, "¿Desea cerrar la aplicación?", "Título", 0, 0, null, botones, this);
         if (eleccion == JOptionPane.YES_OPTION) {
-            dispose();
+            System.exit(0);
         } else if (eleccion == JOptionPane.NO_OPTION) {
         }
 
@@ -73,6 +73,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(870, 419));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -168,7 +169,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,7 +183,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGap(32, 32, 32))
         );
 
-        panelControl.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 882, 112));
+        panelControl.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 112));
 
         jButton_Administracion_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton_Administracion_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/obrero(1).png"))); // NOI18N
@@ -212,17 +213,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jLabel2MouseClicked(evt);
             }
         });
-        panelControl.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(742, 168, 126, 28));
+        panelControl.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 170, 126, 28));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelControl, javax.swing.GroupLayout.PREFERRED_SIZE, 870, Short.MAX_VALUE)
+            .addComponent(panelControl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelControl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelControl, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
