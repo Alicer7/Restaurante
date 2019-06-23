@@ -5,27 +5,15 @@
  */
 package gui;
 
-import core.database.Conexion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.util.JRLoader;
-import net.sf.jasperreports.view.JasperViewer;
+import gui.reportes.ReporteVenta;
 
 /**
  *
@@ -247,6 +235,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     class horas implements ActionListener {
 
+        @Override
         public void actionPerformed(ActionEvent e) {
             Date sistemaHora = new Date();
             String pmAm = "hh:mm:ss a";
@@ -302,7 +291,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        gui.reportes.ReporteVenta fact = new gui.reportes.ReporteVenta(this, true);
+        ReporteVenta fact = new ReporteVenta(this, true);
         fact.setVisible(true);
 
 // TODO add your handling code here:
@@ -358,10 +347,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MenuPrincipal().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new MenuPrincipal().setVisible(true);
         });
     }
 
