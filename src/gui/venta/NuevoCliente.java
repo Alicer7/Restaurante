@@ -5,6 +5,13 @@
  */
 package gui.venta;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Freddy Camposeco <ankoku.fj@gmail.com> <www.stufs.rf.gd>
@@ -28,47 +35,230 @@ public class NuevoCliente extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel_NuevaOrden_ = new javax.swing.JPanel();
+        jComboBox2 = new javax.swing.JComboBox<>();
         jPanel_Main_ = new javax.swing.JPanel();
         jLabel_FactureNumber_ = new javax.swing.JLabel();
         jScrollPane = new javax.swing.JScrollPane();
         jPanel_Pedidos_ = new javax.swing.JPanel();
+        jTextField_Nota_ = new javax.swing.JTextField();
+        jButton_Cancelar = new javax.swing.JButton();
+        jButton_Aceptar_ = new javax.swing.JButton();
+        jLabel_Nota_ = new javax.swing.JLabel();
+        jButton_Aceptar_1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jSpinner_Combo_ = new javax.swing.JSpinner();
+        jLabel_ComboPrecioUnitario_ = new javax.swing.JLabel();
+        jComboBox_Combo_ = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList_Combo_ = new javax.swing.JList<>();
+        jLabel_ComboSubTotal_ = new javax.swing.JLabel();
+        jLabel_ComboCantidad_ = new javax.swing.JLabel();
+        jLabel_PrecioUnitarioQ_ = new javax.swing.JLabel();
+        jLabel_PrecioUnitarioNum_ = new javax.swing.JLabel();
+        jLabel_SubTotalQ_ = new javax.swing.JLabel();
+        jLabel_SubTotalNum_ = new javax.swing.JLabel();
+        jLabel_FactureNumber_1 = new javax.swing.JLabel();
+
+        jPanel_NuevaOrden_.setMaximumSize(new java.awt.Dimension(768, 75));
+        jPanel_NuevaOrden_.setMinimumSize(new java.awt.Dimension(768, 75));
+        jPanel_NuevaOrden_.setPreferredSize(new java.awt.Dimension(768, 75));
+
+        jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jComboBox2.setMaximumRowCount(10);
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Menu" }));
+        jComboBox2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jComboBox2.setMaximumSize(new java.awt.Dimension(120, 50));
+        jComboBox2.setMinimumSize(new java.awt.Dimension(120, 50));
+        jComboBox2.setPreferredSize(new java.awt.Dimension(120, 50));
 
         javax.swing.GroupLayout jPanel_NuevaOrden_Layout = new javax.swing.GroupLayout(jPanel_NuevaOrden_);
         jPanel_NuevaOrden_.setLayout(jPanel_NuevaOrden_Layout);
         jPanel_NuevaOrden_Layout.setHorizontalGroup(
             jPanel_NuevaOrden_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(jPanel_NuevaOrden_Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(568, Short.MAX_VALUE))
         );
         jPanel_NuevaOrden_Layout.setVerticalGroup(
             jPanel_NuevaOrden_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_NuevaOrden_Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jComboBox2, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addGap(8, 8, 8))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cliente Nuevo");
         setMinimumSize(new java.awt.Dimension(800, 600));
+        setResizable(false);
         setType(java.awt.Window.Type.POPUP);
 
         jPanel_Main_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cliente Nuevo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
 
         jLabel_FactureNumber_.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel_FactureNumber_.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel_FactureNumber_.setText("Factura #");
 
         jScrollPane.setBorder(null);
         jScrollPane.setHorizontalScrollBar(null);
 
+        jPanel_Pedidos_.setBorder(javax.swing.BorderFactory.createTitledBorder("Pedidos"));
+        jPanel_Pedidos_.setPreferredSize(new java.awt.Dimension(768, 250));
+
         javax.swing.GroupLayout jPanel_Pedidos_Layout = new javax.swing.GroupLayout(jPanel_Pedidos_);
         jPanel_Pedidos_.setLayout(jPanel_Pedidos_Layout);
         jPanel_Pedidos_Layout.setHorizontalGroup(
             jPanel_Pedidos_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 768, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel_Pedidos_Layout.setVerticalGroup(
             jPanel_Pedidos_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jScrollPane.setViewportView(jPanel_Pedidos_);
+
+        jTextField_Nota_.setMinimumSize(new java.awt.Dimension(397, 51));
+        jTextField_Nota_.setPreferredSize(new java.awt.Dimension(397, 51));
+
+        jButton_Cancelar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton_Cancelar.setText("Cancelar");
+        jButton_Cancelar.setMaximumSize(new java.awt.Dimension(120, 52));
+        jButton_Cancelar.setMinimumSize(new java.awt.Dimension(120, 52));
+        jButton_Cancelar.setPreferredSize(new java.awt.Dimension(120, 52));
+        jButton_Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_CancelarActionPerformed(evt);
+            }
+        });
+
+        jButton_Aceptar_.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton_Aceptar_.setText("Aceptar");
+        jButton_Aceptar_.setMaximumSize(new java.awt.Dimension(120, 52));
+        jButton_Aceptar_.setMinimumSize(new java.awt.Dimension(120, 52));
+        jButton_Aceptar_.setPreferredSize(new java.awt.Dimension(120, 52));
+        jButton_Aceptar_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_Aceptar_ActionPerformed(evt);
+            }
+        });
+
+        jLabel_Nota_.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel_Nota_.setText("Añadir Nota:");
+        jLabel_Nota_.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel_Nota_.setMaximumSize(null);
+        jLabel_Nota_.setMinimumSize(new java.awt.Dimension(85, 49));
+        jLabel_Nota_.setPreferredSize(new java.awt.Dimension(85, 49));
+
+        jButton_Aceptar_1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton_Aceptar_1.setText("Añadir");
+        jButton_Aceptar_1.setMaximumSize(new java.awt.Dimension(120, 52));
+        jButton_Aceptar_1.setMinimumSize(new java.awt.Dimension(120, 52));
+        jButton_Aceptar_1.setPreferredSize(new java.awt.Dimension(120, 52));
+        jButton_Aceptar_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_Aceptar_1ActionPerformed(evt);
+            }
+        });
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Combos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+
+        jSpinner_Combo_.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        jLabel_ComboPrecioUnitario_.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel_ComboPrecioUnitario_.setText("Precio Unitario:");
+
+        jComboBox_Combo_.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jComboBox_Combo_.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos" }));
+
+        jList_Combo_.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jList_Combo_.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList_Combo_);
+
+        jLabel_ComboSubTotal_.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel_ComboSubTotal_.setText("Subtotal:");
+
+        jLabel_ComboCantidad_.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel_ComboCantidad_.setText("Cantidad:");
+
+        jLabel_PrecioUnitarioQ_.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel_PrecioUnitarioQ_.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel_PrecioUnitarioQ_.setText("Q. ");
+
+        jLabel_PrecioUnitarioNum_.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel_PrecioUnitarioNum_.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel_PrecioUnitarioNum_.setText("123456.00");
+
+        jLabel_SubTotalQ_.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel_SubTotalQ_.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel_SubTotalQ_.setText("Q. ");
+
+        jLabel_SubTotalNum_.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel_SubTotalNum_.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel_SubTotalNum_.setText("123456.00");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBox_Combo_, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel_ComboCantidad_, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jSpinner_Combo_, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel_ComboSubTotal_, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel_ComboPrecioUnitario_, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(2, 2, 2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel_PrecioUnitarioQ_, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel_PrecioUnitarioNum_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel_SubTotalQ_, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel_SubTotalNum_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jComboBox_Combo_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_ComboPrecioUnitario_)
+                    .addComponent(jLabel_PrecioUnitarioQ_)
+                    .addComponent(jLabel_PrecioUnitarioNum_))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_ComboSubTotal_)
+                    .addComponent(jLabel_SubTotalQ_)
+                    .addComponent(jLabel_SubTotalNum_))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_ComboCantidad_)
+                    .addComponent(jSpinner_Combo_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        jLabel_FactureNumber_1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel_FactureNumber_1.setText("1234567890");
 
         javax.swing.GroupLayout jPanel_Main_Layout = new javax.swing.GroupLayout(jPanel_Main_);
         jPanel_Main_.setLayout(jPanel_Main_Layout);
@@ -76,17 +266,56 @@ public class NuevoCliente extends javax.swing.JFrame {
             jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_Main_Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel_FactureNumber_, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane)
+                .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Main_Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel_Nota_, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_Nota_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton_Aceptar_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane)
+                    .addGroup(jPanel_Main_Layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton_Aceptar_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Main_Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel_FactureNumber_)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel_FactureNumber_1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel_Main_Layout.setVerticalGroup(
             jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_Main_Layout.createSequentialGroup()
-                .addComponent(jLabel_FactureNumber_)
+                .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_Main_Layout.createSequentialGroup()
+                        .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel_FactureNumber_)
+                            .addComponent(jLabel_FactureNumber_1))
+                        .addGap(141, 141, 141)
+                        .addComponent(jButton_Aceptar_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel_Main_Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 40, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(jPanel_Main_Layout.createSequentialGroup()
+                        .addComponent(jButton_Aceptar_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(11, 11, 11))
+                    .addComponent(jButton_Cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel_Main_Layout.createSequentialGroup()
+                        .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField_Nota_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel_Nota_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -95,20 +324,42 @@ public class NuevoCliente extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel_Main_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel_Main_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel_Main_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel_Main_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton_Aceptar_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Aceptar_ActionPerformed
+        JPanel pedido = new JPanel();
+        JComboBox combo = new JComboBox();
+        
+        combo.setSize(150, 90);
+        
+        pedido.add(combo);
+        
+        pedido.setSize(876,100);
+        pedido.setBackground(Color.red);
+        
+        jPanel_Pedidos_.revalidate();
+        jPanel_Pedidos_.repaint();
+    }//GEN-LAST:event_jButton_Aceptar_ActionPerformed
+
+    private void jButton_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_CancelarActionPerformed
+
+    private void jButton_Aceptar_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Aceptar_1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_Aceptar_1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,10 +404,29 @@ public class NuevoCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_Aceptar_;
+    private javax.swing.JButton jButton_Aceptar_1;
+    private javax.swing.JButton jButton_Cancelar;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox_Combo_;
+    private javax.swing.JLabel jLabel_ComboCantidad_;
+    private javax.swing.JLabel jLabel_ComboPrecioUnitario_;
+    private javax.swing.JLabel jLabel_ComboSubTotal_;
     private javax.swing.JLabel jLabel_FactureNumber_;
+    private javax.swing.JLabel jLabel_FactureNumber_1;
+    private javax.swing.JLabel jLabel_Nota_;
+    private javax.swing.JLabel jLabel_PrecioUnitarioNum_;
+    private javax.swing.JLabel jLabel_PrecioUnitarioQ_;
+    private javax.swing.JLabel jLabel_SubTotalNum_;
+    private javax.swing.JLabel jLabel_SubTotalQ_;
+    private javax.swing.JList<String> jList_Combo_;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel_Main_;
     private javax.swing.JPanel jPanel_NuevaOrden_;
     private javax.swing.JPanel jPanel_Pedidos_;
     private javax.swing.JScrollPane jScrollPane;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSpinner jSpinner_Combo_;
+    private javax.swing.JTextField jTextField_Nota_;
     // End of variables declaration//GEN-END:variables
 }
