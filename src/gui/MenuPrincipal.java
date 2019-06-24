@@ -82,6 +82,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         hora = new javax.swing.JLabel();
         fecha = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jButton_Ventas_ = new javax.swing.JButton();
+        jButton_Test = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(870, 419));
@@ -171,7 +173,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
@@ -180,12 +182,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -225,6 +227,24 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         panelControl.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 170, 126, 28));
+
+        jButton_Ventas_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton_Ventas_.setText("Ventas");
+        jButton_Ventas_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_Ventas_ActionPerformed(evt);
+            }
+        });
+        panelControl.add(jButton_Ventas_, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 360, 182, 45));
+
+        jButton_Test.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton_Test.setText("Test");
+        jButton_Test.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_TestActionPerformed(evt);
+            }
+        });
+        panelControl.add(jButton_Test, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 360, 182, 45));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -279,7 +299,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
 
-        gui.venta.NuevoPedido ped = new gui.venta.NuevoPedido();
+        gui.venta.OldPedido ped = new gui.venta.OldPedido();
         ped.setVisible(true);
 
 
@@ -333,6 +353,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_formWindowOpened
 
+    private void jButton_Ventas_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Ventas_ActionPerformed
+        gui.venta.Ventas ventas = new gui.venta.Ventas();
+        ventas.setVisible(true);
+    }//GEN-LAST:event_jButton_Ventas_ActionPerformed
+
+    private void jButton_TestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_TestActionPerformed
+        gui.venta.NewJFrame test = new gui.venta.NewJFrame();
+        test.setVisible(true);
+    }//GEN-LAST:event_jButton_TestActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -378,6 +408,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JButton jButton_Administracion_;
+    private javax.swing.JButton jButton_Test;
+    private javax.swing.JButton jButton_Ventas_;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel panelControl;

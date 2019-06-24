@@ -1,4 +1,4 @@
-package core.utils;
+package core.utils.test;
 
 import com.sun.javafx.application.PlatformImpl;
 import java.awt.BorderLayout;
