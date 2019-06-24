@@ -20,7 +20,7 @@ import gui.reportes.ReporteVenta;
  * @author Alicer
  */
 public class MenuPrincipal extends javax.swing.JFrame {
-    
+
     private void exit() {
 
         String botones[] = {"Cerrar", "Cancelar"};
@@ -84,6 +84,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton_Ventas_ = new javax.swing.JButton();
         jButton_Test = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(870, 419));
@@ -106,7 +107,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        panelControl.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 196, 182, 45));
+        panelControl.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 182, 45));
 
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton4.setText("Compras/Inventario");
@@ -127,7 +128,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         panelControl.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 308, 182, 42));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("Ingreso de bebidas");
+        jButton1.setText("Asignar Recetas");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -206,7 +207,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jButton_Administracion_ActionPerformed(evt);
             }
         });
-        panelControl.add(jButton_Administracion_, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 140, 182, 42));
+        panelControl.add(jButton_Administracion_, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 290, 182, 42));
 
         hora.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         hora.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -246,6 +247,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         panelControl.add(jButton_Test, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 360, 182, 45));
 
+        jButton7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton7.setText("Registro de Carnes");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        panelControl.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 196, 182, 45));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -263,6 +273,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
         gui.almacen.RegistroLicores almacen = new gui.almacen.RegistroLicores(null, true);
         almacen.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -313,6 +324,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
+        gui.cocina.MateriaprimaDeReceta asignar = new gui.cocina.MateriaprimaDeReceta();
+        asignar.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -363,6 +376,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         test.setVisible(true);
     }//GEN-LAST:event_jButton_TestActionPerformed
 
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        gui.almacen.RegistroCarnes carnes = new gui.almacen.RegistroCarnes(this, true);
+        carnes.setVisible(true);
+    }//GEN-LAST:event_jButton7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -405,6 +423,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JButton jButton_Administracion_;

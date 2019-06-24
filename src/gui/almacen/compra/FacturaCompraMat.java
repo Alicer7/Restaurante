@@ -154,6 +154,7 @@ public class FacturaCompraMat extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         txtBuscar = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -292,11 +293,19 @@ public class FacturaCompraMat extends javax.swing.JFrame {
                 txtBuscarKeyReleased(evt);
             }
         });
-        jPanel3.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 240, 30));
+        jPanel3.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 240, 30));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel9.setText("Buscar Artículo:");
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 120, 30));
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 120, 30));
+
+        jButton3.setText("Nuevo");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(409, 40, 100, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 1190, 410));
 
@@ -443,6 +452,13 @@ public class FacturaCompraMat extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtBuscarKeyReleased
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        gui.almacen.RegistroLicores almacen = new gui.almacen.RegistroLicores(null, true);
+        almacen.setVisible(true);
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     private void limpiar() {
         txtDescripcion.setText("");
         txtEncargado.setText("");
@@ -490,6 +506,7 @@ public class FacturaCompraMat extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
