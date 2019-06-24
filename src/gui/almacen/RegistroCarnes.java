@@ -28,6 +28,8 @@ public class RegistroCarnes extends javax.swing.JDialog {
     public RegistroCarnes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        txtMaxOnzas.setEditable(false);
+        txtMinOnzas.setEditable(false);
     }
 
     /**
@@ -52,11 +54,11 @@ public class RegistroCarnes extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         txtMinOnzas = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        txtCosto = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtMateriaPrima = new javax.swing.JTable();
+        txtBuscar = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -64,50 +66,50 @@ public class RegistroCarnes extends javax.swing.JDialog {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ingreso de Materia Prima", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro de Carnes", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Descripcion:");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 70, 154, 27));
-        jPanel2.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 70, 224, 28));
+        jPanel2.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 70, 280, 28));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Stock Máximo en libras:");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 140, 154, 27));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 154, 27));
 
         txtMax.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtMaxKeyReleased(evt);
             }
         });
-        jPanel2.add(txtMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 140, 84, 28));
+        jPanel2.add(txtMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 84, 28));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Total en Onzas:");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(266, 140, 98, 27));
-        jPanel2.add(txtMaxOnzas, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 140, 84, 28));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 98, 27));
+        jPanel2.add(txtMaxOnzas, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, 84, 28));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Stock Mínimo en libras: ");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 182, 154, 27));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 154, 27));
 
         txtMin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtMinKeyReleased(evt);
             }
         });
-        jPanel2.add(txtMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 182, 84, 28));
+        jPanel2.add(txtMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 84, 28));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Total en Onzas:");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(266, 182, 98, 27));
-        jPanel2.add(txtMinOnzas, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 182, 84, 28));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 98, 27));
+        jPanel2.add(txtMinOnzas, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, 84, 28));
 
         jButton1.setText("Guardar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -115,29 +117,17 @@ public class RegistroCarnes extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(308, 252, 98, 42));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 140, 42));
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel7.setText("Costo por Unidad:");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 224, 154, 27));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 42, 490, 320));
 
-        txtCosto.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtCostoKeyReleased(evt);
-            }
-        });
-        jPanel2.add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 224, 84, 28));
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 42, 490, 308));
-
-        jButton2.setText("Actualizar");
+        jButton2.setText("Mostrar Todos");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(518, 14, 98, 28));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(968, 20, 150, 28));
 
         jtMateriaPrima.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -154,6 +144,18 @@ public class RegistroCarnes extends javax.swing.JDialog {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(518, 56, 602, 294));
 
+        txtBuscar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
+            }
+        });
+        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 20, 240, 30));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel2.setText("Consultar:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, 80, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -164,7 +166,9 @@ public class RegistroCarnes extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -184,22 +188,17 @@ public class RegistroCarnes extends javax.swing.JDialog {
         txtMinOnzas.setText(Integer.toString(onzas));
     }//GEN-LAST:event_txtMinKeyReleased
 
-    private void txtCostoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostoKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCostoKeyReleased
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         try {
             Conexion cone = new Conexion();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
             PreparedStatement ps = null;
-            ps = conn.prepareStatement("INSERT INTO `materiaprima` (`nombre`, `stock`, `stock_min`, `stock_max`, `costo`) VALUES (?,?,?,?,?)");
+            ps = conn.prepareStatement("INSERT INTO `materiaprima` (`nombre`, `stock`, `stock_min`, `stock_max`) VALUES (?,?,?,?)");
             ps.setString(1, txtDescripcion.getText());
             ps.setInt(2, 0);
             ps.setString(3, txtMin.getText());
             ps.setString(4, txtMax.getText());
-            ps.setString(5, txtCosto.getText());
             ps.execute();
             JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
 
@@ -211,6 +210,7 @@ public class RegistroCarnes extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
         try {
             Conexion cone = new Conexion();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
@@ -250,6 +250,45 @@ public class RegistroCarnes extends javax.swing.JDialog {
 
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        try {
+            Conexion cone = new Conexion();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            DefaultTableModel modelo = new DefaultTableModel();
+            jtMateriaPrima.setModel(modelo);
+
+            String sql = "select id, nombre, stock, costo from materiaprima where nombre LIKE '%" + txtBuscar.getText() + "%' order by(id) ";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
+            int cantidadColumnas = rsMd.getColumnCount();
+
+            modelo.addColumn("Código");
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Existencia");
+            modelo.addColumn("Costo");
+
+            int[] anchos = {10, 150, 70, 70};
+            for (int i = 0; i < jtMateriaPrima.getColumnCount(); i++) {
+                jtMateriaPrima.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+            }
+
+            while (rs.next()) {
+                Object[] filas = new Object[cantidadColumnas];
+                for (int i = 0; i < cantidadColumnas; i++) {
+                    filas[i] = rs.getObject(i + 1);
+                }
+                modelo.addRow(filas);
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.toString());
+        }
+    }//GEN-LAST:event_txtBuscarKeyReleased
 
     /**
      * @param args the command line arguments
@@ -312,16 +351,16 @@ public class RegistroCarnes extends javax.swing.JDialog {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtMateriaPrima;
-    private javax.swing.JTextField txtCosto;
+    private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtMax;
     private javax.swing.JTextField txtMaxOnzas;

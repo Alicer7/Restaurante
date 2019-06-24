@@ -82,42 +82,42 @@ public class FacturaCompraMat extends javax.swing.JFrame {
         tabla();
         popuptable();
 
-        try {
-            PreparedStatement ps = null;
-            ResultSet rs = null;
-            Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
-            DefaultTableModel modelo2 = new DefaultTableModel();
-            jtArticulos.setModel(modelo2);
-
-            String sql = "select id, nombre, stock, costo from materiaprima ";
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
-
-            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
-            int cantidadColumnas = rsMd.getColumnCount();
-
-            modelo2.addColumn("id.");
-            modelo2.addColumn("Nombre");
-            modelo2.addColumn("Existencia");
-            modelo2.addColumn("Costo");
-
-            int[] anchos = {10, 30, 70, 70};
-            for (int i = 0; i < jtArticulos.getColumnCount(); i++) {
-                jtArticulos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
-            }
-
-            while (rs.next()) {
-                Object[] filas = new Object[cantidadColumnas];
-                for (int i = 0; i < cantidadColumnas; i++) {
-                    filas[i] = rs.getObject(i + 1);
-                }
-                modelo2.addRow(filas);
-            }
-
-        } catch (SQLException ex) {
-            System.err.println(ex.toString());
-        }
+//        try {
+//            PreparedStatement ps = null;
+//            ResultSet rs = null;
+//            Conexion cone = new Conexion();
+//            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+//            DefaultTableModel modelo2 = new DefaultTableModel();
+//            jtArticulos.setModel(modelo2);
+//
+//            String sql = "select id, nombre, stock, costo from materiaprima ";
+//            ps = conn.prepareStatement(sql);
+//            rs = ps.executeQuery();
+//
+//            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
+//            int cantidadColumnas = rsMd.getColumnCount();
+//
+//            modelo2.addColumn("id.");
+//            modelo2.addColumn("Nombre");
+//            modelo2.addColumn("Existencia");
+//            modelo2.addColumn("Costo");
+//
+//            int[] anchos = {10, 30, 70, 70};
+//            for (int i = 0; i < jtArticulos.getColumnCount(); i++) {
+//                jtArticulos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+//            }
+//
+//            while (rs.next()) {
+//                Object[] filas = new Object[cantidadColumnas];
+//                for (int i = 0; i < cantidadColumnas; i++) {
+//                    filas[i] = rs.getObject(i + 1);
+//                }
+//                modelo2.addRow(filas);
+//            }
+//
+//        } catch (SQLException ex) {
+//            System.err.println(ex.toString());
+//        }
     }
 
     /**
@@ -152,6 +152,8 @@ public class FacturaCompraMat extends javax.swing.JFrame {
         jtArticulos = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        txtBuscar = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -241,7 +243,7 @@ public class FacturaCompraMat extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jtProductos);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(532, 14, 644, 266));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, 644, 266));
 
         jtArticulos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -251,7 +253,7 @@ public class FacturaCompraMat extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Código", "Nombre", "Cantidad Existente", "Precio"
             }
         ));
         jtArticulos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -261,7 +263,7 @@ public class FacturaCompraMat extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jtArticulos);
 
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 14, 476, 266));
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 476, 266));
 
         jButton2.setText("Guardar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -269,7 +271,7 @@ public class FacturaCompraMat extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(784, 294, 112, 42));
+        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 360, 112, 42));
 
         jButton1.setText("Agregar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -277,25 +279,36 @@ public class FacturaCompraMat extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 294, 112, 42));
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 360, 112, 42));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 210, 1190, 350));
+        txtBuscar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarActionPerformed(evt);
+            }
+        });
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
+            }
+        });
+        jPanel3.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 240, 30));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel9.setText("Buscar Artículo:");
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 120, 30));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 1190, 410));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1244, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1268, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
         );
 
         pack();
@@ -386,6 +399,49 @@ public class FacturaCompraMat extends javax.swing.JFrame {
         cerrar();
     }//GEN-LAST:event_formWindowClosing
 
+    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarActionPerformed
+
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        try {
+            Conexion cone = new Conexion();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            DefaultTableModel modelo = new DefaultTableModel();
+            jtArticulos.setModel(modelo);
+
+            String sql = "select id, nombre, stock, costo from materiaprima where nombre LIKE '%" + txtBuscar.getText() + "%' order by(id) ";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
+            int cantidadColumnas = rsMd.getColumnCount();
+
+            modelo.addColumn("Código.");
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Existencia");
+            modelo.addColumn("Costo");
+
+            int[] anchos = {10, 150, 70, 70};
+            for (int i = 0; i < jtArticulos.getColumnCount(); i++) {
+                jtArticulos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+            }
+
+            while (rs.next()) {
+                Object[] filas = new Object[cantidadColumnas];
+                for (int i = 0; i < cantidadColumnas; i++) {
+                    filas[i] = rs.getObject(i + 1);
+                }
+                modelo.addRow(filas);
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.toString());
+        }
+    }//GEN-LAST:event_txtBuscarKeyReleased
+
     private void limpiar() {
         txtDescripcion.setText("");
         txtEncargado.setText("");
@@ -440,6 +496,7 @@ public class FacturaCompraMat extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -448,6 +505,7 @@ public class FacturaCompraMat extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser jcFecha;
     private javax.swing.JTable jtArticulos;
     private javax.swing.JTable jtProductos;
+    private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtEncargado;
     private javax.swing.JTextField txtFactura;

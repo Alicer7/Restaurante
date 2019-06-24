@@ -26,6 +26,8 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
 
     int ID_ARTICULO = 0;
     String NOMBRE_ARTICULO = null;
+    int ID_CAT = 0;
+    int ID_RECETA = 0;
 
     public void tabla() {
         DefaultTableModel modelo = new DefaultTableModel();
@@ -111,7 +113,13 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
             while (rs.next()) {
                 this.jcReceta.addItem(rs.getString("nombre"));
             }
+            String cat_articulo = "Select nombre from categoria order by(id)";
+            ps = conn.prepareStatement(cat_articulo);
+            rs = ps.executeQuery();
 
+            while (rs.next()) {
+                this.jcCategoria.addItem(rs.getString("nombre"));
+            }
         } catch (SQLException ex) {
             System.err.println(ex.toString());
         }
@@ -130,6 +138,8 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jcReceta = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jcCategoria = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtProductos = new javax.swing.JTable();
@@ -151,9 +161,25 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Receta :");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(294, 28, 98, 31));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 98, 31));
 
-        jPanel2.add(jcReceta, new org.netbeans.lib.awtextra.AbsoluteConstraints(406, 28, 266, 28));
+        jcReceta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcRecetaActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jcReceta, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 266, 28));
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel1.setText("Categoría:");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 90, 30));
+
+        jcCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcCategoriaActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jcCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 30, 266, 28));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 28, 1078, 84));
 
@@ -245,13 +271,16 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
             System.out.println("filas jc " + filas);
             for (int row = 0; row < filas; row++) {
 
-                int id_receta =jcReceta.getSelectedIndex() + 1;
+                
                 int id_materia = (int) jtProductos.getValueAt(row, 0);
                 Double cant = (double) jtProductos.getValueAt(row, 2);
-                ps = conn.prepareStatement("INSERT INTO `receta_ingrediente` (`receta_categoria_id`, `materiaprima_id`, `cantidad`) VALUES (?,?,?)");
-                ps.setInt(1, id_receta);
-                ps.setInt(2, id_materia);
-                ps.setDouble(3, cant);
+                
+                ps = conn.prepareStatement("INSERT INTO `receta_ingrediente` (`receta_id`, `categoria_id`, `materiaprima_id`, `cantidad`) VALUES (?,?,?)");
+                ps.setInt(1, ID_RECETA);
+                ps.setInt(2, ID_CAT);
+                ps.setDouble(3, id_materia);
+                ps.setDouble(4, cant);
+
                 ps.execute();
                 System.out.println("ya, asdfasdf");
             }
@@ -329,6 +358,47 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtBuscarKeyReleased
 
+    private void jcRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcRecetaActionPerformed
+        try {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            Conexion cone = new Conexion();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+
+            String cat_articulo = "Select id from receta where nombre = '" + jcReceta.getSelectedItem().toString() + "'";
+            ps = conn.prepareStatement(cat_articulo);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ID_RECETA = (rs.getInt("id"));
+            }
+            
+            System.out.println("receta : " + ID_RECETA);
+        } catch (SQLException ex) {
+            System.err.println(ex.toString());
+        }
+    }//GEN-LAST:event_jcRecetaActionPerformed
+
+    private void jcCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcCategoriaActionPerformed
+        try {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            Conexion cone = new Conexion();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+
+            String cat_articulo = "Select id from categoria where nombre = '" + jcCategoria.getSelectedItem().toString() + "'";
+            ps = conn.prepareStatement(cat_articulo);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ID_CAT = (rs.getInt("id"));
+            }
+            System.out.println("cate  : " + ID_CAT);
+        } catch (SQLException ex) {
+            System.err.println(ex.toString());
+        }
+    }//GEN-LAST:event_jcCategoriaActionPerformed
+
     private void limpiar() {
 
     }
@@ -402,12 +472,14 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JComboBox<String> jcCategoria;
     private javax.swing.JComboBox<String> jcReceta;
     private javax.swing.JTable jtArticulos;
     private javax.swing.JTable jtProductos;
