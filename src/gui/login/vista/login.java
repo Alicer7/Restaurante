@@ -9,6 +9,7 @@ import gui.login.modelo.Hash;
 import javax.swing.JOptionPane;
 import gui.login.modelo.SqlUsuarios;
 import gui.login.modelo.Usuarios;
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -16,20 +17,13 @@ import gui.login.modelo.Usuarios;
  */
 public class login extends javax.swing.JFrame {
 
-    private void configurarVentana() {
-        this.setTitle("BIENVENIDO");                   // colocamos titulo a la ventana
-//        this.setSize(600, 550);                                 // colocamos tamanio a la ventana (ancho, alto)
-        this.setLocationRelativeTo(null);                       // centramos la ventana en la pantalla
-        this.setResizable(false);                               // hacemos que la ventana no sea redimiensionable
-        this.setDefaultCloseOperation(Inicio.EXIT_ON_CLOSE);    // hacemos que cuando se cierre la ventana termina todo proceso
-
-    }
-    public static registro frmReg;
-    public static login frmLog;
-
+    /**
+     * Creates new form login
+     */
     public login() {
         initComponents();
-        configurarVentana();
+        setLocationRelativeTo(null);
+        txtUsuario.requestFocus();
     }
 
     /**
@@ -42,78 +36,80 @@ public class login extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         btnEntrar = new javax.swing.JButton();
         txtPassword = new javax.swing.JPasswordField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        btnEntrar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(161, 0, 0));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/user.png"))); // NOI18N
-        jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(14, 148, 193), 2));
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 112, 126, 140));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel1.setText("Usuario:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, -1, 28));
 
-        txtUsuario.setBackground(new java.awt.Color(34, 101, 142));
-        txtUsuario.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        txtUsuario.setCaretColor(new java.awt.Color(255, 255, 255));
-        txtUsuario.setSelectionColor(new java.awt.Color(255, 255, 255));
-        jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 154, 168, -1));
+        txtUsuario.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 182, 28));
 
-        btnEntrar.setBackground(new java.awt.Color(255, 255, 255));
-        btnEntrar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        btnEntrar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEntrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/entrar2.png"))); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel2.setText("Password:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, -1, 28));
+
+        btnEntrar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnEntrar.setText("Entrar");
         btnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEntrarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 266, 140, 42));
+        jPanel1.add(btnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 98, 28));
 
-        txtPassword.setBackground(new java.awt.Color(34, 101, 142));
-        txtPassword.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtPassword.setForeground(new java.awt.Color(255, 255, 255));
-        txtPassword.setCaretColor(new java.awt.Color(255, 255, 255));
-        txtPassword.setSelectionColor(new java.awt.Color(255, 255, 255));
-        txtPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPasswordActionPerformed(evt);
-            }
-        });
+        txtPassword.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtPasswordKeyReleased(evt);
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyPressed(evt);
             }
         });
-        jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 210, 168, -1));
+        jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 182, 28));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/campoLoginPass.png"))); // NOI18N
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 196, 252, 56));
+        btnEntrar1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnEntrar1.setText("Cancelar");
+        btnEntrar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntrar1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnEntrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 300, 98, 28));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/campoLoginUs.png"))); // NOI18N
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 252, 56));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 588, 378));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
 
-               SqlUsuarios modSql = new SqlUsuarios();
+        SqlUsuarios modSql = new SqlUsuarios();
         Usuarios mod = new Usuarios();
 
         String pass = new String(txtPassword.getPassword());
@@ -129,8 +125,19 @@ public class login extends javax.swing.JFrame {
                 Inicio.frmLog = null;
                 this.dispose();
 
-                gui.MenuPrincipal frmMenu = new gui.MenuPrincipal();
-                frmMenu.setVisible(true);
+                if (mod.getIdTipo() == 1) {
+                    gui.MenuPrincipal menu = new gui.MenuPrincipal();
+                    menu.setVisible(true);
+
+                    menu.lblUser.setText(mod.getNombre());
+                    menu.lblCargo.setText("Administrador");
+                } else {
+                    gui.MenuPrincipal menu = new gui.MenuPrincipal();
+                    menu.setVisible(true);
+//
+                    menu.lblUser.setText(mod.getNombre());
+                    menu.lblCargo.setText("Usuario");
+                }
 
             } else {
                 JOptionPane.showMessageDialog(null, "Datos incorrectos");
@@ -146,13 +153,59 @@ public class login extends javax.swing.JFrame {
         Inicio.frmLog = null;
     }//GEN-LAST:event_formWindowClosing
 
-    private void txtPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyReleased
+    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
+        char teclapresionada = evt.getKeyChar();
+        if (teclapresionada == KeyEvent.VK_ENTER) {
+            
+        SqlUsuarios modSql = new SqlUsuarios();
+        Usuarios mod = new Usuarios();
 
-    }//GEN-LAST:event_txtPasswordKeyReleased
+        String pass = new String(txtPassword.getPassword());
 
-    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPasswordActionPerformed
+        if (!txtUsuario.getText().equals("") && !pass.equals("")) {
+
+            String nuevoPass = Hash.sha1(pass);
+
+            mod.setUsuario(txtUsuario.getText());
+            mod.setPassword(nuevoPass);
+
+            if (modSql.login(mod)) {
+                Inicio.frmLog = null;
+                this.dispose();
+
+                if (mod.getIdTipo() == 1) {
+                    gui.MenuPrincipal menu = new gui.MenuPrincipal();
+                    menu.setVisible(true);
+
+                    menu.lblUser.setText(mod.getNombre());
+                    menu.lblCargo.setText("Administrador");
+                } else {
+                    gui.MenuPrincipal menu = new gui.MenuPrincipal();
+                    menu.setVisible(true);
+//
+                    menu.lblUser.setText(mod.getNombre());
+                    menu.lblCargo.setText("Usuario");
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Datos incorrectos");
+                limpiar();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe ingresar sus datos");
+        }
+        }
+    }//GEN-LAST:event_txtPasswordKeyPressed
+
+    private void btnEntrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrar1ActionPerformed
+        boolean option = false;
+        if (option = false) {
+            JOptionPane.showMessageDialog(null, "Puede continuar...");
+        } else {
+            JOptionPane.showMessageDialog(null, "bye bye ;) ");
+            dispose();
+        }
+    }//GEN-LAST:event_btnEntrar1ActionPerformed
 
     private void limpiar() {
         txtUsuario.setText("");
@@ -183,6 +236,8 @@ public class login extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -194,9 +249,9 @@ public class login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnEntrar;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    public javax.swing.JButton btnEntrar1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JPasswordField txtPassword;
     public javax.swing.JTextField txtUsuario;

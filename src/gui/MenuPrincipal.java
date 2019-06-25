@@ -14,12 +14,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import gui.reportes.ReporteVenta;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 
 /**
  *
  * @author Alicer
  */
 public class MenuPrincipal extends javax.swing.JFrame {
+
+  
 
     private void exit() {
 
@@ -50,7 +54,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);    // hacemos que cuando se cierre la ventana termina todo proceso
 
     }
-
     /**
      * Creates new form MenuPrincipal
      */
@@ -73,6 +76,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         panelControl = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
@@ -90,6 +94,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jButton_Ventas_ = new javax.swing.JButton();
         jButton_Test = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        lblCargo = new javax.swing.JLabel();
+        lblUser = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(870, 419));
@@ -103,7 +111,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
 
         panelControl.setBackground(new java.awt.Color(255, 255, 255));
-        panelControl.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton3.setText("Registro de Licores");
@@ -112,7 +119,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        panelControl.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 182, 45));
 
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton4.setText("Compras");
@@ -121,7 +127,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        panelControl.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 182, 45));
 
         jButton5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton5.setText("Creacion de recetas");
@@ -130,9 +135,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        panelControl.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 182, 42));
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
         jButton8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton8.setText("Facturación");
@@ -141,6 +146,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jButton8ActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 69;
+        gridBagConstraints.ipady = 20;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(35, 28, 32, 0);
+        jPanel1.add(jButton8, gridBagConstraints);
 
         jButton6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton6.setText("Pedidos");
@@ -149,6 +163,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 95;
+        gridBagConstraints.ipady = 17;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(36, 28, 0, 0);
+        jPanel1.add(jButton6, gridBagConstraints);
 
         jButton9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton9.setText("Reporte de Ventas");
@@ -157,6 +179,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jButton9ActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 21;
+        gridBagConstraints.ipady = 20;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(35, 29, 32, 0);
+        jPanel1.add(jButton9, gridBagConstraints);
 
         jButton10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton10.setText("Cierre de Caja");
@@ -165,35 +196,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jButton10ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32))
-        );
-
-        panelControl.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 112));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 53;
+        gridBagConstraints.ipady = 20;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(35, 26, 32, 19);
+        jPanel1.add(jButton10, gridBagConstraints);
 
         jButton_Administracion_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton_Administracion_.setText("administrativos");
@@ -202,17 +213,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jButton_Administracion_ActionPerformed(evt);
             }
         });
-        panelControl.add(jButton_Administracion_, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 280, 182, 42));
 
         hora.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         hora.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         hora.setText("HORA");
-        panelControl.add(hora, new org.netbeans.lib.awtextra.AbsoluteConstraints(658, 112, 196, -1));
 
         fecha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         fecha.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         fecha.setText("DIA - MES - AÑO");
-        panelControl.add(fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(658, 140, 196, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -222,7 +230,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jLabel2MouseClicked(evt);
             }
         });
-        panelControl.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 170, 126, 28));
 
         jButton_Ventas_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton_Ventas_.setText("Ventas");
@@ -231,7 +238,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jButton_Ventas_ActionPerformed(evt);
             }
         });
-        panelControl.add(jButton_Ventas_, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 360, 182, 45));
 
         jButton_Test.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton_Test.setText("Test");
@@ -240,7 +246,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jButton_TestActionPerformed(evt);
             }
         });
-        panelControl.add(jButton_Test, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 360, 182, 45));
 
         jButton7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton7.setText("Registro de Carnes");
@@ -249,7 +254,95 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        panelControl.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 182, 45));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel1.setText("Cargo: ");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("Usuario: ");
+
+        lblCargo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lblCargo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        lblUser.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lblUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout panelControlLayout = new javax.swing.GroupLayout(panelControl);
+        panelControl.setLayout(panelControlLayout);
+        panelControlLayout.setHorizontalGroup(
+            panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panelControlLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(78, 78, 78)
+                .addGroup(panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton_Administracion_, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_Ventas_, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_Test, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(188, 188, 188)
+                .addGroup(panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelControlLayout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(panelControlLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelControlLayout.createSequentialGroup()
+                .addGap(580, 580, 580)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelControlLayout.createSequentialGroup()
+                .addGap(580, 580, 580)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(lblCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        panelControlLayout.setVerticalGroup(
+            panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelControlLayout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addGroup(panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelControlLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelControlLayout.createSequentialGroup()
+                        .addComponent(jButton_Administracion_, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addComponent(jButton_Ventas_, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(jButton_Test, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelControlLayout.createSequentialGroup()
+                        .addComponent(hora)
+                        .addGap(13, 13, 13)
+                        .addComponent(fecha)
+                        .addGap(13, 13, 13)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(15, 15, 15)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addGroup(panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(lblCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -259,9 +352,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelControl, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(panelControl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -417,8 +508,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton_Administracion_;
     private javax.swing.JButton jButton_Test;
     private javax.swing.JButton jButton_Ventas_;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    public static javax.swing.JLabel lblCargo;
+    public javax.swing.JLabel lblUser;
     private javax.swing.JPanel panelControl;
     // End of variables declaration//GEN-END:variables
 }

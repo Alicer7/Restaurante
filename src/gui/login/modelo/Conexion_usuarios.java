@@ -9,9 +9,9 @@ import java.util.logging.Logger;
 
 public class Conexion_usuarios {
     
-    private final String base = "mydb";
+    private final String base = "cafebar";
     private final String user = "root";
-    private final String password = "";
+    private final String password = "333561222587421319";
     private final String url = "jdbc:mysql://localhost/" + base;
     private Connection con = null;
 //    
