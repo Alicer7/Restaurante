@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.cocina;
+
 
 import core.database.Conexion;
 import java.sql.PreparedStatement;
@@ -133,7 +133,7 @@ public class AsignarRecetaComida extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
 
         } catch (SQLException ex) {
-            Logger.getLogger(NuevaReceta.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(NuevaReceta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 

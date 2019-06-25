@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.cliente;
+
 
 import core.database.Conexion;
-import gui.empleado.NuevoCargo;
+//import gui.empleado.NuevoCargo;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;

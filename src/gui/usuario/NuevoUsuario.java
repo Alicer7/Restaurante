@@ -5,7 +5,7 @@
  */
 package gui.usuario;
 
-import gui.empleado.NuevoCargo;
+//import gui.empleado.NuevoCargo;
 import core.database.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -174,7 +174,7 @@ public class NuevoUsuario extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
 
         } catch (SQLException ex) {
-            Logger.getLogger(NuevoCargo.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(NuevoCargo.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
