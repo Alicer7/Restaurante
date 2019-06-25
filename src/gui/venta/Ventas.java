@@ -8,7 +8,6 @@ package gui.venta;
 import com.toedter.calendar.JDateChooser;
 import core.utils.Facturas;
 import core.utils.Pedidos;
-import java.awt.BorderLayout;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
@@ -17,12 +16,9 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
+import javax.swing.ImageIcon;
 import javax.swing.JEditorPane;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.text.BadLocationException;
 /**
  *
@@ -181,6 +177,11 @@ public class Ventas extends javax.swing.JFrame {
         
         mostrarVentasActivas();
         borderFacturaFecha(date);
+        try{
+            setIconImage(new ImageIcon(getClass().getResource("/core/resources/chocolate.png")).getImage());
+        }catch (Error err){
+            System.err.println(err);
+        }
     }
     
     /**
@@ -210,7 +211,6 @@ public class Ventas extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1024, 740));
         setPreferredSize(new java.awt.Dimension(990, 700));
         setSize(new java.awt.Dimension(990, 700));
-        setType(java.awt.Window.Type.UTILITY);
         getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
 
         jPanel_Main_.setMinimumSize(new java.awt.Dimension(1000, 681));
