@@ -46,7 +46,7 @@ public class Ventas extends javax.swing.JFrame {
         
         limpiarTablaFacturas();
         
-        Facturas facturas = new Facturas( Integer.SIZE, null, Double.NaN, Double.NaN, Double.NaN, Double.NaN, null, null);
+        Facturas facturas = new Facturas();
         
         ArrayList<Facturas> lista = facturas.listaFacturasDia(dia);
         
@@ -70,7 +70,7 @@ public class Ventas extends javax.swing.JFrame {
     private void mostrarVentasActivas (  ){
         limpiarTablaFacturas();
         
-        Facturas facturas = new Facturas( Integer.SIZE, null, Double.NaN, Double.NaN, Double.NaN, Double.NaN, null, null);
+        Facturas facturas = new Facturas();
         
         // SQL
         ArrayList<Facturas> lista = facturas.listaFacturasActivas();
@@ -92,10 +92,10 @@ public class Ventas extends javax.swing.JFrame {
         }
     }
     
-        private void mostrarVentasActivasDia ( String dia ){
+    private void mostrarVentasActivasDia ( String dia ){
         limpiarTablaFacturas();
         
-        Facturas facturas = new Facturas( Integer.SIZE, null, Double.NaN, Double.NaN, Double.NaN, Double.NaN, null, null);
+        Facturas facturas = new Facturas();
         
         // SQL
         ArrayList<Facturas> lista = facturas.listaFacturasDiaActivas(dia);

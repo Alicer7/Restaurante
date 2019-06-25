@@ -15,7 +15,7 @@ import java.sql.SQLException;
  */
 public class Conexion2 {
     private final String port="3306";
-    private final String url = "jdbc:mysql://192.168.1.2:"+port+"/"; // Ubicación de la BD.
+    private final String url = "jdbc:mysql://192.168.8.101:"+port+"/"; // Ubicación de la BD.
     private final String db = "cafebar"; // Nombre de la BD.
     private final String user = "freddy";
     private final String password = "freddy";
