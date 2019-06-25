@@ -69,7 +69,7 @@ public class NuevaReceta extends javax.swing.JDialog {
                 btnAceptarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 182, 84, 28));
+        jPanel1.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 84, 28));
 
         jtRecetas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -123,7 +123,7 @@ public class NuevaReceta extends javax.swing.JDialog {
             Conexion cone = new Conexion();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
             PreparedStatement ps = null;
-            ps = conn.prepareStatement("INSERT INTO `receta` (`nombre`, `costo`) VALUES (?,?)");
+                ps = conn.prepareStatement("INSERT INTO `receta` (`nombre`, `costo`) VALUES (?,?)");
             ps.setString(1, txtDescripcion.getText());
             ps.setInt(2, Integer.parseInt(txtCosto.getText()));
             ps.execute();

@@ -6,12 +6,20 @@
 package gui.cocina;
 
 import core.database.Conexion;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,12 +27,99 @@ import javax.swing.JOptionPane;
  */
 public class NuevaCategoria extends javax.swing.JDialog {
 
-    /**
-     * Creates new form NuevoCargo
-     */
+    public void tabla() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        jtCategoria.setModel(modelo);
+
+    }
+    int ID_CATEGORIA = 0;
+
+    public void popuptable() {
+        JPopupMenu popmenu = new JPopupMenu();
+        JMenuItem menuitem = new JMenuItem("Eliminar", new ImageIcon(getClass().getResource("/core/resources/icons/eli.png")));
+        menuitem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DefaultTableModel model = (DefaultTableModel) jtCategoria.getModel();
+                int a = jtCategoria.getSelectedRow();
+                if (a < 0) {
+                    JOptionPane.showMessageDialog(null,
+                            "Debe seleccionar una fila de la tabla");
+                } else {
+                    int confirmar = JOptionPane.showConfirmDialog(null,
+                            "Esta seguro que desea eliminar la categoría? ");
+                    if (JOptionPane.OK_OPTION == confirmar) {
+
+                        //
+                        try {
+                            PreparedStatement ps = null;
+                            ResultSet rs = null;
+                            Conexion cone = new Conexion();
+                            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+                            jtCategoria.getModel();
+
+                            //            String sql = "select id, nombre, precio from bebida order by(id) ";
+                            String sql = "DELETE FROM `categoria` WHERE `id` = '" + ID_CATEGORIA + "'";
+                            ps = conn.prepareStatement(sql);
+                            ps.execute(sql);
+
+                        } catch (SQLException ex) {
+                            System.err.println(ex.toString());
+                        }
+                        //
+                        model.removeRow(a);
+                        JOptionPane.showMessageDialog(null, "Registro Eliminado");
+                    }
+                }
+            }
+        });
+
+        popmenu.add(menuitem);
+
+        jtCategoria.setComponentPopupMenu(popmenu);
+    }
+
     public NuevaCategoria(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        tabla();
+        popuptable();
+
+        try {
+            Conexion cone = new Conexion();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            DefaultTableModel modelo = new DefaultTableModel();
+            jtCategoria.setModel(modelo);
+
+            String sql = "select id, nombre from categoria ";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
+            int cantidadColumnas = rsMd.getColumnCount();
+
+            modelo.addColumn("id.");
+            modelo.addColumn("Nombre");
+
+            int[] anchos = {30, 70};
+            for (int i = 0; i < jtCategoria.getColumnCount(); i++) {
+                jtCategoria.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+            }
+
+            while (rs.next()) {
+                Object[] filas = new Object[cantidadColumnas];
+                for (int i = 0; i < cantidadColumnas; i++) {
+                    filas[i] = rs.getObject(i + 1);
+                }
+                modelo.addRow(filas);
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.toString());
+        }
+
     }
 
     /**
@@ -41,6 +136,8 @@ public class NuevaCategoria extends javax.swing.JDialog {
         txtDescripcion = new javax.swing.JTextField();
         btnAceptar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtCategoria = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -49,10 +146,10 @@ public class NuevaCategoria extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Descripcion");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 140, 84, 28));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 84, 28));
 
         txtDescripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 140, 280, 28));
+        jPanel1.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 280, 28));
 
         btnAceptar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnAceptar.setText("Aceptar");
@@ -61,22 +158,46 @@ public class NuevaCategoria extends javax.swing.JDialog {
                 btnAceptarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 182, 84, 28));
+        jPanel1.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 110, 28));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Agregue una nueva categoría");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 98, 280, 28));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 280, 28));
+
+        jtCategoria.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jtCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtCategoriaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jtCategoria);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 410, 240));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 847, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -84,7 +205,6 @@ public class NuevaCategoria extends javax.swing.JDialog {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
 
-        
         try {
             Conexion cone = new Conexion();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
@@ -93,12 +213,29 @@ public class NuevaCategoria extends javax.swing.JDialog {
             ps.setString(1, txtDescripcion.getText());
             ps.execute();
             JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
-            
+            DefaultTableModel modelo = (DefaultTableModel) jtCategoria.getModel();
+            Object[] fila = new Object[5];
+            fila[0] = jtCategoria.getRowCount() + 1;
+            fila[1] = txtDescripcion.getText();
+            modelo.addRow(fila);
+            txtDescripcion.setText("");
+            txtDescripcion.requestFocus();
+
         } catch (SQLException ex) {
             Logger.getLogger(NuevaCategoria.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void jtCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtCategoriaMouseClicked
+
+        int Fila = jtCategoria.getSelectedRow();
+        String codigo = jtCategoria.getValueAt(Fila, 0).toString();
+        ID_CATEGORIA = Integer.parseInt(codigo);
+        System.out.println("codigo " + ID_CATEGORIA);
+
+
+    }//GEN-LAST:event_jtCategoriaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -150,6 +287,8 @@ public class NuevaCategoria extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jtCategoria;
     private javax.swing.JTextField txtDescripcion;
     // End of variables declaration//GEN-END:variables
 }
