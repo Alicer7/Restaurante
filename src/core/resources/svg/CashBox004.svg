@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" width="512" height="512">
+<g>
+	<rect x="376" y="75" style="fill:#3B4A51;" width="30" height="60"/>
+	<path style="fill:#3B4A51;" d="M482,90H301V0h181V90z"/>
+	<path style="fill:#D8D8FC;" d="M181,30v30H91V30c0-16.5,13.5-30,30-30S181,13.5,181,30z"/>
+	<polygon style="fill:#596C76;" points="482,300 452,330 60,330 30,300 60,120 452,120  "/>
+	<polygon style="fill:#465A61;" points="482,300 452,330 256,330 256,120 452,120  "/>
+	<rect x="30" y="300" style="fill:#465A61;" width="452" height="90"/>
+	<rect x="121" y="240" style="fill:#F2F2FC;" width="30" height="30"/>
+	<rect x="181" y="240" style="fill:#F2F2FC;" width="30" height="30"/>
+	<rect x="241" y="240" style="fill:#F2F2FC;" width="30" height="30"/>
+	<rect x="301" y="240" style="fill:#D8D8FC;" width="30" height="30"/>
+	<rect x="361" y="240" style="fill:#D8D8FC;" width="30" height="30"/>
+	<rect x="151" y="180" width="30" height="30"/>
+	<path style="fill:#F2F2FC;" d="M271,45v150H151V30c0-16.5-13.5-30-30-30h105c11.7,0,22.2,4.499,30,11.7   C265.3,19.799,271,31.8,271,45z"/>
+	<rect x="331" y="30" style="fill:#9CDD05;" width="121" height="30"/>
+	<rect x="256" y="300" style="fill:#3B4A51;" width="226" height="90"/>
+	<polygon style="fill:#C3EA21;" points="512,360 512,512 0,512 0,360 121,360 181,390 331,390 391,360  "/>
+	<polygon style="fill:#9CDD05;" points="512,360 512,512 256,512 256,390 331,390 391,360  "/>
+	<polygon style="fill:#9CDD05;" points="391,360 361,420 151,420 121,360  "/>
+	<polygon style="fill:#66BB00;" points="391,360 361,420 256,420 256,360  "/>
+	<rect x="121" y="180" style="fill:#465A61;" width="180" height="30"/>
+	<rect x="256" y="180" style="fill:#3B4A51;" width="45" height="30"/>
+	<rect x="256" y="240" style="fill:#D8D8FC;" width="15" height="30"/>
+</g>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</svg>
