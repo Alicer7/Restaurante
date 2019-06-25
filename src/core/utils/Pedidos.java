@@ -12,7 +12,6 @@ import java.util.ArrayList;
  * @author freddy
  */
 public class Pedidos {
-    private final Connection conn= new Conexion2().connect();
     private Integer idPedido;
     private Integer facturaId;
     private Integer menuId;
@@ -54,11 +53,8 @@ public class Pedidos {
         this.solvente=solvente;
     }
 
-    public Pedidos(int SIZE, int SIZE0, Object object, int SIZE1, Object object0, int SIZE2, double NaN, String dia, String dia0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public ArrayList<Pedidos> listaPedidosDia (String fecha){
+        Connection conn= new Conexion2().connect();
         
         ArrayList<Pedidos> listaPedidos= new ArrayList<>();
         String sql="SELECT * FROM `factura_pedido` WHERE date(`time`) = \""+fecha+"\"";
@@ -94,6 +90,7 @@ public class Pedidos {
     }
     
     public ArrayList<Pedidos> listaPedidosNumeroFactura ( Integer numeroFactura){
+        Connection conn= new Conexion2().connect();
         
         ArrayList<Pedidos> listaPedidos= new ArrayList<>();
         String sql="SELECT * FROM `factura_pedido` WHERE `factura_venta_id` = "+numeroFactura;
@@ -126,10 +123,6 @@ public class Pedidos {
             System.err.println("Error: "+e);
         }
         return listaPedidos;
-    }
-
-    public Connection getConn() {
-        return conn;
     }
 
     public Integer getIdPedido() {
@@ -175,6 +168,5 @@ public class Pedidos {
     public String getSolvente() {
         return solvente;
     }
-
     
 }

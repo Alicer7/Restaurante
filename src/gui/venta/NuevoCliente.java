@@ -5,12 +5,14 @@
  */
 package gui.venta;
 
+import core.utils.Menus;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
+import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.JComboBox;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.ListModel;
 
 /**
  *
@@ -52,7 +54,7 @@ public class NuevoCliente extends javax.swing.JFrame {
         jPanel_Alimentos_ = new javax.swing.JPanel();
         jComboBox_Combo_2 = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList_Combo_2 = new javax.swing.JList<>();
+        jList_Alimentos_ = new javax.swing.JList<>();
         jSpinner_Combo_2 = new javax.swing.JSpinner();
         jLabel_ComboPrecioUnitario_2 = new javax.swing.JLabel();
         jLabel_ComboSubTotal_2 = new javax.swing.JLabel();
@@ -64,7 +66,7 @@ public class NuevoCliente extends javax.swing.JFrame {
         jPanel_Bebidas_ = new javax.swing.JPanel();
         jComboBox_Combo_1 = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList_Combo_1 = new javax.swing.JList<>();
+        jList_Bebidas_ = new javax.swing.JList<>();
         jSpinner_Combo_1 = new javax.swing.JSpinner();
         jLabel_ComboPrecioUnitario_1 = new javax.swing.JLabel();
         jLabel_ComboSubTotal_1 = new javax.swing.JLabel();
@@ -76,6 +78,8 @@ public class NuevoCliente extends javax.swing.JFrame {
         jButton_AddPedido_ = new javax.swing.JButton();
         jScrollPane = new javax.swing.JScrollPane();
         jPanel_Pedidos_ = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jTextField_Nota_ = new javax.swing.JTextField();
         jButton_Aceptar_ = new javax.swing.JButton();
         jButton_Cancelar = new javax.swing.JButton();
@@ -117,6 +121,11 @@ public class NuevoCliente extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(800, 600));
         setResizable(false);
         setType(java.awt.Window.Type.POPUP);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel_Main_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cliente Nuevo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
 
@@ -210,13 +219,13 @@ public class NuevoCliente extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel_Alimentos_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Combos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        jPanel_Alimentos_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Comidas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         jComboBox_Combo_2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jComboBox_Combo_2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos" }));
 
-        jList_Combo_2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jScrollPane3.setViewportView(jList_Combo_2);
+        jList_Alimentos_.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jScrollPane3.setViewportView(jList_Alimentos_);
 
         jSpinner_Combo_2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
@@ -300,13 +309,13 @@ public class NuevoCliente extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel_Bebidas_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Combos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        jPanel_Bebidas_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Bebidas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         jComboBox_Combo_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jComboBox_Combo_1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos" }));
 
-        jList_Combo_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jScrollPane2.setViewportView(jList_Combo_1);
+        jList_Bebidas_.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jScrollPane2.setViewportView(jList_Bebidas_);
 
         jSpinner_Combo_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
@@ -407,15 +416,28 @@ public class NuevoCliente extends javax.swing.JFrame {
         jPanel_Pedidos_.setBorder(javax.swing.BorderFactory.createTitledBorder("Pedidos"));
         jPanel_Pedidos_.setPreferredSize(new java.awt.Dimension(768, 250));
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(jTable1);
+
         javax.swing.GroupLayout jPanel_Pedidos_Layout = new javax.swing.GroupLayout(jPanel_Pedidos_);
         jPanel_Pedidos_.setLayout(jPanel_Pedidos_Layout);
         jPanel_Pedidos_Layout.setHorizontalGroup(
             jPanel_Pedidos_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 756, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 756, Short.MAX_VALUE)
         );
         jPanel_Pedidos_Layout.setVerticalGroup(
             jPanel_Pedidos_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 227, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
         );
 
         jScrollPane.setViewportView(jPanel_Pedidos_);
@@ -509,13 +531,14 @@ public class NuevoCliente extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton_Cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_Nota_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton_Aceptar_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel_Main_Layout.createSequentialGroup()
                         .addComponent(jTextField_Nota_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel_Nota_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton_Aceptar_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -562,6 +585,20 @@ public class NuevoCliente extends javax.swing.JFrame {
     private void jButton_AddPedido_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AddPedido_ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_AddPedido_ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        Menus menusLista = new Menus();
+        ArrayList<Menus> menus = menusLista.getMenus();
+        
+        Object listaData []= new Object[menus.size()];
+        
+        
+        for (int i = 0 ; i < menus.size() ; i++) {
+            listaData[i]=menus.get(i).getNombre();
+        }
+        jList_Combo_.setListData((String[]) listaData);
+        
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -637,9 +674,9 @@ public class NuevoCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_SubTotalQ_;
     private javax.swing.JLabel jLabel_SubTotalQ_1;
     private javax.swing.JLabel jLabel_SubTotalQ_2;
+    private javax.swing.JList<String> jList_Alimentos_;
+    private javax.swing.JList<String> jList_Bebidas_;
     private javax.swing.JList<String> jList_Combo_;
-    private javax.swing.JList<String> jList_Combo_1;
-    private javax.swing.JList<String> jList_Combo_2;
     private javax.swing.JPanel jPanel_Alimentos_;
     private javax.swing.JPanel jPanel_Bebidas_;
     private javax.swing.JPanel jPanel_Combos_;
@@ -650,9 +687,11 @@ public class NuevoCliente extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSpinner jSpinner_Combo_;
     private javax.swing.JSpinner jSpinner_Combo_1;
     private javax.swing.JSpinner jSpinner_Combo_2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField_Nota_;
     // End of variables declaration//GEN-END:variables
 }

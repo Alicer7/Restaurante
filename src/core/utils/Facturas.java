@@ -52,7 +52,7 @@ public class Facturas {
         public ArrayList<Facturas> listaFacturasActivas (){
         
         ArrayList<Facturas> listaFacturases= new ArrayList<Facturas>();
-        String sql="SELECT * FROM `factura_venta` WHERE `solvente` = \"Activa\"";
+        String sql="SELECT * FROM `factura_venta` WHERE `estado` = \"Activa\"";
         
         try {
             Statement stm;
