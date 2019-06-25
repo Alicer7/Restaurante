@@ -5,7 +5,6 @@
  */
 package gui.almacen;
 
-import gui.empleado.NuevoCargo;
 import core.database.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -172,6 +171,7 @@ public class RegistroCarnes extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtMaxKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMaxKeyReleased
@@ -203,7 +203,7 @@ public class RegistroCarnes extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
 
         } catch (SQLException ex) {
-            Logger.getLogger(NuevoCargo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RegistroCarnes.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 

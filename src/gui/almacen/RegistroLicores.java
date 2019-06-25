@@ -5,7 +5,6 @@
  */
 package gui.almacen;
 
-import gui.empleado.NuevoCargo;
 import core.database.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -174,6 +173,7 @@ public class RegistroLicores extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtMaxKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMaxKeyReleased
@@ -192,7 +192,6 @@ public class RegistroLicores extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        
         try {
             Conexion cone = new Conexion();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
@@ -206,7 +205,7 @@ public class RegistroLicores extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
 
         } catch (SQLException ex) {
-            Logger.getLogger(NuevoCargo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RegistroLicores.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 

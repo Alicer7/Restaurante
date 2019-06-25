@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.cocina;
 
-import gui.cocina.NuevaReceta;
+
 import core.database.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,12 +17,12 @@ import javax.swing.JOptionPane;
  *
  * @author Alicer
  */
-public class NuevoMenu extends javax.swing.JDialog {
+public class AsignarRecetaBebida extends javax.swing.JDialog {
 
     /**
      * Creates new form NewJDialog
      */
-    public NuevoMenu(java.awt.Frame parent, boolean modal) {
+    public AsignarRecetaBebida(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
@@ -34,7 +32,7 @@ public class NuevoMenu extends javax.swing.JDialog {
             Conexion cone = new Conexion();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
             //------------------------
-            String corrArticulo = "Select nombre from comida order by(id)";
+            String corrArticulo = "Select nombre from receta order by(id)";
             ps = conn.prepareStatement(corrArticulo);
             rs = ps.executeQuery();
 
@@ -42,13 +40,13 @@ public class NuevoMenu extends javax.swing.JDialog {
                 this.jcReceta.addItem(rs.getString("nombre"));
             }
             //_______________________________________________
-            String cat = "Select nombre from bebida order by(id)";
-            ps = conn.prepareStatement(cat);
-            rs = ps.executeQuery();
-
-            while (rs.next()) {
-                this.jcCategoria.addItem(rs.getString("nombre"));
-            }
+//            String cat = "Select nombre from categoria order by(id)";
+//            ps = conn.prepareStatement(cat);
+//            rs = ps.executeQuery();
+//
+//            while (rs.next()) {
+//                this.jcCategoria.addItem(rs.getString("nombre"));
+//            }
 
         } catch (Exception ex) {
             System.err.println(ex.toString());
@@ -67,30 +65,30 @@ public class NuevoMenu extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         txtDescripcion = new javax.swing.JTextField();
-        jcCategoria = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        txtPrecio = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jcReceta = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Crear Menú", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro de Bebidas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Descripcion:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 70, 154, 27));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Categoría:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 112, 151, 27));
         jPanel1.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 224, 28));
 
-        jPanel1.add(jcCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 112, 224, 28));
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("Precio:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 154, 154, 27));
+        jPanel1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 154, 84, 28));
 
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -98,14 +96,14 @@ public class NuevoMenu extends javax.swing.JDialog {
                 btnGuardarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 252, 98, 42));
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 210, 98, 42));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Receta:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 154, 151, 27));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 112, 151, 27));
 
-        jPanel1.add(jcReceta, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 154, 224, 28));
+        jPanel1.add(jcReceta, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 112, 224, 28));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,20 +121,19 @@ public class NuevoMenu extends javax.swing.JDialog {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
-        
         try {
             Conexion cone = new Conexion();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
             PreparedStatement ps = null;
-            ps = conn.prepareStatement("INSERT INTO `menu` (`bebida_id`, `comida_id`, `nombre`) VALUES  (?,?,?)");
-            ps.setInt(1, jcCategoria.getSelectedIndex() + 1);
-            ps.setInt(2, jcReceta.getSelectedIndex() + 1);
-            ps.setString(3, txtDescripcion.getText());
+            ps = conn.prepareStatement("INSERT INTO `bebida` (`receta_id`, `nombre`, `precio`) VALUES  (?,?,?)");
+            ps.setInt(1, jcReceta.getSelectedIndex() + 1);
+            ps.setString(2, txtDescripcion.getText());
+            ps.setString(3, txtPrecio.getText());
             ps.execute();
             JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
 
         } catch (SQLException ex) {
-            Logger.getLogger(NuevaReceta.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(NuevaReceta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -157,70 +154,14 @@ public class NuevoMenu extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NuevoMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AsignarRecetaBebida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NuevoMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AsignarRecetaBebida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NuevoMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AsignarRecetaBebida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NuevoMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AsignarRecetaBebida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -233,7 +174,7 @@ public class NuevoMenu extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                NuevoMenu dialog = new NuevoMenu(new javax.swing.JFrame(), true);
+                AsignarRecetaBebida dialog = new AsignarRecetaBebida(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -248,11 +189,11 @@ public class NuevoMenu extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JComboBox<String> jcCategoria;
     private javax.swing.JComboBox<String> jcReceta;
     private javax.swing.JTextField txtDescripcion;
+    private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 }

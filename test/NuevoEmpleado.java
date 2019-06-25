@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.empleado;
 
-import gui.empleado.NuevoCargo;
+
+//import gui.empleado.NuevoCargo;
 import core.database.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

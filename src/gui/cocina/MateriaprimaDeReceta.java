@@ -140,6 +140,8 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
         jcReceta = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jcCategoria = new javax.swing.JComboBox<>();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtProductos = new javax.swing.JTable();
@@ -148,6 +150,7 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         txtBuscar = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -158,28 +161,49 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ingredientes de Recetas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Receta :");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 98, 31));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 110, 31));
 
+        jcReceta.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jcReceta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcRecetaActionPerformed(evt);
             }
         });
-        jPanel2.add(jcReceta, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 266, 28));
+        jPanel2.add(jcReceta, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 280, 28));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Categoría:");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 90, 30));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 30, 90, 30));
 
+        jcCategoria.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jcCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcCategoriaActionPerformed(evt);
             }
         });
-        jPanel2.add(jcCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 30, 266, 28));
+        jPanel2.add(jcCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 30, 266, 28));
+
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jButton3.setText("Nueva Receta");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 130, 30));
+
+        jButton4.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jButton4.setText("Nueva Categoría");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 30, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 28, 1078, 84));
 
@@ -244,7 +268,11 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
         });
         jPanel3.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 32, 320, 30));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 126, 1190, -1));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("Buscar:");
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 30, 80, 30));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 126, 1210, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -258,6 +286,7 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -271,10 +300,9 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
             System.out.println("filas jc " + filas);
             for (int row = 0; row < filas; row++) {
 
-                
                 int id_materia = (int) jtProductos.getValueAt(row, 0);
                 Double cant = (double) jtProductos.getValueAt(row, 2);
-                
+
                 ps = conn.prepareStatement("INSERT INTO `receta_ingrediente` (`receta_id`, `categoria_id`, `materiaprima_id`, `cantidad`) VALUES (?,?,?)");
                 ps.setInt(1, ID_RECETA);
                 ps.setInt(2, ID_CAT);
@@ -372,7 +400,7 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
             while (rs.next()) {
                 ID_RECETA = (rs.getInt("id"));
             }
-            
+
             System.out.println("receta : " + ID_RECETA);
         } catch (SQLException ex) {
             System.err.println(ex.toString());
@@ -398,6 +426,16 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
             System.err.println(ex.toString());
         }
     }//GEN-LAST:event_jcCategoriaActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        gui.cocina.NuevaReceta recipe = new gui.cocina.NuevaReceta(this, true);
+        recipe.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        gui.cocina.NuevaCategoria cat = new gui.cocina.NuevaCategoria(this, true);
+        cat.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     private void limpiar() {
 
@@ -472,8 +510,11 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
