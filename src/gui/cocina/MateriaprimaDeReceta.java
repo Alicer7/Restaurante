@@ -77,7 +77,7 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
             PreparedStatement ps = null;
             ResultSet rs = null;
             Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
             DefaultTableModel modelo2 = new DefaultTableModel();
             jtArticulos.setModel(modelo2);
 
@@ -298,7 +298,7 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
 //
         try {
             Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
             PreparedStatement ps = null;
 
             int filas = jtProductos.getRowCount();
@@ -361,7 +361,7 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
             PreparedStatement ps = null;
             ResultSet rs = null;
             Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
             DefaultTableModel modelo2 = new DefaultTableModel();
             jtArticulos.setModel(modelo2);
 
@@ -400,7 +400,7 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
             PreparedStatement ps = null;
             ResultSet rs = null;
             Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
 
             String cat_articulo = "Select id from receta where nombre = '" + jcReceta.getSelectedItem().toString() + "'";
             ps = conn.prepareStatement(cat_articulo);
@@ -421,7 +421,7 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
             PreparedStatement ps = null;
             ResultSet rs = null;
             Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
 
             String cat_articulo = "Select id from categoria where nombre = '" + jcCategoria.getSelectedItem().toString() + "'";
             ps = conn.prepareStatement(cat_articulo);

@@ -47,7 +47,7 @@ public class IngresoInventario extends javax.swing.JFrame {
             PreparedStatement ps = null;
             ResultSet rs = null;
             Conexion conn = new Conexion();
-            java.sql.Connection con = conn.conectar();
+            java.sql.Connection con = conn.connect();
 
             String sql = "SELECT id, Nombre_articulo, Stock, area FROM inventario ";
             ps = con.prepareStatement(sql);
@@ -243,7 +243,7 @@ public class IngresoInventario extends javax.swing.JFrame {
 
             try {
                 Conexion objCon = new Conexion();
-                Connection conn = (Connection) objCon.conectar();
+                Connection conn = (Connection) objCon.connect();
 
                 ps = conn.prepareStatement("INSERT INTO `compra_inventario` (`nombre_articulo`, `cantidad`, `precio_unitario`, `total`, `fecha_compra`) VALUES  (?,?,?,?,?)");
                 ps.setString(1, txtDescripcion.getText());
@@ -278,7 +278,7 @@ public class IngresoInventario extends javax.swing.JFrame {
 
         try {
             Conexion objCon = new Conexion();
-            Connection conn = (Connection) objCon.conectar();
+            Connection conn = (Connection) objCon.connect();
 
             int Fila = jtProductos.getSelectedRow();
             String codigo = jtProductos.getValueAt(Fila, 0).toString();

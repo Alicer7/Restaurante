@@ -47,7 +47,7 @@ public class SalidaInventario extends javax.swing.JFrame {
             PreparedStatement ps = null;
             ResultSet rs = null;
             Conexion conn = new Conexion();
-            java.sql.Connection con = conn.conectar();
+            java.sql.Connection con = conn.connect();
 
             String sql = "SELECT id, Nombre_articulo, Stock, area FROM inventario ";
             ps = con.prepareStatement(sql);
@@ -240,7 +240,7 @@ public class SalidaInventario extends javax.swing.JFrame {
 
             try {
                 Conexion objCon = new Conexion();
-                Connection conn = (Connection) objCon.conectar();
+                Connection conn = (Connection) objCon.connect();
 
                 ps = conn.prepareStatement("INSERT INTO `salida_inventario` (`nombre_articulo`, `cantidad`, `fecha`, `motivo`) VALUES  (?,?,?,?)");
                 ps.setString(1, txtDescripcion.getText());
@@ -274,7 +274,7 @@ public class SalidaInventario extends javax.swing.JFrame {
 
         try {
             Conexion objCon = new Conexion();
-            Connection conn = (Connection) objCon.conectar();
+            Connection conn = (Connection) objCon.connect();
 
             int Fila = jtProductos.getSelectedRow();
             String codigo = jtProductos.getValueAt(Fila, 0).toString();
@@ -336,133 +336,8 @@ public class SalidaInventario extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(SalidaInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+    
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

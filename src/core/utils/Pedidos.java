@@ -1,6 +1,6 @@
 package core.utils;
 
-import core.database.Conexion2;
+import core.database.Conexion;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -54,7 +54,7 @@ public class Pedidos {
     }
 
     public ArrayList<Pedidos> listaPedidosDia (String fecha){
-        Connection conn= new Conexion2().connect();
+        Connection conn= new Conexion().connect();
         
         ArrayList<Pedidos> listaPedidos= new ArrayList<>();
         String sql="SELECT * FROM `factura_pedido` WHERE date(`time`) = \""+fecha+"\"";
@@ -90,7 +90,7 @@ public class Pedidos {
     }
     
     public ArrayList<Pedidos> listaPedidosNumeroFactura ( Integer numeroFactura){
-        Connection conn= new Conexion2().connect();
+        Connection conn= new Conexion().connect();
         
         ArrayList<Pedidos> listaPedidos= new ArrayList<>();
         String sql="SELECT * FROM `factura_pedido` WHERE `factura_venta_id` = "+numeroFactura;

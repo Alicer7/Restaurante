@@ -5,7 +5,7 @@
  */
 package core.utils;
 
-import core.database.Conexion2;
+import core.database.Conexion;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,7 +33,7 @@ public class Menus {
     }
     
     public ArrayList<Menus> getMenus (){
-        Connection conn= new Conexion2().connect();
+        Connection conn= new Conexion().connect();
         
         ArrayList<Menus> listaMenus = new ArrayList<>();
         

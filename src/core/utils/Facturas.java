@@ -5,7 +5,7 @@
  */
 package core.utils;
 
-import core.database.Conexion2;
+import core.database.Conexion;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * @author freddy
  */
 public class Facturas {
-    private Connection conn= new Conexion2().connect();
+    private Connection conn= new Conexion().connect();
     private Integer idFactura;
     private String nitCliente,solvente,fecha;
     private Double 

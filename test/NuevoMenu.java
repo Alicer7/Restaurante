@@ -32,7 +32,7 @@ public class NuevoMenu extends javax.swing.JDialog {
             PreparedStatement ps = null;
             ResultSet rs = null;
             Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
             //------------------------
             String corrArticulo = "Select nombre from comida order by(id)";
             ps = conn.prepareStatement(corrArticulo);
@@ -126,7 +126,7 @@ public class NuevoMenu extends javax.swing.JDialog {
         
         try {
             Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
             PreparedStatement ps = null;
             ps = conn.prepareStatement("INSERT INTO `menu` (`bebida_id`, `comida_id`, `nombre`) VALUES  (?,?,?)");
             ps.setInt(1, jcCategoria.getSelectedIndex() + 1);
@@ -167,68 +167,7 @@ public class NuevoMenu extends javax.swing.JDialog {
         }
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {

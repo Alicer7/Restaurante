@@ -200,7 +200,7 @@ public class RegistroCarnes extends javax.swing.JDialog {
 
             try {
                 Conexion cone = new Conexion();
-                com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+                com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
                 PreparedStatement ps = null;
                 ps = conn.prepareStatement("INSERT INTO `materiaprima` (`nombre`, `stock`, `stock_min`, `stock_max`) VALUES (?,?,?,?)");
                 ps.setString(1, txtDescripcion.getText());
@@ -221,7 +221,7 @@ public class RegistroCarnes extends javax.swing.JDialog {
 
         try {
             Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
             PreparedStatement ps = null;
             ResultSet rs = null;
             DefaultTableModel modelo = new DefaultTableModel();
@@ -262,7 +262,7 @@ public class RegistroCarnes extends javax.swing.JDialog {
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         try {
             Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
             PreparedStatement ps = null;
             ResultSet rs = null;
             DefaultTableModel modelo = new DefaultTableModel();

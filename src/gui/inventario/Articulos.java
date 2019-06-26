@@ -54,7 +54,7 @@ public class Articulos extends javax.swing.JFrame {
             PreparedStatement ps = null;
             ResultSet rs = null;
             Conexion conn = new Conexion();
-            java.sql.Connection con = conn.conectar();
+            java.sql.Connection con = conn.connect();
 
             String sql = "SELECT id, Nombre_articulo, Stock, area FROM inventario ";
             ps = con.prepareStatement(sql);
@@ -248,7 +248,7 @@ public class Articulos extends javax.swing.JFrame {
 
             try {
                 Conexion objCon = new Conexion();
-                com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) objCon.conectar();
+                com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) objCon.connect();
 //-------------------
 
                 //-----------------------
@@ -288,7 +288,7 @@ public class Articulos extends javax.swing.JFrame {
                 ResultSet rs = null;
 
                 Conexion objCon = new Conexion();
-                com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) objCon.conectar();
+                com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) objCon.connect();
                 PreparedStatement ps = null;
                 ps = conn.prepareStatement("INSERT INTO categoria_articulo (Cod_Categoria,  Descripcion) VALUES (?,?)");
                 ps.setInt(1, contadorTipoMaterial);
@@ -322,7 +322,7 @@ public class Articulos extends javax.swing.JFrame {
         try {
 
             Conexion objCon = new Conexion();
-            Connection conn = (Connection) objCon.conectar();
+            Connection conn = (Connection) objCon.connect();
 
             int Fila = jtProductos.getSelectedRow();
             String codigo = jtProductos.getValueAt(Fila, 0).toString();

@@ -55,7 +55,7 @@ public class NuevaCategoria extends javax.swing.JDialog {
                             PreparedStatement ps = null;
                             ResultSet rs = null;
                             Conexion cone = new Conexion();
-                            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+                            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
                             jtCategoria.getModel();
 
                             //            String sql = "select id, nombre, precio from bebida order by(id) ";
@@ -87,7 +87,7 @@ public class NuevaCategoria extends javax.swing.JDialog {
 
         try {
             Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
             PreparedStatement ps = null;
             ResultSet rs = null;
             DefaultTableModel modelo = new DefaultTableModel();
@@ -209,7 +209,7 @@ public class NuevaCategoria extends javax.swing.JDialog {
         
         try {
             Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
             PreparedStatement ps = null;
             ps = conn.prepareStatement("INSERT INTO categoria (nombre) VALUES (?)");
             ps.setString(1, txtDescripcion.getText());

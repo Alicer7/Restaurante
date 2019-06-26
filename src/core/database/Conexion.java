@@ -14,37 +14,41 @@ import java.sql.SQLException;
  * @author Alicer
  */
 public class Conexion {
-//    private final String URL = "jdbc:mysql://tcp.ngrok.io:17152/"; // Ubicación de la BD.
-//    private final String BD = "cafebar"; // Nombre de la BD.
-//    private final String USER = "freddy";
-//    private final String PASSWORD = "freddy";
-    
-//    
 //     private final String URL = "jdbc:mysql://192.168.1.2:3306/"; // Ubicación de la BD.
 //    private final String BD = "cafebar"; // Nombre de la BD.
 //    private final String USER = "freddy";
 //    private final String PASSWORD = "freddy";
+//    
+//    private final String URL = "jdbc:mysql://localhost:3306/"; // Ubicación de la BD.
+//    private final String BD = "cafebar"; // Nombre de la BD.
+//    private final String USER = "root";
+//    private final String PASSWORD = "333561222587421319";
     
-         private final String URL = "jdbc:mysql://localhost:3306/"; // Ubicación de la BD.
-    private final String BD = "cafebar"; // Nombre de la BD.
-    private final String USER = "root";
-    private final String PASSWORD = "333561222587421319";
-
-
-    public Connection conexion_7 = null;
-
-    @SuppressWarnings("finally")
-    public Connection conectar() throws SQLException {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            conexion_7 = DriverManager.getConnection(URL + BD, USER, PASSWORD);
-            if (conexion_7 != null) {
-                System.out.println("¡Conexión Exitosa!");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            return conexion_7;
+    private final String port="3306";
+    private final String url = "jdbc:mysql://dbsx.cnou9bzubn5m.us-east-2.rds.amazonaws.com:"+port+"/"; // Ubicación de la BD.
+    private final String db = "dbs"; // Nombre de la BD.
+    private final String user = "freddy";
+    private final String password = "%Freddy101";
+    
+    private Connection DBConnection;
+    
+    public Connection connect(){
+    
+        try{
+            Class.forName("com.mysql.jdbc.Driver");         
         }
+        catch(ClassNotFoundException cnfe){
+            System.out.println("Driver not found" + cnfe);
+        }                
+        try{
+          DBConnection=DriverManager.getConnection(url+db,user,password);
+          System.out.println("Database Connected");
+        }
+        catch(SQLException se){
+          System.err.println("Database Not Found");  
+        }
+        System.out.println("Database Succesfull");
+        return DBConnection;        
     }
+    
 }

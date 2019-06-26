@@ -39,7 +39,7 @@ public class NuevoEmpleado extends javax.swing.JDialog {
             PreparedStatement ps = null;
             ResultSet rs = null;
             Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
             //------------------------
 //            String corrArticulo = "Select descripcion from cargo";
 //            ps = conn.prepareStatement(corrArticulo);
@@ -201,7 +201,7 @@ public class NuevoEmpleado extends javax.swing.JDialog {
 //        int estado = jcEstado.getSelectedIndex() + 1;
         try {
             Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
             PreparedStatement ps = null;
             ps = conn.prepareStatement("INSERT INTO `empleado` ( `nombre`, `apellido`, `dpi`, `genero`, `telefono`, `fecha_inicio`, `fecha_fin`) VALUES (?,?,?,?,?,?,?)");
 //            ps.setInt(1, cargo);

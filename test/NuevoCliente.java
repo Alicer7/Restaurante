@@ -121,7 +121,7 @@ public class NuevoCliente extends javax.swing.JDialog {
 
         try {
             Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
             PreparedStatement ps = null;
             ps = conn.prepareStatement("INSERT INTO cliente (nit, nombre, direccion) VALUES (?,?,?)");
             ps.setString(1, txtNit.getText());

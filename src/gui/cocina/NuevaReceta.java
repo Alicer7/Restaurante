@@ -122,7 +122,7 @@ public class NuevaReceta extends javax.swing.JDialog {
         
         try {
             Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
             PreparedStatement ps = null;
                 ps = conn.prepareStatement("INSERT INTO `receta` (`nombre`, `costo`) VALUES (?,?)");
             ps.setString(1, txtDescripcion.getText());
@@ -140,7 +140,7 @@ public class NuevaReceta extends javax.swing.JDialog {
 
         try {
             Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
             PreparedStatement ps = null;
             ResultSet rs = null;
             DefaultTableModel modelo = new DefaultTableModel();

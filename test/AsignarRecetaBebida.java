@@ -30,7 +30,7 @@ public class AsignarRecetaBebida extends javax.swing.JDialog {
             PreparedStatement ps = null;
             ResultSet rs = null;
             Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
             //------------------------
             String corrArticulo = "Select nombre from receta order by(id)";
             ps = conn.prepareStatement(corrArticulo);
@@ -123,7 +123,7 @@ public class AsignarRecetaBebida extends javax.swing.JDialog {
 
         try {
             Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
             PreparedStatement ps = null;
             ps = conn.prepareStatement("INSERT INTO `bebida` (`receta_id`, `nombre`, `precio`) VALUES  (?,?,?)");
             ps.setInt(1, jcReceta.getSelectedIndex() + 1);

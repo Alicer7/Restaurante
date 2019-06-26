@@ -146,7 +146,7 @@ public class ReporteVenta extends javax.swing.JDialog {
             PreparedStatement ps = null;
             ResultSet rs = null;
             Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
             DefaultTableModel modelo2 = new DefaultTableModel();
             jtTabla.setModel(modelo2);
             

@@ -85,7 +85,7 @@ public class OldPedido extends javax.swing.JFrame {
 
         try {
             Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
             PreparedStatement ps = null;
             ResultSet rs = null;
             String corrArticulo = "select id From empleado where cargo_id = '1' order by(id)";
@@ -279,7 +279,7 @@ public class OldPedido extends javax.swing.JFrame {
 //
         try {
             Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
             PreparedStatement ps = null;
             ps = conn.prepareStatement("INSERT INTO `pedido_numero_temporal` (`NoComanda`, `CodigoMesero`, estado) VALUES  (?,?,?)");
 
@@ -366,7 +366,7 @@ public class OldPedido extends javax.swing.JFrame {
             PreparedStatement ps = null;
             ResultSet rs = null;
             Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
             DefaultTableModel modelo2 = new DefaultTableModel();
             jtArticulos.setModel(modelo2);
 

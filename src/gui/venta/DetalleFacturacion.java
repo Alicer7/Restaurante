@@ -56,7 +56,7 @@ public class DetalleFacturacion extends javax.swing.JFrame {
 
         try {
             Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
             PreparedStatement ps = null;
             ResultSet rs = null;
             String corrArticulo = "select id From empleado where cargo_id = '1' order by(id)";
@@ -251,7 +251,7 @@ public class DetalleFacturacion extends javax.swing.JFrame {
 
         try {
             Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
             PreparedStatement ps = null;
             ps = conn.prepareStatement("INSERT INTO `cafebar`.`pedido_venta_facturatemporal` (`NitCliente`, `Nombre`, `ComandaNo`, `Mesero`, `Total`, `Fecha`) VALUES (?,?,?,?,?,?)");
             ps.setString(1, txtNit.getText());
@@ -270,7 +270,7 @@ public class DetalleFacturacion extends javax.swing.JFrame {
 
         try {
             Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
             PreparedStatement ps = null;
             ps = conn.prepareStatement("UPDATE `cafebar`.`pedido_numero_temporal` SET `estado` = 'Cancelado' WHERE nocomanda = '" + txtComanda.getText() + "'");
 

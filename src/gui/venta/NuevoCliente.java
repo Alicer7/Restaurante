@@ -108,7 +108,7 @@ public class NuevoCliente extends javax.swing.JFrame {
         jLabel_SubTotalQ_2 = new javax.swing.JLabel();
         lblSubtotalComida = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jtComida = new javax.swing.JTable();
+        jtComida_ = new javax.swing.JTable();
         txtbuscarComida = new javax.swing.JTextField();
         jButton_AddPedido_ = new javax.swing.JButton();
         txtCant1 = new javax.swing.JTextField();
@@ -121,10 +121,9 @@ public class NuevoCliente extends javax.swing.JFrame {
         jLabel_SubTotalQ_1 = new javax.swing.JLabel();
         lblsubtotalbebidas = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jtBebidas = new javax.swing.JTable();
+        jtBebidas_ = new javax.swing.JTable();
         txtBuscarBebida = new javax.swing.JTextField();
         jButton_AddPedido_1 = new javax.swing.JButton();
-        txtCantidad2 = new javax.swing.JTextField();
         txtCant2 = new javax.swing.JTextField();
         jScrollPane = new javax.swing.JScrollPane();
         jPanel_Pedidos_ = new javax.swing.JPanel();
@@ -132,7 +131,7 @@ public class NuevoCliente extends javax.swing.JFrame {
         jtPedido = new javax.swing.JTable();
         jTextField_Nota_ = new javax.swing.JTextField();
         jButton_Aceptar_ = new javax.swing.JButton();
-        jButton_Cancelar = new javax.swing.JButton();
+        jButton_Cancelar_ = new javax.swing.JButton();
         jLabel_Nota_ = new javax.swing.JLabel();
         jLabel_Factura_ = new javax.swing.JLabel();
         jLabel_FactureNumero_ = new javax.swing.JLabel();
@@ -206,7 +205,7 @@ public class NuevoCliente extends javax.swing.JFrame {
         lblSubtotalComida.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSubtotalComida.setText("0.0");
 
-        jtComida.setModel(new javax.swing.table.DefaultTableModel(
+        jtComida_.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -217,12 +216,12 @@ public class NuevoCliente extends javax.swing.JFrame {
 
             }
         ));
-        jtComida.addMouseListener(new java.awt.event.MouseAdapter() {
+        jtComida_.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtComidaMouseClicked(evt);
+                jtComida_MouseClicked(evt);
             }
         });
-        jScrollPane6.setViewportView(jtComida);
+        jScrollPane6.setViewportView(jtComida_);
 
         txtbuscarComida.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -284,9 +283,9 @@ public class NuevoCliente extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Alimentos_Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(txtbuscarComida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel_Alimentos_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_ComboPrecioUnitario_2)
                     .addComponent(jLabel_PrecioUnitarioQ_2)
@@ -333,7 +332,7 @@ public class NuevoCliente extends javax.swing.JFrame {
         lblsubtotalbebidas.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblsubtotalbebidas.setText("0.0");
 
-        jtBebidas.setModel(new javax.swing.table.DefaultTableModel(
+        jtBebidas_.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -344,12 +343,12 @@ public class NuevoCliente extends javax.swing.JFrame {
 
             }
         ));
-        jtBebidas.addMouseListener(new java.awt.event.MouseAdapter() {
+        jtBebidas_.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtBebidasMouseClicked(evt);
+                jtBebidas_MouseClicked(evt);
             }
         });
-        jScrollPane7.setViewportView(jtBebidas);
+        jScrollPane7.setViewportView(jtBebidas_);
 
         txtBuscarBebida.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -365,12 +364,6 @@ public class NuevoCliente extends javax.swing.JFrame {
         jButton_AddPedido_1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_AddPedido_1ActionPerformed(evt);
-            }
-        });
-
-        txtCantidad2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtCantidad2KeyReleased(evt);
             }
         });
 
@@ -395,32 +388,27 @@ public class NuevoCliente extends javax.swing.JFrame {
                 .addGroup(jPanel_Bebidas_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_Bebidas_Layout.createSequentialGroup()
                         .addComponent(jLabel_ComboCantidad_1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtCant2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton_AddPedido_1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+                    .addComponent(txtBuscarBebida)
                     .addGroup(jPanel_Bebidas_Layout.createSequentialGroup()
-                        .addGroup(jPanel_Bebidas_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel_ComboSubTotal_1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel_ComboPrecioUnitario_1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(2, 2, 2)
+                        .addGroup(jPanel_Bebidas_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel_ComboPrecioUnitario_1)
+                            .addComponent(jLabel_ComboSubTotal_1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
                         .addGroup(jPanel_Bebidas_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel_Bebidas_Layout.createSequentialGroup()
-                                .addComponent(jLabel_PrecioUnitarioQ_1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel_PrecioUnitarioNum_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel_Bebidas_Layout.createSequentialGroup()
                                 .addComponent(jLabel_SubTotalQ_1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(137, 137, 137)
-                                .addComponent(lblsubtotalbebidas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
-                    .addComponent(txtBuscarBebida))
+                                .addGap(133, 133, 133)
+                                .addComponent(lblsubtotalbebidas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel_Bebidas_Layout.createSequentialGroup()
+                                .addComponent(jLabel_PrecioUnitarioQ_1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(2, 2, 2)
+                                .addComponent(jLabel_PrecioUnitarioNum_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap())
-            .addGroup(jPanel_Bebidas_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel_Bebidas_Layout.createSequentialGroup()
-                    .addGap(261, 261, 261)
-                    .addComponent(txtCantidad2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(164, Short.MAX_VALUE)))
         );
         jPanel_Bebidas_Layout.setVerticalGroup(
             jPanel_Bebidas_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -428,30 +416,23 @@ public class NuevoCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(txtBuscarBebida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addGap(13, 13, 13)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_Bebidas_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_ComboPrecioUnitario_1)
+                    .addComponent(jLabel_PrecioUnitarioNum_1)
                     .addComponent(jLabel_PrecioUnitarioQ_1)
-                    .addComponent(jLabel_PrecioUnitarioNum_1))
+                    .addComponent(jLabel_ComboPrecioUnitario_1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel_Bebidas_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_ComboSubTotal_1)
+                    .addComponent(jLabel_SubTotalQ_1)
+                    .addComponent(lblsubtotalbebidas))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_Bebidas_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_Bebidas_Layout.createSequentialGroup()
-                        .addGroup(jPanel_Bebidas_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel_ComboSubTotal_1)
-                            .addComponent(jLabel_SubTotalQ_1)
-                            .addComponent(lblsubtotalbebidas))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel_Bebidas_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel_ComboCantidad_1)
-                            .addComponent(txtCant2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
-                    .addComponent(jButton_AddPedido_1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGroup(jPanel_Bebidas_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel_Bebidas_Layout.createSequentialGroup()
-                    .addGap(131, 131, 131)
-                    .addComponent(txtCantidad2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(132, Short.MAX_VALUE)))
+                    .addGroup(jPanel_Bebidas_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtCant2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel_ComboCantidad_1))
+                    .addComponent(jButton_AddPedido_1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jScrollPane.setBorder(null);
@@ -478,7 +459,7 @@ public class NuevoCliente extends javax.swing.JFrame {
         jPanel_Pedidos_Layout.setHorizontalGroup(
             jPanel_Pedidos_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Pedidos_Layout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
+                .addContainerGap(42, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 968, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -503,14 +484,14 @@ public class NuevoCliente extends javax.swing.JFrame {
             }
         });
 
-        jButton_Cancelar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton_Cancelar.setText("Cancelar");
-        jButton_Cancelar.setMaximumSize(new java.awt.Dimension(120, 52));
-        jButton_Cancelar.setMinimumSize(new java.awt.Dimension(120, 52));
-        jButton_Cancelar.setPreferredSize(new java.awt.Dimension(120, 52));
-        jButton_Cancelar.addActionListener(new java.awt.event.ActionListener() {
+        jButton_Cancelar_.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton_Cancelar_.setText("Cancelar");
+        jButton_Cancelar_.setMaximumSize(new java.awt.Dimension(120, 52));
+        jButton_Cancelar_.setMinimumSize(new java.awt.Dimension(120, 52));
+        jButton_Cancelar_.setPreferredSize(new java.awt.Dimension(120, 52));
+        jButton_Cancelar_.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_CancelarActionPerformed(evt);
+                jButton_Cancelar_ActionPerformed(evt);
             }
         });
 
@@ -539,7 +520,7 @@ public class NuevoCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextField_Nota_, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton_Cancelar_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton_Aceptar_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(111, 111, 111))
@@ -569,14 +550,14 @@ public class NuevoCliente extends javax.swing.JFrame {
                     .addComponent(jLabel_Factura_)
                     .addComponent(jLabel_FactureNumero_))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel_Alimentos_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel_Alimentos_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel_Bebidas_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton_Cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton_Cancelar_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel_Main_Layout.createSequentialGroup()
                         .addComponent(jTextField_Nota_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -611,7 +592,7 @@ public class NuevoCliente extends javax.swing.JFrame {
 
         try {
             Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
             PreparedStatement ps = null;
 
             int filas = jtPedido.getRowCount();
@@ -644,9 +625,9 @@ public class NuevoCliente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton_Aceptar_ActionPerformed
 
-    private void jButton_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CancelarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_CancelarActionPerformed
+    private void jButton_Cancelar_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Cancelar_ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton_Cancelar_ActionPerformed
 
     private void jButton_AddPedido_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AddPedido_ActionPerformed
         String subtotal = lblSubtotalComida.getText().replaceAll(",", "");
@@ -680,11 +661,11 @@ public class NuevoCliente extends javax.swing.JFrame {
     private void txtbuscarComidaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarComidaKeyReleased
         try {
             Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
             PreparedStatement ps = null;
             ResultSet rs = null;
             DefaultTableModel modelo = new DefaultTableModel();
-            jtComida.setModel(modelo);
+            jtComida_.setModel(modelo);
 
             String sql = "select id, nombre, format(precio,2) from comida where nombre LIKE '%" + txtbuscarComida.getText() + "%' order by(id) ";
             ps = conn.prepareStatement(sql);
@@ -698,8 +679,8 @@ public class NuevoCliente extends javax.swing.JFrame {
             modelo.addColumn("precio");
 
             int[] anchos = {0, 200, 50};
-            for (int i = 0; i < jtComida.getColumnCount(); i++) {
-                jtComida.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+            for (int i = 0; i < jtComida_.getColumnCount(); i++) {
+                jtComida_.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
             }
 
             while (rs.next()) {
@@ -718,11 +699,11 @@ public class NuevoCliente extends javax.swing.JFrame {
     private void txtBuscarBebidaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarBebidaKeyReleased
         try {
             Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
             PreparedStatement ps = null;
             ResultSet rs = null;
             DefaultTableModel modelo = new DefaultTableModel();
-            jtBebidas.setModel(modelo);
+            jtBebidas_.setModel(modelo);
 
             String sql = "select id, nombre, precio from bebida where nombre LIKE '%" + txtBuscarBebida.getText() + "%' order by(id) ";
             ps = conn.prepareStatement(sql);
@@ -736,8 +717,8 @@ public class NuevoCliente extends javax.swing.JFrame {
             modelo.addColumn("Precio");
 
             int[] anchos = {10, 200, 50};
-            for (int i = 0; i < jtBebidas.getColumnCount(); i++) {
-                jtBebidas.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+            for (int i = 0; i < jtBebidas_.getColumnCount(); i++) {
+                jtBebidas_.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
             }
 
             while (rs.next()) {
@@ -755,12 +736,12 @@ public class NuevoCliente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtBuscarBebidaKeyReleased
 
-    private void jtComidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtComidaMouseClicked
+    private void jtComida_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtComida_MouseClicked
 
-        int Fila = jtComida.getSelectedRow();
-        String codigo = jtComida.getValueAt(Fila, 0).toString();
-        String nombre = jtComida.getValueAt(Fila, 1).toString();
-        String precio = jtComida.getValueAt(Fila, 2).toString();
+        int Fila = jtComida_.getSelectedRow();
+        String codigo = jtComida_.getValueAt(Fila, 0).toString();
+        String nombre = jtComida_.getValueAt(Fila, 1).toString();
+        String precio = jtComida_.getValueAt(Fila, 2).toString();
 
         precio_comida = Double.parseDouble(precio);
         CODIGOCOMIDA = Integer.parseInt(codigo);
@@ -772,7 +753,7 @@ public class NuevoCliente extends javax.swing.JFrame {
 //        System.out.println("CA: " + CANTIDAD);
 
 
-    }//GEN-LAST:event_jtComidaMouseClicked
+    }//GEN-LAST:event_jtComida_MouseClicked
 
     private void jButton_AddPedido_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AddPedido_1ActionPerformed
         String subtotal = lblsubtotalbebidas.getText().replaceAll(",", "");
@@ -799,22 +780,18 @@ public class NuevoCliente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtCant1KeyReleased
 
-    private void jtBebidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtBebidasMouseClicked
+    private void jtBebidas_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtBebidas_MouseClicked
 
-        int Fila = jtBebidas.getSelectedRow();
-        String codigo = jtBebidas.getValueAt(Fila, 0).toString();
-        String nombre = jtBebidas.getValueAt(Fila, 1).toString();
-        String precio = jtBebidas.getValueAt(Fila, 2).toString();
+        int Fila = jtBebidas_.getSelectedRow();
+        String codigo = jtBebidas_.getValueAt(Fila, 0).toString();
+        String nombre = jtBebidas_.getValueAt(Fila, 1).toString();
+        String precio = jtBebidas_.getValueAt(Fila, 2).toString();
 
         precio_bebida = Double.parseDouble(precio);
         CODIGOBEBIDA = Integer.parseInt(codigo);
         BEBIDA = nombre;
         jLabel_PrecioUnitarioNum_1.setText(precio);
-    }//GEN-LAST:event_jtBebidasMouseClicked
-
-    private void txtCantidad2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidad2KeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCantidad2KeyReleased
+    }//GEN-LAST:event_jtBebidas_MouseClicked
 
     private void txtCant2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCant2KeyReleased
         double total;
@@ -886,7 +863,7 @@ public class NuevoCliente extends javax.swing.JFrame {
     private javax.swing.JButton jButton_Aceptar_;
     private javax.swing.JButton jButton_AddPedido_;
     private javax.swing.JButton jButton_AddPedido_1;
-    private javax.swing.JButton jButton_Cancelar;
+    private javax.swing.JButton jButton_Cancelar_;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel_ComboCantidad_1;
     private javax.swing.JLabel jLabel_ComboCantidad_2;
@@ -912,8 +889,8 @@ public class NuevoCliente extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTextField jTextField_Nota_;
-    private javax.swing.JTable jtBebidas;
-    private javax.swing.JTable jtComida;
+    private javax.swing.JTable jtBebidas_;
+    private javax.swing.JTable jtComida_;
     private javax.swing.JTable jtPedido;
     private javax.swing.JLabel lblSubtotalComida;
     private javax.swing.JLabel lblUnitarioComida;
@@ -921,7 +898,6 @@ public class NuevoCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtBuscarBebida;
     private javax.swing.JTextField txtCant1;
     private javax.swing.JTextField txtCant2;
-    private javax.swing.JTextField txtCantidad2;
     private javax.swing.JTextField txtbuscarComida;
     // End of variables declaration//GEN-END:variables
 }
