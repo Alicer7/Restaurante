@@ -58,10 +58,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
      * Creates new form MenuPrincipal
      */
     public MenuPrincipal() {
-        try { 
-            UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel"); 
-        } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
-
         
         initComponents();
         configurarVentana();
@@ -392,7 +388,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
 
-        gui.venta.OldPedido ped = new gui.venta.OldPedido();
+        gui.venta.NuevoPedido ped = new gui.venta.NuevoPedido();
         ped.setVisible(true);
 
 

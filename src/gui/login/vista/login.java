@@ -23,10 +23,6 @@ public class login extends javax.swing.JFrame {
      * Creates new form login
      */
     public login() {
-        try { 
-            UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel"); 
-        } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
-
         initComponents();
         setLocationRelativeTo(null);
         txtUsuario.requestFocus();

@@ -22,10 +22,6 @@ public class registro extends javax.swing.JFrame {
      * Creates new form registro
      */
     public registro() {
-        try { 
-            UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel"); 
-        } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
-
         initComponents();
         setLocationRelativeTo(null);
     }

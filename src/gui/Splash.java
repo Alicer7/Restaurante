@@ -1,6 +1,8 @@
 package gui;
 
 import gui.Cargar;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public final class Splash extends javax.swing.JFrame {
 
@@ -35,7 +37,7 @@ public final class Splash extends javax.swing.JFrame {
 
         jLabel_Credits_ = new javax.swing.JLabel();
         jLabel_Credits_1 = new javax.swing.JLabel();
-        progress = new javax.swing.JProgressBar();
+        jProgressBar_ = new javax.swing.JProgressBar();
         jLabel_CR_ = new javax.swing.JLabel();
         jLabel_imagen_ = new javax.swing.JLabel();
 
@@ -55,13 +57,14 @@ public final class Splash extends javax.swing.JFrame {
         jLabel_Credits_1.setText("©");
         getContentPane().add(jLabel_Credits_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 450, 30, 30));
 
-        progress.setPreferredSize(new java.awt.Dimension(270, 16));
-        progress.addChangeListener(new javax.swing.event.ChangeListener() {
+        jProgressBar_.setMinimumSize(new java.awt.Dimension(888, 16));
+        jProgressBar_.setPreferredSize(new java.awt.Dimension(888, 16));
+        jProgressBar_.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                progressStateChanged(evt);
+                jProgressBar_StateChanged(evt);
             }
         });
-        getContentPane().add(progress, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 370, -1, -1));
+        getContentPane().add(jProgressBar_, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 880, -1));
 
         jLabel_CR_.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel_CR_.setForeground(new java.awt.Color(255, 255, 255));
@@ -74,15 +77,15 @@ public final class Splash extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void progressStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_progressStateChanged
-        if (progress.getValue() == 100) {
+    private void jProgressBar_StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jProgressBar_StateChanged
+        if (jProgressBar_.getValue() == 100) {
 
             gui.login.vista.login vp = new gui.login.vista.login();
             vp.setVisible(true);
 
             this.dispose();
         }
-    }//GEN-LAST:event_progressStateChanged
+    }//GEN-LAST:event_jProgressBar_StateChanged
 
     /**
      * @param args the command line arguments
@@ -125,14 +128,14 @@ public final class Splash extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_Credits_;
     private javax.swing.JLabel jLabel_Credits_1;
     private javax.swing.JLabel jLabel_imagen_;
-    private javax.swing.JProgressBar progress;
+    private javax.swing.JProgressBar jProgressBar_;
     // End of variables declaration//GEN-END:variables
 
     /**
      * @return the progress
      */
     public javax.swing.JProgressBar getProgress() {
-        return progress;
+        return jProgressBar_;
     }
 
 }

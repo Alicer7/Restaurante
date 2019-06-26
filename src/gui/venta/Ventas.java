@@ -19,6 +19,8 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JEditorPane;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.text.BadLocationException;
 /**
  *
@@ -269,7 +271,7 @@ public class Ventas extends javax.swing.JFrame {
         });
 
         jLabel_BuscarPorFecha_.setFont(new java.awt.Font("Dialog", 2, 14)); // NOI18N
-        jLabel_BuscarPorFecha_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/calendar.x32.png"))); // NOI18N
+        jLabel_BuscarPorFecha_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/CalendarX32.png"))); // NOI18N
         jLabel_BuscarPorFecha_.setText(bundle.getString("Ventas.jLabel_BuscarPorFecha_.text")); // NOI18N
         jLabel_BuscarPorFecha_.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel_BuscarPorFecha_.setMaximumSize(new java.awt.Dimension(150, 32));
@@ -340,7 +342,7 @@ public class Ventas extends javax.swing.JFrame {
         });
 
         jButton_Cobrar_.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton_Cobrar_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/money.x32.png"))); // NOI18N
+        jButton_Cobrar_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/CashBoxX32.png"))); // NOI18N
         jButton_Cobrar_.setText(bundle.getString("Ventas.jButton_Cobrar_.text")); // NOI18N
         jButton_Cobrar_.setMaximumSize(new java.awt.Dimension(140, 42));
         jButton_Cobrar_.setMinimumSize(new java.awt.Dimension(140, 42));
@@ -417,11 +419,27 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_NuevoPedido_ActionPerformed
 
     private void jLabel_BuscarPorFecha_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_BuscarPorFecha_MouseClicked
+        try { 
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
+        
         JDateChooser calendario = new JDateChooser();
         Date fechaActual = new Date();
 
         calendario.setDate(fechaActual);
-        int selectFecha = JOptionPane.showOptionDialog(rootPane, add(calendario), "Selecciona la Fecha", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+        int selectFecha;
+        
+        System.err.println("Calendario pre");
+        selectFecha = JOptionPane.showOptionDialog(rootPane, 
+                add(calendario), 
+                "Selecciona la Fecha", 
+                JOptionPane.OK_CANCEL_OPTION, 
+                JOptionPane.QUESTION_MESSAGE, 
+                null, 
+                null, 
+                NORMAL
+        );
+        System.err.println("Calendario pos");
 
         try {
             if (selectFecha == JOptionPane.OK_OPTION){
@@ -433,6 +451,10 @@ public class Ventas extends javax.swing.JFrame {
         } catch (Exception e) {
             System.err.println(e);
         }
+         try { 
+            UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel"); 
+        } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
+        
     }//GEN-LAST:event_jLabel_BuscarPorFecha_MouseClicked
 
     private void jButton_ClienteNuevo_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ClienteNuevo_ActionPerformed

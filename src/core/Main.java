@@ -7,6 +7,7 @@ package core;
  */
 
 import gui.MenuPrincipal;
+import gui.Splash;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -17,7 +18,13 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class Main {
     
     public static void main(String[] args) {
-        MenuPrincipal gui = new MenuPrincipal();
+        try { 
+//            UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel"); 
+//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel");
+        } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
+        
+        Splash gui = new Splash();
         gui.pack();
         gui.setVisible(true); //Create and show the GUI.
     }

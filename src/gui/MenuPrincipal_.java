@@ -303,7 +303,7 @@ public class MenuPrincipal_ extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
 
-        gui.venta.OldPedido ped = new gui.venta.OldPedido();
+        gui.venta.NuevoPedido ped = new gui.venta.NuevoPedido();
         ped.setVisible(true);
 
 

@@ -35,19 +35,17 @@ public class Conexion {
     public Connection connect(){
     
         try{
-            Class.forName("com.mysql.jdbc.Driver");         
-        }
-        catch(ClassNotFoundException cnfe){
-            System.out.println("Driver not found" + cnfe);
+            Class.forName("com.mysql.jdbc.Driver");
+//            System.out.println("MySQL Driver OK");
+        } catch(ClassNotFoundException cnfe){
+            System.err.println("Driver not found" + cnfe);
         }                
         try{
           DBConnection=DriverManager.getConnection(url+db,user,password);
-          System.out.println("Database Connected");
-        }
-        catch(SQLException se){
+//          System.out.println("DB conection up");
+        } catch(SQLException se){
           System.err.println("Database Not Found");  
         }
-        System.out.println("Database Succesfull");
         return DBConnection;        
     }
     
