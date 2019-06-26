@@ -97,7 +97,6 @@ public class MenuPrincipal_ extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButton_Test = new javax.swing.JButton();
         jButton_Ventas_ = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jButton_Administracion_ = new javax.swing.JButton();
@@ -223,15 +222,6 @@ public class MenuPrincipal_ extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 420, 182, 42));
-
-        jButton_Test.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton_Test.setText("Test");
-        jButton_Test.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_TestActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton_Test, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 260, 182, 45));
 
         jButton_Ventas_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton_Ventas_.setText("Ventas");
@@ -373,11 +363,6 @@ public class MenuPrincipal_ extends javax.swing.JFrame {
         carnes.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jButton_TestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_TestActionPerformed
-        gui.venta.NewJFrame test = new gui.venta.NewJFrame();
-        test.setVisible(true);
-    }//GEN-LAST:event_jButton_TestActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -424,7 +409,6 @@ public class MenuPrincipal_ extends javax.swing.JFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JButton jButton_Administracion_;
-    private javax.swing.JButton jButton_Test;
     private javax.swing.JButton jButton_Ventas_;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

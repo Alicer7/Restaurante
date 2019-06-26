@@ -97,7 +97,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         fecha = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton_Ventas_ = new javax.swing.JButton();
-        jButton_Test = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -244,14 +243,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton_Test.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton_Test.setText("Test");
-        jButton_Test.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_TestActionPerformed(evt);
-            }
-        });
-
         jButton7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton7.setText("Registro de Carnes");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -303,8 +294,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                 .addGap(65, 65, 65)
                                 .addGroup(panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton_Administracion_, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton_Ventas_, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton_Test, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jButton_Ventas_, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(188, 188, 188)
                                 .addGroup(panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -335,9 +325,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                             .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton_Ventas_, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(15, 15, 15)
-                        .addGroup(panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton_Test, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(15, 15, 15)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
@@ -464,11 +452,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         carnes.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jButton_TestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_TestActionPerformed
-        gui.venta.NewJFrame test = new gui.venta.NewJFrame();
-        test.setVisible(true);
-    }//GEN-LAST:event_jButton_TestActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -514,7 +497,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JButton jButton_Administracion_;
-    private javax.swing.JButton jButton_Test;
     private javax.swing.JButton jButton_Ventas_;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -1,5 +1,6 @@
 package gui.login.modelo;
 
+import core.database.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,11 +9,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
-public class SqlUsuarios extends Conexion_usuarios {
+public class SqlUsuarios extends Conexion {
 
     public boolean registrar(Usuarios usr) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
+        Connection con = connect();
 
         String sql = "INSERT INTO usuarios (usuario, password, nombre, correo, id_tipo) VALUES(?,?,?,?,?)";
 
@@ -40,7 +41,7 @@ public class SqlUsuarios extends Conexion_usuarios {
     public boolean login(Usuarios usr) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
+        Connection con = connect();
 
         String sql = "SELECT id, usuario, password, nombre, id_Tipo FROM usuarios WHERE usuario = ? LIMIT 1";
 
@@ -76,7 +77,7 @@ public class SqlUsuarios extends Conexion_usuarios {
     public int existeUsuario(String usuario) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
+        Connection con = connect();
 
         String sql = "SELECT count(id) FROM usuarios WHERE usuario = ?";
 

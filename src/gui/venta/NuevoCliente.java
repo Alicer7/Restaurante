@@ -24,6 +24,84 @@ import javax.swing.table.DefaultTableModel;
  * @author Freddy Camposeco <ankoku.fj@gmail.com> <www.stufs.rf.gd>
  */
 public class NuevoCliente extends javax.swing.JFrame {
+    
+    public void getBuscarComida (){
+        try {
+            Conexion cone = new Conexion();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            DefaultTableModel modelo = new DefaultTableModel();
+            jtComida_.setModel(modelo);
+
+            String sql = "select id, nombre, format(precio,2) from comida where nombre LIKE '%" + txtbuscarComida.getText() + "%' order by(id) ";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
+            int cantidadColumnas = rsMd.getColumnCount();
+
+            modelo.addColumn("Código.");
+            modelo.addColumn("Nombre");
+            modelo.addColumn("precio");
+
+            int[] anchos = {0, 200, 50};
+            for (int i = 0; i < jtComida_.getColumnCount(); i++) {
+                jtComida_.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+            }
+
+            while (rs.next()) {
+                Object[] filas = new Object[cantidadColumnas];
+                for (int i = 0; i < cantidadColumnas; i++) {
+                    filas[i] = rs.getObject(i + 1);
+                }
+                modelo.addRow(filas);
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.toString());
+        }
+    }
+    
+    
+public void getBuscarBebida(){
+        try {
+            Conexion cone = new Conexion();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            DefaultTableModel modelo = new DefaultTableModel();
+            jtBebidas_.setModel(modelo);
+
+            String sql = "select id, nombre, precio from bebida where nombre LIKE '%" + txtBuscarBebida.getText() + "%' order by(id) ";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
+            int cantidadColumnas = rsMd.getColumnCount();
+
+            modelo.addColumn("Código.");
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Precio");
+
+            int[] anchos = {10, 200, 50};
+            for (int i = 0; i < jtBebidas_.getColumnCount(); i++) {
+                jtBebidas_.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+            }
+
+            while (rs.next()) {
+                Object[] filas = new Object[cantidadColumnas];
+                for (int i = 0; i < cantidadColumnas; i++) {
+                    filas[i] = rs.getObject(i + 1);
+                }
+                modelo.addRow(filas);
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.toString());
+        }
+
+    };
 
     public void popuptable() {
         JPopupMenu popmenu = new JPopupMenu();
@@ -85,6 +163,8 @@ public class NuevoCliente extends javax.swing.JFrame {
         popuptable();
         txtCant1.setText("1");
         txtCant2.setText("1");
+        getBuscarComida ();
+        getBuscarBebida();
     }
 
     /**
@@ -659,81 +739,11 @@ public class NuevoCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void txtbuscarComidaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarComidaKeyReleased
-        try {
-            Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
-            PreparedStatement ps = null;
-            ResultSet rs = null;
-            DefaultTableModel modelo = new DefaultTableModel();
-            jtComida_.setModel(modelo);
-
-            String sql = "select id, nombre, format(precio,2) from comida where nombre LIKE '%" + txtbuscarComida.getText() + "%' order by(id) ";
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
-
-            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
-            int cantidadColumnas = rsMd.getColumnCount();
-
-            modelo.addColumn("Código.");
-            modelo.addColumn("Nombre");
-            modelo.addColumn("precio");
-
-            int[] anchos = {0, 200, 50};
-            for (int i = 0; i < jtComida_.getColumnCount(); i++) {
-                jtComida_.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
-            }
-
-            while (rs.next()) {
-                Object[] filas = new Object[cantidadColumnas];
-                for (int i = 0; i < cantidadColumnas; i++) {
-                    filas[i] = rs.getObject(i + 1);
-                }
-                modelo.addRow(filas);
-            }
-
-        } catch (SQLException ex) {
-            System.err.println(ex.toString());
-        }
+        getBuscarComida();
     }//GEN-LAST:event_txtbuscarComidaKeyReleased
 
     private void txtBuscarBebidaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarBebidaKeyReleased
-        try {
-            Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
-            PreparedStatement ps = null;
-            ResultSet rs = null;
-            DefaultTableModel modelo = new DefaultTableModel();
-            jtBebidas_.setModel(modelo);
-
-            String sql = "select id, nombre, precio from bebida where nombre LIKE '%" + txtBuscarBebida.getText() + "%' order by(id) ";
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
-
-            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
-            int cantidadColumnas = rsMd.getColumnCount();
-
-            modelo.addColumn("Código.");
-            modelo.addColumn("Nombre");
-            modelo.addColumn("Precio");
-
-            int[] anchos = {10, 200, 50};
-            for (int i = 0; i < jtBebidas_.getColumnCount(); i++) {
-                jtBebidas_.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
-            }
-
-            while (rs.next()) {
-                Object[] filas = new Object[cantidadColumnas];
-                for (int i = 0; i < cantidadColumnas; i++) {
-                    filas[i] = rs.getObject(i + 1);
-                }
-                modelo.addRow(filas);
-            }
-
-        } catch (SQLException ex) {
-            System.err.println(ex.toString());
-        }
-
-
+        getBuscarBebida();
     }//GEN-LAST:event_txtBuscarBebidaKeyReleased
 
     private void jtComida_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtComida_MouseClicked
