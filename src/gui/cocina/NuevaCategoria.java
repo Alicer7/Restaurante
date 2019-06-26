@@ -206,6 +206,7 @@ public class NuevaCategoria extends javax.swing.JDialog {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
 
+        
         try {
             Conexion cone = new Conexion();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();

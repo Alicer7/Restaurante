@@ -200,7 +200,7 @@ public class Articulos extends javax.swing.JFrame {
         jPanel2.add(Registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(239, 197, 126, 42));
 
         jcArea.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jcArea.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cocina, Bar, Cafetería", " " }));
+        jcArea.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cocina", "Bar", " " }));
         jcArea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcAreaActionPerformed(evt);

@@ -38,13 +38,11 @@ public final class Splash extends javax.swing.JFrame {
         jLabel_Credits_1 = new javax.swing.JLabel();
         jLabel_CR_ = new javax.swing.JLabel();
         jLabel_imagen_ = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(900, 500));
         setMinimumSize(new java.awt.Dimension(900, 500));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(900, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         progress.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -70,11 +68,7 @@ public final class Splash extends javax.swing.JFrame {
         getContentPane().add(jLabel_CR_, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 450, -1, 30));
 
         jLabel_imagen_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/Restaurante-Splash.png"))); // NOI18N
-        getContentPane().add(jLabel_imagen_, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1400, -1));
-
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel1.setLayout(null);
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 470, 391, 27));
+        getContentPane().add(jLabel_imagen_, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -130,7 +124,6 @@ public final class Splash extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_Credits_;
     private javax.swing.JLabel jLabel_Credits_1;
     private javax.swing.JLabel jLabel_imagen_;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JProgressBar progress;
     // End of variables declaration//GEN-END:variables
 

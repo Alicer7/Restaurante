@@ -5,14 +5,19 @@
  */
 package gui.venta;
 
-import core.utils.Menus;
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Iterator;
-import javax.swing.JComboBox;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.ListModel;
+import core.database.Conexion;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.text.DecimalFormat;
+import javax.swing.ImageIcon;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,11 +25,66 @@ import javax.swing.ListModel;
  */
 public class NuevoCliente extends javax.swing.JFrame {
 
+    public void popuptable() {
+        JPopupMenu popmenu = new JPopupMenu();
+        JMenuItem menuitem = new JMenuItem("Eliminar", new ImageIcon(getClass().getResource("/core/resources/icons/eli.png")));
+        menuitem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DefaultTableModel model = (DefaultTableModel) jtPedido.getModel();
+                int a = jtPedido.getSelectedRow();
+                if (a < 0) {
+                    JOptionPane.showMessageDialog(null,
+                            "Debe seleccionar una fila de la tabla");
+                } else {
+                    int confirmar = JOptionPane.showConfirmDialog(null,
+                            "Esta seguro que desea quitar el producto? ");
+                    if (JOptionPane.OK_OPTION == confirmar) {
+                        model.removeRow(a);
+                        JOptionPane.showMessageDialog(null, "Registro Eliminado");
+                    }
+                }
+            }
+        });
+
+        popmenu.add(menuitem);
+
+        jtPedido.setComponentPopupMenu(popmenu);
+    }
+
+    public void tabla() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        jtPedido.setModel(modelo);
+        modelo.addColumn("id.");
+        modelo.addColumn("Platillo");
+        modelo.addColumn("cantidad");
+        modelo.addColumn("Total");
+    }
+
+    DefaultTableModel modelo2 = new DefaultTableModel();
+//            jtCombos.setModel(modelo2);
+    Double precio_comida = 0.0;
+    Double precio_bebida = 0.0;
+
+    Double TOTAL1 = 0.0;
+    Double TOTAL2 = 0.0;
+
+    String COMIDA = null;
+    String BEBIDA = null;
+
+    int CODIGOBEBIDA = 0;
+    int CODIGOCOMIDA = 0;
+
     /**
      * Creates new form FacturaNueva
      */
     public NuevoCliente() {
         initComponents();
+//      
+        tabla();
+        popuptable();
+        txtCant1.setText("1");
+        txtCant2.setText("1");
     }
 
     /**
@@ -39,47 +99,37 @@ public class NuevoCliente extends javax.swing.JFrame {
         jPanel_NuevaOrden_ = new javax.swing.JPanel();
         jComboBox2 = new javax.swing.JComboBox<>();
         jPanel_Main_ = new javax.swing.JPanel();
-        jPanel_Combos_ = new javax.swing.JPanel();
-        jComboBox_Combo_ = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList_Combo_ = new javax.swing.JList<>();
-        jSpinner_Combo_ = new javax.swing.JSpinner();
-        jLabel_ComboPrecioUnitario_ = new javax.swing.JLabel();
-        jLabel_ComboSubTotal_ = new javax.swing.JLabel();
-        jLabel_ComboCantidad_ = new javax.swing.JLabel();
-        jLabel_PrecioUnitarioQ_ = new javax.swing.JLabel();
-        jLabel_PrecioUnitarioNum_ = new javax.swing.JLabel();
-        jLabel_SubTotalQ_ = new javax.swing.JLabel();
-        jLabel_SubTotalNum_ = new javax.swing.JLabel();
         jPanel_Alimentos_ = new javax.swing.JPanel();
-        jComboBox_Combo_2 = new javax.swing.JComboBox<>();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jList_Alimentos_ = new javax.swing.JList<>();
-        jSpinner_Combo_2 = new javax.swing.JSpinner();
         jLabel_ComboPrecioUnitario_2 = new javax.swing.JLabel();
         jLabel_ComboSubTotal_2 = new javax.swing.JLabel();
         jLabel_ComboCantidad_2 = new javax.swing.JLabel();
         jLabel_PrecioUnitarioQ_2 = new javax.swing.JLabel();
-        jLabel_PrecioUnitarioNum_2 = new javax.swing.JLabel();
+        lblUnitarioComida = new javax.swing.JLabel();
         jLabel_SubTotalQ_2 = new javax.swing.JLabel();
-        jLabel_SubTotalNum_2 = new javax.swing.JLabel();
+        lblSubtotalComida = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jtComida = new javax.swing.JTable();
+        txtbuscarComida = new javax.swing.JTextField();
+        jButton_AddPedido_ = new javax.swing.JButton();
+        txtCant1 = new javax.swing.JTextField();
         jPanel_Bebidas_ = new javax.swing.JPanel();
-        jComboBox_Combo_1 = new javax.swing.JComboBox<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList_Bebidas_ = new javax.swing.JList<>();
-        jSpinner_Combo_1 = new javax.swing.JSpinner();
         jLabel_ComboPrecioUnitario_1 = new javax.swing.JLabel();
         jLabel_ComboSubTotal_1 = new javax.swing.JLabel();
         jLabel_ComboCantidad_1 = new javax.swing.JLabel();
         jLabel_PrecioUnitarioQ_1 = new javax.swing.JLabel();
         jLabel_PrecioUnitarioNum_1 = new javax.swing.JLabel();
         jLabel_SubTotalQ_1 = new javax.swing.JLabel();
-        jLabel_SubTotalNum_1 = new javax.swing.JLabel();
-        jButton_AddPedido_ = new javax.swing.JButton();
+        lblsubtotalbebidas = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jtBebidas = new javax.swing.JTable();
+        txtBuscarBebida = new javax.swing.JTextField();
+        jButton_AddPedido_1 = new javax.swing.JButton();
+        txtCantidad2 = new javax.swing.JTextField();
+        txtCant2 = new javax.swing.JTextField();
         jScrollPane = new javax.swing.JScrollPane();
         jPanel_Pedidos_ = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtPedido = new javax.swing.JTable();
         jTextField_Nota_ = new javax.swing.JTextField();
         jButton_Aceptar_ = new javax.swing.JButton();
         jButton_Cancelar = new javax.swing.JButton();
@@ -129,105 +179,7 @@ public class NuevoCliente extends javax.swing.JFrame {
 
         jPanel_Main_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cliente Nuevo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
 
-        jPanel_Combos_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Combos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
-
-        jComboBox_Combo_.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jComboBox_Combo_.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos" }));
-
-        jList_Combo_.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jScrollPane1.setViewportView(jList_Combo_);
-
-        jSpinner_Combo_.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        jLabel_ComboPrecioUnitario_.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel_ComboPrecioUnitario_.setText("Precio Unitario:");
-
-        jLabel_ComboSubTotal_.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel_ComboSubTotal_.setText("Subtotal:");
-
-        jLabel_ComboCantidad_.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel_ComboCantidad_.setText("Cantidad:");
-
-        jLabel_PrecioUnitarioQ_.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel_PrecioUnitarioQ_.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel_PrecioUnitarioQ_.setText("Q. ");
-
-        jLabel_PrecioUnitarioNum_.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel_PrecioUnitarioNum_.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel_PrecioUnitarioNum_.setText("123456.00");
-
-        jLabel_SubTotalQ_.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel_SubTotalQ_.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel_SubTotalQ_.setText("Q. ");
-
-        jLabel_SubTotalNum_.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel_SubTotalNum_.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel_SubTotalNum_.setText("123456.00");
-
-        javax.swing.GroupLayout jPanel_Combos_Layout = new javax.swing.GroupLayout(jPanel_Combos_);
-        jPanel_Combos_.setLayout(jPanel_Combos_Layout);
-        jPanel_Combos_Layout.setHorizontalGroup(
-            jPanel_Combos_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_Combos_Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel_Combos_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox_Combo_, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel_Combos_Layout.createSequentialGroup()
-                        .addComponent(jLabel_ComboCantidad_, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jSpinner_Combo_, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel_Combos_Layout.createSequentialGroup()
-                        .addGroup(jPanel_Combos_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel_ComboSubTotal_, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel_ComboPrecioUnitario_, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(2, 2, 2)
-                        .addGroup(jPanel_Combos_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel_Combos_Layout.createSequentialGroup()
-                                .addComponent(jLabel_PrecioUnitarioQ_, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel_PrecioUnitarioNum_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel_Combos_Layout.createSequentialGroup()
-                                .addComponent(jLabel_SubTotalQ_, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel_SubTotalNum_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Combos_Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        jPanel_Combos_Layout.setVerticalGroup(
-            jPanel_Combos_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Combos_Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jComboBox_Combo_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel_Combos_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_ComboPrecioUnitario_)
-                    .addComponent(jLabel_PrecioUnitarioQ_)
-                    .addComponent(jLabel_PrecioUnitarioNum_))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel_Combos_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_ComboSubTotal_)
-                    .addComponent(jLabel_SubTotalQ_)
-                    .addComponent(jLabel_SubTotalNum_))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel_Combos_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_ComboCantidad_)
-                    .addComponent(jSpinner_Combo_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
         jPanel_Alimentos_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Comidas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
-
-        jComboBox_Combo_2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jComboBox_Combo_2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos" }));
-
-        jList_Alimentos_.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jScrollPane3.setViewportView(jList_Alimentos_);
-
-        jSpinner_Combo_2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         jLabel_ComboPrecioUnitario_2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel_ComboPrecioUnitario_2.setText("Precio Unitario:");
@@ -242,17 +194,59 @@ public class NuevoCliente extends javax.swing.JFrame {
         jLabel_PrecioUnitarioQ_2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel_PrecioUnitarioQ_2.setText("Q. ");
 
-        jLabel_PrecioUnitarioNum_2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel_PrecioUnitarioNum_2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel_PrecioUnitarioNum_2.setText("123456.00");
+        lblUnitarioComida.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblUnitarioComida.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblUnitarioComida.setText("0.0");
 
         jLabel_SubTotalQ_2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel_SubTotalQ_2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel_SubTotalQ_2.setText("Q. ");
 
-        jLabel_SubTotalNum_2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel_SubTotalNum_2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel_SubTotalNum_2.setText("123456.00");
+        lblSubtotalComida.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblSubtotalComida.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblSubtotalComida.setText("0.0");
+
+        jtComida.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jtComida.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtComidaMouseClicked(evt);
+            }
+        });
+        jScrollPane6.setViewportView(jtComida);
+
+        txtbuscarComida.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtbuscarComidaKeyReleased(evt);
+            }
+        });
+
+        jButton_AddPedido_.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton_AddPedido_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/clocheX32.png"))); // NOI18N
+        jButton_AddPedido_.setMaximumSize(new java.awt.Dimension(292, 93));
+        jButton_AddPedido_.setMinimumSize(new java.awt.Dimension(292, 93));
+        jButton_AddPedido_.setPreferredSize(new java.awt.Dimension(292, 93));
+        jButton_AddPedido_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_AddPedido_ActionPerformed(evt);
+            }
+        });
+
+        txtCant1.setText("1");
+        txtCant1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCant1KeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel_Alimentos_Layout = new javax.swing.GroupLayout(jPanel_Alimentos_);
         jPanel_Alimentos_.setLayout(jPanel_Alimentos_Layout);
@@ -261,11 +255,12 @@ public class NuevoCliente extends javax.swing.JFrame {
             .addGroup(jPanel_Alimentos_Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel_Alimentos_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox_Combo_2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel_Alimentos_Layout.createSequentialGroup()
                         .addComponent(jLabel_ComboCantidad_2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCant1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jSpinner_Combo_2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton_AddPedido_, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel_Alimentos_Layout.createSequentialGroup()
                         .addGroup(jPanel_Alimentos_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel_ComboSubTotal_2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -275,49 +270,43 @@ public class NuevoCliente extends javax.swing.JFrame {
                             .addGroup(jPanel_Alimentos_Layout.createSequentialGroup()
                                 .addComponent(jLabel_PrecioUnitarioQ_2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel_PrecioUnitarioNum_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(lblUnitarioComida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel_Alimentos_Layout.createSequentialGroup()
                                 .addComponent(jLabel_SubTotalQ_2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel_SubTotalNum_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Alimentos_Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(lblSubtotalComida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+                    .addComponent(txtbuscarComida))
                 .addContainerGap())
         );
         jPanel_Alimentos_Layout.setVerticalGroup(
             jPanel_Alimentos_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Alimentos_Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jComboBox_Combo_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
+                .addComponent(txtbuscarComida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
                 .addGroup(jPanel_Alimentos_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_ComboPrecioUnitario_2)
                     .addComponent(jLabel_PrecioUnitarioQ_2)
-                    .addComponent(jLabel_PrecioUnitarioNum_2))
+                    .addComponent(lblUnitarioComida))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_Alimentos_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_ComboSubTotal_2)
                     .addComponent(jLabel_SubTotalQ_2)
-                    .addComponent(jLabel_SubTotalNum_2))
+                    .addComponent(lblSubtotalComida))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel_Alimentos_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_ComboCantidad_2)
-                    .addComponent(jSpinner_Combo_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGroup(jPanel_Alimentos_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_Alimentos_Layout.createSequentialGroup()
+                        .addGroup(jPanel_Alimentos_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel_ComboCantidad_2)
+                            .addComponent(txtCant1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
+                    .addComponent(jButton_AddPedido_, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jPanel_Bebidas_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Bebidas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
-
-        jComboBox_Combo_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jComboBox_Combo_1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos" }));
-
-        jList_Bebidas_.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jScrollPane2.setViewportView(jList_Bebidas_);
-
-        jSpinner_Combo_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         jLabel_ComboPrecioUnitario_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel_ComboPrecioUnitario_1.setText("Precio Unitario:");
@@ -334,15 +323,68 @@ public class NuevoCliente extends javax.swing.JFrame {
 
         jLabel_PrecioUnitarioNum_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel_PrecioUnitarioNum_1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel_PrecioUnitarioNum_1.setText("123456.00");
+        jLabel_PrecioUnitarioNum_1.setText("0.0");
 
         jLabel_SubTotalQ_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel_SubTotalQ_1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel_SubTotalQ_1.setText("Q. ");
 
-        jLabel_SubTotalNum_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel_SubTotalNum_1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel_SubTotalNum_1.setText("123456.00");
+        lblsubtotalbebidas.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblsubtotalbebidas.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblsubtotalbebidas.setText("0.0");
+
+        jtBebidas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jtBebidas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtBebidasMouseClicked(evt);
+            }
+        });
+        jScrollPane7.setViewportView(jtBebidas);
+
+        txtBuscarBebida.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarBebidaKeyReleased(evt);
+            }
+        });
+
+        jButton_AddPedido_1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton_AddPedido_1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/clocheX32.png"))); // NOI18N
+        jButton_AddPedido_1.setMaximumSize(new java.awt.Dimension(292, 93));
+        jButton_AddPedido_1.setMinimumSize(new java.awt.Dimension(292, 93));
+        jButton_AddPedido_1.setPreferredSize(new java.awt.Dimension(292, 93));
+        jButton_AddPedido_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_AddPedido_1ActionPerformed(evt);
+            }
+        });
+
+        txtCantidad2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCantidad2KeyReleased(evt);
+            }
+        });
+
+        txtCant2.setText("1");
+        txtCant2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCant2ActionPerformed(evt);
+            }
+        });
+        txtCant2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCant2KeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel_Bebidas_Layout = new javax.swing.GroupLayout(jPanel_Bebidas_);
         jPanel_Bebidas_.setLayout(jPanel_Bebidas_Layout);
@@ -351,11 +393,12 @@ public class NuevoCliente extends javax.swing.JFrame {
             .addGroup(jPanel_Bebidas_Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel_Bebidas_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox_Combo_1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel_Bebidas_Layout.createSequentialGroup()
                         .addComponent(jLabel_ComboCantidad_1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCant2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jSpinner_Combo_1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton_AddPedido_1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel_Bebidas_Layout.createSequentialGroup()
                         .addGroup(jPanel_Bebidas_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel_ComboSubTotal_1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -368,47 +411,48 @@ public class NuevoCliente extends javax.swing.JFrame {
                                 .addComponent(jLabel_PrecioUnitarioNum_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel_Bebidas_Layout.createSequentialGroup()
                                 .addComponent(jLabel_SubTotalQ_1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel_SubTotalNum_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Bebidas_Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(137, 137, 137)
+                                .addComponent(lblsubtotalbebidas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
+                    .addComponent(txtBuscarBebida))
                 .addContainerGap())
+            .addGroup(jPanel_Bebidas_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel_Bebidas_Layout.createSequentialGroup()
+                    .addGap(261, 261, 261)
+                    .addComponent(txtCantidad2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(164, Short.MAX_VALUE)))
         );
         jPanel_Bebidas_Layout.setVerticalGroup(
             jPanel_Bebidas_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Bebidas_Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jComboBox_Combo_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
+                .addComponent(txtBuscarBebida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGap(13, 13, 13)
                 .addGroup(jPanel_Bebidas_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_ComboPrecioUnitario_1)
                     .addComponent(jLabel_PrecioUnitarioQ_1)
                     .addComponent(jLabel_PrecioUnitarioNum_1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel_Bebidas_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_ComboSubTotal_1)
-                    .addComponent(jLabel_SubTotalQ_1)
-                    .addComponent(jLabel_SubTotalNum_1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel_Bebidas_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_ComboCantidad_1)
-                    .addComponent(jSpinner_Combo_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGroup(jPanel_Bebidas_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_Bebidas_Layout.createSequentialGroup()
+                        .addGroup(jPanel_Bebidas_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel_ComboSubTotal_1)
+                            .addComponent(jLabel_SubTotalQ_1)
+                            .addComponent(lblsubtotalbebidas))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel_Bebidas_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel_ComboCantidad_1)
+                            .addComponent(txtCant2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
+                    .addComponent(jButton_AddPedido_1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(jPanel_Bebidas_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel_Bebidas_Layout.createSequentialGroup()
+                    .addGap(131, 131, 131)
+                    .addComponent(txtCantidad2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(132, Short.MAX_VALUE)))
         );
-
-        jButton_AddPedido_.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton_AddPedido_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/clocheX32.png"))); // NOI18N
-        jButton_AddPedido_.setMaximumSize(new java.awt.Dimension(292, 93));
-        jButton_AddPedido_.setMinimumSize(new java.awt.Dimension(292, 93));
-        jButton_AddPedido_.setPreferredSize(new java.awt.Dimension(292, 93));
-        jButton_AddPedido_.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_AddPedido_ActionPerformed(evt);
-            }
-        });
 
         jScrollPane.setBorder(null);
         jScrollPane.setHorizontalScrollBar(null);
@@ -416,24 +460,27 @@ public class NuevoCliente extends javax.swing.JFrame {
         jPanel_Pedidos_.setBorder(javax.swing.BorderFactory.createTitledBorder("Pedidos"));
         jPanel_Pedidos_.setPreferredSize(new java.awt.Dimension(768, 250));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtPedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane4.setViewportView(jTable1);
+        jScrollPane4.setViewportView(jtPedido);
 
         javax.swing.GroupLayout jPanel_Pedidos_Layout = new javax.swing.GroupLayout(jPanel_Pedidos_);
         jPanel_Pedidos_.setLayout(jPanel_Pedidos_Layout);
         jPanel_Pedidos_Layout.setHorizontalGroup(
             jPanel_Pedidos_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 756, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Pedidos_Layout.createSequentialGroup()
+                .addContainerGap(44, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 968, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel_Pedidos_Layout.setVerticalGroup(
             jPanel_Pedidos_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -486,49 +533,46 @@ public class NuevoCliente extends javax.swing.JFrame {
         jPanel_Main_.setLayout(jPanel_Main_Layout);
         jPanel_Main_Layout.setHorizontalGroup(
             jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_Main_Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_Main_Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel_Nota_, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField_Nota_, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton_Aceptar_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel_Main_Layout.createSequentialGroup()
-                            .addComponent(jPanel_Combos_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jPanel_Alimentos_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jPanel_Bebidas_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jButton_AddPedido_, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Main_Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel_Factura_)
+                .addComponent(jLabel_Nota_, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextField_Nota_, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel_FactureNumero_, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(292, 292, 292))
+                .addComponent(jButton_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton_Aceptar_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(111, 111, 111))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Main_Layout.createSequentialGroup()
+                .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel_Main_Layout.createSequentialGroup()
+                        .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel_Main_Layout.createSequentialGroup()
+                                .addGap(522, 522, 522)
+                                .addComponent(jLabel_Factura_)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel_FactureNumero_, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel_Main_Layout.createSequentialGroup()
+                                .addGap(55, 55, 55)
+                                .addComponent(jPanel_Alimentos_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(14, 14, 14)
+                                .addComponent(jPanel_Bebidas_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(54, 54, 54))
         );
         jPanel_Main_Layout.setVerticalGroup(
             jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_Main_Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
                 .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_Factura_)
                     .addComponent(jLabel_FactureNumero_))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel_Combos_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel_Alimentos_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel_Bebidas_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton_AddPedido_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel_Alimentos_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel_Bebidas_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -564,18 +608,40 @@ public class NuevoCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_Aceptar_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Aceptar_ActionPerformed
-        JPanel pedido = new JPanel();
-        JComboBox combo = new JComboBox();
-        
-        combo.setSize(150, 90);
-        
-        pedido.add(combo);
-        
-        pedido.setSize(876,100);
-        pedido.setBackground(Color.red);
-        
-        jPanel_Pedidos_.revalidate();
-        jPanel_Pedidos_.repaint();
+
+        try {
+            Conexion cone = new Conexion();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            PreparedStatement ps = null;
+
+            int filas = jtPedido.getRowCount();
+            for (int row = 0; row < filas; row++) {
+
+//                int id_comida = (int) jtPedido.getValueAt(row, 0);
+//                int cantidad = (int) jtPedido.getValueAt(row, 2);
+//                Double costo = (Double) jtPedido.getValueAt(row, 3);
+//                String test = "select Max(id) from temp_venta";
+//                ps = conn.prepareStatement(test);
+//                rs = ps.executeQuery();
+//                while (rs.next()) {
+//                    ID_FACTURA = (rs.getInt("Max(id)"));
+//                    ID_FACTURA = ID_FACTURA + 1;
+//                    System.out.println("idfactura " + ID_FACTURA);
+//                }
+                ps = conn.prepareStatement("INSERT INTO `temp_pedido` (`temp_venta_id`, `comida_id`, `comida_cantidad`, costo, `estado`) VALUES (?,?,?,?,?)");
+                ps.setInt(1, 2);
+                ps.setInt(2, 1);
+                ps.setInt(3, 1);
+                ps.setDouble(4, 12.50);
+                ps.setString(5, "Activa");
+                ps.execute();
+
+            }
+            JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
+            tabla();
+        } catch (SQLException ex) {
+        }
+
     }//GEN-LAST:event_jButton_Aceptar_ActionPerformed
 
     private void jButton_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CancelarActionPerformed
@@ -583,22 +649,188 @@ public class NuevoCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_CancelarActionPerformed
 
     private void jButton_AddPedido_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AddPedido_ActionPerformed
-        // TODO add your handling code here:
+        String subtotal = lblSubtotalComida.getText().replaceAll(",", "");
+        DefaultTableModel modelo = (DefaultTableModel) jtPedido.getModel();
+        Object[] fila = new Object[4];
+        fila[0] = CODIGOCOMIDA;
+        fila[1] = COMIDA;
+        fila[2] = txtCant1.getText();
+        fila[3] = subtotal;
+        modelo.addRow(fila);
+        txtCant1.setText("");
+        txtbuscarComida.requestFocus();
+        txtbuscarComida.setText("");
+
     }//GEN-LAST:event_jButton_AddPedido_ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        Menus menusLista = new Menus();
-        ArrayList<Menus> menus = menusLista.getMenus();
-        
-        Object listaData []= new Object[menus.size()];
-        
-        
-        for (int i = 0 ; i < menus.size() ; i++) {
-            listaData[i]=menus.get(i).getNombre();
-        }
-        jList_Combo_.setListData((String[]) listaData);
-        
+//        Menus menusLista = new Menus();
+//        ArrayList<Menus> menus = menusLista.getMenus();
+//        
+//        Object listaData []= new Object[menus.size()];
+//        
+//        
+//        for (int i = 0 ; i < menus.size() ; i++) {
+//            listaData[i]=menus.get(i).getNombre();
+//        }
+//        jList_Combo_.setListData((String[]) listaData);
+//        
     }//GEN-LAST:event_formWindowOpened
+
+    private void txtbuscarComidaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarComidaKeyReleased
+        try {
+            Conexion cone = new Conexion();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            DefaultTableModel modelo = new DefaultTableModel();
+            jtComida.setModel(modelo);
+
+            String sql = "select id, nombre, format(precio,2) from comida where nombre LIKE '%" + txtbuscarComida.getText() + "%' order by(id) ";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
+            int cantidadColumnas = rsMd.getColumnCount();
+
+            modelo.addColumn("Código.");
+            modelo.addColumn("Nombre");
+            modelo.addColumn("precio");
+
+            int[] anchos = {0, 200, 50};
+            for (int i = 0; i < jtComida.getColumnCount(); i++) {
+                jtComida.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+            }
+
+            while (rs.next()) {
+                Object[] filas = new Object[cantidadColumnas];
+                for (int i = 0; i < cantidadColumnas; i++) {
+                    filas[i] = rs.getObject(i + 1);
+                }
+                modelo.addRow(filas);
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.toString());
+        }
+    }//GEN-LAST:event_txtbuscarComidaKeyReleased
+
+    private void txtBuscarBebidaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarBebidaKeyReleased
+        try {
+            Conexion cone = new Conexion();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            DefaultTableModel modelo = new DefaultTableModel();
+            jtBebidas.setModel(modelo);
+
+            String sql = "select id, nombre, precio from bebida where nombre LIKE '%" + txtBuscarBebida.getText() + "%' order by(id) ";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
+            int cantidadColumnas = rsMd.getColumnCount();
+
+            modelo.addColumn("Código.");
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Precio");
+
+            int[] anchos = {10, 200, 50};
+            for (int i = 0; i < jtBebidas.getColumnCount(); i++) {
+                jtBebidas.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+            }
+
+            while (rs.next()) {
+                Object[] filas = new Object[cantidadColumnas];
+                for (int i = 0; i < cantidadColumnas; i++) {
+                    filas[i] = rs.getObject(i + 1);
+                }
+                modelo.addRow(filas);
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.toString());
+        }
+
+
+    }//GEN-LAST:event_txtBuscarBebidaKeyReleased
+
+    private void jtComidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtComidaMouseClicked
+
+        int Fila = jtComida.getSelectedRow();
+        String codigo = jtComida.getValueAt(Fila, 0).toString();
+        String nombre = jtComida.getValueAt(Fila, 1).toString();
+        String precio = jtComida.getValueAt(Fila, 2).toString();
+
+        precio_comida = Double.parseDouble(precio);
+        CODIGOCOMIDA = Integer.parseInt(codigo);
+        COMIDA = nombre;
+        lblUnitarioComida.setText(precio);
+//
+//        System.out.println("id " + ID_ARTICULO);
+//        System.out.println("Nombre: " + NOMBRE_ARTICULO);
+//        System.out.println("CA: " + CANTIDAD);
+
+
+    }//GEN-LAST:event_jtComidaMouseClicked
+
+    private void jButton_AddPedido_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AddPedido_1ActionPerformed
+        String subtotal = lblsubtotalbebidas.getText().replaceAll(",", "");
+        DefaultTableModel modelo = (DefaultTableModel) jtPedido.getModel();
+        Object[] fila = new Object[4];
+        fila[0] = CODIGOBEBIDA;
+        fila[1] = BEBIDA;
+        fila[2] = txtCant2.getText();
+        fila[3] = subtotal;
+        modelo.addRow(fila);
+        txtCant2.setText("");
+        txtBuscarBebida.requestFocus();
+    }//GEN-LAST:event_jButton_AddPedido_1ActionPerformed
+
+    private void txtCant1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCant1KeyReleased
+        double total;
+        int cantidad;
+
+        int cant = Integer.parseInt(txtCant1.getText());
+
+        total = precio_comida * cant;
+        DecimalFormat df = new DecimalFormat("###,###.##");
+        lblSubtotalComida.setText(df.format(Double.valueOf(total)));
+
+    }//GEN-LAST:event_txtCant1KeyReleased
+
+    private void jtBebidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtBebidasMouseClicked
+
+        int Fila = jtBebidas.getSelectedRow();
+        String codigo = jtBebidas.getValueAt(Fila, 0).toString();
+        String nombre = jtBebidas.getValueAt(Fila, 1).toString();
+        String precio = jtBebidas.getValueAt(Fila, 2).toString();
+
+        precio_bebida = Double.parseDouble(precio);
+        CODIGOBEBIDA = Integer.parseInt(codigo);
+        BEBIDA = nombre;
+        jLabel_PrecioUnitarioNum_1.setText(precio);
+    }//GEN-LAST:event_jtBebidasMouseClicked
+
+    private void txtCantidad2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidad2KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantidad2KeyReleased
+
+    private void txtCant2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCant2KeyReleased
+        double total;
+        int cantidad;
+
+        int cant = Integer.parseInt(txtCant2.getText());
+
+        total = precio_bebida * cant;
+        DecimalFormat df = new DecimalFormat("###,###.##");
+        lblsubtotalbebidas.setText(df.format(Double.valueOf(total)));
+
+    }//GEN-LAST:event_txtCant2KeyReleased
+
+    private void txtCant2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCant2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCant2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -614,16 +846,24 @@ public class NuevoCliente extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NuevoCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoCliente.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NuevoCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoCliente.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NuevoCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoCliente.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NuevoCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoCliente.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -645,53 +885,43 @@ public class NuevoCliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Aceptar_;
     private javax.swing.JButton jButton_AddPedido_;
+    private javax.swing.JButton jButton_AddPedido_1;
     private javax.swing.JButton jButton_Cancelar;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox_Combo_;
-    private javax.swing.JComboBox<String> jComboBox_Combo_1;
-    private javax.swing.JComboBox<String> jComboBox_Combo_2;
-    private javax.swing.JLabel jLabel_ComboCantidad_;
     private javax.swing.JLabel jLabel_ComboCantidad_1;
     private javax.swing.JLabel jLabel_ComboCantidad_2;
-    private javax.swing.JLabel jLabel_ComboPrecioUnitario_;
     private javax.swing.JLabel jLabel_ComboPrecioUnitario_1;
     private javax.swing.JLabel jLabel_ComboPrecioUnitario_2;
-    private javax.swing.JLabel jLabel_ComboSubTotal_;
     private javax.swing.JLabel jLabel_ComboSubTotal_1;
     private javax.swing.JLabel jLabel_ComboSubTotal_2;
     private javax.swing.JLabel jLabel_Factura_;
     private javax.swing.JLabel jLabel_FactureNumero_;
     private javax.swing.JLabel jLabel_Nota_;
-    private javax.swing.JLabel jLabel_PrecioUnitarioNum_;
     private javax.swing.JLabel jLabel_PrecioUnitarioNum_1;
-    private javax.swing.JLabel jLabel_PrecioUnitarioNum_2;
-    private javax.swing.JLabel jLabel_PrecioUnitarioQ_;
     private javax.swing.JLabel jLabel_PrecioUnitarioQ_1;
     private javax.swing.JLabel jLabel_PrecioUnitarioQ_2;
-    private javax.swing.JLabel jLabel_SubTotalNum_;
-    private javax.swing.JLabel jLabel_SubTotalNum_1;
-    private javax.swing.JLabel jLabel_SubTotalNum_2;
-    private javax.swing.JLabel jLabel_SubTotalQ_;
     private javax.swing.JLabel jLabel_SubTotalQ_1;
     private javax.swing.JLabel jLabel_SubTotalQ_2;
-    private javax.swing.JList<String> jList_Alimentos_;
-    private javax.swing.JList<String> jList_Bebidas_;
-    private javax.swing.JList<String> jList_Combo_;
     private javax.swing.JPanel jPanel_Alimentos_;
     private javax.swing.JPanel jPanel_Bebidas_;
-    private javax.swing.JPanel jPanel_Combos_;
     private javax.swing.JPanel jPanel_Main_;
     private javax.swing.JPanel jPanel_NuevaOrden_;
     private javax.swing.JPanel jPanel_Pedidos_;
     private javax.swing.JScrollPane jScrollPane;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JSpinner jSpinner_Combo_;
-    private javax.swing.JSpinner jSpinner_Combo_1;
-    private javax.swing.JSpinner jSpinner_Combo_2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTextField jTextField_Nota_;
+    private javax.swing.JTable jtBebidas;
+    private javax.swing.JTable jtComida;
+    private javax.swing.JTable jtPedido;
+    private javax.swing.JLabel lblSubtotalComida;
+    private javax.swing.JLabel lblUnitarioComida;
+    private javax.swing.JLabel lblsubtotalbebidas;
+    private javax.swing.JTextField txtBuscarBebida;
+    private javax.swing.JTextField txtCant1;
+    private javax.swing.JTextField txtCant2;
+    private javax.swing.JTextField txtCantidad2;
+    private javax.swing.JTextField txtbuscarComida;
     // End of variables declaration//GEN-END:variables
 }

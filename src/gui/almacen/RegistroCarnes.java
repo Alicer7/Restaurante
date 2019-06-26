@@ -190,22 +190,30 @@ public class RegistroCarnes extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        try {
-            Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
-            PreparedStatement ps = null;
-            ps = conn.prepareStatement("INSERT INTO `materiaprima` (`nombre`, `stock`, `stock_min`, `stock_max`) VALUES (?,?,?,?)");
-            ps.setString(1, txtDescripcion.getText());
-            ps.setInt(2, 0);
-            ps.setString(3, txtMin.getText());
-            ps.setString(4, txtMax.getText());
-            ps.execute();
-            JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
+        String uno = txtDescripcion.getText();
+        String dos = txtMax.getText();
+        String tres = txtMin.getText();
 
-        } catch (SQLException ex) {
-            Logger.getLogger(RegistroCarnes.class.getName()).log(Level.SEVERE, null, ex);
+        if (uno.equals("") || dos.equals("") || tres.equals("")) {
+            JOptionPane.showMessageDialog(this, "Debe llenar los campos requeridos");
+        } else {
+
+            try {
+                Conexion cone = new Conexion();
+                com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+                PreparedStatement ps = null;
+                ps = conn.prepareStatement("INSERT INTO `materiaprima` (`nombre`, `stock`, `stock_min`, `stock_max`) VALUES (?,?,?,?)");
+                ps.setString(1, txtDescripcion.getText());
+                ps.setInt(2, 0);
+                ps.setString(3, txtMin.getText());
+                ps.setString(4, txtMax.getText());
+                ps.execute();
+                JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
+
+            } catch (SQLException ex) {
+                Logger.getLogger(RegistroCarnes.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
