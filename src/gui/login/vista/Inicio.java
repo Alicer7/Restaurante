@@ -5,6 +5,9 @@
  */
 package gui.login.vista;
 
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 /**
  *
  * @author Marko
@@ -24,6 +27,10 @@ public class Inicio extends javax.swing.JFrame {
     public static login frmLog;
 
     public Inicio() {
+        try { 
+            UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel"); 
+        } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
+
         initComponents();
         configurarVentana();
     }
