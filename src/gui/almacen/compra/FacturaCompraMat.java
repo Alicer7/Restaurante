@@ -326,49 +326,61 @@ public class FacturaCompraMat extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int ID_FACTURA = 0;
-        try {
-            Conexion cone = new Conexion();
-            ResultSet rs = null;
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
-            PreparedStatement ps = null;
-            ps = conn.prepareStatement("INSERT INTO `factura_compra` (`numfactura`, `nit`, `monto`) VALUES (?,?,?)");
 
-            ps.setInt(1, Integer.parseInt(txtFactura.getText()));
-            ps.setInt(2, Integer.parseInt(txtNit.getText()));
-            ps.setString(3, txtMonto.getText());
-            ps.execute();
+        String uno = txtDescripcion.getText();
+        String dos = txtEncargado.getText();
+        String tres = txtFactura.getText();
+        String cuatro = txtMonto.getText();
+        String cinco = txtNit.getText();
+        String seis = txtProveedor.getText();
 
-            String id_factura = "select id from factura_compra where numfactura ='" + txtFactura.getText() + "'";
-            ps = conn.prepareStatement(id_factura);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                ID_FACTURA = (rs.getInt("id"));
-            }
+        if (uno.equals("") || dos.equals("") || tres.equals("") || cuatro.equals("") || cinco.equals("") || seis.equals("")) {
+            JOptionPane.showMessageDialog(this, "Debe llenar los campos requeridos");
+        } else {
 
-            int filas = jtProductos.getRowCount();
-            System.out.println("filas jc " + filas);
-            for (int row = 0; row < filas; row++) {
+            try {
+                Conexion cone = new Conexion();
+                ResultSet rs = null;
+                com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.conectar();
+                PreparedStatement ps = null;
+                ps = conn.prepareStatement("INSERT INTO `factura_compra` (`numfactura`, `nit`, `monto`) VALUES (?,?,?)");
 
-                int idMateria = (int) jtProductos.getValueAt(row, 0);
-                String descripcion = (String) jtProductos.getValueAt(row, 1);
-                int cant = (int) jtProductos.getValueAt(row, 2);
-                Double precio = (Double) jtProductos.getValueAt(row, 3);
-
-                ps = conn.prepareStatement("INSERT INTO `materia_compra` (`materiaprima_id`, `factura_compra_id`, `descripcion`, cantidad, `costo`) VALUES (?,?,?,?,?)");
-                ps.setInt(1, idMateria);
-                ps.setInt(2, ID_FACTURA);
-                ps.setString(3, descripcion);
-                ps.setInt(4, cant);
-                ps.setDouble(5, precio);
+                ps.setInt(1, Integer.parseInt(txtFactura.getText()));
+                ps.setInt(2, Integer.parseInt(txtNit.getText()));
+                ps.setString(3, txtMonto.getText());
                 ps.execute();
-                System.out.println("ya, asdfasdf");
-            }
-            JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
-            tabla();
-            limpiar();
-        } catch (SQLException ex) {
-        }
 
+                String id_factura = "select id from factura_compra where numfactura ='" + txtFactura.getText() + "'";
+                ps = conn.prepareStatement(id_factura);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    ID_FACTURA = (rs.getInt("id"));
+                }
+
+                int filas = jtProductos.getRowCount();
+                System.out.println("filas jc " + filas);
+                for (int row = 0; row < filas; row++) {
+
+                    int idMateria = (int) jtProductos.getValueAt(row, 0);
+                    String descripcion = (String) jtProductos.getValueAt(row, 1);
+                    int cant = (int) jtProductos.getValueAt(row, 2);
+                    Double precio = (Double) jtProductos.getValueAt(row, 3);
+
+                    ps = conn.prepareStatement("INSERT INTO `materia_compra` (`materiaprima_id`, `factura_compra_id`, `descripcion`, cantidad, `costo`) VALUES (?,?,?,?,?)");
+                    ps.setInt(1, idMateria);
+                    ps.setInt(2, ID_FACTURA);
+                    ps.setString(3, descripcion);
+                    ps.setInt(4, cant);
+                    ps.setDouble(5, precio);
+                    ps.execute();
+                    System.out.println("ya, asdfasdf");
+                }
+                JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
+                tabla();
+                limpiar();
+            } catch (SQLException ex) {
+            }
+        }
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -456,7 +468,7 @@ public class FacturaCompraMat extends javax.swing.JFrame {
 
         gui.almacen.RegistroLicores almacen = new gui.almacen.RegistroLicores(null, true);
         almacen.setVisible(true);
-        
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void limpiar() {

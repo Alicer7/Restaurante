@@ -412,7 +412,7 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_Cobrar_ActionPerformed
 
     private void jButton_NuevoPedido_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_NuevoPedido_ActionPerformed
-        NuevoPedido nuevoPedido = new NuevoPedido();
+        Nuevo_Pedido_old nuevoPedido = new Nuevo_Pedido_old();
         nuevoPedido.setVisible(true);
     }//GEN-LAST:event_jButton_NuevoPedido_ActionPerformed
 

@@ -261,6 +261,11 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
         });
         jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 350, 112, 42));
 
+        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarActionPerformed(evt);
+            }
+        });
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarKeyReleased(evt);
@@ -333,17 +338,21 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
     }//GEN-LAST:event_jtArticulosMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int filas = jtArticulos.getSelectedRow();
+        if (filas < 0) {
+            JOptionPane.showMessageDialog(null, "Seleccione un artículo");
 
-        String cant = JOptionPane.showInputDialog(null, "Ingrese la cantidad", JOptionPane.WARNING_MESSAGE);
-        double cantidad = Double.parseDouble(cant);
-        DefaultTableModel modelo = (DefaultTableModel) jtProductos.getModel();
-        Object[] fila = new Object[5];
-        fila[0] = ID_ARTICULO;
-        fila[1] = NOMBRE_ARTICULO;
-        fila[2] = cantidad;
-        modelo.addRow(fila);
+        } else {
+            String cant = JOptionPane.showInputDialog(null, "Ingrese la cantidad","Cantidad de onzas utilizadas", JOptionPane.WARNING_MESSAGE);
+            double cantidad = Double.parseDouble(cant);
+            DefaultTableModel modelo = (DefaultTableModel) jtProductos.getModel();
+            Object[] fila = new Object[5];
+            fila[0] = ID_ARTICULO;
+            fila[1] = NOMBRE_ARTICULO;
+            fila[2] = cantidad;
+            modelo.addRow(fila);
 //        jtProductos.setModel(modelo);
-
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
@@ -436,6 +445,10 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
         gui.cocina.NuevaCategoria cat = new gui.cocina.NuevaCategoria(this, true);
         cat.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void limpiar() {
 
