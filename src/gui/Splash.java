@@ -33,9 +33,9 @@ public final class Splash extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        progress = new javax.swing.JProgressBar();
         jLabel_Credits_ = new javax.swing.JLabel();
         jLabel_Credits_1 = new javax.swing.JLabel();
+        progress = new javax.swing.JProgressBar();
         jLabel_CR_ = new javax.swing.JLabel();
         jLabel_imagen_ = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -47,13 +47,6 @@ public final class Splash extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(900, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        progress.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                progressStateChanged(evt);
-            }
-        });
-        getContentPane().add(progress, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, 430, 25));
-
         jLabel_Credits_.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel_Credits_.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_Credits_.setText("Power By:");
@@ -63,6 +56,14 @@ public final class Splash extends javax.swing.JFrame {
         jLabel_Credits_1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_Credits_1.setText("©");
         getContentPane().add(jLabel_Credits_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 450, 30, 30));
+
+        progress.setPreferredSize(new java.awt.Dimension(270, 16));
+        progress.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                progressStateChanged(evt);
+            }
+        });
+        getContentPane().add(progress, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 370, -1, -1));
 
         jLabel_CR_.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel_CR_.setForeground(new java.awt.Color(255, 255, 255));
