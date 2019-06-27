@@ -57,7 +57,7 @@ public class Pedidos {
         Connection conn= new Conexion().connect();
         
         ArrayList<Pedidos> listaPedidos= new ArrayList<>();
-        String sql="SELECT * FROM `factura_pedido` WHERE date(`time`) = \""+fecha+"\"";
+        String sql="SELECT * FROM `temp_pedido` WHERE date(`time`) = \""+fecha+"\"";
         
         try {
             Statement stm;
@@ -93,7 +93,7 @@ public class Pedidos {
         Connection conn= new Conexion().connect();
         
         ArrayList<Pedidos> listaPedidos= new ArrayList<>();
-        String sql="SELECT * FROM `factura_pedido` WHERE `factura_venta_id` = "+numeroFactura;
+        String sql="SELECT * FROM `temp_pedido` WHERE `temp_venta_id` = "+numeroFactura;
         
         try {
             Statement stm;

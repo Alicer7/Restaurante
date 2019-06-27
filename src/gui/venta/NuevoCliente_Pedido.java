@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Freddy Camposeco <ankoku.fj@gmail.com> <www.stufs.rf.gd>
  */
-public class NuevoCliente extends javax.swing.JFrame {
+public class NuevoCliente_Pedido extends javax.swing.JFrame {
 
     public void getBuscarComida() {
         try {
@@ -192,7 +192,7 @@ public class NuevoCliente extends javax.swing.JFrame {
     /**
      * Creates new form FacturaNueva
      */
-    public NuevoCliente() {
+    public NuevoCliente_Pedido() {
         initComponents();
 //      
         tabla();
@@ -673,26 +673,11 @@ public class NuevoCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_Aceptar_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Aceptar_ActionPerformed
-        Conexion cone = new Conexion();
+        int factura = gui.venta.Ventas.IDVENTATEMPORAL;
+       Conexion cone = new Conexion();
         com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
         PreparedStatement ps = null;
-        ResultSet rs = null;
-        int TEST = 0;
-        try {
-
-            ps = conn.prepareStatement("INSERT INTO `temp_venta`  (`estado`) VALUES (?)");
-            ps.setString(1, "Activa");
-            ps.execute();
-
-            ps = conn.prepareStatement("select id from temp_venta order by id desc limit 1");
-            rs = ps.executeQuery();
-
-            while (rs.next()) {
-                TEST = (rs.getInt("id"));
-
-            }
-        } catch (SQLException ex) {
-        }
+       
 
         try {
             int filas = jtPedido.getRowCount();
@@ -703,12 +688,12 @@ public class NuevoCliente extends javax.swing.JFrame {
                 String costo = (String) jtPedido.getValueAt(row, 3);
 
                 ps = conn.prepareStatement("INSERT INTO `temp_pedido` (`temp_venta_id`, `comida_id`, `comida_cantidad`, `costo`) VALUES (?,?,?,?)");
-                ps.setInt(1, TEST);
+                ps.setInt(1, factura);
                 ps.setInt(2, id_comida);
                 ps.setString(3, cantidad);
                 ps.setString(4, costo);
                 ps.execute();
-                System.out.println("asdf" + TEST);
+                System.out.println("asdf" + factura);
             }
             JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
         } catch (SQLException ex) {
@@ -854,21 +839,29 @@ public class NuevoCliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NuevoCliente.class
+            java.util.logging.Logger.getLogger(NuevoCliente_Pedido.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NuevoCliente.class
+            java.util.logging.Logger.getLogger(NuevoCliente_Pedido.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NuevoCliente.class
+            java.util.logging.Logger.getLogger(NuevoCliente_Pedido.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NuevoCliente.class
+            java.util.logging.Logger.getLogger(NuevoCliente_Pedido.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -881,7 +874,7 @@ public class NuevoCliente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NuevoCliente().setVisible(true);
+                new NuevoCliente_Pedido().setVisible(true);
             }
         });
     }

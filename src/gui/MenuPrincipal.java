@@ -23,8 +23,6 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class MenuPrincipal extends javax.swing.JFrame {
 
-  
-
     private void exit() {
 
         String botones[] = {"Cerrar", "Cancelar"};
@@ -54,11 +52,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);    // hacemos que cuando se cierre la ventana termina todo proceso
 
     }
+
     /**
      * Creates new form MenuPrincipal
      */
     public MenuPrincipal() {
-        
+
         initComponents();
         configurarVentana();
         // incluimos un ícono para la aplicación
@@ -377,8 +376,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        gui.cocina.MateriaprimaDeReceta mats = new gui.cocina.MateriaprimaDeReceta();
-        mats.setVisible(true);
+        gui.cocina.MateriaprimaDeReceta recipe = new gui.cocina.MateriaprimaDeReceta();
+        recipe.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton_Administracion_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Administracion_ActionPerformed

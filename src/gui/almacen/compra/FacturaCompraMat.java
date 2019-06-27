@@ -5,17 +5,23 @@
  */
 package gui.almacen.compra;
 
+import com.toedter.calendar.JDateChooser;
 import core.database.Conexion;
+import static java.awt.Frame.NORMAL;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,9 +29,9 @@ import javax.swing.table.DefaultTableModel;
  * @author Alicer
  */
 public class FacturaCompraMat extends javax.swing.JFrame {
-
+    
     private void cerrar() {
-
+        
         String botones[] = {"Cerrar", "Cancelar"};
         int eleccion = JOptionPane.showOptionDialog(this, "¿Desea cerrar la aplicación?", "Título", 0, 0, null, botones, this);
         if (eleccion == JOptionPane.YES_OPTION) {
@@ -36,7 +42,9 @@ public class FacturaCompraMat extends javax.swing.JFrame {
     int ID_ARTICULO = 0;
     String NOMBRE_ARTICULO = null;
     Double COSTO = 0.0;
-
+    String RESULTADO = null;
+    private Date date = new Date();
+    
     public void tabla() {
         DefaultTableModel modelo = new DefaultTableModel();
         jtProductos.setModel(modelo);
@@ -46,7 +54,7 @@ public class FacturaCompraMat extends javax.swing.JFrame {
         modelo.addColumn("Precio");
         modelo.addColumn("Totalw");
     }
-
+    
     public void popuptable() {
         JPopupMenu popmenu = new JPopupMenu();
         JMenuItem menuitem = new JMenuItem("Eliminar", new ImageIcon(getClass().getResource("/core/resources/icons/eli.png")));
@@ -68,9 +76,9 @@ public class FacturaCompraMat extends javax.swing.JFrame {
                 }
             }
         });
-
+        
         popmenu.add(menuitem);
-
+        
         jtProductos.setComponentPopupMenu(popmenu);
     }
 
@@ -139,12 +147,12 @@ public class FacturaCompraMat extends javax.swing.JFrame {
         txtProveedor = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtEncargado = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
         txtMonto = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jcFecha = new com.toedter.calendar.JDateChooser();
         jLabel8 = new javax.swing.JLabel();
         txtNit = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        lblFECHA = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtProductos = new javax.swing.JTable();
@@ -202,11 +210,6 @@ public class FacturaCompraMat extends javax.swing.JFrame {
         txtEncargado.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel2.add(txtEncargado, new org.netbeans.lib.awtextra.AbsoluteConstraints(672, 28, 266, 31));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("Fecha:");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 112, 98, 31));
-
         txtMonto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel2.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(672, 70, 266, 31));
 
@@ -214,9 +217,6 @@ public class FacturaCompraMat extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Monto:");
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 70, 98, 31));
-
-        jcFecha.setDateFormatString("yyyy-MM-dd");
-        jPanel2.add(jcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(672, 112, 266, 28));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -226,11 +226,26 @@ public class FacturaCompraMat extends javax.swing.JFrame {
         txtNit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel2.add(txtNit, new org.netbeans.lib.awtextra.AbsoluteConstraints(364, 28, 126, 31));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/CalendarX32.png"))); // NOI18N
+        jLabel1.setText("Seleccionar Fecha:");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 120, -1, 30));
+
+        lblFECHA.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblFECHA.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(lblFECHA, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 120, 110, 30));
+
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 28, 1078, 168));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jtProductos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jtProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -246,6 +261,7 @@ public class FacturaCompraMat extends javax.swing.JFrame {
 
         jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, 644, 266));
 
+        jtArticulos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jtArticulos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -326,46 +342,52 @@ public class FacturaCompraMat extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int ID_FACTURA = 0;
-
+        
         String uno = txtDescripcion.getText();
         String dos = txtEncargado.getText();
         String tres = txtFactura.getText();
         String cuatro = txtMonto.getText();
         String cinco = txtNit.getText();
         String seis = txtProveedor.getText();
-
+        
         if (uno.equals("") || dos.equals("") || tres.equals("") || cuatro.equals("") || cinco.equals("") || seis.equals("")) {
             JOptionPane.showMessageDialog(this, "Debe llenar los campos requeridos");
         } else {
-
+            
             try {
                 Conexion cone = new Conexion();
                 ResultSet rs = null;
                 com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
                 PreparedStatement ps = null;
-                ps = conn.prepareStatement("INSERT INTO `factura_compra` (`numfactura`, `nit`, `monto`) VALUES (?,?,?)");
-
+                ps = conn.prepareStatement("INSERT INTO `factura_compra` (`numfactura`, `nit`, `monto`, fecha, descripcion, proveedor, encargado) VALUES (?,?,?,?,?,?,?)");
+                
                 ps.setInt(1, Integer.parseInt(txtFactura.getText()));
                 ps.setInt(2, Integer.parseInt(txtNit.getText()));
                 ps.setString(3, txtMonto.getText());
+                ps.setString(4, RESULTADO);
+                
+                ps.setString(5, txtDescripcion.getText());
+                ps.setString(6, txtProveedor.getText());
+                ps.setString(7, txtEncargado.getText());
+                
                 ps.execute();
-
+                
                 String id_factura = "select id from factura_compra where numfactura ='" + txtFactura.getText() + "'";
                 ps = conn.prepareStatement(id_factura);
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     ID_FACTURA = (rs.getInt("id"));
                 }
-
+                
                 int filas = jtProductos.getRowCount();
                 System.out.println("filas jc " + filas);
                 for (int row = 0; row < filas; row++) {
-
+                    
                     int idMateria = (int) jtProductos.getValueAt(row, 0);
                     String descripcion = (String) jtProductos.getValueAt(row, 1);
                     int cant = (int) jtProductos.getValueAt(row, 2);
                     Double precio = (Double) jtProductos.getValueAt(row, 3);
-
+                    
                     ps = conn.prepareStatement("INSERT INTO `materia_compra` (`materiaprima_id`, `factura_compra_id`, `descripcion`, cantidad, `costo`) VALUES (?,?,?,?,?)");
                     ps.setInt(1, idMateria);
                     ps.setInt(2, ID_FACTURA);
@@ -373,7 +395,7 @@ public class FacturaCompraMat extends javax.swing.JFrame {
                     ps.setInt(4, cant);
                     ps.setDouble(5, precio);
                     ps.execute();
-                    System.out.println("ya, asdfasdf");
+                    System.out.println("ingresado correctamente");
                 }
                 JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
                 tabla();
@@ -385,7 +407,7 @@ public class FacturaCompraMat extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jtArticulosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtArticulosMouseClicked
-
+        
         int Fila = jtArticulos.getSelectedRow();
         String codigo = jtArticulos.getValueAt(Fila, 0).toString();
         String nombre = jtArticulos.getValueAt(Fila, 1).toString();
@@ -393,14 +415,14 @@ public class FacturaCompraMat extends javax.swing.JFrame {
         ID_ARTICULO = Integer.parseInt(codigo);
         NOMBRE_ARTICULO = nombre;
         COSTO = Double.parseDouble(CANTIDAD);
-
+        
         System.out.println("id " + ID_ARTICULO);
         System.out.println("Nombre: " + NOMBRE_ARTICULO);
         System.out.println("CA: " + CANTIDAD);
     }//GEN-LAST:event_jtArticulosMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        
         String cant = JOptionPane.showInputDialog(null, "Ingrese la cantidad", JOptionPane.WARNING_MESSAGE);
         int cantidad = Integer.parseInt(cant);
         Double costos = COSTO;
@@ -433,24 +455,24 @@ public class FacturaCompraMat extends javax.swing.JFrame {
             ResultSet rs = null;
             DefaultTableModel modelo = new DefaultTableModel();
             jtArticulos.setModel(modelo);
-
+            
             String sql = "select id, nombre, stock, costo from materiaprima where nombre LIKE '%" + txtBuscar.getText() + "%' order by(id) ";
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
-
+            
             ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
             int cantidadColumnas = rsMd.getColumnCount();
-
+            
             modelo.addColumn("Código.");
             modelo.addColumn("Nombre");
             modelo.addColumn("Existencia");
             modelo.addColumn("Costo");
-
+            
             int[] anchos = {10, 150, 70, 70};
             for (int i = 0; i < jtArticulos.getColumnCount(); i++) {
                 jtArticulos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
             }
-
+            
             while (rs.next()) {
                 Object[] filas = new Object[cantidadColumnas];
                 for (int i = 0; i < cantidadColumnas; i++) {
@@ -458,19 +480,72 @@ public class FacturaCompraMat extends javax.swing.JFrame {
                 }
                 modelo.addRow(filas);
             }
-
+            
         } catch (SQLException ex) {
             System.err.println(ex.toString());
         }
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
+        
         gui.almacen.RegistroLicores almacen = new gui.almacen.RegistroLicores(null, true);
         almacen.setVisible(true);
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored) {
+        }
+        
+        JDateChooser calendario = new JDateChooser();
+        Date fechaActual = new Date();
+        
+        calendario.setDate(fechaActual);
+        int selectFecha;
+        
+        System.err.println("Calendario pre");
+        selectFecha = JOptionPane.showOptionDialog(rootPane,
+                add(calendario),
+                "Selecciona la Fecha",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                null,
+                NORMAL
+        );
+        System.err.println("Calendario pos");
+        
+        try {
+            if (selectFecha == JOptionPane.OK_OPTION) {
+//                limpiarTablaFacturas();
+//                borderFacturaFecha(calendario.getDate());
+//                mostrarVentasDia(formatoFechaDia.format(calendario.getDate()));
+                date = calendario.getDate();
+                //
+                String FORMAT = "yyyy-MM-dd";
+                // Instancia de simple date format.
+                SimpleDateFormat sdf = new SimpleDateFormat(FORMAT);
+                // Formateamos la fecha del dia.
+                RESULTADO = sdf.format(date);
+                // Imprime la fecha del dia de hoy formateada 2015-11-28
+                System.out.println("Fecha formateada: " + RESULTADO);
+                lblFECHA.setText(RESULTADO);
+
+                //
+            } else {
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        try {
+            UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel");
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored) {
+        }
+
+    }//GEN-LAST:event_jLabel1MouseClicked
+    
     private void limpiar() {
         txtDescripcion.setText("");
         txtEncargado.setText("");
@@ -478,7 +553,7 @@ public class FacturaCompraMat extends javax.swing.JFrame {
         txtMonto.setText("");
         txtProveedor.setText("");
         txtNit.setText("");
-
+        
     }
 
     /**
@@ -495,16 +570,24 @@ public class FacturaCompraMat extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+                    
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FacturaCompraMat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FacturaCompraMat.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FacturaCompraMat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FacturaCompraMat.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FacturaCompraMat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FacturaCompraMat.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FacturaCompraMat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FacturaCompraMat.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -519,11 +602,11 @@ public class FacturaCompraMat extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -532,9 +615,9 @@ public class FacturaCompraMat extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private com.toedter.calendar.JDateChooser jcFecha;
     private javax.swing.JTable jtArticulos;
     private javax.swing.JTable jtProductos;
+    private javax.swing.JLabel lblFECHA;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtEncargado;

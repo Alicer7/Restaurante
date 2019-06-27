@@ -5,9 +5,21 @@
  */
 package gui.venta;
 
+import core.database.Conexion;
 import core.utils.Pedidos;
+import java.awt.Graphics;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import static java.awt.print.Printable.NO_SUCH_PAGE;
+import static java.awt.print.Printable.PAGE_EXISTS;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JEditorPane;
+import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
 
 /**
@@ -15,51 +27,69 @@ import javax.swing.text.BadLocationException;
  * @author Freddy Camposeco <ankoku.fj@gmail.com> <www.stufs.rf.gd>
  */
 public class Cobrar extends javax.swing.JFrame {
+   
 
-    /**
-     * Creates new form Cobrar
-     */
+   public int imprimir (Graphics g, PageFormat f, int pageIndex)
+   {
+      if (pageIndex == 0)
+      {
+         // Imprime "Hola mundo" en la primera pagina, en la posicion 100,100
+         jScrollPane_View_.paint(g);
+         return PAGE_EXISTS;
+      }
+      else
+         return NO_SUCH_PAGE;
+   }
+
+    
     public Cobrar() {
         initComponents();
+        try {
+            mostrarVentasDetalleNumeroFactura(gui.venta.Ventas.PRUEBA);
+        } catch (BadLocationException ex) {
+            Logger.getLogger(Cobrar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    private void mostrarVentasDetalleNumeroFactura ( Integer numeroFactura ) throws BadLocationException{
+    private void mostrarVentasDetalleNumeroFactura(Integer numeroFactura) throws BadLocationException {
         JEditorPane viwer = new JEditorPane();
         viwer.setSize(300, 588);
         viwer.setContentType("text/html");
         jScrollPane_View_.setViewportView(viwer);
-        
-        Pedidos pedidos = new Pedidos();
-        
-        // SQL
-        ArrayList<Pedidos> lista = pedidos.listaPedidosNumeroFactura(numeroFactura); 
-        
-        Double totalConsumo=0.999;    
 
-        Object filaData [][]= new Object[lista.size()][11];
-                
-        for (int i=0 ; i < lista.size() ; i++){
-            filaData[i][0]=lista.get(i).getIdPedido();
-            filaData[i][1]=lista.get(i).getFacturaId();
-            filaData[i][2]=lista.get(i).getMenuId();
-            filaData[i][3]=lista.get(i).getMenuCantidad();
-            filaData[i][4]=lista.get(i).getComidaId();
-            filaData[i][5]=lista.get(i).getComidaCantidad();
-            filaData[i][6]=lista.get(i).getBebidaId();
-            filaData[i][7]=lista.get(i).getBebidaCantidad();
-            filaData[i][8]="Q "+lista.get(i).getCosto();
-            filaData[i][9]=lista.get(i).getTiempo();
-            filaData[i][10]=lista.get(i).getSolvente();
+        Pedidos pedidos = new Pedidos();
+
+        // SQL
+        ArrayList<Pedidos> lista = pedidos.listaPedidosNumeroFactura(numeroFactura);
+
+        Double totalConsumo = 0.999;
+
+        Object filaData[][] = new Object[lista.size()][11];
+
+        for (int i = 0; i < lista.size(); i++) {
+            filaData[i][0] = lista.get(i).getIdPedido();
+            filaData[i][1] = lista.get(i).getFacturaId();
+            filaData[i][2] = lista.get(i).getMenuId();
+            filaData[i][3] = lista.get(i).getMenuCantidad();
+            filaData[i][4] = lista.get(i).getComidaId();
+            filaData[i][5] = lista.get(i).getComidaCantidad();
+            filaData[i][6] = lista.get(i).getBebidaId();
+            filaData[i][7] = lista.get(i).getBebidaCantidad();
+            filaData[i][8] = "Q " + lista.get(i).getCosto();
+            filaData[i][9] = lista.get(i).getTiempo();
+            filaData[i][10] = lista.get(i).getSolvente();
             // Conseguir Total Consumo
-            totalConsumo+=lista.get(i).getCosto();
-            
+            totalConsumo += lista.get(i).getCosto();
+            jLabel_Total_.setText(Double.toString(totalConsumo));
+
             viwer.setText(
-                    "<h3 style=\"\">Factura: "+filaData[i][1]+"</h3>"+
-                    "<p>Menu: "+filaData[i][2]+"</p>"+
-                    "<p>Costo: "+totalConsumo+"</p>"
+                    "<h3 style=\"\">Factura: " + filaData[i][1] + "</h3>"
+                    + "<p>Menu: " + filaData[i][2] + "</p>"
+                    + "<p>Costo: " + totalConsumo + "</p>"
             );
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -181,6 +211,11 @@ public class Cobrar extends javax.swing.JFrame {
         jButton_Imprimir_.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         jButton_Imprimir_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/InvoiceX48.png"))); // NOI18N
         jButton_Imprimir_.setText("Aceptar");
+        jButton_Imprimir_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_Imprimir_ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel_Imprimir_Layout = new javax.swing.GroupLayout(jPanel_Imprimir_);
         jPanel_Imprimir_.setLayout(jPanel_Imprimir_Layout);
@@ -277,9 +312,9 @@ public class Cobrar extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane_View_, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane_View_)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel_Total_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel_ModoPago_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -315,10 +350,35 @@ public class Cobrar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_PagoEfectivo_ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+    private void jButton_Imprimir_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Imprimir_ActionPerformed
+//ResultSet rs = null; 
+//        try {
+//            Conexion cone = new Conexion();
+//            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
+//
+//            String codi = "Select id_proyecto from proyecto where no_proyecto_asignado=  ";
+//            ps = conn.prepareStatement(codi);
+//            rs = ps.executeQuery();
+//            rs = ps.executeQuery();
+//
+//            while (rs.next()) {
+//                ideproye = (rs.getString("id_proyecto"));
+//            }
+//
+//            ps = conn.prepareStatement("UPDATE aprobacion SET  Abono_realizado= '");
+//            ps.execute();
+//
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Error al Guardar");
+//            System.out.println(ex);
+//        }
+
+    }//GEN-LAST:event_jButton_Imprimir_ActionPerformed
+
+/**
+ * @param args the command line arguments
+ */
+public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -329,16 +389,28 @@ public class Cobrar extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+                
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Cobrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Cobrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Cobrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Cobrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Cobrar.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Cobrar.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Cobrar.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Cobrar.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
