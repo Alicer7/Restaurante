@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -52,6 +54,10 @@ public class DetalleFacturacion extends javax.swing.JFrame {
      * Creates new form Factura_ingreso
      */
     public DetalleFacturacion() {
+        try { 
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
+        
         initComponents();
 
         try {
@@ -137,6 +143,11 @@ public class DetalleFacturacion extends javax.swing.JFrame {
         jButton_Guardar_ = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -245,6 +256,7 @@ public class DetalleFacturacion extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_Guardar_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Guardar_ActionPerformed
@@ -302,6 +314,13 @@ public class DetalleFacturacion extends javax.swing.JFrame {
     private void txtNitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNitActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNitActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        try {
+            UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel");
+        } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
+        
+    }//GEN-LAST:event_formWindowClosing
 
     private void limpiar() {
         txtComanda.setText("");

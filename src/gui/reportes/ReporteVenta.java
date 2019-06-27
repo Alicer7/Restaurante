@@ -37,22 +37,11 @@ public class ReporteVenta extends javax.swing.JDialog {
      */
     public ReporteVenta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();
-        configurarVentana();
-        
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            SwingUtilities.updateComponentTreeUI(jcInicial);
-            SwingUtilities.updateComponentTreeUI(jcFinal);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ReporteVenta.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(ReporteVenta.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(ReporteVenta.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(ReporteVenta.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
+        initComponents();
+        configurarVentana();
     }
 
     /**
@@ -79,6 +68,11 @@ public class ReporteVenta extends javax.swing.JDialog {
         jcFinal = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -225,6 +219,14 @@ public class ReporteVenta extends javax.swing.JDialog {
         
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        try { 
+            UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel");
+        } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
+        
+        dispose();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
