@@ -161,13 +161,13 @@ public class login extends javax.swing.JFrame {
                 this.dispose();
 
                 if (mod.getIdTipo() == 1) {
-                    gui.MenuPrincipal menu = new gui.MenuPrincipal();
+                    gui.MenuPrincipal_ menu = new gui.MenuPrincipal_();
                     menu.setVisible(true);
 
                     menu.lblUser.setText(mod.getNombre());
                     menu.lblCargo.setText("Administrador");
                 } else {
-                    gui.MenuPrincipal menu = new gui.MenuPrincipal();
+                    gui.MenuPrincipal_ menu = new gui.MenuPrincipal_();
                     menu.setVisible(true);
 //
                     menu.lblUser.setText(mod.getNombre());
