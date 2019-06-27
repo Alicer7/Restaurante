@@ -23,8 +23,6 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class MenuPrincipal_ extends javax.swing.JFrame {
 
-  
-
     private void exit() {
 
         String botones[] = {"Cerrar", "Cancelar"};
@@ -54,15 +52,16 @@ public class MenuPrincipal_ extends javax.swing.JFrame {
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);    // hacemos que cuando se cierre la ventana termina todo proceso
 
     }
+
     /**
      * Creates new form MenuPrincipal
      */
     public MenuPrincipal_() {
-        try { 
-            UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel"); 
-        } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
+        try {
+            UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel");
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored) {
+        }
 
-        
         initComponents();
         configurarVentana();
         // incluimos un ícono para la aplicación
