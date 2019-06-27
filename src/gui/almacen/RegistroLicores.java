@@ -47,6 +47,8 @@ public class RegistroLicores extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         txtMin = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        txtonzas = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtMateriaPrima = new javax.swing.JTable();
@@ -89,12 +91,12 @@ public class RegistroLicores extends javax.swing.JDialog {
                 txtMaxKeyReleased(evt);
             }
         });
-        jPanel2.add(txtMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 112, 84, 28));
+        jPanel2.add(txtMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 112, 100, 28));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("Stock Mínimo en botellas:");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 154, 168, 27));
+        jLabel5.setText("No. de Onzas:");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 168, 27));
 
         txtMin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,7 +108,7 @@ public class RegistroLicores extends javax.swing.JDialog {
                 txtMinKeyReleased(evt);
             }
         });
-        jPanel2.add(txtMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 154, 84, 28));
+        jPanel2.add(txtMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 154, 100, 28));
 
         jButton1.setText("Guardar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -114,7 +116,13 @@ public class RegistroLicores extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, 130, 42));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 130, 42));
+        jPanel2.add(txtonzas, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, 100, 30));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel6.setText("Stock Mínimo en botellas:");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 154, 168, 27));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 42, 504, 308));
 
@@ -202,14 +210,20 @@ public class RegistroLicores extends javax.swing.JDialog {
                 Conexion cone = new Conexion();
                 com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
                 PreparedStatement ps = null;
-                ps = conn.prepareStatement("INSERT INTO `materiaprima` (`nombre`, `stock`, `stock_min`, `stock_max`) VALUES (?,?,?,?)");
+                ps = conn.prepareStatement("INSERT INTO `materiaprima` (`nombre`, `stock`, `stock_min`, `stock_max`, onzas) VALUES (?,?,?,?,?)");
                 ps.setString(1, txtDescripcion.getText());
                 ps.setInt(2, 0);
                 ps.setString(3, txtMin.getText());
                 ps.setString(4, txtMax.getText());
+                ps.setDouble(5, Double.parseDouble(txtonzas.getText().replaceAll(",", "")));
                 ps.execute();
                 JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
 
+                txtBuscar.setText("");
+                txtDescripcion.setText("");
+                txtMax.setText("");
+                txtMin.setText("");
+                txtonzas.setText("");
             } catch (SQLException ex) {
                 Logger.getLogger(RegistroLicores.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -425,6 +439,7 @@ public class RegistroLicores extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -433,5 +448,6 @@ public class RegistroLicores extends javax.swing.JDialog {
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtMax;
     private javax.swing.JTextField txtMin;
+    private javax.swing.JTextField txtonzas;
     // End of variables declaration//GEN-END:variables
 }
