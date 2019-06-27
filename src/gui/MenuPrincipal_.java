@@ -99,6 +99,8 @@ public class MenuPrincipal_ extends javax.swing.JFrame {
         jButton_Ventas_ = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jButton_Administracion_ = new javax.swing.JButton();
+        jButton_Administracion_1 = new javax.swing.JButton();
+        jButton_Administracion_2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(870, 419));
@@ -241,13 +243,32 @@ public class MenuPrincipal_ extends javax.swing.JFrame {
             }
         });
 
+        jButton_Administracion_1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton_Administracion_1.setText("Inventario General");
+        jButton_Administracion_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_Administracion_1ActionPerformed(evt);
+            }
+        });
+
+        jButton_Administracion_2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton_Administracion_2.setText("Descuento a inventarios");
+        jButton_Administracion_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_Administracion_2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton_Administracion_, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton_Administracion_, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                    .addComponent(jButton_Administracion_1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                    .addComponent(jButton_Administracion_2, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -255,7 +276,11 @@ public class MenuPrincipal_ extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton_Administracion_, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(271, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton_Administracion_1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton_Administracion_2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(149, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 250, 350));
@@ -309,9 +334,8 @@ public class MenuPrincipal_ extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-
-        gui.venta.DetalleFacturacion temp = new gui.venta.DetalleFacturacion();
-        temp.setVisible(true);
+        gui.venta.Ventas cobro = new gui.venta.Ventas();
+        cobro.setVisible(true);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -362,6 +386,17 @@ public class MenuPrincipal_ extends javax.swing.JFrame {
         carnes.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 
+    private void jButton_Administracion_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Administracion_1ActionPerformed
+        gui.inventario.Articulos articulos = new gui.inventario.Articulos();
+        articulos.setVisible(true);
+
+    }//GEN-LAST:event_jButton_Administracion_1ActionPerformed
+
+    private void jButton_Administracion_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Administracion_2ActionPerformed
+        gui.inventario.SalidaInventario salida = new gui.inventario.SalidaInventario();
+        salida.setVisible(true);
+    }//GEN-LAST:event_jButton_Administracion_2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -408,6 +443,8 @@ public class MenuPrincipal_ extends javax.swing.JFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JButton jButton_Administracion_;
+    private javax.swing.JButton jButton_Administracion_1;
+    private javax.swing.JButton jButton_Administracion_2;
     private javax.swing.JButton jButton_Ventas_;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

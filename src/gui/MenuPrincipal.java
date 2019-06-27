@@ -369,7 +369,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-
+        gui.almacen.compra.FacturaCompraMat mat = new gui.almacen.compra.FacturaCompraMat();
+        mat.setVisible(true);
 
     }//GEN-LAST:event_jButton4ActionPerformed
 

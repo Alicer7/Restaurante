@@ -41,42 +41,42 @@ public class SalidaInventario extends javax.swing.JFrame {
 
         JFrame frame = new JFrame();
         frame.setLayout(new BorderLayout());
-
-        try {
-            jtProductos.setModel(modelo);
-            PreparedStatement ps = null;
-            ResultSet rs = null;
-            Conexion conn = new Conexion();
-            java.sql.Connection con = conn.connect();
-
-            String sql = "SELECT id, Nombre_articulo, Stock, area FROM inventario ";
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-
-            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
-            int cantidadColumnas = rsMd.getColumnCount();
-
-            modelo.addColumn("No.");
-            modelo.addColumn("Artículo");
-            modelo.addColumn("Existencia");
-            modelo.addColumn("Área");
-
-            int[] anchos = {50, 200, 50, 200};
-            for (int i = 0; i < jtProductos.getColumnCount(); i++) {
-                jtProductos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
-            }
-
-            while (rs.next()) {
-                Object[] filas = new Object[cantidadColumnas];
-                for (int i = 0; i < cantidadColumnas; i++) {
-                    filas[i] = rs.getObject(i + 1);
-                }
-                modelo.addRow(filas);
-            }
-
-        } catch (SQLException ex) {
-            System.err.println(ex.toString());
-        }
+//
+//        try {
+//            jtProductos.setModel(modelo);
+//            PreparedStatement ps = null;
+//            ResultSet rs = null;
+//            Conexion conn = new Conexion();
+//            java.sql.Connection con = conn.connect();
+//
+//            String sql = "SELECT id, Nombre_articulo, Stock, area FROM inventario ";
+//            ps = con.prepareStatement(sql);
+//            rs = ps.executeQuery();
+//
+//            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
+//            int cantidadColumnas = rsMd.getColumnCount();
+//
+//            modelo.addColumn("No.");
+//            modelo.addColumn("Artículo");
+//            modelo.addColumn("Existencia");
+//            modelo.addColumn("Área");
+//
+//            int[] anchos = {50, 200, 50, 200};
+//            for (int i = 0; i < jtProductos.getColumnCount(); i++) {
+//                jtProductos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+//            }
+//
+//            while (rs.next()) {
+//                Object[] filas = new Object[cantidadColumnas];
+//                for (int i = 0; i < cantidadColumnas; i++) {
+//                    filas[i] = rs.getObject(i + 1);
+//                }
+//                modelo.addRow(filas);
+//            }
+//
+//        } catch (SQLException ex) {
+//            System.err.println(ex.toString());
+//        }
     }
 
     @SuppressWarnings("unchecked")
@@ -97,6 +97,8 @@ public class SalidaInventario extends javax.swing.JFrame {
         txtMotivo = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtProductos = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        txtbuscar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -156,7 +158,7 @@ public class SalidaInventario extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, 126, 42));
+        jPanel2.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 170, 126, 42));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -167,7 +169,7 @@ public class SalidaInventario extends javax.swing.JFrame {
         txtMotivo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPanel2.add(txtMotivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, 350, 30));
 
-        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 760, 280));
+        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 760, 250));
 
         jtProductos.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jtProductos.setModel(new javax.swing.table.DefaultTableModel(
@@ -188,6 +190,16 @@ public class SalidaInventario extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jtProductos);
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel6.setText("Buscar: ");
+
+        txtbuscar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtbuscarKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -198,15 +210,25 @@ public class SalidaInventario extends javax.swing.JFrame {
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 982, Short.MAX_VALUE))
                 .addGap(39, 39, 39))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(343, 343, 343)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -306,6 +328,48 @@ public class SalidaInventario extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
     }//GEN-LAST:event_formWindowOpened
 
+    private void txtbuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyReleased
+
+        
+        try {
+            DefaultTableModel modelo = new DefaultTableModel();
+            jtProductos.setModel(modelo);
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            Conexion conn = new Conexion();
+            java.sql.Connection con = conn.connect();
+
+            String sql = "SELECT id, Nombre_articulo, Stock, area FROM inventario where Nombre_articulo LIKE '%" + txtbuscar.getText() + "%' order by(id)";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
+            int cantidadColumnas = rsMd.getColumnCount();
+
+            modelo.addColumn("No.");
+            modelo.addColumn("Artículo");
+            modelo.addColumn("Existencia");
+            modelo.addColumn("Área");
+
+            int[] anchos = {50, 200, 50, 200};
+            for (int i = 0; i < jtProductos.getColumnCount(); i++) {
+                jtProductos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+            }
+
+            while (rs.next()) {
+                Object[] filas = new Object[cantidadColumnas];
+                for (int i = 0; i < cantidadColumnas; i++) {
+                    filas[i] = rs.getObject(i + 1);
+                }
+                modelo.addRow(filas);
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.toString());
+        }
+
+    }//GEN-LAST:event_txtbuscarKeyReleased
+
     private void limpiar() {
         txtCantIngreso.setText("");
         txtDescripcion.setText("");
@@ -353,6 +417,7 @@ public class SalidaInventario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
@@ -362,5 +427,6 @@ public class SalidaInventario extends javax.swing.JFrame {
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtMotivo;
+    private javax.swing.JTextField txtbuscar;
     // End of variables declaration//GEN-END:variables
 }
