@@ -25,8 +25,8 @@ public class Main {
             UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel");
         } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
         
-//        Splash gui = new Splash();
-        MenuPrincipal_ gui = new MenuPrincipal_();
+        Splash gui = new Splash();
+//        MenuPrincipal_ gui = new MenuPrincipal_();
         gui.pack();
         gui.setVisible(true); //Create and show the GUI.
     }
