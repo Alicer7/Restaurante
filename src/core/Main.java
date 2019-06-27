@@ -7,6 +7,7 @@ package core;
  */
 
 import gui.MenuPrincipal;
+import gui.MenuPrincipal_;
 import gui.Splash;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -25,6 +26,7 @@ public class Main {
         } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
         
         Splash gui = new Splash();
+//        MenuPrincipal_ gui = new MenuPrincipal_();
         gui.pack();
         gui.setVisible(true); //Create and show the GUI.
     }
