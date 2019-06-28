@@ -24,12 +24,18 @@ public class Conexion {
 //    private final String USER = "root";
 //    private final String PASSWORD = "333561222587421319";
     
+//    private final String port="3306";
+//    private final String url = "jdbc:mysql://192.168.1.2:"+port+"/"; // Ubicación de la BD.
+//    private final String db = "cafebar"; // Nombre de la BD.
+//    private final String user = "root";
+////    private final String password = "333561222587421319";
+//    private final String password = "fe95aca7184807452_7";
+    
     private final String port="3306";
-    private final String url = "jdbc:mysql://192.168.1.2:"+port+"/"; // Ubicación de la BD.
+    private final String url = "jdbc:mysql://dbsx.cnou9bzubn5m.us-east-2.rds.amazonaws.com:"+port+"/"; // Ubicación de la BD.
     private final String db = "cafebar"; // Nombre de la BD.
-    private final String user = "root";
-//    private final String password = "333561222587421319";
-    private final String password = "fe95aca7184807452_7";
+    private final String user = "freddy";
+    private final String password = "%Freddy101";
     
     private Connection DBConnection;
     

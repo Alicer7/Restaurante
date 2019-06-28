@@ -5,21 +5,14 @@
  */
 package gui.venta;
 
-import core.database.Conexion;
 import core.utils.Pedidos;
 import java.awt.Graphics;
 import java.awt.print.PageFormat;
-import java.awt.print.Printable;
 import static java.awt.print.Printable.NO_SUCH_PAGE;
 import static java.awt.print.Printable.PAGE_EXISTS;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JEditorPane;
-import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
 
 /**
@@ -29,16 +22,17 @@ import javax.swing.text.BadLocationException;
 public class Cobrar extends javax.swing.JFrame {
    
 
-   public int imprimir (Graphics g, PageFormat f, int pageIndex)
+//   public int imprimir (Graphics g, PageFormat f, int pageIndex)
+   public int imprimir ()
    {
-      if (pageIndex == 0)
-      {
+//      if (pageIndex == 0)
+//      {
          // Imprime "Hola mundo" en la primera pagina, en la posicion 100,100
-         jScrollPane_View_.paint(g);
+         jEditorPane_View_.paint(getGraphics());
          return PAGE_EXISTS;
-      }
-      else
-         return NO_SUCH_PAGE;
+//      }
+//      else
+//         return NO_SUCH_PAGE;
    }
 
     
@@ -52,10 +46,7 @@ public class Cobrar extends javax.swing.JFrame {
     }
 
     private void mostrarVentasDetalleNumeroFactura(Integer numeroFactura) throws BadLocationException {
-        JEditorPane viwer = new JEditorPane();
-        viwer.setSize(300, 588);
-        viwer.setContentType("text/html");
-        jScrollPane_View_.setViewportView(viwer);
+        jEditorPane_View_.setContentType("text/html");
 
         Pedidos pedidos = new Pedidos();
 
@@ -82,7 +73,7 @@ public class Cobrar extends javax.swing.JFrame {
             totalConsumo += lista.get(i).getCosto();
             jLabel_Total_.setText(Double.toString(totalConsumo));
 
-            viwer.setText(
+            jEditorPane_View_.setText(
                     "<h3 style=\"\">Factura: " + filaData[i][1] + "</h3>"
                     + "<p>Menu: " + filaData[i][2] + "</p>"
                     + "<p>Costo: " + totalConsumo + "</p>"
@@ -111,6 +102,7 @@ public class Cobrar extends javax.swing.JFrame {
         jLabel_Total_ = new javax.swing.JLabel();
         jLabel_TotalQ_ = new javax.swing.JLabel();
         jScrollPane_View_ = new javax.swing.JScrollPane();
+        jEditorPane_View_ = new javax.swing.JEditorPane();
         jPanel_Saldo_ = new javax.swing.JPanel();
         jLabel_Saldo_ = new javax.swing.JLabel();
         jLabel_SaldoQ_ = new javax.swing.JLabel();
@@ -262,6 +254,7 @@ public class Cobrar extends javax.swing.JFrame {
         );
 
         jScrollPane_View_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vista Previa", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+        jScrollPane_View_.setViewportView(jEditorPane_View_);
 
         jPanel_Saldo_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Saldo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
@@ -373,6 +366,7 @@ public class Cobrar extends javax.swing.JFrame {
 //            System.out.println(ex);
 //        }
 
+//        imprimir();
     }//GEN-LAST:event_jButton_Imprimir_ActionPerformed
 
 /**
@@ -424,6 +418,7 @@ public static void main(String args[]) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Imprimir_;
+    private javax.swing.JEditorPane jEditorPane_View_;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
