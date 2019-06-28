@@ -1,8 +1,6 @@
 package gui;
 
 import gui.Cargar;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 public final class Splash extends javax.swing.JFrame {
 
@@ -116,10 +114,8 @@ public final class Splash extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Splash().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Splash().setVisible(true);
         });
     }
 
