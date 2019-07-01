@@ -23,6 +23,40 @@ public class Almacen {
     
     private final Conexion conexion = new Conexion();
     
+    public ResultSet mostrarCarnes (){
+        
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        try {
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) conexion.connect();
+            String sql = "SELECT `id`, `nombre`, `stock`, `costo` FROM `materiaprima`";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            rs.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.toString());
+        }
+        return rs;
+    }
+    
+    public ResultSet buscarCarnes (String busqueda){
+        
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        try {
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) conexion.connect();
+            String sql = "select id, nombre, stock, costo from materiaprima where nombre LIKE '%" + busqueda + "%' order by(id) ";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            rs.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.toString());
+        }
+        return rs;
+    }
+
     public void registroCarnes (String nombre, Integer stock, Integer stock_min, Integer stock_max){
         try (com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) conexion.connect()) {
             PreparedStatement ps = null;
@@ -36,23 +70,6 @@ public class Almacen {
         } catch (SQLException ex) {
             Logger.getLogger(Almacen.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    
-    public ResultSet mostrarCarnes (){
-        
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        
-        try {
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) conexion.connect();
-            String sql = "select id, nombre, stock, costo from materiaprima ";
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
-            rs.close();
-        } catch (SQLException ex) {
-            System.err.println(ex.toString());
-        }
-        return rs;
     }
     
 }

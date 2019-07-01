@@ -237,16 +237,10 @@ public class RegistroCarnes extends javax.swing.JDialog {
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         try {
-            Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
-            PreparedStatement ps = null;
-            ResultSet rs = null;
             DefaultTableModel modelo = new DefaultTableModel();
             jtMateriaPrima.setModel(modelo);
-
-            String sql = "select id, nombre, stock, costo from materiaprima where nombre LIKE '%" + txtBuscar.getText() + "%' order by(id) ";
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
+            
+            ResultSet rs = almacen.buscarCarnes(txtBuscar.getText());
 
             ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
             int cantidadColumnas = rsMd.getColumnCount();
