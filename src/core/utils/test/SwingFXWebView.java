@@ -36,17 +36,14 @@ public class SwingFXWebView extends JPanel {
   
     public static void main(String ...args){  
         // Run this later:
-        SwingUtilities.invokeLater(new Runnable() {  
-            @Override
-            public void run() {  
-                final JFrame frame = new JFrame();  
-                 
-                frame.getContentPane().add(new SwingFXWebView());  
-                 
-                frame.setMinimumSize(new Dimension(300, 600));  
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
-                frame.setVisible(true);  
-            }  
+        SwingUtilities.invokeLater(() -> {
+            final JFrame frame = new JFrame();
+            
+            frame.getContentPane().add(new SwingFXWebView());
+            
+            frame.setMinimumSize(new Dimension(640, 480));
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setVisible(true);  
         });     
     }  
      

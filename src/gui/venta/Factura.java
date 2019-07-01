@@ -6,7 +6,7 @@
 package gui.venta;
 
 import java.util.ArrayList;
-import core.utils.Pedidos;
+import core.database.querry.Pedidos;
 import javax.swing.table.DefaultTableModel;
 
 /**

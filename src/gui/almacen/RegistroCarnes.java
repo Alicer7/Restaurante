@@ -6,6 +6,7 @@
 package gui.almacen;
 
 import core.database.Conexion;
+import core.database.querry.Almacen;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -21,9 +22,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class RegistroCarnes extends javax.swing.JDialog {
 
-    /**
-     * Creates new form Almacen_materia_prima
-     */
+    Almacen almacen = new Almacen();
+    
     public RegistroCarnes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -52,8 +52,8 @@ public class RegistroCarnes extends javax.swing.JDialog {
         txtMin = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtMinOnzas = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButton_Guardar_ = new javax.swing.JButton();
+        jButton_MostrarTodo_ = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtMateriaPrima = new javax.swing.JTable();
         txtBuscar = new javax.swing.JTextField();
@@ -110,23 +110,23 @@ public class RegistroCarnes extends javax.swing.JDialog {
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 98, 27));
         jPanel2.add(txtMinOnzas, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, 84, 28));
 
-        jButton1.setText("Guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton_Guardar_.setText("Guardar");
+        jButton_Guardar_.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton_Guardar_ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 140, 42));
+        jPanel2.add(jButton_Guardar_, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 140, 42));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 42, 490, 320));
 
-        jButton2.setText("Mostrar Todos");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButton_MostrarTodo_.setText("Mostrar Todos");
+        jButton_MostrarTodo_.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButton_MostrarTodo_ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(968, 20, 150, 28));
+        jPanel1.add(jButton_MostrarTodo_, new org.netbeans.lib.awtextra.AbsoluteConstraints(968, 20, 150, 28));
 
         jtMateriaPrima.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -188,76 +188,52 @@ public class RegistroCarnes extends javax.swing.JDialog {
         txtMinOnzas.setText(Integer.toString(onzas));
     }//GEN-LAST:event_txtMinKeyReleased
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton_Guardar_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Guardar_ActionPerformed
 
-        String uno = txtDescripcion.getText();
-        String dos = txtMax.getText();
-        String tres = txtMin.getText();
-
-        if (uno.equals("") || dos.equals("") || tres.equals("")) {
+        String nombre = txtDescripcion.getText();
+        Integer stock = 0;
+        Integer stock_min = Integer.valueOf(txtMax.getText());
+        Integer stock_max = Integer.valueOf(txtMin.getText());
+        
+        if (nombre.equals("") || stock_min.equals("") || stock_max.equals("")) {
             JOptionPane.showMessageDialog(this, "Debe llenar los campos requeridos");
         } else {
-
-            try {
-                Conexion cone = new Conexion();
-                com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
-                PreparedStatement ps = null;
-                ps = conn.prepareStatement("INSERT INTO `materiaprima` (`nombre`, `stock`, `stock_min`, `stock_max`) VALUES (?,?,?,?)");
-                ps.setString(1, txtDescripcion.getText());
-                ps.setInt(2, 0);
-                ps.setString(3, txtMin.getText());
-                ps.setString(4, txtMax.getText());
-                ps.execute();
-                JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
-
-            } catch (SQLException ex) {
-                Logger.getLogger(RegistroCarnes.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            almacen.registroCarnes(nombre, stock, stock_min, stock_max);
         }
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton_Guardar_ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-        try {
-            Conexion cone = new Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
-            PreparedStatement ps = null;
-            ResultSet rs = null;
+    private void jButton_MostrarTodo_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_MostrarTodo_ActionPerformed
+        
             DefaultTableModel modelo = new DefaultTableModel();
             jtMateriaPrima.setModel(modelo);
-
-            String sql = "select id, nombre, stock, costo from materiaprima ";
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
-
-            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
-            int cantidadColumnas = rsMd.getColumnCount();
-
+                        
             modelo.addColumn("id.");
             modelo.addColumn("Nombre");
             modelo.addColumn("Existencia");
             modelo.addColumn("Costo");
+            
+            ResultSet rs = almacen.mostrarCarnes();
+            
+            try {
+                ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
+                int cantidadColumnas = rsMd.getColumnCount();
+                int[] anchos = {10, 30, 70, 70};
 
-            int[] anchos = {10, 30, 70, 70};
-            for (int i = 0; i < jtMateriaPrima.getColumnCount(); i++) {
-                jtMateriaPrima.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
-            }
-
-            while (rs.next()) {
-                Object[] filas = new Object[cantidadColumnas];
-                for (int i = 0; i < cantidadColumnas; i++) {
-                    filas[i] = rs.getObject(i + 1);
+                for (int i = 0; i < jtMateriaPrima.getColumnCount(); i++) {
+                    jtMateriaPrima.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
                 }
-                modelo.addRow(filas);
+                while (rs.next()) {
+                    Object[] filas = new Object[cantidadColumnas];
+                    for (int i = 0; i < cantidadColumnas; i++) {
+                        filas[i] = rs.getObject(i + 1);
+                    }
+                    modelo.addRow(filas);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(RegistroCarnes.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-        } catch (SQLException ex) {
-            System.err.println(ex.toString());
-        }
-
-
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButton_MostrarTodo_ActionPerformed
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         try {
@@ -356,8 +332,8 @@ public class RegistroCarnes extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton_Guardar_;
+    private javax.swing.JButton jButton_MostrarTodo_;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

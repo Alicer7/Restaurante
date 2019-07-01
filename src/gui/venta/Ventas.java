@@ -6,8 +6,8 @@
 package gui.venta;
 
 import com.toedter.calendar.JDateChooser;
-import core.utils.Facturas;
-import core.utils.Pedidos;
+import core.database.querry.Facturas;
+import core.database.querry.Pedidos;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;

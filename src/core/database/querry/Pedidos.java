@@ -1,4 +1,4 @@
-package core.utils;
+package core.database.querry;
 
 import core.database.Conexion;
 import java.sql.Connection;

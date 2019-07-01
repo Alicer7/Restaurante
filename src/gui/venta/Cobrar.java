@@ -5,7 +5,7 @@
  */
 package gui.venta;
 
-import core.utils.Pedidos;
+import core.database.querry.Pedidos;
 import java.awt.print.PrinterException;
 import java.sql.Array;
 import java.util.ArrayList;
