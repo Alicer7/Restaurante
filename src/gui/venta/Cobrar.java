@@ -7,7 +7,6 @@ package gui.venta;
 
 import core.database.querry.Pedidos;
 import java.awt.print.PrinterException;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +22,6 @@ public class Cobrar extends javax.swing.JFrame {
 //   public int imprimir (Graphics g, PageFormat f, int pageIndex)
     public void imprimir () {
         try {
-            
             jEditorPane_View_.print();
         } catch (PrinterException ex) {
             Logger.getLogger(Cobrar.class.getName()).log(Level.SEVERE, null, ex);

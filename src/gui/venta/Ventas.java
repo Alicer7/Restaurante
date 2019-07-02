@@ -272,7 +272,7 @@ public class Ventas extends javax.swing.JFrame {
         jLabel_BuscarPorFecha_.setFont(new java.awt.Font("Dialog", 2, 14)); // NOI18N
         jLabel_BuscarPorFecha_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/CalendarX32.png"))); // NOI18N
         jLabel_BuscarPorFecha_.setText(bundle.getString("Ventas.jLabel_BuscarPorFecha_.text")); // NOI18N
-        jLabel_BuscarPorFecha_.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel_BuscarPorFecha_.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel_BuscarPorFecha_.setMaximumSize(new java.awt.Dimension(150, 32));
         jLabel_BuscarPorFecha_.setMinimumSize(new java.awt.Dimension(150, 32));
         jLabel_BuscarPorFecha_.setPreferredSize(new java.awt.Dimension(150, 32));
@@ -285,7 +285,7 @@ public class Ventas extends javax.swing.JFrame {
         jLabel_SinCobrar_.setFont(new java.awt.Font("Dialog", 2, 14)); // NOI18N
         jLabel_SinCobrar_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/food32.png"))); // NOI18N
         jLabel_SinCobrar_.setText(bundle.getString("Ventas.jLabel_SinCobrar_.text")); // NOI18N
-        jLabel_SinCobrar_.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel_SinCobrar_.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel_SinCobrar_.setMaximumSize(new java.awt.Dimension(150, 32));
         jLabel_SinCobrar_.setMinimumSize(new java.awt.Dimension(150, 32));
         jLabel_SinCobrar_.setPreferredSize(new java.awt.Dimension(150, 32));
