@@ -33,10 +33,10 @@ public class Conexion {
     
     private final String port="3306";
 //    private final String url = "jdbc:mysql://192.168.1.2:"+port+"/"; // Ubicación de la BD.
-    private final String url = "jdbc:mysql://dbsx.cnou9bzubn5m.us-east-2.rds.amazonaws.com:"+port+"/"; // Ubicación de la BD.
+    private final String url = "jdbc:mysql://localhost:"+port+"/"; // Ubicación de la BD.
     private final String db = "cafebar"; // Nombre de la BD.
-    private final String user = "freddy";
-    private final String password = "%Freddy101";
+    private final String user = "root";
+    private final String password = "";
     
     private Connection DBConnection;
     

@@ -219,6 +219,22 @@ public class RegistroLicores extends javax.swing.JDialog {
                 ps.execute();
                 JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
 
+            } catch (SQLException ex) {
+                Logger.getLogger(RegistroLicores.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            try {
+                Conexion cone = new Conexion();
+                com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
+                PreparedStatement ps = null;
+                ps = conn.prepareStatement("INSERT INTO `materiaprima_cocina` (`nombre`, `stock`, `stock_min`, `stock_max`, onzas) VALUES (?,?,?,?,?)");
+                ps.setString(1, txtDescripcion.getText());
+                ps.setInt(2, 0);
+                ps.setString(3, txtMin.getText());
+                ps.setString(4, txtMax.getText());
+                ps.setDouble(5, Double.parseDouble(txtonzas.getText().replaceAll(",", "")));
+                ps.execute();
+
                 txtBuscar.setText("");
                 txtDescripcion.setText("");
                 txtMax.setText("");

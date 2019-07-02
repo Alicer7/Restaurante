@@ -308,11 +308,11 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
                 int id_materia = (int) jtProductos.getValueAt(row, 0);
                 Double cant = (double) jtProductos.getValueAt(row, 2);
 
-                ps = conn.prepareStatement("INSERT INTO `receta_ingrediente` (`receta_id`, `categoria_id`, `materiaprima_id`, `cantidad`) VALUES (?,?,?)");
+                ps = conn.prepareStatement("INSERT INTO `receta_ingrediente` (`receta_id`, `receta_categoria_id`,  `cantidad`, `materiaprima_cocina_id`) VALUES (?,?,?,?)");
                 ps.setInt(1, ID_RECETA);
                 ps.setInt(2, ID_CAT);
-                ps.setDouble(3, id_materia);
-                ps.setDouble(4, cant);
+                ps.setDouble(3, cant);
+                ps.setDouble(4, id_materia);
 
                 ps.execute();
                 System.out.println("ya, asdfasdf");
@@ -321,6 +321,7 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
             tabla();
             limpiar();
         } catch (SQLException ex) {
+            System.out.println("errorsql " + ex);
         }
 
 
@@ -343,7 +344,7 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Seleccione un artículo");
 
         } else {
-            String cant = JOptionPane.showInputDialog(null, "Ingrese la cantidad","Cantidad de onzas utilizadas", JOptionPane.WARNING_MESSAGE);
+            String cant = JOptionPane.showInputDialog(null, "Ingrese la cantidad", "Cantidad de onzas utilizadas", JOptionPane.WARNING_MESSAGE);
             double cantidad = Double.parseDouble(cant);
             DefaultTableModel modelo = (DefaultTableModel) jtProductos.getModel();
             Object[] fila = new Object[5];
