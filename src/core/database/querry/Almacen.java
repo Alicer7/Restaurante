@@ -8,12 +8,10 @@ package core.database.querry;
 import core.database.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,7 +21,7 @@ public class Almacen {
     
     private final Conexion conexion = new Conexion();
     
-    public ResultSet mostrarCarnes (){
+    public ResultSet mostrarCarnes (){ 
         
         PreparedStatement ps = null;
         ResultSet rs = null;
