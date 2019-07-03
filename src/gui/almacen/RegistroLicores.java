@@ -6,13 +6,19 @@
 package gui.almacen;
 
 import core.database.Conexion;
+import gui.almacen.compra.FacturaCompraMat;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,12 +27,61 @@ import javax.swing.table.DefaultTableModel;
  */
 public class RegistroLicores extends javax.swing.JDialog {
 
+    public void popuptable() {
+        JPopupMenu popmenu = new JPopupMenu();
+        JMenuItem menuitem = new JMenuItem("Modificar", new ImageIcon(getClass().getResource("/core/resources/icons/eli.png")));
+        menuitem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DefaultTableModel model = (DefaultTableModel) jtMateriaPrima.getModel();
+                int a = jtMateriaPrima.getSelectedRow();
+                if (a < 0) {
+                    JOptionPane.showMessageDialog(null,
+                            "Debe seleccionar una fila de la tabla");
+                } else {
+                    int confirmar = JOptionPane.showConfirmDialog(null,
+                            "Esta seguro que desea Modificar el producto? ");
+                    if (JOptionPane.OK_OPTION == confirmar) {
+
+                        String Nombre = JOptionPane.showInputDialog(null, "Ingrese el Nombre");
+                        String onzas = JOptionPane.showInputDialog(null, "Ingrese las onzas");
+
+                        try {
+                            Conexion cone = new Conexion();
+                            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
+                            PreparedStatement ps = null;
+                            ps = conn.prepareStatement("UPDATE `materiaprima` SET `nombre` = '" + Nombre + "', `onzas` = '" + onzas + "' WHERE (`id` = '" + ID_ARTICULO + "')");
+                            ps.execute();
+                            
+                              ps = conn.prepareStatement("UPDATE `materiaprima_cocina` SET `nombre` = '" + Nombre + "', `onzas` = '" + onzas + "' WHERE (`id` = '" + ID_ARTICULO + "')");
+                            ps.execute();
+                            
+                            
+                        } catch (SQLException ex) {
+                            Logger.getLogger(FacturaCompraMat.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+//                        model.removeRow(a);
+
+                        JOptionPane.showMessageDialog(null, "Registro Modificado");
+
+                    }
+                }
+            }
+        });
+
+        popmenu.add(menuitem);
+
+        jtMateriaPrima.setComponentPopupMenu(popmenu);
+    }
+    int ID_ARTICULO = 0;
+
     /**
      * Creates new form Almacen_materia_prima
      */
     public RegistroLicores(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        popuptable();
     }
 
     /**
@@ -146,6 +201,11 @@ public class RegistroLicores extends javax.swing.JDialog {
                 "Código", "Nombre", "Existencia", "Costo"
             }
         ));
+        jtMateriaPrima.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtMateriaPrimaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtMateriaPrima);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 56, 574, 294));
@@ -342,6 +402,15 @@ public class RegistroLicores extends javax.swing.JDialog {
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarActionPerformed
+
+    private void jtMateriaPrimaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtMateriaPrimaMouseClicked
+        int Fila = jtMateriaPrima.getSelectedRow();
+        String codigo = jtMateriaPrima.getValueAt(Fila, 0).toString();
+        ID_ARTICULO = Integer.parseInt(codigo);
+        System.out.println("id : " + ID_ARTICULO);
+
+
+    }//GEN-LAST:event_jtMateriaPrimaMouseClicked
 
     /**
      * @param args the command line arguments
