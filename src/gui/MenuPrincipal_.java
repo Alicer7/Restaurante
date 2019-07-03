@@ -22,29 +22,29 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author Alicer
  */
 public class MenuPrincipal_ extends javax.swing.JFrame {
-
+    
     private void exit() {
-
+        
         String botones[] = {"Cerrar", "Cancelar"};
         int eleccion = JOptionPane.showOptionDialog(this, "¿Desea cerrar la aplicación?", "", 0, 0, null, botones, this);
         if (eleccion == JOptionPane.YES_OPTION) {
             System.exit(0);
         } else if (eleccion == JOptionPane.NO_OPTION) {
         }
-
+        
     }
-
+    
     private void cerrar() {
-
+        
         String botones[] = {"Cerrar", "Cancelar"};
         int eleccion = JOptionPane.showOptionDialog(this, "¿Desea cerrar la aplicación?", "Cerrar Ventana?", 0, 0, null, botones, this);
         if (eleccion == JOptionPane.YES_OPTION) {
             dispose();
         } else if (eleccion == JOptionPane.NO_OPTION) {
         }
-
+        
     }
-
+    
     private void configurarVentana() {
         this.setLocationRelativeTo(null);                       // centramos la ventana en la pantalla
         this.setResizable(false);                               // hacemos que la ventana no sea redimiensionable
@@ -67,6 +67,7 @@ public class MenuPrincipal_ extends javax.swing.JFrame {
         }
         initComponents();
         configurarVentana();
+        jButton_RegistroCarnes_.setVisible(false);
     }
 
     /**
@@ -90,17 +91,15 @@ public class MenuPrincipal_ extends javax.swing.JFrame {
         lblCargo = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jButton_RegistroLicores_ = new javax.swing.JButton();
-        jButton_RegistroCarnes_ = new javax.swing.JButton();
         jButton_RegistroCompras_ = new javax.swing.JButton();
+        jButton_RegistroCarnes_ = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jButton_CocinaRecetas_ = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jButton_ReportesVentas_ = new javax.swing.JButton();
         jButton_ReportesCierreCaja_ = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
-        jButton_VentasPedidos_ = new javax.swing.JButton();
         jButton_Ventas = new javax.swing.JButton();
-        jButton_VentasFacturacion_ = new javax.swing.JButton();
         fecha = new javax.swing.JLabel();
         hora = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -121,7 +120,7 @@ public class MenuPrincipal_ extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Administrativos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
         jButton_AdministrativosHerramientas_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton_AdministrativosHerramientas_.setText("administrativos");
+        jButton_AdministrativosHerramientas_.setText("Crear Usuarios");
         jButton_AdministrativosHerramientas_.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_AdministrativosHerramientas_ActionPerformed(evt);
@@ -237,19 +236,19 @@ public class MenuPrincipal_ extends javax.swing.JFrame {
             }
         });
 
-        jButton_RegistroCarnes_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton_RegistroCarnes_.setText("Carnes");
-        jButton_RegistroCarnes_.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_RegistroCarnes_ActionPerformed(evt);
-            }
-        });
-
         jButton_RegistroCompras_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton_RegistroCompras_.setText("Compras");
         jButton_RegistroCompras_.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_RegistroCompras_ActionPerformed(evt);
+            }
+        });
+
+        jButton_RegistroCarnes_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton_RegistroCarnes_.setText("Carnes");
+        jButton_RegistroCarnes_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_RegistroCarnes_ActionPerformed(evt);
             }
         });
 
@@ -269,15 +268,15 @@ public class MenuPrincipal_ extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton_RegistroCarnes_, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton_RegistroLicores_, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton_RegistroCompras_, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton_RegistroCarnes_, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 13, -1, -1));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 13, -1, 220));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cocina", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
@@ -303,10 +302,10 @@ public class MenuPrincipal_ extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton_CocinaRecetas_, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 13, -1, -1));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 13, -1, 220));
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Reportes", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
@@ -351,27 +350,11 @@ public class MenuPrincipal_ extends javax.swing.JFrame {
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ventas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
-        jButton_VentasPedidos_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton_VentasPedidos_.setText("Pedidos");
-        jButton_VentasPedidos_.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_VentasPedidos_ActionPerformed(evt);
-            }
-        });
-
         jButton_Ventas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton_Ventas.setText("Ventas");
         jButton_Ventas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_VentasActionPerformed(evt);
-            }
-        });
-
-        jButton_VentasFacturacion_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton_VentasFacturacion_.setText("Facturación");
-        jButton_VentasFacturacion_.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_VentasFacturacion_ActionPerformed(evt);
             }
         });
 
@@ -381,25 +364,15 @@ public class MenuPrincipal_ extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton_VentasPedidos_, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_Ventas, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jButton_Ventas, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton_VentasFacturacion_, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton_VentasPedidos_, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton_Ventas, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton_VentasFacturacion_, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(132, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 247, -1, -1));
@@ -433,7 +406,7 @@ public class MenuPrincipal_ extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     class horas implements ActionListener {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             Date sistemaHora = new Date();
@@ -443,11 +416,11 @@ public class MenuPrincipal_ extends javax.swing.JFrame {
             hora.setText(String.format(formato.format(sistemaHora), now));
         }
     }
-
+    
 
     private void jButton_AdministrativosHerramientas_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AdministrativosHerramientas_ActionPerformed
-//        gui.empleado.Catalogos catalogo = new gui.empleado.Catalogos(null, true);
-//        catalogo.setVisible(true);
+        gui.login.vista.registro reg = new gui.login.vista.registro();
+        reg.setVisible(true);
     }//GEN-LAST:event_jButton_AdministrativosHerramientas_ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -472,7 +445,7 @@ public class MenuPrincipal_ extends javax.swing.JFrame {
 //        Hora del sistema
         Timer tiempo = new Timer(100, new gui.MenuPrincipal_.horas());
         tiempo.start();
-
+        
 
     }//GEN-LAST:event_formWindowOpened
 
@@ -492,8 +465,8 @@ public class MenuPrincipal_ extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_RegistroLicores_ActionPerformed
 
     private void jButton_RegistroCarnes_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RegistroCarnes_ActionPerformed
-        gui.almacen.RegistroCarnes carnes = new gui.almacen.RegistroCarnes(this, true);
-        carnes.setVisible(true);
+//        gui.almacen.RegistroCarnes carnes = new gui.almacen.RegistroCarnes(this, true);
+//        carnes.setVisible(true);
     }//GEN-LAST:event_jButton_RegistroCarnes_ActionPerformed
 
     private void jButton_RegistroCompras_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RegistroCompras_ActionPerformed
@@ -515,23 +488,13 @@ public class MenuPrincipal_ extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_ReportesCierreCaja_ActionPerformed
 
-    private void jButton_VentasPedidos_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_VentasPedidos_ActionPerformed
-        ReporteVenta fact = new ReporteVenta(this, true);
-        fact.setVisible(true);
-    }//GEN-LAST:event_jButton_VentasPedidos_ActionPerformed
-
     private void jButton_VentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_VentasActionPerformed
         gui.venta.Ventas ventas = new gui.venta.Ventas();
         ventas.setVisible(true);
     }//GEN-LAST:event_jButton_VentasActionPerformed
 
-    private void jButton_VentasFacturacion_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_VentasFacturacion_ActionPerformed
-        gui.venta.DetalleFacturacion temp = new gui.venta.DetalleFacturacion();
-        temp.setVisible(true);
-    }//GEN-LAST:event_jButton_VentasFacturacion_ActionPerformed
-
     private void jButton_AdministracionInventarioSalida_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AdministracionInventarioSalida_1ActionPerformed
-
+        
         gui.almacen.compra.bar_matDisponible salida = new gui.almacen.compra.bar_matDisponible();
         salida.setVisible(true);
     }//GEN-LAST:event_jButton_AdministracionInventarioSalida_1ActionPerformed
@@ -584,8 +547,6 @@ public class MenuPrincipal_ extends javax.swing.JFrame {
     private javax.swing.JButton jButton_ReportesCierreCaja_;
     private javax.swing.JButton jButton_ReportesVentas_;
     private javax.swing.JButton jButton_Ventas;
-    private javax.swing.JButton jButton_VentasFacturacion_;
-    private javax.swing.JButton jButton_VentasPedidos_;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

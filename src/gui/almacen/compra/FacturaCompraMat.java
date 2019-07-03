@@ -430,10 +430,10 @@ public class FacturaCompraMat extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        String cant = JOptionPane.showInputDialog(null, "Ingrese la cantidad", "Ingreso de cantidad", JOptionPane.WARNING_MESSAGE);
+        String cant = JOptionPane.showInputDialog(null, "Ingrese la cantidad", "Ingreso de cantidad adquirida", JOptionPane.WARNING_MESSAGE);
         int cantidad = Integer.parseInt(cant);
 
-        String precioUnit = JOptionPane.showInputDialog(null, "Ingrese la cantidad", "Ingreso de cantidad", JOptionPane.WARNING_MESSAGE);
+        String precioUnit = JOptionPane.showInputDialog(null, "Ingrese el Precio", "Ingreso de precio de compra", JOptionPane.WARNING_MESSAGE);
         Double precioUni = Double.parseDouble(precioUnit);
         
         Double total = cantidad* precioUni;

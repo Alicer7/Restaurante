@@ -3,101 +3,109 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.almacen;
+package gui.cocina;
 
-import com.mysql.jdbc.Connection;
 import core.database.Conexion;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Alicer
  */
-public class ingreso_disponible_unidades extends javax.swing.JFrame {
+public class ModificarReceta extends javax.swing.JFrame {
 
     int ID_ARTICULO = 0;
     String NOMBRE_ARTICULO = null;
     int ID_CAT = 0;
     int ID_RECETA = 0;
 
-//    public void tabla() {
-//        modelo.addColumn("id.");
-//        modelo.addColumn("Nombre");
-//        modelo.addColumn("cantidad");
-//
-//    }
-//    public void popuptable() {
-//        JPopupMenu popmenu = new JPopupMenu();
-//        JMenuItem menuitem = new JMenuItem("Eliminar", new ImageIcon(getClass().getResource("/core/resources/icons/eli.png")));
-//        menuitem.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                DefaultTableModel model = (DefaultTableModel) jtProductos.getModel();
-//                int a = jtProductos.getSelectedRow();
-//                if (a < 0) {
-//                    JOptionPane.showMessageDialog(null,
-//                            "Debe seleccionar una fila de la tabla");
-//                } else {
-//                    int confirmar = JOptionPane.showConfirmDialog(null,
-//                            "Esta seguro que desea quitar el producto? ");
-//                    if (JOptionPane.OK_OPTION == confirmar) {
-//                        model.removeRow(a);
-//                        JOptionPane.showMessageDialog(null, "Registro Eliminado");
-//                    }
-//                }
-//            }
-//        });
-//
-//        popmenu.add(menuitem);
-//
-//        jtProductos.setComponentPopupMenu(popmenu);
-//    }
+    public void tabla() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        jtProductos.setModel(modelo);
+        modelo.addColumn("id.");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("cantidad");
+
+    }
+
+    public void popuptable() {
+        JPopupMenu popmenu = new JPopupMenu();
+        JMenuItem menuitem = new JMenuItem("Eliminar", new ImageIcon(getClass().getResource("/core/resources/icons/eli.png")));
+        menuitem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DefaultTableModel model = (DefaultTableModel) jtProductos.getModel();
+                int a = jtProductos.getSelectedRow();
+                if (a < 0) {
+                    JOptionPane.showMessageDialog(null,
+                            "Debe seleccionar una fila de la tabla");
+                } else {
+                    int confirmar = JOptionPane.showConfirmDialog(null,
+                            "Esta seguro que desea quitar el producto? ");
+                    if (JOptionPane.OK_OPTION == confirmar) {
+                        model.removeRow(a);
+                        JOptionPane.showMessageDialog(null, "Registro Eliminado");
+                    }
+                }
+            }
+        });
+
+        popmenu.add(menuitem);
+
+        jtProductos.setComponentPopupMenu(popmenu);
+    }
+
     /**
      * Creates new form Factura_ingreso
      */
-    public ingreso_disponible_unidades() {
+    public ModificarReceta() {
         initComponents();
-//        tabla();
-//        popuptable();
-//
-//        try {
-//            PreparedStatement ps = null;
-//            ResultSet rs = null;
-//            Conexion cone = new Conexion();
-//            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
-//            DefaultTableModel modelo2 = new DefaultTableModel();
-//            jtArticulos.setModel(modelo2);
-//
-//            String sql = "select id, nombre, stock, costo from materiaprima ";
-//            ps = conn.prepareStatement(sql);
-//            rs = ps.executeQuery();
-//
-//            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
-//            int cantidadColumnas = rsMd.getColumnCount();
-//
-//            modelo2.addColumn("id.");
-//            modelo2.addColumn("Nombre");
-//            modelo2.addColumn("Existencia");
-//            modelo2.addColumn("Costo");
-//
-//            int[] anchos = {10, 30, 70, 70};
-//            for (int i = 0; i < jtArticulos.getColumnCount(); i++) {
-//                jtArticulos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
-//            }
-//
-//            while (rs.next()) {
-//                Object[] filas = new Object[cantidadColumnas];
-//                for (int i = 0; i < cantidadColumnas; i++) {
-//                    filas[i] = rs.getObject(i + 1);
-//                }
-//                modelo2.addRow(filas);
-//            }
-//
+        tabla();
+        popuptable();
+
+        try {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            Conexion cone = new Conexion();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
+            DefaultTableModel modelo2 = new DefaultTableModel();
+            jtArticulos.setModel(modelo2);
+
+            String sql = "select id, nombre, stock, costo from materiaprima ";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
+            int cantidadColumnas = rsMd.getColumnCount();
+
+            modelo2.addColumn("id.");
+            modelo2.addColumn("Nombre");
+            modelo2.addColumn("Existencia");
+            modelo2.addColumn("Costo");
+
+            int[] anchos = {10, 30, 70, 70};
+            for (int i = 0; i < jtArticulos.getColumnCount(); i++) {
+                jtArticulos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+            }
+
+            while (rs.next()) {
+                Object[] filas = new Object[cantidadColumnas];
+                for (int i = 0; i < cantidadColumnas; i++) {
+                    filas[i] = rs.getObject(i + 1);
+                }
+                modelo2.addRow(filas);
+            }
+
 //            String corrArticulo = "Select nombre from receta order by(id)";
 //            ps = conn.prepareStatement(corrArticulo);
 //            rs = ps.executeQuery();
@@ -112,9 +120,9 @@ public class ingreso_disponible_unidades extends javax.swing.JFrame {
 //            while (rs.next()) {
 //                this.jcCategoria.addItem(rs.getString("nombre"));
 //            }
-//        } catch (SQLException ex) {
-//            System.err.println(ex.toString());
-//        }
+        } catch (SQLException ex) {
+            System.err.println(ex.toString());
+        }
     }
 
     /**
@@ -128,9 +136,14 @@ public class ingreso_disponible_unidades extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtProductos = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtArticulos = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         txtBuscar = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -143,10 +156,40 @@ public class ingreso_disponible_unidades extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ingredientes de Recetas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 28, 570, 84));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("Receta :");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 110, 31));
+
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jButton3.setText("Nueva Receta");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 130, 30));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 28, 1078, 84));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jtProductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jtProductos);
+
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 70, 658, 266));
 
         jtArticulos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -166,7 +209,15 @@ public class ingreso_disponible_unidades extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jtArticulos);
 
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 500, 266));
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 476, 266));
+
+        jButton2.setText("Guardar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 350, 112, 42));
 
         jButton1.setText("Agregar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -186,21 +237,19 @@ public class ingreso_disponible_unidades extends javax.swing.JFrame {
                 txtBuscarKeyReleased(evt);
             }
         });
-        jPanel3.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 32, 390, 30));
+        jPanel3.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 32, 320, 30));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Buscar:");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 30, 80, 30));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 126, 630, -1));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 126, 1210, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 828, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1268, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,7 +260,41 @@ public class ingreso_disponible_unidades extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+//
+        try {
+            Conexion cone = new Conexion();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
+            PreparedStatement ps = null;
+
+            int filas = jtProductos.getRowCount();
+            System.out.println("filas jc " + filas);
+            for (int row = 0; row < filas; row++) {
+
+                int id_materia = (int) jtProductos.getValueAt(row, 0);
+                Double cant = (double) jtProductos.getValueAt(row, 2);
+
+                ps = conn.prepareStatement("INSERT INTO `receta_ingrediente` (`receta_id`, `receta_categoria_id`,  `cantidad`, `materiaprima_cocina_id`) VALUES (?,?,?,?)");
+                ps.setInt(1, ID_RECETA);
+                ps.setInt(2, ID_CAT);
+                ps.setDouble(3, cant);
+                ps.setDouble(4, id_materia);
+
+                ps.execute();
+                System.out.println("ya, asdfasdf");
+            }
+            JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
+            tabla();
+            limpiar();
+        } catch (SQLException ex) {
+            System.out.println("errorsql " + ex);
+        }
+
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     private void jtArticulosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtArticulosMouseClicked
+
         int Fila = jtArticulos.getSelectedRow();
         String codigo = jtArticulos.getValueAt(Fila, 0).toString();
         String nombre = jtArticulos.getValueAt(Fila, 1).toString();
@@ -222,48 +305,21 @@ public class ingreso_disponible_unidades extends javax.swing.JFrame {
     }//GEN-LAST:event_jtArticulosMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        int Fila = jtArticulos.getSelectedRow();
         int filas = jtArticulos.getSelectedRow();
         if (filas < 0) {
             JOptionPane.showMessageDialog(null, "Seleccione un artículo");
 
         } else {
-            String cant = JOptionPane.showInputDialog(null, "Ingrese la cantidad", "Cantidad otorgada", JOptionPane.WARNING_MESSAGE);
-            int cantidad = Integer.parseInt(cant);
-
-           
-
-           
-
-            System.out.println("cantidad " + cantidad);
-
-
-
-            try {
-                Conexion objCon = new Conexion();
-                Connection conn = (Connection) objCon.connect();
-                PreparedStatement ps = null;
-
-//                ps = conn.prepareStatement("INSERT INTO `compra_inventario` (`nombre_articulo`, `cantidad`, `precio_unitario`, `total`, `fecha_compra`) VALUES  (?,?,?,?,?)");
-//                ps.setString(1, txtDescripcion.getText());
-//                ps.setString(2, txtCantIngreso.getText());
-//                ps.setDouble(3, Double.parseDouble(txtPrecio.getText()));
-//                ps.setDouble(4, total);
-//                ps.setDate(5, fecha);
-//                ps.execute();
-                JOptionPane.showMessageDialog(null, "Ingresado Exitosamente");
-
-                ps = conn.prepareStatement("UPDATE inventario SET  stock = stock - '" + cantidad + "' WHERE id = ''");
-                ps.execute();
-
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error al Generar el Registro");
-                System.out.println(ex);
-            }
+            String cant = JOptionPane.showInputDialog(null, "Ingrese la cantidad", "Cantidad de onzas utilizadas", JOptionPane.WARNING_MESSAGE);
+            double cantidad = Double.parseDouble(cant);
+            DefaultTableModel modelo = (DefaultTableModel) jtProductos.getModel();
+            Object[] fila = new Object[5];
+            fila[0] = ID_ARTICULO;
+            fila[1] = NOMBRE_ARTICULO;
+            fila[2] = cantidad;
+            modelo.addRow(fila);
+//        jtProductos.setModel(modelo);
         }
-
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
@@ -306,6 +362,10 @@ public class ingreso_disponible_unidades extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtBuscarKeyReleased
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarActionPerformed
@@ -331,206 +391,14 @@ public class ingreso_disponible_unidades extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ingreso_disponible_unidades.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModificarReceta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ingreso_disponible_unidades.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModificarReceta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ingreso_disponible_unidades.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModificarReceta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ingreso_disponible_unidades.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModificarReceta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -599,19 +467,24 @@ public class ingreso_disponible_unidades extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ingreso_disponible_unidades().setVisible(true);
+                new ModificarReceta().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jtArticulos;
+    private javax.swing.JTable jtProductos;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }
