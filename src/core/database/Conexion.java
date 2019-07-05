@@ -20,9 +20,7 @@ public class Conexion {
     private final String user = "root";
     private final String password = "fe95aca7184807452_7";
     private final String charset="?useUnicode=yes&characterEncoding=UTF-8";
-    
-
-    
+        
     private Connection DBConnection;
     
     public Connection connect(){
