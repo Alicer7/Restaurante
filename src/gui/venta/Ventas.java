@@ -146,7 +146,7 @@ public class Ventas extends javax.swing.JFrame {
             filaData[i][5] = lista.get(i).getComidaCantidad();
             filaData[i][6] = lista.get(i).getBebidaId();
             filaData[i][7] = lista.get(i).getBebidaCantidad();
-            filaData[i][8] = "Q " + lista.get(i).getCosto();
+            filaData[i][8] = lista.get(i).getCosto();
             filaData[i][9] = lista.get(i).getTiempo();
             filaData[i][10] = lista.get(i).getSolvente();
             // Conseguir Total Consumo
@@ -272,7 +272,7 @@ public class Ventas extends javax.swing.JFrame {
         jLabel_BuscarPorFecha_.setFont(new java.awt.Font("Dialog", 2, 14)); // NOI18N
         jLabel_BuscarPorFecha_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/CalendarX32.png"))); // NOI18N
         jLabel_BuscarPorFecha_.setText(bundle.getString("Ventas.jLabel_BuscarPorFecha_.text")); // NOI18N
-        jLabel_BuscarPorFecha_.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel_BuscarPorFecha_.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel_BuscarPorFecha_.setMaximumSize(new java.awt.Dimension(150, 32));
         jLabel_BuscarPorFecha_.setMinimumSize(new java.awt.Dimension(150, 32));
         jLabel_BuscarPorFecha_.setPreferredSize(new java.awt.Dimension(150, 32));
@@ -285,7 +285,7 @@ public class Ventas extends javax.swing.JFrame {
         jLabel_SinCobrar_.setFont(new java.awt.Font("Dialog", 2, 14)); // NOI18N
         jLabel_SinCobrar_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/food32.png"))); // NOI18N
         jLabel_SinCobrar_.setText(bundle.getString("Ventas.jLabel_SinCobrar_.text")); // NOI18N
-        jLabel_SinCobrar_.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel_SinCobrar_.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel_SinCobrar_.setMaximumSize(new java.awt.Dimension(150, 32));
         jLabel_SinCobrar_.setMinimumSize(new java.awt.Dimension(150, 32));
         jLabel_SinCobrar_.setPreferredSize(new java.awt.Dimension(150, 32));
@@ -386,7 +386,7 @@ public class Ventas extends javax.swing.JFrame {
             jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_Main_Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel_Clientes_, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
+                .addComponent(jPanel_Clientes_, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel_Detalle_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -396,8 +396,8 @@ public class Ventas extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Main_Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel_Detalle_, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
-                    .addComponent(jPanel_Clientes_, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE))
+                    .addComponent(jPanel_Detalle_, javax.swing.GroupLayout.DEFAULT_SIZE, 678, Short.MAX_VALUE)
+                    .addComponent(jPanel_Clientes_, javax.swing.GroupLayout.DEFAULT_SIZE, 678, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
