@@ -122,7 +122,7 @@ public class Ventas extends javax.swing.JFrame {
         }
     }
 
-    private void mostrarVentasDetalleNumeroFactura(Integer numeroFactura) throws BadLocationException {
+    private void mostrarVentasDetalleNumeroFactura(Integer IDVENTATEMPORAL) throws BadLocationException {
         JEditorPane viwer = new JEditorPane();
         viwer.setSize(300, 588);
         viwer.setContentType("text/html");
@@ -131,9 +131,9 @@ public class Ventas extends javax.swing.JFrame {
         Pedidos pedidos = new Pedidos();
 
         // SQL
-        ArrayList<Pedidos> lista = pedidos.listaPedidosNumeroFactura(numeroFactura);
+        ArrayList<Pedidos> lista = pedidos.listaPedidosNumeroFactura(IDVENTATEMPORAL);
 
-        Double totalConsumo = 0.999;
+        Double totalConsumo = 0.00;
 
         Object filaData[][] = new Object[lista.size()][11];
 
@@ -386,7 +386,7 @@ public class Ventas extends javax.swing.JFrame {
             jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_Main_Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel_Clientes_, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
+                .addComponent(jPanel_Clientes_, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel_Detalle_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -396,8 +396,8 @@ public class Ventas extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Main_Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel_Detalle_, javax.swing.GroupLayout.DEFAULT_SIZE, 678, Short.MAX_VALUE)
-                    .addComponent(jPanel_Clientes_, javax.swing.GroupLayout.DEFAULT_SIZE, 678, Short.MAX_VALUE))
+                    .addComponent(jPanel_Detalle_, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
+                    .addComponent(jPanel_Clientes_, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE))
                 .addContainerGap())
         );
 

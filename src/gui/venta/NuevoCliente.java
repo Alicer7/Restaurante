@@ -702,11 +702,12 @@ public class NuevoCliente extends javax.swing.JFrame {
                 String cantidad = (String) jtPedido.getValueAt(row, 2);
                 String costo = (String) jtPedido.getValueAt(row, 3);
 
-                ps = conn.prepareStatement("INSERT INTO `temp_pedido` (`temp_venta_id`, `comida_id`, `comida_cantidad`, `costo`) VALUES (?,?,?,?)");
+                ps = conn.prepareStatement("INSERT INTO `temp_pedido` (`temp_venta_id`,empleado_id,  `bebida_id`, `bebida_cantidad`, `costo`) VALUES (?,?,?,?,?)");
                 ps.setInt(1, TEST);
-                ps.setInt(2, id_comida);
-                ps.setString(3, cantidad);
-                ps.setString(4, costo);
+                ps.setInt(2, 1);
+                ps.setInt(3, id_comida);
+                ps.setString(4, cantidad);
+                ps.setString(5, costo);
                 ps.execute();
                 System.out.println("asdf" + TEST);
             }

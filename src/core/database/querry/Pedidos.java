@@ -93,7 +93,7 @@ public class Pedidos {
         Connection conn= new Conexion().connect();
         
         ArrayList<Pedidos> listaPedidos= new ArrayList<>();
-        String sql="SELECT * FROM `temp_pedido` WHERE `temp_venta_id` = "+numeroFactura;
+        String sql="select id, temp_venta_id, menu_id, menu_cantidad, comida_id, comida_cantidad, bebida_id, bebida_cantidad, costo, time, estado from temp_pedido WHERE `temp_venta_id` = "+numeroFactura;
         
         try {
             Statement stm;
