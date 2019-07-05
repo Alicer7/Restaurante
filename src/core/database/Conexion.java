@@ -14,29 +14,14 @@ import java.sql.SQLException;
  * @author Alicer
  */
 public class Conexion {
-//     private final String URL = "jdbc:mysql://192.168.1.2:3306/"; // Ubicación de la BD.
-//    private final String BD = "cafebar"; // Nombre de la BD.
-//    private final String USER = "freddy";
-//    private final String PASSWORD = "freddy";
-//    
-//    private final String URL = "jdbc:mysql://localhost:3306/"; // Ubicación de la BD.
-//    private final String BD = "cafebar"; // Nombre de la BD.
-//    private final String USER = "root";
-//    private final String PASSWORD = "333561222587421319";
-    
-//    private final String port="3306";
-//    private final String url = "jdbc:mysql://192.168.1.2:"+port+"/"; // Ubicación de la BD.
-//    private final String db = "cafebar"; // Nombre de la BD.
-//    private final String user = "root";
-////    private final String password = "333561222587421319";
-//    private final String password = "fe95aca7184807452_7";
-    
+    private final String host = "192.168.1.2";
     private final String port="3306";
-//    private final String url = "jdbc:mysql://192.168.1.2:"+port+"/"; // Ubicación de la BD.
-    private final String url = "jdbc:mysql://localhost:"+port+"/"; // Ubicación de la BD.
     private final String db = "cafebar"; // Nombre de la BD.
     private final String user = "root";
-    private final String password = "";
+    private final String password = "fe95aca7184807452_7";
+    private final String charset="?useUnicode=yes&characterEncoding=UTF-8";
+    
+
     
     private Connection DBConnection;
     
@@ -49,7 +34,7 @@ public class Conexion {
             System.err.println("Driver not found" + cnfe);
         }                
         try{
-          DBConnection=DriverManager.getConnection(url+db,user,password);
+          DBConnection=DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db+charset,user, password);
 //          System.out.println("DB conection up");
         } catch(SQLException se){
           System.err.println("Database Not Found");  
