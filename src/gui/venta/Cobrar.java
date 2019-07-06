@@ -179,19 +179,19 @@ public class Cobrar extends javax.swing.JFrame {
             }
         });
 
-        jPanel_ModoPago_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Método de pago", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
+        jPanel_ModoPago_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vista Previa", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
         jPanel_ModoPago_.setMaximumSize(null);
         jPanel_ModoPago_.setMinimumSize(new java.awt.Dimension(319, 252));
         jPanel_ModoPago_.setPreferredSize(new java.awt.Dimension(319, 252));
 
-        jTextField_MoElectronico_.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTextField_MoElectronico_.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTextField_MoElectronico_.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextField_MoElectronico_.setText("0.00");
         jTextField_MoElectronico_.setMaximumSize(null);
         jTextField_MoElectronico_.setMinimumSize(new java.awt.Dimension(148, 48));
         jTextField_MoElectronico_.setPreferredSize(new java.awt.Dimension(148, 48));
 
-        jLabel_MoElectronico_.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel_MoElectronico_.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel_MoElectronico_.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel_MoElectronico_.setText("Electrónico:");
         jLabel_MoElectronico_.setMaximumSize(new java.awt.Dimension(110, 48));
@@ -207,7 +207,7 @@ public class Cobrar extends javax.swing.JFrame {
         jLabel_MoElectronicoIcon_.setPreferredSize(new java.awt.Dimension(28, 48));
         jLabel_MoElectronicoIcon_.setRequestFocusEnabled(false);
 
-        jLabel_MoEfectivo_.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel_MoEfectivo_.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel_MoEfectivo_.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel_MoEfectivo_.setText("Efectivo:");
         jLabel_MoEfectivo_.setMaximumSize(new java.awt.Dimension(110, 48));
@@ -223,14 +223,14 @@ public class Cobrar extends javax.swing.JFrame {
         jLabel_MoEfectivoIcon_.setPreferredSize(new java.awt.Dimension(28, 48));
         jLabel_MoEfectivoIcon_.setRequestFocusEnabled(false);
 
-        jTextField_MoEfectivo_.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTextField_MoEfectivo_.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTextField_MoEfectivo_.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextField_MoEfectivo_.setText("0.00");
         jTextField_MoEfectivo_.setMaximumSize(null);
         jTextField_MoEfectivo_.setMinimumSize(new java.awt.Dimension(148, 48));
         jTextField_MoEfectivo_.setPreferredSize(new java.awt.Dimension(148, 48));
 
-        jLabel_Descuento_.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel_Descuento_.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel_Descuento_.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel_Descuento_.setText("Descuento:");
         jLabel_Descuento_.setMaximumSize(new java.awt.Dimension(110, 48));
@@ -238,7 +238,7 @@ public class Cobrar extends javax.swing.JFrame {
         jLabel_Descuento_.setOpaque(true);
         jLabel_Descuento_.setPreferredSize(new java.awt.Dimension(110, 48));
 
-        jTextField_Descuento_.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTextField_Descuento_.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTextField_Descuento_.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextField_Descuento_.setText("0.00");
         jTextField_Descuento_.setMaximumSize(null);
@@ -301,15 +301,15 @@ public class Cobrar extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel_Total_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Total", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
+        jPanel_Total_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vista Previa", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
         jPanel_Total_.setMaximumSize(null);
         jPanel_Total_.setMinimumSize(new java.awt.Dimension(319, 128));
 
-        jLabel_TotalQ_.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jLabel_TotalQ_.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel_TotalQ_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_TotalQ_.setText("Q");
 
-        jLabel_Total_.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jLabel_Total_.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel_Total_.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel_Total_.setText("0.00");
 
@@ -333,22 +333,22 @@ public class Cobrar extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel_PreView_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vista Previa", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
+        jPanel_PreView_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vista Previa", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
         jPanel_PreView_.setMinimumSize(new java.awt.Dimension(377, 688));
         jPanel_PreView_.setName(""); // NOI18N
         jPanel_PreView_.setPreferredSize(new java.awt.Dimension(377, 688));
         jPanel_PreView_.setLayout(new java.awt.BorderLayout());
 
-        jPanel_Saldo_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Saldo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
+        jPanel_Saldo_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vista Previa", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
         jPanel_Saldo_.setMaximumSize(null);
         jPanel_Saldo_.setMinimumSize(new java.awt.Dimension(319, 128));
         jPanel_Saldo_.setPreferredSize(new java.awt.Dimension(319, 128));
 
-        jLabel_SaldoQ_.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jLabel_SaldoQ_.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel_SaldoQ_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_SaldoQ_.setText("Q");
 
-        jLabel_Saldo_.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jLabel_Saldo_.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel_Saldo_.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel_Saldo_.setText("0.00");
 
@@ -372,12 +372,12 @@ public class Cobrar extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel_Imprimir_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Imprimir", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
+        jPanel_Imprimir_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vista Previa", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
         jPanel_Imprimir_.setMaximumSize(null);
         jPanel_Imprimir_.setMinimumSize(new java.awt.Dimension(319, 128));
         jPanel_Imprimir_.setPreferredSize(new java.awt.Dimension(319, 128));
 
-        jButton_Imprimir_.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jButton_Imprimir_.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jButton_Imprimir_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/InvoiceX32.png"))); // NOI18N
         jButton_Imprimir_.setText("Aceptar");
         jButton_Imprimir_.addActionListener(new java.awt.event.ActionListener() {
