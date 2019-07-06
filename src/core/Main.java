@@ -6,8 +6,6 @@ package core;
  * and open the template in the editor.
  */
 
-import gui.MenuPrincipal;
-import gui.MenuPrincipal_;
 import gui.Splash;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -20,9 +18,8 @@ public class Main {
     
     public static void main(String[] args) {
         try { 
-//            UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel"); 
+            UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel"); 
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel");
         } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
         
         Splash gui = new Splash();

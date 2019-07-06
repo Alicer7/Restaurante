@@ -15,7 +15,6 @@ import javafx.embed.swing.JFXPanel;
 import javafx.print.PrinterJob;
 import javafx.scene.Scene;
 import javafx.scene.web.WebView;
-import javax.swing.JFrame;
 import javax.swing.text.BadLocationException;
 
 /**
@@ -24,7 +23,7 @@ import javax.swing.text.BadLocationException;
  */
 public class Cobrar extends javax.swing.JFrame {
 
-//   public int imprimir (Graphics g, PageFormat f, int pageIndex)
+ 
     JFXPanel jFxPanel = new JFXPanel();
     WebView webView;
     
@@ -39,18 +38,7 @@ public class Cobrar extends javax.swing.JFrame {
             System.err.println(e);
         }
     }
-
-    public Cobrar() {
-        initComponents();
-        try {
-            mostrarVentasDetalleNumeroFactura(gui.venta.Ventas.IDVENTATEMPORAL);
-        } catch (BadLocationException ex) {
-            Logger.getLogger(Cobrar.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    ;
-    
+   
     Integer puede = gui.venta.Ventas.IDVENTATEMPORAL;
 
     private void mostrarVentasDetalleNumeroFactura(Integer valor) throws BadLocationException {
@@ -147,82 +135,123 @@ public class Cobrar extends javax.swing.JFrame {
        
 //PARTE 3 - FIN -
     }
-
+    public Cobrar() {
+        initComponents();
+        try {
+            mostrarVentasDetalleNumeroFactura(gui.venta.Ventas.IDVENTATEMPORAL);
+        } catch (BadLocationException ex) {
+            Logger.getLogger(Cobrar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel_Main_ = new javax.swing.JPanel();
         jPanel_ModoPago_ = new javax.swing.JPanel();
-        jTextField_PagoEfectivo_ = new javax.swing.JTextField();
-        jTextField_PagoElectronico_ = new javax.swing.JTextField();
-        jTextField_Descuento_ = new javax.swing.JTextField();
-        jLabel_Efectivo_ = new javax.swing.JLabel();
-        jLabel_Electronico_ = new javax.swing.JLabel();
-        jLabel_iconEfectivo_ = new javax.swing.JLabel();
-        jLabel_iconElectronico_ = new javax.swing.JLabel();
-        jLabel_iconDescuento_ = new javax.swing.JLabel();
+        jTextField_MoElectronico_ = new javax.swing.JTextField();
+        jLabel_MoElectronico_ = new javax.swing.JLabel();
+        jLabel_MoElectronicoIcon_ = new javax.swing.JLabel();
+        jLabel_MoEfectivo_ = new javax.swing.JLabel();
+        jLabel_MoEfectivoIcon_ = new javax.swing.JLabel();
+        jTextField_MoEfectivo_ = new javax.swing.JTextField();
         jLabel_Descuento_ = new javax.swing.JLabel();
+        jTextField_Descuento_ = new javax.swing.JTextField();
+        jLabel_DescuentoIcon_ = new javax.swing.JLabel();
+        jPanel_Total_ = new javax.swing.JPanel();
+        jLabel_TotalQ_ = new javax.swing.JLabel();
+        jLabel_Total_ = new javax.swing.JLabel();
+        jPanel_PreView_ = new javax.swing.JPanel();
+        jPanel_Saldo_ = new javax.swing.JPanel();
+        jLabel_SaldoQ_ = new javax.swing.JLabel();
+        jLabel_Saldo_ = new javax.swing.JLabel();
         jPanel_Imprimir_ = new javax.swing.JPanel();
         jButton_Imprimir_ = new javax.swing.JButton();
-        jPanel_Total_ = new javax.swing.JPanel();
-        jLabel_Total_ = new javax.swing.JLabel();
-        jLabel_TotalQ_ = new javax.swing.JLabel();
-        jPanel_Saldo_ = new javax.swing.JPanel();
-        jLabel_Saldo_ = new javax.swing.JLabel();
-        jLabel_SaldoQ_ = new javax.swing.JLabel();
-        jPanel_PreView_ = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cobrar");
+        setMaximumSize(new java.awt.Dimension(720, 720));
+        setMinimumSize(new java.awt.Dimension(720, 720));
         setResizable(false);
-        setType(java.awt.Window.Type.POPUP);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
 
-        jPanel_Main_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        jPanel_ModoPago_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Método de pago", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
+        jPanel_ModoPago_.setMaximumSize(null);
+        jPanel_ModoPago_.setMinimumSize(new java.awt.Dimension(319, 252));
+        jPanel_ModoPago_.setPreferredSize(new java.awt.Dimension(319, 252));
 
-        jPanel_ModoPago_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Metodo de Pago", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+        jTextField_MoElectronico_.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTextField_MoElectronico_.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jTextField_MoElectronico_.setText("0.00");
+        jTextField_MoElectronico_.setMaximumSize(null);
+        jTextField_MoElectronico_.setMinimumSize(new java.awt.Dimension(148, 48));
+        jTextField_MoElectronico_.setPreferredSize(new java.awt.Dimension(148, 48));
 
-        jTextField_PagoEfectivo_.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jTextField_PagoEfectivo_.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField_PagoEfectivo_.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_PagoEfectivo_ActionPerformed(evt);
-            }
-        });
+        jLabel_MoElectronico_.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel_MoElectronico_.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel_MoElectronico_.setText("Electrónico:");
+        jLabel_MoElectronico_.setMaximumSize(new java.awt.Dimension(110, 48));
+        jLabel_MoElectronico_.setMinimumSize(new java.awt.Dimension(110, 48));
+        jLabel_MoElectronico_.setOpaque(true);
+        jLabel_MoElectronico_.setPreferredSize(new java.awt.Dimension(110, 48));
 
-        jTextField_PagoElectronico_.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jTextField_PagoElectronico_.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jLabel_MoElectronicoIcon_.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel_MoElectronicoIcon_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_MoElectronicoIcon_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/CreditCarX32.png"))); // NOI18N
+        jLabel_MoElectronicoIcon_.setMaximumSize(new java.awt.Dimension(28, 48));
+        jLabel_MoElectronicoIcon_.setMinimumSize(new java.awt.Dimension(28, 48));
+        jLabel_MoElectronicoIcon_.setPreferredSize(new java.awt.Dimension(28, 48));
+        jLabel_MoElectronicoIcon_.setRequestFocusEnabled(false);
 
-        jTextField_Descuento_.setEditable(false);
-        jTextField_Descuento_.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jTextField_Descuento_.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField_Descuento_.setText("0");
+        jLabel_MoEfectivo_.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel_MoEfectivo_.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel_MoEfectivo_.setText("Efectivo:");
+        jLabel_MoEfectivo_.setMaximumSize(new java.awt.Dimension(110, 48));
+        jLabel_MoEfectivo_.setMinimumSize(new java.awt.Dimension(110, 48));
+        jLabel_MoEfectivo_.setOpaque(true);
+        jLabel_MoEfectivo_.setPreferredSize(new java.awt.Dimension(110, 48));
 
-        jLabel_Efectivo_.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel_Efectivo_.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel_Efectivo_.setText("Efectivo:");
+        jLabel_MoEfectivoIcon_.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel_MoEfectivoIcon_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_MoEfectivoIcon_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/WalletX32.png"))); // NOI18N
+        jLabel_MoEfectivoIcon_.setMaximumSize(new java.awt.Dimension(28, 48));
+        jLabel_MoEfectivoIcon_.setMinimumSize(new java.awt.Dimension(28, 48));
+        jLabel_MoEfectivoIcon_.setPreferredSize(new java.awt.Dimension(28, 48));
+        jLabel_MoEfectivoIcon_.setRequestFocusEnabled(false);
 
-        jLabel_Electronico_.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel_Electronico_.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel_Electronico_.setText("Electronico:");
+        jTextField_MoEfectivo_.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTextField_MoEfectivo_.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jTextField_MoEfectivo_.setText("0.00");
+        jTextField_MoEfectivo_.setMaximumSize(null);
+        jTextField_MoEfectivo_.setMinimumSize(new java.awt.Dimension(148, 48));
+        jTextField_MoEfectivo_.setPreferredSize(new java.awt.Dimension(148, 48));
 
-        jLabel_iconEfectivo_.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel_iconEfectivo_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/money.x32.png"))); // NOI18N
-
-        jLabel_iconElectronico_.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel_iconElectronico_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/CreditCarX32.png"))); // NOI18N
-
-        jLabel_iconDescuento_.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel_iconDescuento_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/FunAsClienteX32.png"))); // NOI18N
-
-        jLabel_Descuento_.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel_Descuento_.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel_Descuento_.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel_Descuento_.setText("Descuento:");
+        jLabel_Descuento_.setMaximumSize(new java.awt.Dimension(110, 48));
+        jLabel_Descuento_.setMinimumSize(new java.awt.Dimension(110, 48));
+        jLabel_Descuento_.setOpaque(true);
+        jLabel_Descuento_.setPreferredSize(new java.awt.Dimension(110, 48));
+
+        jTextField_Descuento_.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTextField_Descuento_.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jTextField_Descuento_.setText("0.00");
+        jTextField_Descuento_.setMaximumSize(null);
+        jTextField_Descuento_.setMinimumSize(new java.awt.Dimension(148, 48));
+        jTextField_Descuento_.setPreferredSize(new java.awt.Dimension(148, 48));
+
+        jLabel_DescuentoIcon_.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel_DescuentoIcon_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_DescuentoIcon_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/FunAsClienteX32.png"))); // NOI18N
+        jLabel_DescuentoIcon_.setMaximumSize(new java.awt.Dimension(28, 48));
+        jLabel_DescuentoIcon_.setMinimumSize(new java.awt.Dimension(28, 48));
+        jLabel_DescuentoIcon_.setPreferredSize(new java.awt.Dimension(28, 48));
+        jLabel_DescuentoIcon_.setRequestFocusEnabled(false);
 
         javax.swing.GroupLayout jPanel_ModoPago_Layout = new javax.swing.GroupLayout(jPanel_ModoPago_);
         jPanel_ModoPago_.setLayout(jPanel_ModoPago_Layout);
@@ -230,47 +259,126 @@ public class Cobrar extends javax.swing.JFrame {
             jPanel_ModoPago_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_ModoPago_Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel_ModoPago_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel_Electronico_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_Efectivo_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_Descuento_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_ModoPago_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel_iconEfectivo_)
-                    .addComponent(jLabel_iconElectronico_)
-                    .addComponent(jLabel_iconDescuento_))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel_ModoPago_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField_PagoEfectivo_)
-                    .addComponent(jTextField_PagoElectronico_)
-                    .addComponent(jTextField_Descuento_))
+                    .addGroup(jPanel_ModoPago_Layout.createSequentialGroup()
+                        .addComponent(jLabel_Descuento_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel_DescuentoIcon_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_Descuento_, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                    .addGroup(jPanel_ModoPago_Layout.createSequentialGroup()
+                        .addComponent(jLabel_MoElectronico_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel_MoElectronicoIcon_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_MoElectronico_, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                    .addGroup(jPanel_ModoPago_Layout.createSequentialGroup()
+                        .addComponent(jLabel_MoEfectivo_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel_MoEfectivoIcon_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_MoEfectivo_, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel_ModoPago_Layout.setVerticalGroup(
             jPanel_ModoPago_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_ModoPago_Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel_ModoPago_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField_PagoEfectivo_, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel_iconEfectivo_, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                    .addComponent(jLabel_Efectivo_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel_ModoPago_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel_iconElectronico_, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                    .addComponent(jLabel_Electronico_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField_PagoElectronico_))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel_ModoPago_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel_Descuento_, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField_Descuento_, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_iconDescuento_, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14))
+            .addGroup(jPanel_ModoPago_Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel_ModoPago_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_MoElectronico_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_MoElectronicoIcon_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_MoElectronico_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel_ModoPago_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_MoEfectivo_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_MoEfectivoIcon_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_MoEfectivo_, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addGroup(jPanel_ModoPago_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_Descuento_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_DescuentoIcon_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_Descuento_, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
-        jPanel_Imprimir_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Imprimir", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+        jPanel_Total_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Total", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
+        jPanel_Total_.setMaximumSize(null);
+        jPanel_Total_.setMinimumSize(new java.awt.Dimension(319, 128));
 
-        jButton_Imprimir_.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jButton_Imprimir_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/InvoiceX48.png"))); // NOI18N
+        jLabel_TotalQ_.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jLabel_TotalQ_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_TotalQ_.setText("Q");
+
+        jLabel_Total_.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jLabel_Total_.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel_Total_.setText("0.00");
+
+        javax.swing.GroupLayout jPanel_Total_Layout = new javax.swing.GroupLayout(jPanel_Total_);
+        jPanel_Total_.setLayout(jPanel_Total_Layout);
+        jPanel_Total_Layout.setHorizontalGroup(
+            jPanel_Total_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_Total_Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel_TotalQ_, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel_Total_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel_Total_Layout.setVerticalGroup(
+            jPanel_Total_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Total_Layout.createSequentialGroup()
+                .addGroup(jPanel_Total_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel_Total_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel_TotalQ_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jPanel_PreView_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vista Previa", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
+        jPanel_PreView_.setMinimumSize(new java.awt.Dimension(377, 688));
+        jPanel_PreView_.setName(""); // NOI18N
+        jPanel_PreView_.setPreferredSize(new java.awt.Dimension(377, 688));
+        jPanel_PreView_.setLayout(new java.awt.BorderLayout());
+
+        jPanel_Saldo_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Saldo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
+        jPanel_Saldo_.setMaximumSize(null);
+        jPanel_Saldo_.setMinimumSize(new java.awt.Dimension(319, 128));
+        jPanel_Saldo_.setPreferredSize(new java.awt.Dimension(319, 128));
+
+        jLabel_SaldoQ_.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jLabel_SaldoQ_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_SaldoQ_.setText("Q");
+
+        jLabel_Saldo_.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jLabel_Saldo_.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel_Saldo_.setText("0.00");
+
+        javax.swing.GroupLayout jPanel_Saldo_Layout = new javax.swing.GroupLayout(jPanel_Saldo_);
+        jPanel_Saldo_.setLayout(jPanel_Saldo_Layout);
+        jPanel_Saldo_Layout.setHorizontalGroup(
+            jPanel_Saldo_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_Saldo_Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel_SaldoQ_, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel_Saldo_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel_Saldo_Layout.setVerticalGroup(
+            jPanel_Saldo_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Saldo_Layout.createSequentialGroup()
+                .addGroup(jPanel_Saldo_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel_Saldo_, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                    .addComponent(jLabel_SaldoQ_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jPanel_Imprimir_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Imprimir", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
+        jPanel_Imprimir_.setMaximumSize(null);
+        jPanel_Imprimir_.setMinimumSize(new java.awt.Dimension(319, 128));
+        jPanel_Imprimir_.setPreferredSize(new java.awt.Dimension(319, 128));
+
+        jButton_Imprimir_.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jButton_Imprimir_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/InvoiceX32.png"))); // NOI18N
         jButton_Imprimir_.setText("Aceptar");
         jButton_Imprimir_.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -284,144 +392,62 @@ public class Cobrar extends javax.swing.JFrame {
             jPanel_Imprimir_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_Imprimir_Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton_Imprimir_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton_Imprimir_, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel_Imprimir_Layout.setVerticalGroup(
             jPanel_Imprimir_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_Imprimir_Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton_Imprimir_)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel_Total_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Total", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
-
-        jLabel_Total_.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel_Total_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
-        jLabel_TotalQ_.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel_TotalQ_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_TotalQ_.setText("Q");
-
-        javax.swing.GroupLayout jPanel_Total_Layout = new javax.swing.GroupLayout(jPanel_Total_);
-        jPanel_Total_.setLayout(jPanel_Total_Layout);
-        jPanel_Total_Layout.setHorizontalGroup(
-            jPanel_Total_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_Total_Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel_TotalQ_, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel_Total_, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton_Imprimir_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel_Total_Layout.setVerticalGroup(
-            jPanel_Total_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_Total_Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel_Total_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel_TotalQ_, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_Total_, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
-        );
-
-        jPanel_Saldo_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Saldo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
-
-        jLabel_Saldo_.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel_Saldo_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
-        jLabel_SaldoQ_.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel_SaldoQ_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_SaldoQ_.setText("Q");
-
-        javax.swing.GroupLayout jPanel_Saldo_Layout = new javax.swing.GroupLayout(jPanel_Saldo_);
-        jPanel_Saldo_.setLayout(jPanel_Saldo_Layout);
-        jPanel_Saldo_Layout.setHorizontalGroup(
-            jPanel_Saldo_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_Saldo_Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel_SaldoQ_, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel_Saldo_, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel_Saldo_Layout.setVerticalGroup(
-            jPanel_Saldo_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_Saldo_Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel_Saldo_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel_SaldoQ_, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_Saldo_, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
-        );
-
-        jPanel_PreView_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vista Previa", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
-        jPanel_PreView_.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout jPanel_Main_Layout = new javax.swing.GroupLayout(jPanel_Main_);
         jPanel_Main_.setLayout(jPanel_Main_Layout);
         jPanel_Main_Layout.setHorizontalGroup(
             jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Main_Layout.createSequentialGroup()
+            .addGroup(jPanel_Main_Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel_PreView_, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel_PreView_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel_Total_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel_ModoPago_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel_Saldo_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel_Imprimir_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel_Saldo_, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel_Imprimir_, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel_Main_Layout.setVerticalGroup(
             jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_Main_Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel_PreView_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel_PreView_, javax.swing.GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE)
                     .addGroup(jPanel_Main_Layout.createSequentialGroup()
                         .addComponent(jPanel_Total_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel_ModoPago_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel_Saldo_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel_Imprimir_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel_Saldo_, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel_Imprimir_, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel_Main_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel_Main_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        getContentPane().add(jPanel_Main_, java.awt.BorderLayout.CENTER);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField_PagoEfectivo_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_PagoEfectivo_ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_PagoEfectivo_ActionPerformed
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        jPanel_PreView_.remove(jFxPanel);
+    }//GEN-LAST:event_formWindowClosing
 
     private void jButton_Imprimir_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Imprimir_ActionPerformed
         imprimir();
     }//GEN-LAST:event_jButton_Imprimir_ActionPerformed
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        jPanel_PreView_.remove(jFxPanel);
-    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -437,45 +463,39 @@ public class Cobrar extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Cobrar.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            java.util.logging.Logger.getLogger(Cobrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Cobrar.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            java.util.logging.Logger.getLogger(Cobrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Cobrar.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            java.util.logging.Logger.getLogger(Cobrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Cobrar.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Cobrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new Cobrar().setVisible(true);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Cobrar().setVisible(true);
+            }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Imprimir_;
+    private javax.swing.JLabel jLabel_DescuentoIcon_;
     private javax.swing.JLabel jLabel_Descuento_;
-    private javax.swing.JLabel jLabel_Efectivo_;
-    private javax.swing.JLabel jLabel_Electronico_;
+    private javax.swing.JLabel jLabel_MoEfectivoIcon_;
+    private javax.swing.JLabel jLabel_MoEfectivo_;
+    private javax.swing.JLabel jLabel_MoElectronicoIcon_;
+    private javax.swing.JLabel jLabel_MoElectronico_;
     private javax.swing.JLabel jLabel_SaldoQ_;
     private javax.swing.JLabel jLabel_Saldo_;
     private javax.swing.JLabel jLabel_TotalQ_;
     private javax.swing.JLabel jLabel_Total_;
-    private javax.swing.JLabel jLabel_iconDescuento_;
-    private javax.swing.JLabel jLabel_iconEfectivo_;
-    private javax.swing.JLabel jLabel_iconElectronico_;
     private javax.swing.JPanel jPanel_Imprimir_;
     private javax.swing.JPanel jPanel_Main_;
     private javax.swing.JPanel jPanel_ModoPago_;
@@ -483,7 +503,7 @@ public class Cobrar extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_Saldo_;
     private javax.swing.JPanel jPanel_Total_;
     private javax.swing.JTextField jTextField_Descuento_;
-    private javax.swing.JTextField jTextField_PagoEfectivo_;
-    private javax.swing.JTextField jTextField_PagoElectronico_;
+    private javax.swing.JTextField jTextField_MoEfectivo_;
+    private javax.swing.JTextField jTextField_MoElectronico_;
     // End of variables declaration//GEN-END:variables
 }

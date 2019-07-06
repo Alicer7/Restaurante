@@ -22,31 +22,30 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author Alicer
  */
 public class MenuPrincipal extends javax.swing.JFrame {
-
+    
     private void exit() {
-
+        
         String botones[] = {"Cerrar", "Cancelar"};
         int eleccion = JOptionPane.showOptionDialog(this, "¿Desea cerrar la aplicación?", "", 0, 0, null, botones, this);
         if (eleccion == JOptionPane.YES_OPTION) {
             System.exit(0);
         } else if (eleccion == JOptionPane.NO_OPTION) {
         }
-
+        
     }
-
+    
     private void cerrar() {
-
+        
         String botones[] = {"Cerrar", "Cancelar"};
         int eleccion = JOptionPane.showOptionDialog(this, "¿Desea cerrar la aplicación?", "Cerrar Ventana?", 0, 0, null, botones, this);
         if (eleccion == JOptionPane.YES_OPTION) {
             dispose();
         } else if (eleccion == JOptionPane.NO_OPTION) {
         }
-
+        
     }
-
+    
     private void configurarVentana() {
-        this.setTitle("Abonos");                   // colocamos titulo a la ventana
         this.setLocationRelativeTo(null);                       // centramos la ventana en la pantalla
         this.setResizable(false);                               // hacemos que la ventana no sea redimiensionable
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);    // hacemos que cuando se cierre la ventana termina todo proceso
@@ -57,15 +56,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
      * Creates new form MenuPrincipal
      */
     public MenuPrincipal() {
-
-        initComponents();
-        configurarVentana();
-        // incluimos un ícono para la aplicación
         try {
-//            setIconImage(new ImageIcon(getClass().getResource("/core/resources/chocolate.png")).getImage());
+            UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel");
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored) {
+        }
+        try {
+            setIconImage(new ImageIcon(getClass().getResource("/core/resources/chocolate.png")).getImage());
         } catch (Error err) {
             System.err.println(err);
         }
+        initComponents();
+        configurarVentana();
+        jButton_RegistroCarnes_.setVisible(false);
     }
 
     /**
@@ -76,287 +78,391 @@ public class MenuPrincipal extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
-        panelControl = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jButton_AdministrativosHerramientas_ = new javax.swing.JButton();
+        jButton_AdministracionInventarioGeneral_ = new javax.swing.JButton();
+        jButton_AdministracionInventarioSalida_ = new javax.swing.JButton();
+        jButton_AdministracionInventarioSalida_1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jButton8 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton_Administracion_ = new javax.swing.JButton();
-        hora = new javax.swing.JLabel();
-        fecha = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jButton_Ventas_ = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        lblCargo = new javax.swing.JLabel();
         lblUser = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        lblCargo = new javax.swing.JLabel();
+        fecha = new javax.swing.JLabel();
+        hora = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jButton_RegistroLicores_ = new javax.swing.JButton();
+        jButton_RegistroCompras_ = new javax.swing.JButton();
+        jButton_RegistroCarnes_ = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jButton_CocinaRecetas_ = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jButton_ReportesVentas_ = new javax.swing.JButton();
+        jButton_ReportesCierreCaja_ = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        jButton_Ventas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(870, 419));
+        setTitle("Menu");
+        setMaximumSize(new java.awt.Dimension(726, 532));
+        setMinimumSize(new java.awt.Dimension(726, 532));
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
-        });
-
-        panelControl.setBackground(new java.awt.Color(255, 255, 255));
-
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton3.setText("Registro de Licores");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton4.setText("Compras");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Administrativos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+        jPanel2.setMaximumSize(new java.awt.Dimension(230, 257));
+        jPanel2.setMinimumSize(new java.awt.Dimension(230, 257));
+
+        jButton_AdministrativosHerramientas_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton_AdministrativosHerramientas_.setText("Crear Usuarios");
+        jButton_AdministrativosHerramientas_.setMaximumSize(null);
+        jButton_AdministrativosHerramientas_.setMinimumSize(null);
+        jButton_AdministrativosHerramientas_.setPreferredSize(null);
+        jButton_AdministrativosHerramientas_.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButton_AdministrativosHerramientas_ActionPerformed(evt);
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton5.setText("Creacion de recetas");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jButton_AdministracionInventarioGeneral_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton_AdministracionInventarioGeneral_.setText("Inventario General");
+        jButton_AdministracionInventarioGeneral_.setMaximumSize(null);
+        jButton_AdministracionInventarioGeneral_.setMinimumSize(null);
+        jButton_AdministracionInventarioGeneral_.setPreferredSize(null);
+        jButton_AdministracionInventarioGeneral_.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jButton_AdministracionInventarioGeneral_ActionPerformed(evt);
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
-        jPanel1.setLayout(new java.awt.GridBagLayout());
-
-        jButton8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton8.setText("Facturación");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        jButton_AdministracionInventarioSalida_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton_AdministracionInventarioSalida_.setText("Descuento a inventarios");
+        jButton_AdministracionInventarioSalida_.setMaximumSize(null);
+        jButton_AdministracionInventarioSalida_.setMinimumSize(null);
+        jButton_AdministracionInventarioSalida_.setPreferredSize(null);
+        jButton_AdministracionInventarioSalida_.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 69;
-        gridBagConstraints.ipady = 20;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(35, 28, 32, 0);
-        jPanel1.add(jButton8, gridBagConstraints);
-
-        jButton6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton6.setText("Pedidos");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 95;
-        gridBagConstraints.ipady = 17;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(36, 28, 0, 0);
-        jPanel1.add(jButton6, gridBagConstraints);
-
-        jButton9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton9.setText("Reporte de Ventas");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 21;
-        gridBagConstraints.ipady = 20;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(35, 29, 32, 0);
-        jPanel1.add(jButton9, gridBagConstraints);
-
-        jButton10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton10.setText("Cierre de Caja");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 53;
-        gridBagConstraints.ipady = 20;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(35, 26, 32, 19);
-        jPanel1.add(jButton10, gridBagConstraints);
-
-        jButton_Administracion_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton_Administracion_.setText("administrativos");
-        jButton_Administracion_.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_Administracion_ActionPerformed(evt);
+                jButton_AdministracionInventarioSalida_ActionPerformed(evt);
             }
         });
 
-        hora.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        hora.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        hora.setText("HORA");
+        jButton_AdministracionInventarioSalida_1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton_AdministracionInventarioSalida_1.setText("Salida de Almacén");
+        jButton_AdministracionInventarioSalida_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_AdministracionInventarioSalida_1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton_AdministracionInventarioGeneral_, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                    .addComponent(jButton_AdministracionInventarioSalida_, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jButton_AdministrativosHerramientas_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton_AdministracionInventarioSalida_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton_AdministrativosHerramientas_, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton_AdministracionInventarioGeneral_, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton_AdministracionInventarioSalida_, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton_AdministracionInventarioSalida_1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Información", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+
+        lblUser.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblUser.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblUser.setText("Usuario");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("@");
+
+        lblCargo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblCargo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblCargo.setText("Cargo");
 
         fecha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        fecha.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        fecha.setForeground(new java.awt.Color(102, 102, 255));
+        fecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         fecha.setText("DIA - MES - AÑO");
 
+        hora.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        hora.setForeground(new java.awt.Color(0, 204, 102));
+        hora.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        hora.setText("HORA");
+
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 102, 102));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("DESCONECTARSE");
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel2MouseClicked(evt);
             }
         });
 
-        jButton_Ventas_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton_Ventas_.setText("Ventas");
-        jButton_Ventas_.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_Ventas_ActionPerformed(evt);
-            }
-        });
-
-        jButton7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton7.setText("Registro de Carnes");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("Cargo: ");
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Usuario: ");
-
-        lblCargo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        lblCargo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
-        lblUser.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        lblUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
-        javax.swing.GroupLayout panelControlLayout = new javax.swing.GroupLayout(panelControl);
-        panelControl.setLayout(panelControlLayout);
-        panelControlLayout.setHorizontalGroup(
-            panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(panelControlLayout.createSequentialGroup()
-                .addGroup(panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelControlLayout.createSequentialGroup()
-                        .addGap(580, 580, 580)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelControlLayout.createSequentialGroup()
-                        .addGap(580, 580, 580)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(lblCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelControlLayout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addGroup(panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelControlLayout.createSequentialGroup()
-                                .addGroup(panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(65, 65, 65)
-                                .addGroup(panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton_Administracion_, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton_Ventas_, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(188, 188, 188)
-                                .addGroup(panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(panelControlLayout.createSequentialGroup()
-                                        .addGap(70, 70, 70)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addGap(0, 0, Short.MAX_VALUE))
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(hora, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(38, 38, 38))
         );
-        panelControlLayout.setVerticalGroup(
-            panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelControlLayout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
-                .addGroup(panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton_Administracion_, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelControlLayout.createSequentialGroup()
-                        .addComponent(hora)
-                        .addGap(13, 13, 13)
-                        .addComponent(fecha)
-                        .addGap(13, 13, 13)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelControlLayout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addGroup(panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton_Ventas_, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(15, 15, 15)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(15, 15, 15)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
-                .addGroup(panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
+                    .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addGap(59, 59, 59)
+                .addComponent(fecha)
+                .addGap(18, 18, 18)
+                .addComponent(hora)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addContainerGap())
+        );
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registros", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+        jPanel3.setMaximumSize(new java.awt.Dimension(230, 257));
+        jPanel3.setMinimumSize(new java.awt.Dimension(230, 257));
+
+        jButton_RegistroLicores_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton_RegistroLicores_.setText("Licores");
+        jButton_RegistroLicores_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_RegistroLicores_ActionPerformed(evt);
+            }
+        });
+
+        jButton_RegistroCompras_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton_RegistroCompras_.setText("Compras");
+        jButton_RegistroCompras_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_RegistroCompras_ActionPerformed(evt);
+            }
+        });
+
+        jButton_RegistroCarnes_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton_RegistroCarnes_.setText("Carnes");
+        jButton_RegistroCarnes_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_RegistroCarnes_ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton_RegistroCarnes_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton_RegistroLicores_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton_RegistroCompras_, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton_RegistroLicores_, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton_RegistroCompras_, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton_RegistroCarnes_, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(62, Short.MAX_VALUE))
+        );
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cocina", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+        jPanel4.setMaximumSize(null);
+
+        jButton_CocinaRecetas_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton_CocinaRecetas_.setText("Creacion de recetas");
+        jButton_CocinaRecetas_.setMaximumSize(null);
+        jButton_CocinaRecetas_.setMinimumSize(null);
+        jButton_CocinaRecetas_.setPreferredSize(null);
+        jButton_CocinaRecetas_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_CocinaRecetas_ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton_CocinaRecetas_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton_CocinaRecetas_, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Reportes", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+        jPanel5.setMaximumSize(new java.awt.Dimension(230, 257));
+        jPanel5.setMinimumSize(new java.awt.Dimension(230, 257));
+        jPanel5.setPreferredSize(new java.awt.Dimension(230, 257));
+
+        jButton_ReportesVentas_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton_ReportesVentas_.setText("Reporte de Ventas");
+        jButton_ReportesVentas_.setMaximumSize(null);
+        jButton_ReportesVentas_.setMinimumSize(null);
+        jButton_ReportesVentas_.setPreferredSize(null);
+        jButton_ReportesVentas_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ReportesVentas_ActionPerformed(evt);
+            }
+        });
+
+        jButton_ReportesCierreCaja_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton_ReportesCierreCaja_.setText("Cierre de Caja");
+        jButton_ReportesCierreCaja_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ReportesCierreCaja_ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton_ReportesVentas_, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                    .addComponent(jButton_ReportesCierreCaja_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton_ReportesVentas_, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton_ReportesCierreCaja_, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ventas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+        jPanel6.setMaximumSize(new java.awt.Dimension(230, 257));
+        jPanel6.setMinimumSize(new java.awt.Dimension(230, 257));
+        jPanel6.setPreferredSize(new java.awt.Dimension(230, 257));
+
+        jButton_Ventas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton_Ventas.setText("Ventas");
+        jButton_Ventas.setMaximumSize(null);
+        jButton_Ventas.setMinimumSize(null);
+        jButton_Ventas.setPreferredSize(null);
+        jButton_Ventas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_VentasActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton_Ventas, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton_Ventas, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(182, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelControl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelControl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
-        gui.almacen.RegistroLicores almacen = new gui.almacen.RegistroLicores(null, true);
-        almacen.setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     class horas implements ActionListener {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             Date sistemaHora = new Date();
@@ -366,53 +472,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
             hora.setText(String.format(formato.format(sistemaHora), now));
         }
     }
+    
 
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        gui.almacen.compra.FacturaCompraMat mat = new gui.almacen.compra.FacturaCompraMat();
-        mat.setVisible(true);
-
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        gui.cocina.MateriaprimaDeReceta recipe = new gui.cocina.MateriaprimaDeReceta();
-        recipe.setVisible(true);
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton_Administracion_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Administracion_ActionPerformed
-//        gui.empleado.Catalogos catalogo = new gui.empleado.Catalogos(null, true);
-//        catalogo.setVisible(true);
-    }//GEN-LAST:event_jButton_Administracion_ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-
-        gui.venta.NuevoPedido ped = new gui.venta.NuevoPedido();
-        ped.setVisible(true);
-
-
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-
-        gui.venta.DetalleFacturacion temp = new gui.venta.DetalleFacturacion();
-        temp.setVisible(true);
-    }//GEN-LAST:event_jButton8ActionPerformed
+    private void jButton_AdministrativosHerramientas_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AdministrativosHerramientas_ActionPerformed
+        gui.login.vista.registro reg = new gui.login.vista.registro();
+        reg.setVisible(true);
+    }//GEN-LAST:event_jButton_AdministrativosHerramientas_ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         exit();
     }//GEN-LAST:event_formWindowClosing
-
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        ReporteVenta fact = new ReporteVenta(this, true);
-        fact.setVisible(true);
-
-// TODO add your handling code here:
-    }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         if (JOptionPane.showConfirmDialog(this, "Esta a punto de\ncerrar la sesión\n¿Desea continuar?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION, 0,
@@ -432,19 +501,59 @@ public class MenuPrincipal extends javax.swing.JFrame {
 //        Hora del sistema
         Timer tiempo = new Timer(100, new gui.MenuPrincipal.horas());
         tiempo.start();
-
+        
 
     }//GEN-LAST:event_formWindowOpened
 
-    private void jButton_Ventas_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Ventas_ActionPerformed
+    private void jButton_AdministracionInventarioGeneral_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AdministracionInventarioGeneral_ActionPerformed
+        gui.inventario.Articulos articulos = new gui.inventario.Articulos();
+        articulos.setVisible(true);
+    }//GEN-LAST:event_jButton_AdministracionInventarioGeneral_ActionPerformed
+
+    private void jButton_AdministracionInventarioSalida_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AdministracionInventarioSalida_ActionPerformed
+        gui.inventario.SalidaInventario salida = new gui.inventario.SalidaInventario();
+        salida.setVisible(true);
+    }//GEN-LAST:event_jButton_AdministracionInventarioSalida_ActionPerformed
+
+    private void jButton_RegistroLicores_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RegistroLicores_ActionPerformed
+        gui.almacen.RegistroLicores almacen = new gui.almacen.RegistroLicores(null, true);
+        almacen.setVisible(true);
+    }//GEN-LAST:event_jButton_RegistroLicores_ActionPerformed
+
+    private void jButton_RegistroCarnes_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RegistroCarnes_ActionPerformed
+//        gui.almacen.RegistroCarnes carnes = new gui.almacen.RegistroCarnes(this, true);
+//        carnes.setVisible(true);
+    }//GEN-LAST:event_jButton_RegistroCarnes_ActionPerformed
+
+    private void jButton_RegistroCompras_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RegistroCompras_ActionPerformed
+        gui.almacen.compra.FacturaCompraMat mat = new gui.almacen.compra.FacturaCompraMat();
+        mat.setVisible(true);
+    }//GEN-LAST:event_jButton_RegistroCompras_ActionPerformed
+
+    private void jButton_CocinaRecetas_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CocinaRecetas_ActionPerformed
+        gui.cocina.MateriaprimaDeReceta recipe = new gui.cocina.MateriaprimaDeReceta();
+        recipe.setVisible(true);
+    }//GEN-LAST:event_jButton_CocinaRecetas_ActionPerformed
+
+    private void jButton_ReportesVentas_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ReportesVentas_ActionPerformed
+        ReporteVenta reporteVenta = new ReporteVenta(this, true);
+        reporteVenta.setVisible(true);
+    }//GEN-LAST:event_jButton_ReportesVentas_ActionPerformed
+
+    private void jButton_ReportesCierreCaja_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ReportesCierreCaja_ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_ReportesCierreCaja_ActionPerformed
+
+    private void jButton_VentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_VentasActionPerformed
         gui.venta.Ventas ventas = new gui.venta.Ventas();
         ventas.setVisible(true);
-    }//GEN-LAST:event_jButton_Ventas_ActionPerformed
+    }//GEN-LAST:event_jButton_VentasActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        gui.almacen.RegistroCarnes carnes = new gui.almacen.RegistroCarnes(this, true);
-        carnes.setVisible(true);
-    }//GEN-LAST:event_jButton7ActionPerformed
+    private void jButton_AdministracionInventarioSalida_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AdministracionInventarioSalida_1ActionPerformed
+        
+        gui.almacen.compra.bar_matDisponible salida = new gui.almacen.compra.bar_matDisponible();
+        salida.setVisible(true);
+    }//GEN-LAST:event_jButton_AdministracionInventarioSalida_1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -472,6 +581,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
@@ -482,22 +594,26 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel fecha;
     private javax.swing.JLabel hora;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JButton jButton_Administracion_;
-    private javax.swing.JButton jButton_Ventas_;
+    private javax.swing.JButton jButton_AdministracionInventarioGeneral_;
+    private javax.swing.JButton jButton_AdministracionInventarioSalida_;
+    private javax.swing.JButton jButton_AdministracionInventarioSalida_1;
+    private javax.swing.JButton jButton_AdministrativosHerramientas_;
+    private javax.swing.JButton jButton_CocinaRecetas_;
+    private javax.swing.JButton jButton_RegistroCarnes_;
+    private javax.swing.JButton jButton_RegistroCompras_;
+    private javax.swing.JButton jButton_RegistroLicores_;
+    private javax.swing.JButton jButton_ReportesCierreCaja_;
+    private javax.swing.JButton jButton_ReportesVentas_;
+    private javax.swing.JButton jButton_Ventas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     public static javax.swing.JLabel lblCargo;
     public javax.swing.JLabel lblUser;
-    private javax.swing.JPanel panelControl;
     // End of variables declaration//GEN-END:variables
 }

@@ -159,13 +159,13 @@ public class login extends javax.swing.JFrame {
                 this.dispose();
 
                 if (mod.getIdTipo() == 1) {
-                    gui.MenuPrincipal_ menu = new gui.MenuPrincipal_();
+                    gui.MenuPrincipal menu = new gui.MenuPrincipal();
                     menu.setVisible(true);
 
                     menu.lblUser.setText(mod.getNombre());
                     menu.lblCargo.setText("Administrador");
                 } else {
-                    gui.MenuPrincipal_ menu = new gui.MenuPrincipal_();
+                    gui.MenuPrincipal menu = new gui.MenuPrincipal();
                     menu.setVisible(true);
 //
                     menu.lblUser.setText(mod.getNombre());
@@ -207,13 +207,13 @@ public class login extends javax.swing.JFrame {
                 this.dispose();
 
                 if (mod.getIdTipo() == 1) {
-                    gui.MenuPrincipal_ menu = new gui.MenuPrincipal_();
+                    gui.MenuPrincipal menu = new gui.MenuPrincipal();
                     menu.setVisible(true);
 
                     menu.lblUser.setText(mod.getNombre());
                     menu.lblCargo.setText("Administrador");
                 } else {
-                    gui.MenuPrincipal_ menu = new gui.MenuPrincipal_();
+                    gui.MenuPrincipal menu = new gui.MenuPrincipal();
                     menu.setVisible(true);
 //
                     menu.lblUser.setText(mod.getNombre());
