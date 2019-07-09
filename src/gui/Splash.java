@@ -33,17 +33,24 @@ public final class Splash extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel_CR_2 = new javax.swing.JLabel();
         jLabel_Credits_ = new javax.swing.JLabel();
         jLabel_Credits_1 = new javax.swing.JLabel();
         jProgressBar_ = new javax.swing.JProgressBar();
         jLabel_CR_ = new javax.swing.JLabel();
         jLabel_imagen_ = new javax.swing.JLabel();
+        jLabel_CR_1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(900, 500));
         setMinimumSize(new java.awt.Dimension(900, 500));
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel_CR_2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel_CR_2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_CR_2.setText("Versión del sistema: 0.8");
+        getContentPane().add(jLabel_CR_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, -1, 30));
 
         jLabel_Credits_.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel_Credits_.setForeground(new java.awt.Color(255, 255, 255));
@@ -71,6 +78,11 @@ public final class Splash extends javax.swing.JFrame {
 
         jLabel_imagen_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/Restaurante-Splash.png"))); // NOI18N
         getContentPane().add(jLabel_imagen_, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 500));
+
+        jLabel_CR_1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel_CR_1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_CR_1.setText("Marco Méndez / Freddy Camposeco");
+        getContentPane().add(jLabel_CR_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 450, -1, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -121,6 +133,8 @@ public final class Splash extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel_CR_;
+    private javax.swing.JLabel jLabel_CR_1;
+    private javax.swing.JLabel jLabel_CR_2;
     private javax.swing.JLabel jLabel_Credits_;
     private javax.swing.JLabel jLabel_Credits_1;
     private javax.swing.JLabel jLabel_imagen_;

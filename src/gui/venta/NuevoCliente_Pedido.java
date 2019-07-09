@@ -674,10 +674,9 @@ public class NuevoCliente_Pedido extends javax.swing.JFrame {
 
     private void jButton_Aceptar_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Aceptar_ActionPerformed
         int factura = gui.venta.Ventas.IDVENTATEMPORAL;
-       Conexion cone = new Conexion();
+        Conexion cone = new Conexion();
         com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
         PreparedStatement ps = null;
-       
 
         try {
             int filas = jtPedido.getRowCount();
@@ -687,7 +686,7 @@ public class NuevoCliente_Pedido extends javax.swing.JFrame {
                 String cantidad = (String) jtPedido.getValueAt(row, 2);
                 String costo = (String) jtPedido.getValueAt(row, 3);
 
-                ps = conn.prepareStatement("INSERT INTO `temp_pedido` (`temp_venta_id`,empleado_id,  `bebida_id`, `bebida_cantidad`, `costo`) VALUES (?,?,?,?,?)");
+                ps = conn.prepareStatement("INSERT INTO `temp_pedido` (`temp_venta_id`, empleado_id,  `bebida_id`, `bebida_cantidad`, `costo`) VALUES (?,?,?,?,?)");
                 ps.setInt(1, factura);
                 ps.setInt(2, 1);
                 ps.setInt(3, id_comida);
@@ -697,6 +696,7 @@ public class NuevoCliente_Pedido extends javax.swing.JFrame {
             }
             JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
         } catch (SQLException ex) {
+            System.out.println("errorsql " + ex);
         }
 
     }//GEN-LAST:event_jButton_Aceptar_ActionPerformed
