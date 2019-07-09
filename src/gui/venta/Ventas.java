@@ -5,10 +5,14 @@
  */
 package gui.venta;
 
+import com.mysql.jdbc.Connection;
 import com.toedter.calendar.JDateChooser;
 import core.database.querry.Facturas;
 import core.database.querry.Pedidos;
 import java.awt.BorderLayout;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
@@ -173,65 +177,111 @@ public class Ventas extends javax.swing.JFrame {
         String tFoot = "";
         
         Pedidos pedidos = new Pedidos();
-
+        String DESCRIPCION = null;
+        int Cantidad = 0;
+        Double Costo = 0.0;
+        double totalconsumido = 0.0;
         // SQL
+        
+         try {
+
+            core.database.Conexion objCon = new core.database.Conexion();
+            Connection conn = (Connection) objCon.connect();
+            ResultSet rs = null;
+            PreparedStatement ps = null;
+
+            String servicios = "SELECT\n"
+                    + "     bebida.`nombre` AS bebida_nombre,\n"
+                    + "     temp_pedido.`bebida_cantidad` AS temp_pedido_bebida_cantidad,\n"
+                    + "     temp_pedido.`costo` AS temp_pedido_costo\n"
+                    + "FROM\n"
+                    + "     `bebida` bebida INNER JOIN `temp_pedido` temp_pedido ON bebida.`id` = temp_pedido.`bebida_id` where temp_venta_id = '" + gui.venta.Ventas.IDVENTATEMPORAL + "'";
+            ps = conn.prepareStatement(servicios);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                DESCRIPCION = (rs.getString("bebida_nombre"));
+                Cantidad = (rs.getInt("temp_pedido_bebida_cantidad"));
+                Costo = (rs.getDouble("temp_pedido_costo"));
+                Double sub = Cantidad * Costo;
+                totalconsumido = totalconsumido + sub;
+
+                // ######################################    AQUÍ INI   ######################################    
+                String pedidoX
+                        = "<tr><td class=\"L\">"
+                        + DESCRIPCION //aquí de acuerdo al id crear un query para seleccionar el nombre del producto
+                        + "</td><td class=\"R\">Q "
+                        + Costo //aquí de acuerdo al id crear un query para seleccionar el precio del producto
+                        + "</td><td class=\"M\"> "
+                        + Cantidad //las unidades se toman si no son igual a 0
+                        + "</td><td class=\"R\">Q "
+                        + sub
+                        + "</td></tr>";
+
+                tBodyB = tBodyB + pedidoX;
+
+//// ######################################    AQUÍ FIN   ######################################    
+                System.out.println("Datos: " + "desc = " + DESCRIPCION + "  cantidad: " + Cantidad + "  costo: " + Costo);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
         ArrayList<Pedidos> lista = pedidos.listaPedidosNumeroFactura(gui.venta.Ventas.IDVENTATEMPORAL);
 
         Double totalConsumo = 0.0;
 
         Object filaData[][] = new Object[lista.size()][11];
-
-        for (int i = 0; i < lista.size(); i++) {
-            filaData[i][0] = lista.get(i).getIdPedido();
-            filaData[i][1] = lista.get(i).getFacturaId();
-            filaData[i][2] = lista.get(i).getMenuId();
-            filaData[i][3] = lista.get(i).getMenuCantidad();
-            filaData[i][4] = lista.get(i).getComidaId();
-            filaData[i][5] = lista.get(i).getComidaCantidad();
-            filaData[i][6] = lista.get(i).getBebidaId();
-            filaData[i][7] = lista.get(i).getBebidaCantidad();
-            filaData[i][8] = lista.get(i).getCosto();
-            filaData[i][9] = lista.get(i).getTiempo();
-            filaData[i][10] = lista.get(i).getSolvente();
-            
-            String Descripción = "";
-            Integer Unidades = 0;
-            Double PrecioUnitario = 1.00, SubTotal = 1.00, Total = 1.00;
-
-            
-            if ((Unidades=(Integer) filaData[i][3])>0){
-                SubTotal=PrecioUnitario * Unidades;
-            }
-            else if ((Unidades=(Integer) filaData[i][5])>0){
-                SubTotal=PrecioUnitario * Unidades;
-            }
-            else if ((Unidades=(Integer) filaData[i][7])>0){
-                SubTotal=PrecioUnitario * Unidades;
-            }
-            else {
-            }
-// ######################################    AQUÍ INI   ######################################    
-            String pedidoX
-                    = "<tr><td class=\"L\">"
-                    + Descripción //aquí de acuerdo al id crear un query para seleccionar el nombre del producto
-                    + "</td><td class=\"R\">Q "
-                    + PrecioUnitario //aquí de acuerdo al id crear un query para seleccionar el precio del producto
-                    + "</td><td class=\"M\"> "
-                    + Unidades //las unidades se toman si no son igual a 0
-                    + "</td><td class=\"R\">Q "
-                    + SubTotal 
-                    + "</td></tr>";
-// ######################################    AQUÍ FIN   ######################################    
-
-            tBodyB = tBodyB + pedidoX;
-
-            totalConsumo += lista.get(i).getCosto();
-        } // Fin For
+//////
+//////        for (int i = 0; i < lista.size(); i++) {
+//////            filaData[i][0] = lista.get(i).getIdPedido();
+//////            filaData[i][1] = lista.get(i).getFacturaId();
+//////            filaData[i][2] = lista.get(i).getMenuId();
+//////            filaData[i][3] = lista.get(i).getMenuCantidad();
+//////            filaData[i][4] = lista.get(i).getComidaId();
+//////            filaData[i][5] = lista.get(i).getComidaCantidad();
+//////            filaData[i][6] = lista.get(i).getBebidaId();
+//////            filaData[i][7] = lista.get(i).getBebidaCantidad();
+//////            filaData[i][8] = lista.get(i).getCosto();
+//////            filaData[i][9] = lista.get(i).getTiempo();
+//////            filaData[i][10] = lista.get(i).getSolvente();
+////            
+////            String Descripción = "";
+////            Integer Unidades = 0;
+////            Double PrecioUnitario = 1.00, SubTotal = 1.00, Total = 1.00;
+////
+////            
+////            if ((Unidades=(Integer) filaData[i][3])>0){
+////                SubTotal=PrecioUnitario * Unidades;
+////            }
+////            else if ((Unidades=(Integer) filaData[i][5])>0){
+////                SubTotal=PrecioUnitario * Unidades;
+////            }
+////            else if ((Unidades=(Integer) filaData[i][7])>0){
+////                SubTotal=PrecioUnitario * Unidades;
+////            }
+////            else {
+////            }
+////// ######################################    AQUÍ INI   ######################################    
+////            String pedidoX
+////                    = "<tr><td class=\"L\">"
+////                    + Descripción //aquí de acuerdo al id crear un query para seleccionar el nombre del producto
+////                    + "</td><td class=\"R\">Q "
+////                    + PrecioUnitario //aquí de acuerdo al id crear un query para seleccionar el precio del producto
+////                    + "</td><td class=\"M\"> "
+////                    + Unidades //las unidades se toman si no son igual a 0
+////                    + "</td><td class=\"R\">Q "
+////                    + SubTotal 
+////                    + "</td></tr>";
+////// ######################################    AQUÍ FIN   ######################################    
+//
+//            tBodyB = tBodyB + pedidoX;
+//
+//            totalConsumo += lista.get(i).getCosto();
+//        } // Fin For
 
 // PARTE 2 - INICIO - esto va despues del haber hecho la suma de subtotales
         String totalX
                 = "<td class=\"M\">Total</td><td></td><td></td><td class=\"R total\">Q "
-                + totalConsumo
+                + totalconsumido
                 + "</td></tr>";
 // PARTE 2 - FIN -
 
@@ -458,8 +508,7 @@ public class Ventas extends javax.swing.JFrame {
         jPanel_Detalle_Layout.setHorizontalGroup(
             jPanel_Detalle_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Detalle_Layout.createSequentialGroup()
-                .addGap(0, 1, Short.MAX_VALUE)
-                .addComponent(jButton_NuevoPedido_, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                .addComponent(jButton_NuevoPedido_, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton_Cobrar_, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel_Detalle_Layout.createSequentialGroup()
@@ -484,7 +533,7 @@ public class Ventas extends javax.swing.JFrame {
             jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_Main_Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel_Clientes_, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
+                .addComponent(jPanel_Clientes_, javax.swing.GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel_Detalle_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -494,8 +543,8 @@ public class Ventas extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Main_Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel_Detalle_, javax.swing.GroupLayout.DEFAULT_SIZE, 725, Short.MAX_VALUE)
-                    .addComponent(jPanel_Clientes_, javax.swing.GroupLayout.DEFAULT_SIZE, 725, Short.MAX_VALUE))
+                    .addComponent(jPanel_Detalle_, javax.swing.GroupLayout.DEFAULT_SIZE, 711, Short.MAX_VALUE)
+                    .addComponent(jPanel_Clientes_, javax.swing.GroupLayout.DEFAULT_SIZE, 711, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -563,8 +612,8 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_ClienteNuevo_ActionPerformed
 
     private void jTable_Factura_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_Factura_MouseClicked
-        if (evt.getClickCount() == 2) {
 
+        if (evt.getClickCount() == 2) {
             int colId = 1;
             int row = jTable_Factura_.getSelectedRow();
             PRUEBA = row + 1;

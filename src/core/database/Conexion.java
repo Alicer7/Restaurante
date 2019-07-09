@@ -14,13 +14,13 @@ import java.sql.SQLException;
  * @author Alicer
  */
 public class Conexion {
-    private final String host = "192.168.1.2";
+    private final String host = "localhost";
     private final String port="3306";
     private final String db = "cafebar"; // Nombre de la BD.
 //    private final String user = "root";
-    private final String user = "freddy";
+    private final String user = "root";
 //    private final String password = "";
-    private final String password = "%Freddy101";
+    private final String password = "";
     private final String charset="?useUnicode=yes&characterEncoding=UTF-8";
         
     private Connection DBConnection;
