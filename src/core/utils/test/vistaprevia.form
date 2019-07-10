@@ -28,9 +28,13 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel_Main_" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="jButton_Mostrar_" min="-2" pref="153" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jButton_Imprimir_" pref="153" max="32767" attributes="0"/>
+                      <Component id="jButton_Mostrar_" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jButton_Limpiar_" min="-2" pref="82" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jButton_Mostrar2_" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      <Component id="jButton_Imprimir_" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -46,6 +50,8 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButton_Mostrar_" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButton_Imprimir_" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton_Limpiar_" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton_Mostrar2_" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
@@ -78,6 +84,22 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_Imprimir_ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton_Limpiar_">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Limpiar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_Limpiar_ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton_Mostrar2_">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="mostrar2"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_Mostrar2_ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
