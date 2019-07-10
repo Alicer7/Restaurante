@@ -49,9 +49,9 @@
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jPanel_Total_" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jPanel_ModoPago_" alignment="0" pref="330" max="32767" attributes="0"/>
-                      <Component id="jPanel_Saldo_" alignment="1" pref="330" max="32767" attributes="0"/>
-                      <Component id="jPanel_Imprimir_" alignment="1" pref="330" max="32767" attributes="0"/>
+                      <Component id="jPanel_ModoPago_" alignment="0" pref="331" max="32767" attributes="0"/>
+                      <Component id="jPanel_Saldo_" alignment="1" pref="331" max="32767" attributes="0"/>
+                      <Component id="jPanel_Imprimir_" alignment="1" pref="331" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>

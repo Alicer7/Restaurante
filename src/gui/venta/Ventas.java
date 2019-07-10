@@ -243,10 +243,10 @@ public class Ventas extends javax.swing.JFrame {
             modelF.removeRow(i);
         }
     }
-
+    
     private void limpiarTablaPedidos() {
         Platform.runLater(() -> {
-            webView.getEngine().loadContent(" ");
+            webView.getEngine().loadContent("<h1>Sin datos.</h1>");
         });
     }
 
@@ -490,7 +490,7 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_Cobrar_ActionPerformed
 
     private void jButton_NuevoPedido_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_NuevoPedido_ActionPerformed
-        gui.venta.NuevoCliente_Pedido pedido = new gui.venta.NuevoCliente_Pedido();
+        NuevoPedido pedido = new NuevoPedido();
         pedido.setVisible(true);
     }//GEN-LAST:event_jButton_NuevoPedido_ActionPerformed
 
@@ -519,6 +519,7 @@ public class Ventas extends javax.swing.JFrame {
         try {
             if (selectFecha == JOptionPane.OK_OPTION) {
                 limpiarTablaFacturas();
+                limpiarTablaPedidos();
                 borderFacturaFecha(calendario.getDate());
                 mostrarVentasDia(formatoFechaDia.format(calendario.getDate()));
                 date = calendario.getDate();

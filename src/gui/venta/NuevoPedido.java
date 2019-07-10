@@ -253,7 +253,6 @@ public class NuevoPedido extends javax.swing.JFrame {
         setTitle("Pedidos");
         setMinimumSize(new java.awt.Dimension(800, 600));
         setResizable(false);
-        setType(java.awt.Window.Type.POPUP);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -673,7 +672,31 @@ public class NuevoPedido extends javax.swing.JFrame {
 
     private void jButton_Aceptar_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Aceptar_ActionPerformed
 
+int factura = gui.venta.Ventas.IDVENTATEMPORAL;
+        Conexion cone = new Conexion();
+        com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
+        PreparedStatement ps = null;
 
+        try {
+            int filas = jtPedido.getRowCount();
+            for (int row = 0; row < filas; row++) {
+
+                int id_comida = (int) jtPedido.getValueAt(row, 0);
+                String cantidad = (String) jtPedido.getValueAt(row, 2);
+                String costo = (String) jtPedido.getValueAt(row, 3);
+
+                ps = conn.prepareStatement("INSERT INTO `temp_pedido` (`temp_venta_id`, empleado_id,  `bebida_id`, `bebida_cantidad`, `costo`) VALUES (?,?,?,?,?)");
+                ps.setInt(1, factura);
+                ps.setInt(2, 1);
+                ps.setInt(3, id_comida);
+                ps.setString(4, cantidad);
+                ps.setString(5, costo);
+                ps.execute();
+            }
+            JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
+        } catch (SQLException ex) {
+            System.out.println("errorsql " + ex);
+        }
 
     }//GEN-LAST:event_jButton_Aceptar_ActionPerformed
 
@@ -773,6 +796,8 @@ public class NuevoPedido extends javax.swing.JFrame {
         CODIGOBEBIDA = Integer.parseInt(codigo);
         BEBIDA = nombre;
         jLabel_PrecioUnitarioNum_1.setText(precio);
+        lblsubtotalbebidas.setText(precio);
+        txtCant2.setText("1");
     }//GEN-LAST:event_jtBebidas_MouseClicked
 
     private void txtCant2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCant2KeyReleased

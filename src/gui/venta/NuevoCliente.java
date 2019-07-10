@@ -254,7 +254,6 @@ public class NuevoCliente extends javax.swing.JFrame {
         setTitle("Cliente Nuevo");
         setMinimumSize(new java.awt.Dimension(800, 600));
         setResizable(false);
-        setType(java.awt.Window.Type.POPUP);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
