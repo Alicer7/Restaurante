@@ -24,8 +24,8 @@ import javax.swing.table.DefaultTableModel;
  * @author Freddy Camposeco <ankoku.fj@gmail.com> <www.stufs.rf.gd>
  */
 public class NuevoPedido extends javax.swing.JFrame {
-    
-    public void getBuscarComida (){
+
+    public void getBuscarComida() {
         try {
             Conexion cone = new Conexion();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
@@ -62,9 +62,8 @@ public class NuevoPedido extends javax.swing.JFrame {
             System.err.println(ex.toString());
         }
     }
-    
-    
-    public void getBuscarBebida(){
+
+    public void getBuscarBebida() {
         try {
             Conexion cone = new Conexion();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
@@ -97,13 +96,23 @@ public class NuevoPedido extends javax.swing.JFrame {
                 modelo.addRow(filas);
             }
 
+            ps = conn.prepareStatement("select nombre, apellido from empleado order by id desc limit 1");
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                jComboBox1.addItem(rs.getString("nombre") + " " + rs.getString("apellido"));
+
+            }
+
         } catch (SQLException ex) {
             System.err.println(ex.toString());
         }
 
-    };
+    }
+
+    ;
     
-    public void addComida (){
+    public void addComida() {
         try {
             Conexion cone = new Conexion();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
@@ -198,7 +207,7 @@ public class NuevoPedido extends javax.swing.JFrame {
         popuptable();
         txtCant1.setText("1");
         txtCant2.setText("1");
-        getBuscarComida ();
+        getBuscarComida();
         getBuscarBebida();
     }
 
@@ -242,12 +251,12 @@ public class NuevoPedido extends javax.swing.JFrame {
         jPanel_Pedidos_ = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jtPedido = new javax.swing.JTable();
-        jTextField_Nota_ = new javax.swing.JTextField();
         jButton_Aceptar_ = new javax.swing.JButton();
         jButton_Cancelar_ = new javax.swing.JButton();
-        jLabel_Nota_ = new javax.swing.JLabel();
         jLabel_Factura_ = new javax.swing.JLabel();
         jLabel_FactureNumero_ = new javax.swing.JLabel();
+        jLabel_Nota_ = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pedidos");
@@ -556,9 +565,6 @@ public class NuevoPedido extends javax.swing.JFrame {
 
         jScrollPane.setViewportView(jPanel_Pedidos_);
 
-        jTextField_Nota_.setMinimumSize(new java.awt.Dimension(397, 51));
-        jTextField_Nota_.setPreferredSize(new java.awt.Dimension(397, 51));
-
         jButton_Aceptar_.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton_Aceptar_.setText("Aceptar");
         jButton_Aceptar_.setMaximumSize(new java.awt.Dimension(120, 52));
@@ -581,12 +587,6 @@ public class NuevoPedido extends javax.swing.JFrame {
             }
         });
 
-        jLabel_Nota_.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel_Nota_.setText("Nota:");
-        jLabel_Nota_.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel_Nota_.setMinimumSize(new java.awt.Dimension(85, 49));
-        jLabel_Nota_.setPreferredSize(new java.awt.Dimension(85, 49));
-
         jLabel_Factura_.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel_Factura_.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel_Factura_.setText("#");
@@ -594,6 +594,12 @@ public class NuevoPedido extends javax.swing.JFrame {
         jLabel_FactureNumero_.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel_FactureNumero_.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel_FactureNumero_.setText("1234567890");
+
+        jLabel_Nota_.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel_Nota_.setText("Mesero Encargado: ");
+        jLabel_Nota_.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel_Nota_.setMinimumSize(new java.awt.Dimension(85, 49));
+        jLabel_Nota_.setPreferredSize(new java.awt.Dimension(85, 49));
 
         javax.swing.GroupLayout jPanel_Main_Layout = new javax.swing.GroupLayout(jPanel_Main_);
         jPanel_Main_.setLayout(jPanel_Main_Layout);
@@ -603,10 +609,10 @@ public class NuevoPedido extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel_Main_Layout.createSequentialGroup()
-                        .addComponent(jLabel_Nota_, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel_Nota_, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_Nota_, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(85, 85, 85)
                         .addComponent(jLabel_Factura_)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel_FactureNumero_, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -639,13 +645,12 @@ public class NuevoPedido extends javax.swing.JFrame {
                             .addComponent(jButton_Cancelar_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
                     .addGroup(jPanel_Main_Layout.createSequentialGroup()
-                        .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel_Factura_, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel_FactureNumero_, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel_Factura_, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel_FactureNumero_, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jTextField_Nota_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel_Nota_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel_Nota_, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
@@ -672,7 +677,7 @@ public class NuevoPedido extends javax.swing.JFrame {
 
     private void jButton_Aceptar_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Aceptar_ActionPerformed
 
-int factura = gui.venta.Ventas.IDVENTATEMPORAL;
+        int factura = gui.venta.Ventas.IDVENTATEMPORAL;
         Conexion cone = new Conexion();
         com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
         PreparedStatement ps = null;
@@ -687,13 +692,15 @@ int factura = gui.venta.Ventas.IDVENTATEMPORAL;
 
                 ps = conn.prepareStatement("INSERT INTO `temp_pedido` (`temp_venta_id`, empleado_id,  `bebida_id`, `bebida_cantidad`, `costo`) VALUES (?,?,?,?,?)");
                 ps.setInt(1, factura);
-                ps.setInt(2, 1);
+                ps.setInt(2, jComboBox1.getSelectedIndex() + 1);
                 ps.setInt(3, id_comida);
                 ps.setString(4, cantidad);
                 ps.setString(5, costo);
                 ps.execute();
             }
+
             JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
+            tabla();
         } catch (SQLException ex) {
             System.out.println("errorsql " + ex);
         }
@@ -879,6 +886,7 @@ int factura = gui.venta.Ventas.IDVENTATEMPORAL;
     private javax.swing.JButton jButton_AddPedido_;
     private javax.swing.JButton jButton_AddPedido_1;
     private javax.swing.JButton jButton_Cancelar_;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel_ComboCantidad_1;
     private javax.swing.JLabel jLabel_ComboCantidad_2;
     private javax.swing.JLabel jLabel_ComboPrecioUnitario_1;
@@ -901,7 +909,6 @@ int factura = gui.venta.Ventas.IDVENTATEMPORAL;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JTextField jTextField_Nota_;
     private javax.swing.JTable jtBebidas_;
     private javax.swing.JTable jtComida_;
     private javax.swing.JTable jtPedido;
