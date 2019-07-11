@@ -10,10 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
@@ -34,12 +31,17 @@ public class ReporteVenta extends javax.swing.JDialog {
 
     /**
      * Creates new form ReporteVenta
+     * @param parent
+     * @param modal
      */
     public ReporteVenta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
+         
+        
         initComponents();
         configurarVentana();
     }

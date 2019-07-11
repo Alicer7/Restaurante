@@ -1,4 +1,4 @@
-package gui.login.modelo;
+package core.utils.login;
 
 import core.database.Conexion;
 import java.sql.Connection;

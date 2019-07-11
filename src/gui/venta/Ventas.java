@@ -82,6 +82,8 @@ public class Ventas extends javax.swing.JFrame {
         ArrayList<Facturas> lista = facturas.listaFacturasDia(dia);
 
         jTable_Factura_.setPreferredSize(new java.awt.Dimension(jTable_Factura_.getWidth(), lista.size() * 16));
+        jTable_Factura_.revalidate();
+        jTable_Factura_.repaint();
 
         DefaultTableModel model = (DefaultTableModel) jTable_Factura_.getModel();
 

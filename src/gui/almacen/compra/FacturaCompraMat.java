@@ -517,7 +517,6 @@ public class FacturaCompraMat extends javax.swing.JFrame {
         calendario.setDate(fechaActual);
         int selectFecha;
 
-        System.err.println("Calendario pre");
         selectFecha = JOptionPane.showOptionDialog(rootPane,
                 add(calendario),
                 "Selecciona la Fecha",
@@ -527,13 +526,9 @@ public class FacturaCompraMat extends javax.swing.JFrame {
                 null,
                 NORMAL
         );
-        System.err.println("Calendario pos");
 
         try {
             if (selectFecha == JOptionPane.OK_OPTION) {
-//                limpiarTablaFacturas();
-//                borderFacturaFecha(calendario.getDate());
-//                mostrarVentasDia(formatoFechaDia.format(calendario.getDate()));
                 date = calendario.getDate();
                 //
                 String FORMAT = "yyyy-MM-dd";

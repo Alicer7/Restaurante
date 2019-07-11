@@ -13,7 +13,6 @@ import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
-import gui.reportes.ReporteVenta;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -466,8 +465,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     
 
     private void jButton_AdministrativosHerramientas_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AdministrativosHerramientas_ActionPerformed
-        gui.login.vista.registro reg = new gui.login.vista.registro();
-        reg.setVisible(true);
+        gui.usuario.NuevoUsuario nuevoUsuario = new gui.usuario.NuevoUsuario();
+        nuevoUsuario.setVisible(true);
     }//GEN-LAST:event_jButton_AdministrativosHerramientas_ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -519,7 +518,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_CocinaRecetas_ActionPerformed
 
     private void jButton_ReportesVentas_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ReportesVentas_ActionPerformed
-        ReporteVenta reporteVenta = new ReporteVenta(this, true);
+        gui.reportes.ReporteVenta reporteVenta = new gui.reportes.ReporteVenta(this, true);
         reporteVenta.setVisible(true);
     }//GEN-LAST:event_jButton_ReportesVentas_ActionPerformed
 
@@ -542,7 +541,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         if (JOptionPane.showConfirmDialog(this, "Esta a punto de\ncerrar la sesión\n¿Desea continuar?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION, 0,
             new ImageIcon(getClass().getResource("/core/resources/icons/eliminar.png"))) == JOptionPane.YES_OPTION) {
         this.dispose();
-        new gui.login.vista.login().setVisible(true);
+        new gui.login.Login().setVisible(true);
         }
     }//GEN-LAST:event_jLabel2MouseClicked
 

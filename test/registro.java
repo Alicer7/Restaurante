@@ -5,10 +5,10 @@
  */
 
 
-import gui.login.modelo.Hash;
+import core.utils.login.Hash;
 import javax.swing.JOptionPane;
-import gui.login.modelo.SqlUsuarios;
-import gui.login.modelo.Usuarios;
+import core.utils.login.SqlUsuarios;
+import core.utils.login.Usuarios;
 
 /**
  *

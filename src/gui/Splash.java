@@ -90,7 +90,7 @@ public final class Splash extends javax.swing.JFrame {
     private void jProgressBar_StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jProgressBar_StateChanged
         if (jProgressBar_.getValue() == 100) {
 
-            gui.login.vista.login vp = new gui.login.vista.login();
+            gui.login.Login vp = new gui.login.Login();
             vp.setVisible(true);
 
             this.dispose();

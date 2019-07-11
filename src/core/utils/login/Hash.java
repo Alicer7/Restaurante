@@ -1,5 +1,5 @@
 
-package gui.login.modelo;
+package core.utils.login;
 
 public class Hash {
     

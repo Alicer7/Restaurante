@@ -3,24 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.login.vista;
+package gui.login;
 
-import gui.login.modelo.Hash;
+import core.utils.login.Hash;
 import javax.swing.JOptionPane;
-import gui.login.modelo.SqlUsuarios;
-import gui.login.modelo.Usuarios;
+import core.utils.login.SqlUsuarios;
+import core.utils.login.Usuarios;
+import gui.MenuPrincipal;
 import java.awt.event.KeyEvent;
 
 /**
  *
  * @author Marko
  */
-public class login extends javax.swing.JFrame {
+public class Login extends javax.swing.JFrame {
 
     /**
      * Creates new form login
      */
-    public login() {
+    public Login() {
         initComponents();
         setLocationRelativeTo(null);
         txtUsuario.requestFocus();
@@ -48,11 +49,6 @@ public class login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
 
         jPanel2.setBackground(new java.awt.Color(102, 0, 0));
 
@@ -155,7 +151,6 @@ public class login extends javax.swing.JFrame {
             mod.setPassword(nuevoPass);
 
             if (modSql.login(mod)) {
-                Inicio.frmLog = null;
                 this.dispose();
 
                 if (mod.getIdTipo() == 1) {
@@ -163,13 +158,13 @@ public class login extends javax.swing.JFrame {
                     menu.setVisible(true);
 
                     menu.lblUser.setText(mod.getNombre());
-                    menu.lblCargo.setText("Administrador");
+                    MenuPrincipal.lblCargo.setText("Administrador");
                 } else {
                     gui.MenuPrincipal menu = new gui.MenuPrincipal();
                     menu.setVisible(true);
-//
+
                     menu.lblUser.setText(mod.getNombre());
-                    menu.lblCargo.setText("Usuario");
+                    MenuPrincipal.lblCargo.setText("Usuario");
                 }
 
             } else {
@@ -181,10 +176,6 @@ public class login extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnEntrarActionPerformed
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        Inicio.frmLog = null;
-    }//GEN-LAST:event_formWindowClosing
 
     private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
         char teclapresionada = evt.getKeyChar();
@@ -203,7 +194,6 @@ public class login extends javax.swing.JFrame {
             mod.setPassword(nuevoPass);
 
             if (modSql.login(mod)) {
-                Inicio.frmLog = null;
                 this.dispose();
 
                 if (mod.getIdTipo() == 1) {
@@ -215,7 +205,7 @@ public class login extends javax.swing.JFrame {
                 } else {
                     gui.MenuPrincipal menu = new gui.MenuPrincipal();
                     menu.setVisible(true);
-//
+
                     menu.lblUser.setText(mod.getNombre());
                     menu.lblCargo.setText("Usuario");
                 }
@@ -253,14 +243,18 @@ public class login extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -269,7 +263,7 @@ public class login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new login().setVisible(true);
+                new Login().setVisible(true);
             }
         });
     }
