@@ -28,6 +28,7 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
     String NOMBRE_ARTICULO = null;
     int ID_CAT = 0;
     int ID_RECETA = 0;
+    int X = 0;
 
     public void tabla() {
         DefaultTableModel modelo = new DefaultTableModel();
@@ -35,6 +36,34 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
         modelo.addColumn("id.");
         modelo.addColumn("Nombre");
         modelo.addColumn("cantidad");
+
+    }
+
+    public void sqlconsulta() {
+//        jcReceta.removeAllItems();
+        try {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            Conexion cone = new Conexion();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
+
+            String corrArticulo = "Select nombre from receta where estado = 'Inactivo' order by(id)";
+            ps = conn.prepareStatement(corrArticulo);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                this.jcReceta.addItem(rs.getString("nombre"));
+            }
+            String cat_articulo = "Select nombre from categoria order by(id)";
+            ps = conn.prepareStatement(cat_articulo);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                this.jcCategoria.addItem(rs.getString("nombre"));
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.toString());
+        }
 
     }
 
@@ -106,7 +135,7 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
                 modelo2.addRow(filas);
             }
 
-            String corrArticulo = "Select nombre from receta order by(id)";
+            String corrArticulo = "Select nombre from receta where estado = 'Inactivo' order by(id)";
             ps = conn.prepareStatement(corrArticulo);
             rs = ps.executeQuery();
 
@@ -313,11 +342,16 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
                 ps.setInt(2, ID_CAT);
                 ps.setDouble(3, cant);
                 ps.setDouble(4, id_materia);
-
                 ps.execute();
                 System.out.println("ya, asdfasdf");
+
             }
-            JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
+//            JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
+            ps = conn.prepareStatement("UPDATE receta SET estado = 'Activo' WHERE id = '" + ID_RECETA + "' and categoria_id = '" + ID_CAT + "'");
+            ps.execute();
+
+            JOptionPane.showMessageDialog(null, "Ingredientes Asignados..");
+            jcReceta.removeItemAt(X);
             tabla();
             limpiar();
         } catch (SQLException ex) {
@@ -397,6 +431,8 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void jcRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcRecetaActionPerformed
+        X = jcReceta.getSelectedIndex() ;
+        System.out.println("   " + X);
         try {
             PreparedStatement ps = null;
             ResultSet rs = null;
@@ -415,6 +451,7 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.err.println(ex.toString());
         }
+
     }//GEN-LAST:event_jcRecetaActionPerformed
 
     private void jcCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcCategoriaActionPerformed
