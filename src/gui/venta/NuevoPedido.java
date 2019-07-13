@@ -645,12 +645,13 @@ public class NuevoPedido extends javax.swing.JFrame {
                             .addComponent(jButton_Cancelar_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
                     .addGroup(jPanel_Main_Layout.createSequentialGroup()
-                        .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel_Factura_, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel_FactureNumero_, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel_Nota_, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel_Factura_, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel_FactureNumero_, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
@@ -814,7 +815,7 @@ public class NuevoPedido extends javax.swing.JFrame {
         int cant = Integer.parseInt(txtCant2.getText());
 
         total = precio_bebida * cant;
-        DecimalFormat df = new DecimalFormat("###,###.##");
+        DecimalFormat df = new DecimalFormat("###,###,###.##");
         lblsubtotalbebidas.setText(df.format(Double.valueOf(total)));
 
     }//GEN-LAST:event_txtCant2KeyReleased

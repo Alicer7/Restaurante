@@ -59,11 +59,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
             UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel");
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored) {
         }
-        try {
-            setIconImage(new ImageIcon(getClass().getResource("/core/resources/chocolate.png")).getImage());
-        } catch (Error err) {
-            System.err.println(err);
-        }
+//        try {
+//            setIconImage(new ImageIcon(getClass().getResource("/core/resources/chocolate.png")).getImage());
+//        } catch (Error err) {
+//            System.err.println(err);
+//        }
         initComponents();
         configurarVentana();
         jButton_RegistroCarnes_.setVisible(false);
@@ -88,7 +88,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         lblCargo = new javax.swing.JLabel();
         fecha = new javax.swing.JLabel();
         hora = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel_Desconectarse_ = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jButton_RegistroLicores_ = new javax.swing.JButton();
         jButton_RegistroCompras_ = new javax.swing.JButton();
@@ -201,19 +201,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
         fecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         fecha.setText("DIA - MES - AÑO");
 
-        hora.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        hora.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         hora.setForeground(new java.awt.Color(0, 204, 102));
         hora.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         hora.setText("HORA");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 102, 102));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("DESCONECTARSE");
-        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel_Desconectarse_.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel_Desconectarse_.setForeground(new java.awt.Color(255, 102, 102));
+        jLabel_Desconectarse_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Desconectarse_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/Exit0X32.png"))); // NOI18N
+        jLabel_Desconectarse_.setText("DESCONECTARSE");
+        jLabel_Desconectarse_.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel_Desconectarse_.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                jLabel_Desconectarse_MouseClicked(evt);
             }
         });
 
@@ -221,14 +222,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblCargo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(fecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(hora, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(fecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(hora, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblCargo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel_Desconectarse_, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -238,12 +239,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(hora)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addComponent(hora)
+                .addGap(18, 18, 18)
+                .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
+                .addComponent(jLabel_Desconectarse_)
                 .addContainerGap())
         );
 
@@ -537,13 +538,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         salida.setVisible(true);
     }//GEN-LAST:event_jButton_AdministracionInventarioSalida_1ActionPerformed
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+    private void jLabel_Desconectarse_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_Desconectarse_MouseClicked
         if (JOptionPane.showConfirmDialog(this, "Esta a punto de\ncerrar la sesión\n¿Desea continuar?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION, 0,
             new ImageIcon(getClass().getResource("/core/resources/icons/eliminar.png"))) == JOptionPane.YES_OPTION) {
         this.dispose();
         new gui.login.Login().setVisible(true);
         }
-    }//GEN-LAST:event_jLabel2MouseClicked
+    }//GEN-LAST:event_jLabel_Desconectarse_MouseClicked
 
     /**
      * @param args the command line arguments
@@ -595,7 +596,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton_ReportesCierreCaja_;
     private javax.swing.JButton jButton_ReportesVentas_;
     private javax.swing.JButton jButton_Ventas;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel_Desconectarse_;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
