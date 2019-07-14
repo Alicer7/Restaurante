@@ -5,15 +5,28 @@
  */
 package gui.venta;
 
+import java.text.DecimalFormat;
+
 /**
  *
  * @author Freddy Camposeco <ankoku.fj@gmail.com> <www.stufs.rf.gd>
  */
 public class CambioEfectivo extends javax.swing.JFrame {
+    
+    private DecimalFormat df = new DecimalFormat("Q  ###,###,##0.00");
+    private Double cambio = 0.0;
 
-    /**
-     * Creates new form CambioEfectivo
-     */
+    private void showCambio (){
+        jLabel_Cambio_.setText(df.format(Double.valueOf(cambio)));
+        jLabel_Cambio_.revalidate();
+        jLabel_Cambio_.repaint();
+    }
+    
+    public void setCambio(Double cambio) {
+        this.cambio = cambio;
+        showCambio ();
+    }
+    
     public CambioEfectivo() {
         initComponents();
     }
@@ -28,12 +41,13 @@ public class CambioEfectivo extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel_Q_ = new javax.swing.JLabel();
+        jLabel_Cambio_ = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cambio");
-        setType(java.awt.Window.Type.UTILITY);
+        setAlwaysOnTop(true);
+        setType(java.awt.Window.Type.POPUP);
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
@@ -46,16 +60,17 @@ public class CambioEfectivo extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 255, 0));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/bankX64.png"))); // NOI18N
-        jLabel1.setText("Q");
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 255, 0));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("0.00");
+        jLabel_Q_.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        jLabel_Q_.setForeground(new java.awt.Color(0, 255, 0));
+        jLabel_Q_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Q_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/bankX64.png"))); // NOI18N
+
+        jLabel_Cambio_.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        jLabel_Cambio_.setForeground(new java.awt.Color(0, 255, 0));
+        jLabel_Cambio_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Cambio_.setText("0.00");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -65,19 +80,19 @@ public class CambioEfectivo extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel_Q_, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel_Cambio_, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                .addGap(12, 12, 12))
+                .addComponent(jLabel_Q_, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel_Cambio_, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
@@ -130,8 +145,8 @@ public class CambioEfectivo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel_Cambio_;
+    private javax.swing.JLabel jLabel_Q_;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

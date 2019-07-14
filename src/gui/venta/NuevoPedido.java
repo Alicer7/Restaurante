@@ -678,7 +678,7 @@ public class NuevoPedido extends javax.swing.JFrame {
 
     private void jButton_Aceptar_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Aceptar_ActionPerformed
 
-        int factura = gui.venta.Ventas.IDVENTATEMPORAL;
+        int factura = gui.venta.Ventas.FACTURAID;
         Conexion cone = new Conexion();
         com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
         PreparedStatement ps = null;

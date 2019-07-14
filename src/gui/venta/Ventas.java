@@ -20,8 +20,6 @@ import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
@@ -29,7 +27,6 @@ import javafx.scene.web.WebView;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.text.BadLocationException;
 
 /**
  *
@@ -47,10 +44,8 @@ public class Ventas extends javax.swing.JFrame {
     private JFXPanel jFxPanel = new JFXPanel();
     private WebView webView;
     private String htmlFinal = "";
-    
-    public static int PRUEBA = 0;
-    public static int IDVENTATEMPORAL = 0;
-    
+    public static Integer FACTURAID = 0 ;
+
     private void startViwer (){
         jFxPanel = new JFXPanel();
         jPanel_PreView_.add(jFxPanel,BorderLayout.CENTER);
@@ -64,6 +59,10 @@ public class Ventas extends javax.swing.JFrame {
             webView.getEngine().loadContent(htmlFinal);
         });
         
+    }
+    
+    private void endViwer (){
+        jPanel_PreView_.removeAll();
     }
     
     private void showInViwer() {
@@ -140,7 +139,12 @@ public class Ventas extends javax.swing.JFrame {
         // SQL
         ArrayList<Facturas> lista = facturas.listaFacturasDiaActivas(dia);
 
-        jTable_Factura_.setPreferredSize(new java.awt.Dimension(jTable_Factura_.getWidth(), lista.size() * 16));
+//        jTable_Factura_.setSize(new java.awt.Dimension(jTable_Factura_.getWidth(), lista.size() * 20));
+//        jTable_Factura_.revalidate();
+//        jTable_Factura_.repaint();
+        jScrollPane_Clientes_.setSize(new java.awt.Dimension(jTable_Factura_.getWidth(), jTable_Factura_.getHeight()+16));
+        jScrollPane_Clientes_.revalidate();
+        jScrollPane_Clientes_.repaint();
 
         DefaultTableModel model = (DefaultTableModel) jTable_Factura_.getModel();
 
@@ -157,7 +161,7 @@ public class Ventas extends javax.swing.JFrame {
         }
     }
 
-    private void mostrarVentasDetalleNumeroFactura(Integer IDVENTATEMPORAL) throws BadLocationException {
+    private void mostrarVentasDetalleNumeroFactura() {
         
         String textSize = "75%";
         String imgSize = "8%";
@@ -194,7 +198,7 @@ public class Ventas extends javax.swing.JFrame {
                     + "     temp_pedido.`costo` AS temp_pedido_costo\n"
                     + "FROM\n"
                     + "     `bebida` bebida INNER JOIN `temp_pedido` temp_pedido ON bebida.`id` = temp_pedido.`bebida_id` where temp_venta_id = '" 
-                    + gui.venta.Ventas.IDVENTATEMPORAL  
+                    + FACTURAID  
                     + "'"
             ;
             ps = conn.prepareStatement(servicios);
@@ -271,6 +275,7 @@ public class Ventas extends javax.swing.JFrame {
     }
 
     public Ventas() {
+        
         initComponents();
 
         limpiarTablaFacturas();
@@ -311,7 +316,11 @@ public class Ventas extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1024, 740));
         setPreferredSize(new java.awt.Dimension(990, 700));
         setSize(new java.awt.Dimension(990, 700));
-        getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel_Main_.setMinimumSize(new java.awt.Dimension(1000, 681));
         jPanel_Main_.setName("ventas_main_"); // NOI18N
@@ -322,9 +331,11 @@ public class Ventas extends javax.swing.JFrame {
         jPanel_Clientes_.setPreferredSize(new java.awt.Dimension(632, 669));
 
         jScrollPane_Clientes_.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jScrollPane_Clientes_.setMinimumSize(new java.awt.Dimension(600, 588));
-        jScrollPane_Clientes_.setPreferredSize(new java.awt.Dimension(600, 588));
+        jScrollPane_Clientes_.setMaximumSize(null);
+        jScrollPane_Clientes_.setMinimumSize(null);
+        jScrollPane_Clientes_.setPreferredSize(null);
 
+        jTable_Factura_.setAutoCreateRowSorter(true);
         jTable_Factura_.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         jTable_Factura_.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -343,6 +354,9 @@ public class Ventas extends javax.swing.JFrame {
             }
         });
         jTable_Factura_.setToolTipText(bundle.getString("Ventas.jTable_Factura_.toolTipText")); // NOI18N
+        jTable_Factura_.setMaximumSize(null);
+        jTable_Factura_.setMinimumSize(null);
+        jTable_Factura_.setPreferredSize(null);
         jTable_Factura_.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable_Factura_MouseClicked(evt);
@@ -401,10 +415,10 @@ public class Ventas extends javax.swing.JFrame {
             .addGroup(jPanel_Clientes_Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel_Clientes_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane_Clientes_, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
+                    .addComponent(jScrollPane_Clientes_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel_Clientes_Layout.createSequentialGroup()
                         .addComponent(jButton_ClienteNuevo_, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
                         .addComponent(jLabel_BuscarPorFecha_, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel_SinCobrar_, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -413,7 +427,7 @@ public class Ventas extends javax.swing.JFrame {
         jPanel_Clientes_Layout.setVerticalGroup(
             jPanel_Clientes_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_Clientes_Layout.createSequentialGroup()
-                .addComponent(jScrollPane_Clientes_, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
+                .addComponent(jScrollPane_Clientes_, javax.swing.GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_Clientes_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_ClienteNuevo_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -494,12 +508,21 @@ public class Ventas extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Main_Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel_Detalle_, javax.swing.GroupLayout.DEFAULT_SIZE, 725, Short.MAX_VALUE)
-                    .addComponent(jPanel_Clientes_, javax.swing.GroupLayout.DEFAULT_SIZE, 725, Short.MAX_VALUE))
+                    .addComponent(jPanel_Detalle_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel_Clientes_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel_Main_);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel_Main_, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel_Main_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         pack();
         setLocationRelativeTo(null);
@@ -565,15 +588,12 @@ public class Ventas extends javax.swing.JFrame {
         if (evt.getClickCount() == 2) {
             int colId = 1;
             int row = jTable_Factura_.getSelectedRow();
-            PRUEBA = row + 1;
-            IDVENTATEMPORAL = (int) jTable_Factura_.getValueAt(row, 1);
+            
+            FACTURAID = (Integer) jTable_Factura_.getValueAt(row, 1);
+            
             Object objId = (Object) jTable_Factura_.getValueAt(row, colId);
 
-            try {
-                mostrarVentasDetalleNumeroFactura((Integer) objId);
-            } catch (BadLocationException ex) {
-                Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            mostrarVentasDetalleNumeroFactura();
         }
     }//GEN-LAST:event_jTable_Factura_MouseClicked
 
@@ -581,6 +601,10 @@ public class Ventas extends javax.swing.JFrame {
         mostrarVentasActivas();
         borderFacturaFecha(date);
     }//GEN-LAST:event_jLabel_SinCobrar_MouseClicked
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        endViwer ();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
