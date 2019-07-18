@@ -16,7 +16,7 @@ import java.util.ArrayList;
  *
  * @author freddy
  */
-public class Facturas {
+public class Factura {
     private Connection conn= new Conexion().connect();
     private Integer idFactura;
     private String nitCliente,solvente,fecha;
@@ -26,10 +26,10 @@ public class Facturas {
             pagoElectronico,
             cambio;
 
-    public Facturas() {
+    public Factura() {
     }
     
-    public Facturas(
+    public Factura(
             Integer idFactura, 
             String nitCliente,
             Double costo,
@@ -49,9 +49,9 @@ public class Facturas {
         this.solvente=solvente;
     }
     
-        public ArrayList<Facturas> listaFacturasActivas (){
+        public ArrayList<Factura> listaFacturasActivas (){
         
-        ArrayList<Facturas> listaFacturases= new ArrayList<Facturas>();
+        ArrayList<Factura> listaFacturases= new ArrayList<Factura>();
         String sql="SELECT * FROM `temp_venta` WHERE `estado` = \"Activa\"";
         
         try {
@@ -61,7 +61,7 @@ public class Facturas {
             rst = stm.executeQuery(sql);
             
             while (rst.next()){
-                Facturas factura= new Facturas (
+                Factura factura= new Factura (
                         rst.getInt(1), 
                         rst.getString(2), 
                         rst.getDouble(3), 
@@ -81,9 +81,9 @@ public class Facturas {
         return listaFacturases;
     }
     
-    public ArrayList<Facturas> listaFacturasDiaActivas (String fecha){
+    public ArrayList<Factura> listaFacturasDiaActivas (String fecha){
         
-        ArrayList<Facturas> listaFacturases= new ArrayList<Facturas>();
+        ArrayList<Factura> listaFacturases= new ArrayList<Factura>();
         String sql="SELECT * FROM `temp_venta` WHERE date(`fecha`) = \""+fecha+"\"AND `solvente` = \"Activa\"";
         
         try {
@@ -93,7 +93,7 @@ public class Facturas {
             rst = stm.executeQuery(sql);
             
             while (rst.next()){
-                Facturas factura= new Facturas (
+                Factura factura= new Factura (
                         rst.getInt(1), 
                         rst.getString(2), 
                         rst.getDouble(3), 
@@ -113,9 +113,9 @@ public class Facturas {
         return listaFacturases;
     }
     
-    public ArrayList<Facturas> listaFacturasDia (String fecha){
+    public ArrayList<Factura> listaFacturasDia (String fecha){
         
-        ArrayList<Facturas> listaFacturases= new ArrayList<>();
+        ArrayList<Factura> listaFacturases= new ArrayList<>();
         String sql="SELECT * FROM `temp_venta` WHERE date(fecha) = \""+fecha+"\"";
         
         try {
@@ -125,7 +125,7 @@ public class Facturas {
             rst = stm.executeQuery(sql);
             
             while (rst.next()){
-                Facturas factura= new Facturas (
+                Factura factura= new Factura (
                         rst.getInt(1), 
                         rst.getString(2), 
                         rst.getDouble(3), 

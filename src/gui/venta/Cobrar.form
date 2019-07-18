@@ -49,9 +49,9 @@
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jPanel_Total_" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jPanel_MetodoPago_" alignment="0" pref="331" max="32767" attributes="0"/>
-                      <Component id="jPanel_Saldo_" alignment="1" pref="331" max="32767" attributes="0"/>
-                      <Component id="jPanel_Imprimir_" alignment="1" pref="331" max="32767" attributes="0"/>
+                      <Component id="jPanel_MetodoPago_" alignment="0" pref="325" max="32767" attributes="0"/>
+                      <Component id="jPanel_Saldo_" alignment="1" pref="325" max="32767" attributes="0"/>
+                      <Component id="jPanel_Imprimir_" alignment="1" pref="325" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
@@ -68,9 +68,9 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jPanel_MetodoPago_" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jPanel_Saldo_" pref="136" max="32767" attributes="0"/>
+                          <Component id="jPanel_Saldo_" pref="132" max="32767" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jPanel_Imprimir_" pref="136" max="32767" attributes="0"/>
+                          <Component id="jPanel_Imprimir_" pref="132" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -146,7 +146,7 @@
                           <Component id="jLabel_MoEfectivoIcon_" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextField_MoEfectivo_" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="54" max="32767" attributes="0"/>
+                      <EmptySpace pref="42" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel_Descuento_" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel_DescuentoIcon_" alignment="3" min="-2" max="-2" attributes="0"/>
