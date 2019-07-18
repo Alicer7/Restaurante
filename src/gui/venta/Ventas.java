@@ -183,6 +183,7 @@ public class Ventas extends javax.swing.JFrame {
     
     private void mostrarDetalle() {
         core.utils.themplate.Detalle detalle = new core.utils.themplate.Detalle();
+        
         this.htmlFinal = detalle.getDetalleHTML(FACTURAID);
         showInViwer();
     }

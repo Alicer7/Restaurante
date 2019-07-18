@@ -39,10 +39,10 @@ public class Detalle {
     private String tFootB = "";
     private String footFinal = "";
 
-    private String descripcion = null;
-    private int Cantidad = 0;
-    private Double Costo = 0.0;
-    private Double totalconsumido = 0.0;
+    private String DESCRIPCION = null;
+    private int CANTIDAD = 0;
+    private Double COSTO = 0.0;
+    private Double TOTAL = 0.0;
 
     public Detalle() {
     }
@@ -68,27 +68,27 @@ public class Detalle {
             ps = conn.prepareStatement(servicios);
             rs = ps.executeQuery();
             while (rs.next()) {
-                descripcion = (rs.getString("bebida_nombre"));
-                Cantidad = (rs.getInt("temp_pedido_bebida_cantidad"));
-                Costo = (rs.getDouble("temp_pedido_costo"));
-                Double subTotal = Cantidad * Costo;
-                totalconsumido = totalconsumido + subTotal;
+                DESCRIPCION = (rs.getString("bebida_nombre"));
+                CANTIDAD = (rs.getInt("temp_pedido_bebida_cantidad"));
+                COSTO = (rs.getDouble("temp_pedido_costo"));
+                Double SUBTOTAL = CANTIDAD * COSTO;
+                TOTAL = TOTAL + SUBTOTAL;
                 
                 String pedidoX
                         = "<tr><td class=\"L\">"
-                        + descripcion //aquí de acuerdo al id crear un query para seleccionar el nombre del producto
+                        + DESCRIPCION //aquí de acuerdo al id crear un query para seleccionar el nombre del producto
                         + "</td><td class=\"R\">Q "
-                        + Costo //aquí de acuerdo al id crear un query para seleccionar el precio del producto
+                        + COSTO //aquí de acuerdo al id crear un query para seleccionar el precio del producto
                         + "</td><td class=\"M\"> "
-                        + Cantidad //las unidades se toman si no son igual a 0
+                        + CANTIDAD //las unidades se toman si no son igual a 0
                         + "</td><td class=\"R\">Q "
-                        + subTotal
+                        + SUBTOTAL
                         + "</td></tr>"
                 ;
 
                 tBodyB = tBodyB + pedidoX;
                 
-                System.out.println("Datos: " + "desc = " + descripcion + "  cantidad: " + Cantidad + "  costo: " + Costo);
+                System.out.println("Datos: " + "desc = " + DESCRIPCION + "  cantidad: " + CANTIDAD + "  costo: " + COSTO);
             }
         } catch (SQLException ex) {
             System.out.println(ex.toString());
@@ -96,7 +96,7 @@ public class Detalle {
         
         String totalX 
             = "<td class=\"M\">Total</td><td></td><td></td><td class=\"R total\">Q "
-            + this.totalconsumido
+            + this.TOTAL
             + "</td></tr>"
         ;
         
