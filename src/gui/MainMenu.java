@@ -7,6 +7,7 @@ package gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,8 +21,41 @@ import javax.swing.UnsupportedLookAndFeelException;
  * <www.elementum69.com>
  */
 public class MainMenu extends javax.swing.JFrame {
-
     private static final String SAMS = " Sam's ";
+    
+    private Boolean switchMenuBar = false;
+    private Boolean switchMenu = false;
+    
+    
+    private void ocultarMenuBar (){
+        if (switchMenuBar == false){
+            jMenuBar_.setVisible(true);
+            switchMenuBar = true;
+        } else if (switchMenuBar == true){
+            jMenuBar_.setVisible(false);
+            switchMenuBar = false;
+        } else {
+            System.err.println("Error al ocultar Barra de Menú");
+        }
+    }
+    
+    private void mostrarMenu (){
+        if (switchMenu == true){
+            jPanel_Main_.remove(jPanel_MenuBar_);
+            jPanel_Main_.add(jPanel_MenuBar_, java.awt.BorderLayout.WEST);
+            jLabel_MostrarMenu_.setText("Ocultar");
+            switchMenu = false;
+        }
+        else if (switchMenu == false) {
+            jPanel_Main_.remove(jPanel_MenuBarSmall_);
+            jPanel_Main_.add(jPanel_MenuBarSmall_, java.awt.BorderLayout.WEST);
+            jLabel_MostrarMenu_.setText("Mostrar");
+            switchMenu = true;
+        }
+        else {
+            System.err.println("Error al mostrar el menu");
+        }
+    }
     
     public MainMenu() {
         try { 
@@ -29,6 +63,7 @@ public class MainMenu extends javax.swing.JFrame {
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
         initComponents();
+        jMenuBar_.setVisible(false);
     }
 
     /**
@@ -40,152 +75,184 @@ public class MainMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel_MenuBarSmall_ = new javax.swing.JPanel();
         jPanel_Main_ = new javax.swing.JPanel();
         jPanel_StatusBar_ = new javax.swing.JPanel();
-        jLabel_RESIZE_ = new javax.swing.JLabel();
         jLabel_HORA_ = new javax.swing.JLabel();
-        jTabbedPane_Pedidos_ = new javax.swing.JTabbedPane();
-        jPanel_Pedido_ = new javax.swing.JPanel();
+        jLabel_MostrarMenu_ = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel_Content_ = new javax.swing.JPanel();
+        jTabbedPane_Content_ = new javax.swing.JTabbedPane();
+        jPanel_Achivos_ = new javax.swing.JPanel();
+        jPanel_MenuBar_ = new javax.swing.JPanel();
         jMenuBar_ = new javax.swing.JMenuBar();
-        jMenu_Archivo_ = new javax.swing.JMenu();
-        jSeparator_1Archivo_ = new javax.swing.JPopupMenu.Separator();
+        jMenu_Archivos_ = new javax.swing.JMenu();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem_Salir_ = new javax.swing.JMenuItem();
+        jMenu_Help_ = new javax.swing.JMenu();
+        jMenuItem_Help_ = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
-        jMenu_Ayuda_ = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jSeparator_1Ayuda_ = new javax.swing.JPopupMenu.Separator();
-        jMenuItem_About_ = new javax.swing.JMenuItem();
+
+        jPanel_MenuBarSmall_.setBackground(java.awt.Color.darkGray);
+        jPanel_MenuBarSmall_.setForeground(java.awt.Color.white);
+        jPanel_MenuBarSmall_.setMaximumSize(null);
+        jPanel_MenuBarSmall_.setMinimumSize(new java.awt.Dimension(32, 640));
+        jPanel_MenuBarSmall_.setName("MenuBar"); // NOI18N
+        jPanel_MenuBarSmall_.setPreferredSize(new java.awt.Dimension(32, 640));
+
+        javax.swing.GroupLayout jPanel_MenuBarSmall_Layout = new javax.swing.GroupLayout(jPanel_MenuBarSmall_);
+        jPanel_MenuBarSmall_.setLayout(jPanel_MenuBarSmall_Layout);
+        jPanel_MenuBarSmall_Layout.setHorizontalGroup(
+            jPanel_MenuBarSmall_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 32, Short.MAX_VALUE)
+        );
+        jPanel_MenuBarSmall_Layout.setVerticalGroup(
+            jPanel_MenuBarSmall_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 640, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(null);
-        setMinimumSize(new java.awt.Dimension(800, 626));
-        setPreferredSize(new java.awt.Dimension(800, 626));
-        setSize(new java.awt.Dimension(800, 626));
-        addWindowStateListener(new java.awt.event.WindowStateListener() {
-            public void windowStateChanged(java.awt.event.WindowEvent evt) {
-                formWindowStateChanged(evt);
-            }
-        });
+        setMinimumSize(new java.awt.Dimension(1024, 661));
+        setSize(new java.awt.Dimension(1024, 661));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
 
-        jPanel_Main_.setMinimumSize(new java.awt.Dimension(800, 626));
-        jPanel_Main_.setName("JP_MAIN"); // NOI18N
-        jPanel_Main_.setPreferredSize(new java.awt.Dimension(800, 626));
+        jPanel_Main_.setMinimumSize(new java.awt.Dimension(1024, 661));
+        jPanel_Main_.setName(""); // NOI18N
+        jPanel_Main_.setPreferredSize(new java.awt.Dimension(1024, 661));
         jPanel_Main_.setLayout(new java.awt.BorderLayout());
 
+        jPanel_StatusBar_.setBackground(java.awt.Color.darkGray);
+        jPanel_StatusBar_.setForeground(java.awt.Color.white);
         jPanel_StatusBar_.setMaximumSize(null);
-        jPanel_StatusBar_.setMinimumSize(new java.awt.Dimension(800, 21));
-        jPanel_StatusBar_.setPreferredSize(new java.awt.Dimension(800, 21));
+        jPanel_StatusBar_.setMinimumSize(new java.awt.Dimension(1024, 21));
+        jPanel_StatusBar_.setPreferredSize(new java.awt.Dimension(1024, 21));
 
-        jLabel_RESIZE_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_RESIZE_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/ResizeCorner0X16.png"))); // NOI18N
-        jLabel_RESIZE_.setMaximumSize(null);
-        jLabel_RESIZE_.setMinimumSize(new java.awt.Dimension(21, 21));
-        jLabel_RESIZE_.setPreferredSize(new java.awt.Dimension(21, 21));
-
+        jLabel_HORA_.setBackground(java.awt.Color.darkGray);
         jLabel_HORA_.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel_HORA_.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_HORA_.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel_HORA_.setText("| 2019-01-01 | dom | 00:00:00 AM |");
+
+        jLabel_MostrarMenu_.setBackground(java.awt.Color.darkGray);
+        jLabel_MostrarMenu_.setForeground(java.awt.Color.white);
+        jLabel_MostrarMenu_.setText("Ocultar");
+        jLabel_MostrarMenu_.setMaximumSize(new java.awt.Dimension(21, 21));
+        jLabel_MostrarMenu_.setMinimumSize(new java.awt.Dimension(21, 21));
+        jLabel_MostrarMenu_.setPreferredSize(new java.awt.Dimension(34, 21));
+        jLabel_MostrarMenu_.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel_MostrarMenu_MouseClicked(evt);
+            }
+        });
+
+        jLabel1.setBackground(java.awt.Color.darkGray);
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/ResizeCornerW0X16.gif"))); // NOI18N
+        jLabel1.setMaximumSize(null);
+        jLabel1.setPreferredSize(new java.awt.Dimension(21, 21));
 
         javax.swing.GroupLayout jPanel_StatusBar_Layout = new javax.swing.GroupLayout(jPanel_StatusBar_);
         jPanel_StatusBar_.setLayout(jPanel_StatusBar_Layout);
         jPanel_StatusBar_Layout.setHorizontalGroup(
             jPanel_StatusBar_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_StatusBar_Layout.createSequentialGroup()
-                .addGap(0, 570, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel_MostrarMenu_, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 741, Short.MAX_VALUE)
                 .addComponent(jLabel_HORA_)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel_RESIZE_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel_StatusBar_Layout.setVerticalGroup(
             jPanel_StatusBar_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel_RESIZE_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel_HORA_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel_StatusBar_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel_HORA_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel_MostrarMenu_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel_Main_.add(jPanel_StatusBar_, java.awt.BorderLayout.PAGE_END);
+        jPanel_Main_.add(jPanel_StatusBar_, java.awt.BorderLayout.SOUTH);
 
-        jTabbedPane_Pedidos_.setTabPlacement(javax.swing.JTabbedPane.LEFT);
-        jTabbedPane_Pedidos_.setToolTipText("");
-        jTabbedPane_Pedidos_.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jTabbedPane_Pedidos_.setMaximumSize(null);
-        jTabbedPane_Pedidos_.setMinimumSize(new java.awt.Dimension(800, 573));
+        jPanel_Content_.setMinimumSize(new java.awt.Dimension(824, 640));
+        jPanel_Content_.setLayout(new java.awt.BorderLayout());
 
-        jPanel_Pedido_.setMinimumSize(null);
+        jTabbedPane_Content_.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+        jTabbedPane_Content_.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        javax.swing.GroupLayout jPanel_Pedido_Layout = new javax.swing.GroupLayout(jPanel_Pedido_);
-        jPanel_Pedido_.setLayout(jPanel_Pedido_Layout);
-        jPanel_Pedido_Layout.setHorizontalGroup(
-            jPanel_Pedido_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 567, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel_Achivos_Layout = new javax.swing.GroupLayout(jPanel_Achivos_);
+        jPanel_Achivos_.setLayout(jPanel_Achivos_Layout);
+        jPanel_Achivos_Layout.setHorizontalGroup(
+            jPanel_Achivos_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 733, Short.MAX_VALUE)
         );
-        jPanel_Pedido_Layout.setVerticalGroup(
-            jPanel_Pedido_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+        jPanel_Achivos_Layout.setVerticalGroup(
+            jPanel_Achivos_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jTabbedPane_Pedidos_.addTab("Comanda #123456789000", new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/clocheX16.png")), jPanel_Pedido_); // NOI18N
+        jTabbedPane_Content_.addTab("1234567890", jPanel_Achivos_);
 
-        jPanel_Main_.add(jTabbedPane_Pedidos_, java.awt.BorderLayout.CENTER);
+        jTabbedPane_Content_.setSelectedComponent(jPanel_Achivos_);
+
+        jPanel_Content_.add(jTabbedPane_Content_, java.awt.BorderLayout.CENTER);
+
+        jPanel_Main_.add(jPanel_Content_, java.awt.BorderLayout.CENTER);
+
+        jPanel_MenuBar_.setBackground(java.awt.Color.darkGray);
+        jPanel_MenuBar_.setForeground(java.awt.Color.white);
+        jPanel_MenuBar_.setMaximumSize(null);
+        jPanel_MenuBar_.setMinimumSize(new java.awt.Dimension(200, 640));
+        jPanel_MenuBar_.setName("MenuBar"); // NOI18N
+        jPanel_MenuBar_.setPreferredSize(new java.awt.Dimension(200, 640));
+
+        javax.swing.GroupLayout jPanel_MenuBar_Layout = new javax.swing.GroupLayout(jPanel_MenuBar_);
+        jPanel_MenuBar_.setLayout(jPanel_MenuBar_Layout);
+        jPanel_MenuBar_Layout.setHorizontalGroup(
+            jPanel_MenuBar_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
+        );
+        jPanel_MenuBar_Layout.setVerticalGroup(
+            jPanel_MenuBar_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 640, Short.MAX_VALUE)
+        );
+
+        jPanel_Main_.add(jPanel_MenuBar_, java.awt.BorderLayout.WEST);
 
         getContentPane().add(jPanel_Main_, java.awt.BorderLayout.CENTER);
 
-        jMenuBar_.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        jMenuBar_.setMaximumSize(null);
-        jMenuBar_.setMinimumSize(new java.awt.Dimension(128, 21));
-        jMenuBar_.setPreferredSize(new java.awt.Dimension(800, 21));
+        jMenu_Archivos_.setText("Archivo");
+        jMenu_Archivos_.add(jSeparator1);
 
-        jMenu_Archivo_.setText("Archivo");
-        jMenu_Archivo_.add(jSeparator_1Archivo_);
-
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/Exit0X24.png"))); // NOI18N
-        jMenuItem1.setText("Salir");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem_Salir_.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem_Salir_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/Exit0X24.png"))); // NOI18N
+        jMenuItem_Salir_.setText("Salir");
+        jMenuItem_Salir_.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuItem_Salir_ActionPerformed(evt);
             }
         });
-        jMenu_Archivo_.add(jMenuItem1);
+        jMenu_Archivos_.add(jMenuItem_Salir_);
 
-        jMenuBar_.add(jMenu_Archivo_);
+        jMenuBar_.add(jMenu_Archivos_);
 
-        jMenu1.setText("Administrivos");
-        jMenuBar_.add(jMenu1);
+        jMenu_Help_.setText("Ayuda");
 
-        jMenu2.setText("Registros");
-        jMenuBar_.add(jMenu2);
+        jMenuItem_Help_.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
+        jMenuItem_Help_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/help0X24.png"))); // NOI18N
+        jMenuItem_Help_.setText("Ayuda");
+        jMenu_Help_.add(jMenuItem_Help_);
 
-        jMenu3.setText("Reportes");
-        jMenuBar_.add(jMenu3);
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/heartX24.png"))); // NOI18N
+        jMenuItem1.setText("Acerca de ..");
+        jMenu_Help_.add(jMenuItem1);
 
-        jMenu4.setText("Cocina");
-        jMenuBar_.add(jMenu4);
-
-        jMenu5.setText("Venta");
-        jMenuBar_.add(jMenu5);
-
-        jMenu_Ayuda_.setText("Ayuda");
-
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/help0X24.png"))); // NOI18N
-        jMenuItem2.setText("Ayuda");
-        jMenu_Ayuda_.add(jMenuItem2);
-        jMenu_Ayuda_.add(jSeparator_1Ayuda_);
-
-        jMenuItem_About_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/heartX24.png"))); // NOI18N
-        jMenuItem_About_.setText("Acerca de S'ams");
-        jMenu_Ayuda_.add(jMenuItem_About_);
-
-        jMenuBar_.add(jMenu_Ayuda_);
+        jMenuBar_.add(jMenu_Help_);
 
         setJMenuBar(jMenuBar_);
 
@@ -193,8 +260,21 @@ public class MainMenu extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    class hora implements ActionListener {
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        Timer tiempo = new Timer(100, new gui.MainMenu.hora());
+        tiempo.start();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void jLabel_MostrarMenu_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_MostrarMenu_MouseClicked
+        mostrarMenu();
         
+    }//GEN-LAST:event_jLabel_MostrarMenu_MouseClicked
+
+    private void jMenuItem_Salir_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_Salir_ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem_Salir_ActionPerformed
+
+    class hora implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             Date date = new Date();
@@ -207,73 +287,31 @@ public class MainMenu extends javax.swing.JFrame {
 //            jLabel_HORA_.setForeground(new java.awt.Color(255, 0, 255));
         }
     }
-    
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        Timer tiempo = new Timer(100, new gui.MainMenu.hora());
-        tiempo.start();
-    }//GEN-LAST:event_formWindowOpened
-
-    private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
-//        if ((Frame.MAXIMIZED_BOTH) == .MAXIMIZED_BOTH) {
-//        }
-    }//GEN-LAST:event_formWindowStateChanged
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(() -> {
             new MainMenu().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel_HORA_;
-    private javax.swing.JLabel jLabel_RESIZE_;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
+    private javax.swing.JLabel jLabel_MostrarMenu_;
     private javax.swing.JMenuBar jMenuBar_;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem_About_;
-    private javax.swing.JMenu jMenu_Archivo_;
-    private javax.swing.JMenu jMenu_Ayuda_;
+    private javax.swing.JMenuItem jMenuItem_Help_;
+    private javax.swing.JMenuItem jMenuItem_Salir_;
+    private javax.swing.JMenu jMenu_Archivos_;
+    private javax.swing.JMenu jMenu_Help_;
+    private javax.swing.JPanel jPanel_Achivos_;
+    private javax.swing.JPanel jPanel_Content_;
     private javax.swing.JPanel jPanel_Main_;
-    private javax.swing.JPanel jPanel_Pedido_;
+    private javax.swing.JPanel jPanel_MenuBarSmall_;
+    private javax.swing.JPanel jPanel_MenuBar_;
     private javax.swing.JPanel jPanel_StatusBar_;
-    private javax.swing.JPopupMenu.Separator jSeparator_1Archivo_;
-    private javax.swing.JPopupMenu.Separator jSeparator_1Ayuda_;
-    private javax.swing.JTabbedPane jTabbedPane_Pedidos_;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JTabbedPane jTabbedPane_Content_;
     // End of variables declaration//GEN-END:variables
 }

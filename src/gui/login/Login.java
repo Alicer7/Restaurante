@@ -50,11 +50,14 @@ public class Login extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
-        jPanel2.setBackground(new java.awt.Color(102, 0, 0));
+        jPanel2.setBackground(java.awt.Color.darkGray);
+        jPanel2.setForeground(java.awt.Color.white);
 
+        jLabel_LogoUser_.setBackground(java.awt.Color.darkGray);
+        jLabel_LogoUser_.setForeground(java.awt.Color.white);
         jLabel_LogoUser_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/userGx300.png"))); // NOI18N
 
-        jPanel1.setBackground(new java.awt.Color(102, 0, 0));
+        jPanel1.setBackground(java.awt.Color.darkGray);
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -64,6 +67,7 @@ public class Login extends javax.swing.JFrame {
 
         txtUsuario.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtUsuario.setToolTipText("Usuario");
+        txtUsuario.setCaretColor(new java.awt.Color(102, 0, 0));
         jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 182, 28));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -71,6 +75,7 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setText("Password:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, 28));
 
+        btnEntrar.setBackground(new java.awt.Color(102, 0, 0));
         btnEntrar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnEntrar.setText("Entrar");
         btnEntrar.addActionListener(new java.awt.event.ActionListener() {
@@ -82,6 +87,7 @@ public class Login extends javax.swing.JFrame {
 
         txtPassword.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtPassword.setToolTipText("Contraseña");
+        txtPassword.setCaretColor(new java.awt.Color(102, 0, 0));
         txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtPasswordKeyPressed(evt);
@@ -89,6 +95,7 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 182, 28));
 
+        btnEntrar1.setBackground(new java.awt.Color(102, 0, 0));
         btnEntrar1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnEntrar1.setText("Cancelar");
         btnEntrar1.addActionListener(new java.awt.event.ActionListener() {
@@ -117,7 +124,7 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(jLabel_LogoUser_)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -128,9 +135,7 @@ public class Login extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
