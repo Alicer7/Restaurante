@@ -47,6 +47,20 @@ public class Detalle {
     public Detalle() {
     }
     
+    public String getDetalleClean (){
+        return  "<!DOCTYPE html>"
+                + "<html lang=\"es\">"
+                + "<head>"
+                + "     <meta charset=\"UTF-8\">"
+                + "     <meta name=\"viewport\" content=\"width=device-width, initial-scale=0.8\">"
+                + "     <title>Factura</title>"
+                + "</head>"
+                + "<body>"
+                + "<p style=\"text-align: center;\">Sin Datos que mostrar</p>"
+                + "</body>"
+                + "</html>";
+    }
+    
     public String getDetalleHTML (Integer FACTURAID){
         
         try {

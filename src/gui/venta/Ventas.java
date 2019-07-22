@@ -28,12 +28,14 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class Ventas extends javax.swing.JFrame {
     
-    private static final String plantillaDia = "yyyy/MM/dd";
-    private static final String plantillaHora = "HH:mm:ss";
-    private static final SimpleDateFormat formatoFechaDia = new SimpleDateFormat(plantillaDia, Locale.ROOT);
-    private static final DateTimeFormatter diaFormato = DateTimeFormatter.ofPattern(plantillaDia);
-    private static final SimpleDateFormat formatoFechaHora = new SimpleDateFormat(plantillaDia + " " + plantillaHora, Locale.ROOT);
+    private final String plantillaDia = "yyyy/MM/dd";
+    private final String plantillaHora = "HH:mm:ss";
+    private final SimpleDateFormat formatoFechaDia = new SimpleDateFormat(plantillaDia, Locale.ROOT);
+    private final DateTimeFormatter diaFormato = DateTimeFormatter.ofPattern(plantillaDia);
+    private final SimpleDateFormat formatoFechaHora = new SimpleDateFormat(plantillaDia + " " + plantillaHora, Locale.ROOT);
     private Date date = new Date();
+    
+    private final core.utils.themplate.Detalle detalle = new core.utils.themplate.Detalle();
     
     private JFXPanel jFxPanel = new JFXPanel();
     private WebView webView;
@@ -108,6 +110,9 @@ public class Ventas extends javax.swing.JFrame {
         ArrayList<Factura> lista = facturas.listaFacturasActivas();
         
         jTable_Factura_.setPreferredSize(new java.awt.Dimension(jTable_Factura_.getWidth(), lista.size() * 16));
+        jTable_Factura_.revalidate();
+        jTable_Factura_.repaint();
+        
         DefaultTableModel model = (DefaultTableModel) jTable_Factura_.getModel();
 
         Object filaData[][] = new Object[lista.size()][5];
@@ -131,12 +136,9 @@ public class Ventas extends javax.swing.JFrame {
         // SQL
         ArrayList<Factura> lista = facturas.listaFacturasDiaActivas(DIA);
 
-//        jTable_Factura_.setSize(new java.awt.Dimension(jTable_Factura_.getWidth(), lista.size() * 20));
-//        jTable_Factura_.revalidate();
-//        jTable_Factura_.repaint();
-        jScrollPane_Clientes_.setSize(new java.awt.Dimension(jTable_Factura_.getWidth(), jTable_Factura_.getHeight()+16));
-        jScrollPane_Clientes_.revalidate();
-        jScrollPane_Clientes_.repaint();
+        jTable_Factura_.setSize(new java.awt.Dimension(jTable_Factura_.getWidth(), lista.size() * 16));
+        jTable_Factura_.revalidate();
+        jTable_Factura_.repaint();
 
         DefaultTableModel model = (DefaultTableModel) jTable_Factura_.getModel();
 
@@ -165,25 +167,11 @@ public class Ventas extends javax.swing.JFrame {
     
     private void limpiarTablaPedidos() {
         Platform.runLater(() -> {
-            webView.getEngine().loadContent(
-                "<!DOCTYPE html>"
-                + "<html lang=\"es\">"
-                + "<head>"
-                + "     <meta charset=\"UTF-8\">"
-                + "     <meta name=\"viewport\" content=\"width=device-width, initial-scale=0.8\">"
-                + "     <title>Factura</title>"
-                + "</head>"
-                + "<body>"
-                + "<p style=\"text-align: center;\">Sin Datos que mostrar</p>"
-                + "</body>"
-                + "</html>"
-            );
+            webView.getEngine().loadContent(detalle.getDetalleClean()); 
         });
     }
     
     private void mostrarDetalle() {
-        core.utils.themplate.Detalle detalle = new core.utils.themplate.Detalle();
-        
         this.htmlFinal = detalle.getDetalleHTML(FACTURAID);
         showInViwer();
     }

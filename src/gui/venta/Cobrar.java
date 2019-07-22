@@ -476,7 +476,7 @@ public class Cobrar extends javax.swing.JFrame {
         jPanel_Imprimir_.setPreferredSize(new java.awt.Dimension(319, 128));
 
         jButton_Imprimir_.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jButton_Imprimir_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/InvoiceX32.png"))); // NOI18N
+        jButton_Imprimir_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/TicketX48.png"))); // NOI18N
         jButton_Imprimir_.setText("Aceptar");
         jButton_Imprimir_.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

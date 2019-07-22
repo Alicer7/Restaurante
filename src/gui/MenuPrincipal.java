@@ -47,7 +47,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void configurarVentana() {
         this.setLocationRelativeTo(null);                       // centramos la ventana en la pantalla
         this.setResizable(false);                               // hacemos que la ventana no sea redimiensionable
-        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);    // hacemos que cuando se cierre la ventana termina todo proceso
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);    // hacemos que cuando se cierre la ventana termina todo proceso
 
     }
 
@@ -66,7 +66,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 //        }
         initComponents();
         configurarVentana();
-        jButton_RegistroCarnes_.setVisible(false);
     }
 
     /**
@@ -362,7 +361,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton_ReportesVentas_, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                    .addComponent(jButton_ReportesVentas_, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                     .addComponent(jButton_ReportesCierreCaja_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -398,7 +397,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton_Ventas, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                .addComponent(jButton_Ventas, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -406,7 +405,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton_Ventas, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -437,7 +436,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -452,7 +451,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    class horas implements ActionListener {
+    class hora implements ActionListener {
         
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -461,6 +460,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             SimpleDateFormat formato = new SimpleDateFormat(pmAm);
             Calendar now = Calendar.getInstance();
             hora.setText(String.format(formato.format(sistemaHora), now));
+            setTitle("Menu | "+(String.format(formato.format(sistemaHora))));
         }
     }
     
@@ -482,7 +482,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         fecha.setText(formato.format(sistemaFech));
 
 //        Hora del sistema
-        Timer tiempo = new Timer(100, new gui.MenuPrincipal.horas());
+        Timer tiempo = new Timer(100, new gui.MenuPrincipal.hora());
         tiempo.start();
         
 
