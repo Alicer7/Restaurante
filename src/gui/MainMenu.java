@@ -5,12 +5,18 @@
  */
 package gui;
 
+import java.awt.GridLayout;
+import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
+import javax.swing.JMenuBar;
+import javax.swing.KeyStroke;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -20,8 +26,20 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author Freddy Camposeco <freddy.camposeco@elementum69.com>
  * <www.elementum69.com>
  */
+
+class VerticalMenuBar extends JMenuBar {
+  private static final LayoutManager grid = new GridLayout(0,1);
+  public VerticalMenuBar() {
+    setLayout(grid);
+  }
+}
+
 public class MainMenu extends javax.swing.JFrame {
     private static final String SAMS = " Sam's ";
+    private static final LayoutManager verticalMenu = new GridLayout(0,1);
+    
+//    private KeyMap keyMap = MainMenu.getFrames().
+    private KeyStroke ctrlM = KeyStroke.getKeyStroke(KeyEvent.VK_M,InputEvent.CTRL_MASK);
     
     private Boolean switchMenuBar = false;
     private Boolean switchMenu = false;
@@ -41,13 +59,13 @@ public class MainMenu extends javax.swing.JFrame {
     
     private void mostrarMenu (){
         if (switchMenu == true){
-            jPanel_Main_.remove(jPanel_MenuBar_);
+            jPanel_Main_.remove(jPanel_MenuBarSmall_);
             jPanel_Main_.add(jPanel_MenuBar_, java.awt.BorderLayout.WEST);
             jLabel_MostrarMenu_.setText("Ocultar");
             switchMenu = false;
         }
         else if (switchMenu == false) {
-            jPanel_Main_.remove(jPanel_MenuBarSmall_);
+            jPanel_Main_.remove(jPanel_MenuBar_);
             jPanel_Main_.add(jPanel_MenuBarSmall_, java.awt.BorderLayout.WEST);
             jLabel_MostrarMenu_.setText("Mostrar");
             switchMenu = true;
@@ -62,8 +80,14 @@ public class MainMenu extends javax.swing.JFrame {
             UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel"); 
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
+        
+        setLocale(Locale.ROOT); 
+        
         initComponents();
-        jMenuBar_.setVisible(false);
+        
+
+        setTitle(SAMS);
+//        jMenuBar_.setVisible(false);       
     }
 
     /**
@@ -80,12 +104,12 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel_StatusBar_ = new javax.swing.JPanel();
         jLabel_HORA_ = new javax.swing.JLabel();
         jLabel_MostrarMenu_ = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel_ResizeIcono_ = new javax.swing.JLabel();
         jPanel_Content_ = new javax.swing.JPanel();
         jTabbedPane_Content_ = new javax.swing.JTabbedPane();
         jPanel_Achivos_ = new javax.swing.JPanel();
         jPanel_MenuBar_ = new javax.swing.JPanel();
-        jMenuBar_ = new javax.swing.JMenuBar();
+        jMenuBar_ = new VerticalMenuBar();
         jMenu_Archivos_ = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem_Salir_ = new javax.swing.JMenuItem();
@@ -112,7 +136,6 @@ public class MainMenu extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(null);
         setMinimumSize(new java.awt.Dimension(1024, 661));
         setSize(new java.awt.Dimension(1024, 661));
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -150,12 +173,12 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setBackground(java.awt.Color.darkGray);
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/ResizeCornerW0X16.gif"))); // NOI18N
-        jLabel1.setMaximumSize(null);
-        jLabel1.setPreferredSize(new java.awt.Dimension(21, 21));
+        jLabel_ResizeIcono_.setBackground(java.awt.Color.darkGray);
+        jLabel_ResizeIcono_.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_ResizeIcono_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_ResizeIcono_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/ResizeCornerW0X16.gif"))); // NOI18N
+        jLabel_ResizeIcono_.setMaximumSize(null);
+        jLabel_ResizeIcono_.setPreferredSize(new java.awt.Dimension(21, 21));
 
         javax.swing.GroupLayout jPanel_StatusBar_Layout = new javax.swing.GroupLayout(jPanel_StatusBar_);
         jPanel_StatusBar_.setLayout(jPanel_StatusBar_Layout);
@@ -167,14 +190,14 @@ public class MainMenu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 741, Short.MAX_VALUE)
                 .addComponent(jLabel_HORA_)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel_ResizeIcono_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel_StatusBar_Layout.setVerticalGroup(
             jPanel_StatusBar_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel_ResizeIcono_, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jPanel_StatusBar_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel_HORA_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel_MostrarMenu_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel_MostrarMenu_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel_Main_.add(jPanel_StatusBar_, java.awt.BorderLayout.SOUTH);
@@ -267,7 +290,6 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void jLabel_MostrarMenu_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_MostrarMenu_MouseClicked
         mostrarMenu();
-        
     }//GEN-LAST:event_jLabel_MostrarMenu_MouseClicked
 
     private void jMenuItem_Salir_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_Salir_ActionPerformed
@@ -282,12 +304,11 @@ public class MainMenu extends javax.swing.JFrame {
             DateFormat outFormat = new SimpleDateFormat( "| yyyy-MM-dd | E | HH:mm:ss | ");
             
             String myDate = outFormat.format(date);
-            setTitle(SAMS);
             jLabel_HORA_.setText(outFormat.format(date));
 //            jLabel_HORA_.setForeground(new java.awt.Color(255, 0, 255));
         }
     }
-
+    
     public static void main(String args[]) {
         
         java.awt.EventQueue.invokeLater(() -> {
@@ -296,9 +317,9 @@ public class MainMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel_HORA_;
     private javax.swing.JLabel jLabel_MostrarMenu_;
+    private javax.swing.JLabel jLabel_ResizeIcono_;
     private javax.swing.JMenuBar jMenuBar_;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem_Help_;

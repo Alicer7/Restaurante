@@ -5,6 +5,7 @@
  */
 package gui.venta;
 
+import java.awt.Color;
 import java.text.DecimalFormat;
 
 /**
@@ -137,10 +138,8 @@ public class CambioEfectivo extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CambioEfectivo().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new CambioEfectivo().setVisible(true);
         });
     }
 
