@@ -111,7 +111,6 @@ public class Cobrar extends javax.swing.JFrame {
         try {
             PrinterJob job = PrinterJob.createPrinterJob();
             if (job != null) {
-//                webView.getEngine().print(job);
                 boolean success = job.printPage(webView);
                 if (success) {
                     job.endJob();
