@@ -62,7 +62,8 @@ public class Detalle {
     }
     
     public String getDetalleHTML (Integer FACTURAID){
-        
+        this.htmlFinal = "";
+        System.err.println(htmlFinal);
         try {
             Conexion objCon = new Conexion();
             Connection conn = (Connection) objCon.connect();
@@ -118,7 +119,8 @@ public class Detalle {
         bodyFinal = tBodyH + tBodyB + tBocyF;
         footFinal = tFootH + tFootB + tFootF;
         
-        return htmlFinal = head + bodyFinal + footFinal + foot;
+        htmlFinal = head + bodyFinal + footFinal + foot;
+        return htmlFinal ;
     }
 }
  

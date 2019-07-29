@@ -186,4 +186,8 @@ public class Factura extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable_Pedidos_;
     // End of variables declaration//GEN-END:variables
+
+    ArrayList<Factura> listaFacturasDiaActivas(String DIA) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

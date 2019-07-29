@@ -77,6 +77,16 @@ public class Ventas extends javax.swing.JFrame {
         jPanel_Detalle_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detalle - Pedidos Factura #" + numeroFactura, javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14)));
     }
 
+    private void limpiarTablaFacturas() {
+        DefaultTableModel modelF = (DefaultTableModel) jTable_Factura_.getModel();
+        jTable_Factura_.setPreferredSize(new java.awt.Dimension(jTable_Factura_.getWidth(), 0));
+
+        int rowCount = modelF.getRowCount();
+        for (int i = rowCount - 1; i >= 0; i--) {
+            modelF.removeRow(i);
+        }
+    }
+    
     private void mostrarVentasDia(String dia) {
 
         limpiarTablaFacturas();
@@ -157,16 +167,6 @@ public class Ventas extends javax.swing.JFrame {
         }
     }
 
-    private void limpiarTablaFacturas() {
-        DefaultTableModel modelF = (DefaultTableModel) jTable_Factura_.getModel();
-        jTable_Factura_.setPreferredSize(new java.awt.Dimension(jTable_Factura_.getWidth(), 0));
-
-        int rowCount = modelF.getRowCount();
-        for (int i = rowCount - 1; i >= 0; i--) {
-            modelF.removeRow(i);
-        }
-    }
-    
     private void limpiarTablaPedidos() {
         Platform.runLater(() -> {
             webView.getEngine().loadContent(detalle.getDetalleClean());
