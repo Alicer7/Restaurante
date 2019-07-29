@@ -5,21 +5,20 @@
  */
 package gui;
 
+import gui.venta.Ventas;
+import gui.venta.VentasP;
 import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.LayoutManager;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.KeyStroke;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -55,7 +54,49 @@ public class MainMenu extends javax.swing.JFrame {
         return iconDir;
     }
     
+    private void colorNavDef(){
+        jLabel_MenuVentas_.setBackground(java.awt.Color.darkGray);
+        jLabel_MenuVentas_.setForeground(java.awt.Color.white);
+        jLabel_MenuVentasDelDia_.setBackground(java.awt.Color.darkGray);
+        jLabel_MenuVentasDelDia_.setForeground(java.awt.Color.white);
+        
+    }
     
+    private void clicPresNav (String nameComponent){
+        if (null == nameComponent){
+        } else switch (nameComponent) {
+            case "Ventas":
+                colorNavDef();
+                jLabel_MenuVentas_.setBackground(java.awt.Color.white);
+                jLabel_MenuVentas_.setForeground(java.awt.Color.black);
+                break;
+            case "VentasDelDia":
+                colorNavDef();
+                jLabel_MenuVentasDelDia_.setBackground(java.awt.Color.white);
+                jLabel_MenuVentasDelDia_.setForeground(java.awt.Color.black);
+                break;
+            default:
+                break;
+        }
+    }
+      
+    private void hoverNav (String nameComponent){
+        if (null == nameComponent){
+        } else switch (nameComponent) {
+            case "Ventas":
+                colorNavDef();
+                jLabel_MenuVentas_.setBackground(java.awt.Color.red);
+                jLabel_MenuVentas_.setForeground(java.awt.Color.white);
+                break;
+            case "VentasDelDia":
+                colorNavDef();
+                jLabel_MenuVentasDelDia_.setBackground(java.awt.Color.red);
+                jLabel_MenuVentasDelDia_.setForeground(java.awt.Color.white);
+                break;
+            default:
+                break;
+        }
+    }
     
     private void ocultarMenuBar (){
         if (switchMenuBar == false){
@@ -122,8 +163,9 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel_HORA_ = new javax.swing.JLabel();
         jLabel_ResizeIcono_ = new javax.swing.JLabel();
         jPanel_MenuBar_ = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        jPanel_NormalNav_ = new javax.swing.JPanel();
         jLabel_MenuVentas_ = new javax.swing.JLabel();
+        jLabel_MenuVentasDelDia_ = new javax.swing.JLabel();
         jPanel_Content_ = new javax.swing.JPanel();
         jMenuBar_ = new javax.swing.JMenuBar();
         jMenu_Archivos_ = new javax.swing.JMenu();
@@ -234,18 +276,28 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel_MenuBar_.setPreferredSize(new java.awt.Dimension(200, 640));
         jPanel_MenuBar_.setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setOpaque(false);
+        jPanel_NormalNav_.setOpaque(false);
+        jPanel_NormalNav_.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jPanel_NormalNav_MouseMoved(evt);
+            }
+        });
 
         jLabel_MenuVentas_.setBackground(java.awt.Color.darkGray);
         jLabel_MenuVentas_.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel_MenuVentas_.setForeground(java.awt.Color.white);
         jLabel_MenuVentas_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_MenuVentas_.setText("Ventas");
-        jLabel_MenuVentas_.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabel_MenuVentas_.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jLabel_MenuVentas_.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel_MenuVentas_.setMinimumSize(new java.awt.Dimension(180, 21));
         jLabel_MenuVentas_.setOpaque(true);
         jLabel_MenuVentas_.setPreferredSize(new java.awt.Dimension(180, 21));
+        jLabel_MenuVentas_.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel_MenuVentas_MouseMoved(evt);
+            }
+        });
         jLabel_MenuVentas_.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel_MenuVentas_MouseClicked(evt);
@@ -258,24 +310,52 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jLabel_MenuVentasDelDia_.setBackground(java.awt.Color.darkGray);
+        jLabel_MenuVentasDelDia_.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel_MenuVentasDelDia_.setForeground(java.awt.Color.white);
+        jLabel_MenuVentasDelDia_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_MenuVentasDelDia_.setText("Ver Ventas Del Día");
+        jLabel_MenuVentasDelDia_.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jLabel_MenuVentasDelDia_.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel_MenuVentasDelDia_.setMinimumSize(new java.awt.Dimension(180, 21));
+        jLabel_MenuVentasDelDia_.setOpaque(true);
+        jLabel_MenuVentasDelDia_.setPreferredSize(new java.awt.Dimension(180, 21));
+        jLabel_MenuVentasDelDia_.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel_MenuVentasDelDia_MouseMoved(evt);
+            }
+        });
+        jLabel_MenuVentasDelDia_.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel_MenuVentasDelDia_MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabel_MenuVentasDelDia_MouseReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel_NormalNav_Layout = new javax.swing.GroupLayout(jPanel_NormalNav_);
+        jPanel_NormalNav_.setLayout(jPanel_NormalNav_Layout);
+        jPanel_NormalNav_Layout.setHorizontalGroup(
+            jPanel_NormalNav_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_NormalNav_Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel_MenuVentas_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel_NormalNav_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel_MenuVentasDelDia_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_MenuVentas_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jPanel_NormalNav_Layout.setVerticalGroup(
+            jPanel_NormalNav_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_NormalNav_Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel_MenuVentas_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(608, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel_MenuVentasDelDia_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(576, Short.MAX_VALUE))
         );
 
-        jPanel_MenuBar_.add(jPanel1, java.awt.BorderLayout.CENTER);
+        jPanel_MenuBar_.add(jPanel_NormalNav_, java.awt.BorderLayout.CENTER);
 
         jPanel_Main_.add(jPanel_MenuBar_, java.awt.BorderLayout.WEST);
 
@@ -285,7 +365,6 @@ public class MainMenu extends javax.swing.JFrame {
 
         getContentPane().add(jPanel_Main_, java.awt.BorderLayout.CENTER);
 
-        jMenuBar_.setMaximumSize(null);
         jMenuBar_.setMinimumSize(new java.awt.Dimension(0, 0));
         jMenuBar_.setPreferredSize(new java.awt.Dimension(1024, 21));
 
@@ -376,27 +455,46 @@ public class MainMenu extends javax.swing.JFrame {
         ocultarNavBar ();
     }//GEN-LAST:event_jMenuItem_ShowNavBar_ActionPerformed
 
-    private void jLabel_MenuVentas_MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_MenuVentas_MousePressed
-        jLabel_MenuVentas_.setBackground(java.awt.Color.white);
-        jLabel_MenuVentas_.setForeground(java.awt.Color.darkGray);
-    }//GEN-LAST:event_jLabel_MenuVentas_MousePressed
-
-    private void jLabel_MenuVentas_MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_MenuVentas_MouseReleased
-        jLabel_MenuVentas_.setBackground(java.awt.Color.darkGray);
-        jLabel_MenuVentas_.setForeground(java.awt.Color.white);
-    }//GEN-LAST:event_jLabel_MenuVentas_MouseReleased
-
-    private void jLabel_MenuVentas_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_MenuVentas_MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel_MenuVentas_MouseClicked
-
     private void jMenuItem_CerrarSesion_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_CerrarSesion_ActionPerformed
-        if (JOptionPane.showConfirmDialog(this, "Esta a punto de\ncerrar la sesión\n¿Desea continuar?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION, 0,
-            new ImageIcon(getClass().getResource("/core/resources/icons/eliminar.png"))) == JOptionPane.YES_OPTION) {
+        if (JOptionPane.showConfirmDialog(this, "\t\t¿Desea continuar?", "Esta a punto de cerrar la sesión", JOptionPane.YES_NO_OPTION, 0,
+            new ImageIcon(getClass().getResource("/core/resources/icons/ExitX32.png"))) == JOptionPane.YES_OPTION) {
         this.dispose();
         new gui.login.Login().setVisible(true);
         }
     }//GEN-LAST:event_jMenuItem_CerrarSesion_ActionPerformed
+
+    private void jPanel_NormalNav_MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel_NormalNav_MouseMoved
+        colorNavDef();
+    }//GEN-LAST:event_jPanel_NormalNav_MouseMoved
+
+    private void jLabel_MenuVentas_MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_MenuVentas_MouseMoved
+        hoverNav("Ventas");
+    }//GEN-LAST:event_jLabel_MenuVentas_MouseMoved
+
+    private void jLabel_MenuVentasDelDia_MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_MenuVentasDelDia_MouseMoved
+        hoverNav("VentasDelDia");
+    }//GEN-LAST:event_jLabel_MenuVentasDelDia_MouseMoved
+
+    private void jLabel_MenuVentas_MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_MenuVentas_MousePressed
+        clicPresNav("Ventas");
+    }//GEN-LAST:event_jLabel_MenuVentas_MousePressed
+
+    private void jLabel_MenuVentas_MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_MenuVentas_MouseReleased
+        hoverNav("Ventas");
+    }//GEN-LAST:event_jLabel_MenuVentas_MouseReleased
+
+    private void jLabel_MenuVentasDelDia_MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_MenuVentasDelDia_MousePressed
+        clicPresNav("VentasDelDia");
+    }//GEN-LAST:event_jLabel_MenuVentasDelDia_MousePressed
+
+    private void jLabel_MenuVentasDelDia_MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_MenuVentasDelDia_MouseReleased
+        hoverNav("VentasDelDia");
+    }//GEN-LAST:event_jLabel_MenuVentasDelDia_MouseReleased
+
+    private void jLabel_MenuVentas_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_MenuVentas_MouseClicked
+        gui.venta.VentasP ventas = new VentasP();
+        jPanel_Content_.add(ventas);
+    }//GEN-LAST:event_jLabel_MenuVentas_MouseClicked
     
     class hora implements ActionListener {
         @Override
@@ -422,6 +520,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel_HORA_;
+    private javax.swing.JLabel jLabel_MenuVentasDelDia_;
     private javax.swing.JLabel jLabel_MenuVentas_;
     private javax.swing.JLabel jLabel_ResizeIcono_;
     private javax.swing.JMenuBar jMenuBar_;
@@ -434,12 +533,12 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu_Archivos_;
     private javax.swing.JMenu jMenu_Help_;
     private javax.swing.JMenu jMenu_Ver_;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel_Achivos_;
     private javax.swing.JPanel jPanel_Content_;
     private javax.swing.JPanel jPanel_Main_;
     private javax.swing.JPanel jPanel_MenuBarSmall_;
     private javax.swing.JPanel jPanel_MenuBar_;
+    private javax.swing.JPanel jPanel_NormalNav_;
     private javax.swing.JPanel jPanel_StatusBar_;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane_Comandas_;
