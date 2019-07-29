@@ -32,18 +32,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
         
     }
-    
-    private void cerrar() {
-        
-        String botones[] = {"Cerrar", "Cancelar"};
-        int eleccion = JOptionPane.showOptionDialog(this, "¿Desea cerrar la aplicación?", "Cerrar Ventana?", 0, 0, null, botones, this);
-        if (eleccion == JOptionPane.YES_OPTION) {
-            dispose();
-        } else if (eleccion == JOptionPane.NO_OPTION) {
-        }
-        
-    }
-    
+       
     private void configurarVentana() {
         this.setLocationRelativeTo(null);                       // centramos la ventana en la pantalla
         this.setResizable(false);                               // hacemos que la ventana no sea redimiensionable
@@ -59,11 +48,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel");
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored) {
         }
-//        try {
-//            setIconImage(new ImageIcon(getClass().getResource("/core/resources/chocolate.png")).getImage());
-//        } catch (Error err) {
-//            System.err.println(err);
-//        }
         initComponents();
         configurarVentana();
     }

@@ -9,6 +9,7 @@ import core.utils.login.Hash;
 import javax.swing.JOptionPane;
 import core.utils.login.SqlUsuarios;
 import core.utils.login.Usuarios;
+import java.awt.Toolkit;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -27,7 +28,8 @@ public class NuevoUsuario extends javax.swing.JFrame {
         } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
         
         initComponents();
-        setLocationRelativeTo(null);
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(gui.MainMenu.getIconDir())));
+
     }
 
     /**
@@ -153,6 +155,7 @@ public class NuevoUsuario extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed

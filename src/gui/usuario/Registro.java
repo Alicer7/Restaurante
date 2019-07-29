@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import core.utils.login.SqlUsuarios;
 import core.utils.login.Usuarios;
 import gui.login.Inicio;
+import java.awt.Toolkit;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -17,12 +18,12 @@ import javax.swing.UnsupportedLookAndFeelException;
  *
  * @author Marko
  */
-public class registro extends javax.swing.JFrame {
+public class Registro extends javax.swing.JFrame {
 
     /**
      * Creates new form registro
      */
-    public registro() {
+    public Registro() {
         try { 
 //            UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel"); 
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -30,7 +31,7 @@ public class registro extends javax.swing.JFrame {
         } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
         
         initComponents();
-        setLocationRelativeTo(null);
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(gui.MainMenu.getIconDir())));
     }
 
     /**
@@ -161,6 +162,7 @@ public class registro extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
@@ -248,8 +250,11 @@ public class registro extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(registro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Registro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
+        //</editor-fold>
         //</editor-fold>
         
         //</editor-fold>
@@ -257,7 +262,7 @@ public class registro extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new registro().setVisible(true);
+            new Registro().setVisible(true);
         });
     }
 

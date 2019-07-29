@@ -1,6 +1,9 @@
 package gui;
 
-import gui.Cargar;
+import java.awt.Color;
+import java.awt.Toolkit;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public final class Splash extends javax.swing.JFrame {
 
@@ -10,9 +13,18 @@ public final class Splash extends javax.swing.JFrame {
     Cargar hilo;
 
     public Splash() {
+        try { 
+            System.setProperty("sun.java2d.noddraw", "true");
+            UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel"); 
+//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
+        
         initComponents();
         iniciar();
-
+        
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(gui.MainMenu.getIconDir())));
+        setBackground(new Color (0,0,0,0));
+        
     }
 
     public void iniciar() {
@@ -33,19 +45,30 @@ public final class Splash extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jProgressBar_ = new javax.swing.JProgressBar();
         jLabel_CR_2 = new javax.swing.JLabel();
         jLabel_Credits_ = new javax.swing.JLabel();
         jLabel_Credits_1 = new javax.swing.JLabel();
-        jProgressBar_ = new javax.swing.JProgressBar();
         jLabel_CR_ = new javax.swing.JLabel();
-        jLabel_imagen_ = new javax.swing.JLabel();
         jLabel_CR_1 = new javax.swing.JLabel();
+        jLabel_imagen_ = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("SplashArt");
+        setBackground(new java.awt.Color(102, 0, 0));
         setMaximumSize(new java.awt.Dimension(900, 500));
         setMinimumSize(new java.awt.Dimension(900, 500));
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jProgressBar_.setMinimumSize(new java.awt.Dimension(888, 16));
+        jProgressBar_.setPreferredSize(new java.awt.Dimension(888, 16));
+        jProgressBar_.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jProgressBar_StateChanged(evt);
+            }
+        });
+        getContentPane().add(jProgressBar_, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 880, -1));
 
         jLabel_CR_2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel_CR_2.setForeground(new java.awt.Color(255, 255, 255));
@@ -62,29 +85,21 @@ public final class Splash extends javax.swing.JFrame {
         jLabel_Credits_1.setText("©");
         getContentPane().add(jLabel_Credits_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 450, 30, 30));
 
-        jProgressBar_.setMinimumSize(new java.awt.Dimension(888, 16));
-        jProgressBar_.setPreferredSize(new java.awt.Dimension(888, 16));
-        jProgressBar_.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jProgressBar_StateChanged(evt);
-            }
-        });
-        getContentPane().add(jProgressBar_, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 880, -1));
-
         jLabel_CR_.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel_CR_.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_CR_.setText("Marco Méndez / Freddy Camposeco");
         getContentPane().add(jLabel_CR_, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 450, -1, 30));
-
-        jLabel_imagen_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/Restaurante-Splash.png"))); // NOI18N
-        getContentPane().add(jLabel_imagen_, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 500));
 
         jLabel_CR_1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel_CR_1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_CR_1.setText("Marco Méndez / Freddy Camposeco");
         getContentPane().add(jLabel_CR_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 450, -1, 30));
 
+        jLabel_imagen_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/Restaurante-Splash.png"))); // NOI18N
+        getContentPane().add(jLabel_imagen_, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 500));
+
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jProgressBar_StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jProgressBar_StateChanged

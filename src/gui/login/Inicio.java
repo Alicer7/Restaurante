@@ -6,6 +6,7 @@
 package gui.login;
 
 import gui.usuario.NuevoUsuario;
+import java.awt.Toolkit;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -30,6 +31,8 @@ public class Inicio extends javax.swing.JFrame {
     public Inicio() {
         initComponents();
         configurarVentana();
+        
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(gui.MainMenu.getIconDir())));
     }
 
     @SuppressWarnings("unchecked")
