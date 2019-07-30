@@ -167,7 +167,6 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel_NormalNav_ = new javax.swing.JPanel();
         jLabel_MenuVentas_ = new javax.swing.JLabel();
         jLabel_MenuVentasDelDia_ = new javax.swing.JLabel();
-        jDesktopPane_ = new javax.swing.JDesktopPane();
         jMenuBar_ = new javax.swing.JMenuBar();
         jMenu_Archivos_ = new javax.swing.JMenu();
         jMenuItem_CerrarSesion_ = new javax.swing.JMenuItem();
@@ -235,6 +234,7 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         jPanel_StatusBar_.setBackground(java.awt.Color.darkGray);
+        jPanel_StatusBar_.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel_StatusBar_.setForeground(java.awt.Color.white);
         jPanel_StatusBar_.setMaximumSize(null);
         jPanel_StatusBar_.setMinimumSize(new java.awt.Dimension(1024, 21));
@@ -280,6 +280,8 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel_MenuBar_.setPreferredSize(new java.awt.Dimension(200, 640));
         jPanel_MenuBar_.setLayout(new java.awt.BorderLayout());
 
+        jPanel_NormalNav_.setBackground(java.awt.Color.darkGray);
+        jPanel_NormalNav_.setForeground(java.awt.Color.lightGray);
         jPanel_NormalNav_.setOpaque(false);
         jPanel_NormalNav_.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -366,19 +368,8 @@ public class MainMenu extends javax.swing.JFrame {
 
         getContentPane().add(jPanel_MenuBar_, java.awt.BorderLayout.WEST);
 
-        javax.swing.GroupLayout jDesktopPane_Layout = new javax.swing.GroupLayout(jDesktopPane_);
-        jDesktopPane_.setLayout(jDesktopPane_Layout);
-        jDesktopPane_Layout.setHorizontalGroup(
-            jDesktopPane_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 824, Short.MAX_VALUE)
-        );
-        jDesktopPane_Layout.setVerticalGroup(
-            jDesktopPane_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jDesktopPane_, java.awt.BorderLayout.CENTER);
-
+        jMenuBar_.setBackground(java.awt.Color.darkGray);
+        jMenuBar_.setForeground(java.awt.Color.lightGray);
         jMenuBar_.setMinimumSize(new java.awt.Dimension(0, 0));
         jMenuBar_.setPreferredSize(new java.awt.Dimension(1024, 21));
 
@@ -494,9 +485,7 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel_MenuVentas_MouseReleased
 
     private void jLabel_MenuVentas_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_MenuVentas_MouseClicked
-       gui.venta.VentasI ventasI = new VentasI();
-       ventasI.setVisible(true);
-       jDesktopPane_.add(ventasI);
+      
     }//GEN-LAST:event_jLabel_MenuVentas_MouseClicked
 
     private void jLabel_MenuVentasDelDia_MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_MenuVentasDelDia_MouseReleased
@@ -538,7 +527,6 @@ public class MainMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane_;
     private javax.swing.JLabel jLabel_HORA_;
     private javax.swing.JLabel jLabel_MenuVentasDelDia_;
     private javax.swing.JLabel jLabel_MenuVentas_;
