@@ -6,12 +6,17 @@
 package gui.venta;
 
 import com.toedter.calendar.JDateChooser;
+import core.utils.engine.WebEngine;
+import java.awt.BorderLayout;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import javafx.embed.swing.JFXPanel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,19 +29,61 @@ public class VentasP extends javax.swing.JPanel {
     private final DateFormat outFormat = new SimpleDateFormat( "| yyyy-MM-dd | E | HH:mm:ss | ");
     private final String myDate = outFormat.format(date);
     private Date dateX = new Date();
-    
+    private WebEngine webEngine;
+    private JFXPanel fxPanel;
     private static Integer FACTURAID = 0 ;
-
-    public static Integer getFACTURAID() {
-        return FACTURAID;
+      
+    private void startViwer(){
+        webEngine = new WebEngine();
+        fxPanel = webEngine.getjFxPanel();
+        
+        jPanel_Detalle_.add(fxPanel,BorderLayout.CENTER);
+        jPanel_Detalle_.revalidate();
+        jPanel_Detalle_.repaint();
     }
+    
+    private void limpiarTablaFacturas() {
+        DefaultTableModel modelF = (DefaultTableModel) jTable_Facturas_.getModel();
+        jTable_Facturas_.setPreferredSize(new java.awt.Dimension(jTable_Facturas_.getWidth(), 0));
 
-    public static void setFACTURAID(Integer FACTURAID) {
-        VentasP.FACTURAID = FACTURAID;
+        int rowCount = modelF.getRowCount();
+        for (int i = rowCount-1; i >= 0; i--) {
+            modelF.removeRow(i);
+        }
+    }
+    
+    private void mostrarVentasActivas() {
+        limpiarTablaFacturas();
+
+        core.database.querry.Factura facturas = new core.database.querry.Factura();
+        // SQL
+        ArrayList<core.database.querry.Factura> lista = facturas.listaFacturasActivas();
+        
+        jTable_Facturas_.setPreferredSize(new java.awt.Dimension(jTable_Facturas_.getWidth(), lista.size() * 18));
+        jTable_Facturas_.revalidate();
+        jTable_Facturas_.repaint();
+        
+        DefaultTableModel model = (DefaultTableModel) jTable_Facturas_.getModel();
+
+        Object filaData[][] = new Object[lista.size()][5];
+
+        for (int i = 0; i < lista.size(); i++) {
+            filaData[i][0] = "desc";
+            filaData[i][1] = lista.get(i).getIdFactura();
+            filaData[i][2] = "Q " + lista.get(i).getCosto();
+            filaData[i][3] = lista.get(i).getFecha();
+            filaData[i][4] = lista.get(i).getSolvente();
+            
+            model.addRow(filaData[i]);
+        }
     }
     
     public VentasP() {
+        
         initComponents();
+        
+        mostrarVentasActivas();
+        startViwer();
     }
 
     /**
@@ -48,65 +95,88 @@ public class VentasP extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane_Facturas_ = new javax.swing.JScrollPane();
-        jTable_Factura_ = new javax.swing.JTable();
-        jPanel_Clientes_ = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jButton_ClienteNuevo_ = new javax.swing.JButton();
-        jLabel_BuscarPorFecha_ = new javax.swing.JLabel();
-        jLabel_SinCobrar_ = new javax.swing.JLabel();
         jPanel_Detalle_ = new javax.swing.JPanel();
         jButton_NuevoPedido_ = new javax.swing.JButton();
         jButton_Cobrar_ = new javax.swing.JButton();
         jScrollPane_Detalle_ = new javax.swing.JScrollPane();
-
-        jScrollPane_Facturas_.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jScrollPane_Facturas_.setMaximumSize(null);
-        jScrollPane_Facturas_.setMinimumSize(new java.awt.Dimension(454, 404));
-
-        jTable_Factura_.setAutoCreateRowSorter(true);
-        jTable_Factura_.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
-        jTable_Factura_.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Nota", "Factura", "Monto", "Fecha", "Estado"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("gui/venta/Bundle"); // NOI18N
-        jTable_Factura_.setToolTipText(bundle.getString("Ventas.jTable_Factura_.toolTipText")); // NOI18N
-        jTable_Factura_.setMaximumSize(null);
-        jTable_Factura_.setMinimumSize(new java.awt.Dimension(100, 16));
-        jTable_Factura_.setPreferredSize(new java.awt.Dimension(100, 16));
-        jTable_Factura_.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable_Factura_MouseClicked(evt);
-            }
-        });
-        jScrollPane_Facturas_.setViewportView(jTable_Factura_);
-        if (jTable_Factura_.getColumnModel().getColumnCount() > 0) {
-            jTable_Factura_.getColumnModel().getColumn(1).setMinWidth(100);
-        }
+        jPanel_Clientes_ = new javax.swing.JPanel();
+        jPanel_FacturasBtns_ = new javax.swing.JPanel();
+        jButton_ClienteNuevo_ = new javax.swing.JButton();
+        jLabel_BuscarPorFecha_ = new javax.swing.JLabel();
+        jLabel_SinCobrar_ = new javax.swing.JLabel();
+        jScrollPane_Facturas_ = new javax.swing.JScrollPane();
+        jTable_Facturas_ = new javax.swing.JTable();
 
         setLayout(new java.awt.BorderLayout());
 
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("gui/venta/Bundle"); // NOI18N
+        jPanel_Detalle_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, bundle.getString("Ventas.jPanel_Detalle_.border.title"), javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14))); // NOI18N
+        jPanel_Detalle_.setToolTipText(bundle.getString("Ventas.jPanel_Detalle_.toolTipText")); // NOI18N
+        jPanel_Detalle_.setMinimumSize(new java.awt.Dimension(332, 669));
+        jPanel_Detalle_.setPreferredSize(new java.awt.Dimension(332, 332));
+
+        jButton_NuevoPedido_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton_NuevoPedido_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/clocheX32.png"))); // NOI18N
+        jButton_NuevoPedido_.setText(bundle.getString("Ventas.jButton_NuevoPedido_.text")); // NOI18N
+        jButton_NuevoPedido_.setMaximumSize(new java.awt.Dimension(140, 42));
+        jButton_NuevoPedido_.setMinimumSize(new java.awt.Dimension(140, 42));
+        jButton_NuevoPedido_.setPreferredSize(new java.awt.Dimension(140, 42));
+        jButton_NuevoPedido_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_NuevoPedido_ActionPerformed(evt);
+            }
+        });
+
+        jButton_Cobrar_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton_Cobrar_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/CashBoxX32.png"))); // NOI18N
+        jButton_Cobrar_.setText(bundle.getString("Ventas.jButton_Cobrar_.text")); // NOI18N
+        jButton_Cobrar_.setMaximumSize(new java.awt.Dimension(140, 42));
+        jButton_Cobrar_.setMinimumSize(new java.awt.Dimension(140, 42));
+        jButton_Cobrar_.setPreferredSize(new java.awt.Dimension(140, 42));
+        jButton_Cobrar_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_Cobrar_ActionPerformed(evt);
+            }
+        });
+
+        jScrollPane_Detalle_.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        javax.swing.GroupLayout jPanel_Detalle_Layout = new javax.swing.GroupLayout(jPanel_Detalle_);
+        jPanel_Detalle_.setLayout(jPanel_Detalle_Layout);
+        jPanel_Detalle_Layout.setHorizontalGroup(
+            jPanel_Detalle_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_Detalle_Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel_Detalle_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_Detalle_Layout.createSequentialGroup()
+                        .addComponent(jScrollPane_Detalle_, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel_Detalle_Layout.createSequentialGroup()
+                        .addComponent(jButton_NuevoPedido_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton_Cobrar_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel_Detalle_Layout.setVerticalGroup(
+            jPanel_Detalle_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_Detalle_Layout.createSequentialGroup()
+                .addComponent(jScrollPane_Detalle_, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel_Detalle_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton_NuevoPedido_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_Cobrar_, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        add(jPanel_Detalle_, java.awt.BorderLayout.EAST);
+
         jPanel_Clientes_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, bundle.getString("Ventas.jPanel_Clientes_.border.title"), javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14))); // NOI18N
-        jPanel_Clientes_.setMaximumSize(null);
         jPanel_Clientes_.setMinimumSize(new java.awt.Dimension(478, 669));
         jPanel_Clientes_.setPreferredSize(new java.awt.Dimension(478, 669));
         jPanel_Clientes_.setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setMinimumSize(new java.awt.Dimension(466, 59));
-        jPanel1.setPreferredSize(new java.awt.Dimension(466, 59));
+        jPanel_FacturasBtns_.setMinimumSize(new java.awt.Dimension(466, 59));
+        jPanel_FacturasBtns_.setPreferredSize(new java.awt.Dimension(466, 59));
 
         jButton_ClienteNuevo_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton_ClienteNuevo_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/FunAsClienteX32.png"))); // NOI18N
@@ -146,102 +216,61 @@ public class VentasP extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+        javax.swing.GroupLayout jPanel_FacturasBtns_Layout = new javax.swing.GroupLayout(jPanel_FacturasBtns_);
+        jPanel_FacturasBtns_.setLayout(jPanel_FacturasBtns_Layout);
+        jPanel_FacturasBtns_Layout.setHorizontalGroup(
+            jPanel_FacturasBtns_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_FacturasBtns_Layout.createSequentialGroup()
                 .addComponent(jButton_ClienteNuevo_, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel_BuscarPorFecha_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel_SinCobrar_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(20, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        jPanel_FacturasBtns_Layout.setVerticalGroup(
+            jPanel_FacturasBtns_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_FacturasBtns_Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel_FacturasBtns_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_SinCobrar_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_BuscarPorFecha_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_ClienteNuevo_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        jPanel_Clientes_.add(jPanel1, java.awt.BorderLayout.SOUTH);
+        jPanel_Clientes_.add(jPanel_FacturasBtns_, java.awt.BorderLayout.SOUTH);
+
+        jTable_Facturas_.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable_Facturas_.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable_Facturas_MouseClicked(evt);
+            }
+        });
+        jScrollPane_Facturas_.setViewportView(jTable_Facturas_);
+
+        jPanel_Clientes_.add(jScrollPane_Facturas_, java.awt.BorderLayout.CENTER);
 
         add(jPanel_Clientes_, java.awt.BorderLayout.CENTER);
-
-        jPanel_Detalle_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, bundle.getString("Ventas.jPanel_Detalle_.border.title"), javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14))); // NOI18N
-        jPanel_Detalle_.setToolTipText(bundle.getString("Ventas.jPanel_Detalle_.toolTipText")); // NOI18N
-        jPanel_Detalle_.setMinimumSize(new java.awt.Dimension(332, 669));
-
-        jButton_NuevoPedido_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton_NuevoPedido_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/clocheX32.png"))); // NOI18N
-        jButton_NuevoPedido_.setText(bundle.getString("Ventas.jButton_NuevoPedido_.text")); // NOI18N
-        jButton_NuevoPedido_.setMaximumSize(new java.awt.Dimension(140, 42));
-        jButton_NuevoPedido_.setMinimumSize(new java.awt.Dimension(140, 42));
-        jButton_NuevoPedido_.setPreferredSize(new java.awt.Dimension(140, 42));
-        jButton_NuevoPedido_.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_NuevoPedido_ActionPerformed(evt);
-            }
-        });
-
-        jButton_Cobrar_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton_Cobrar_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/CashBoxX32.png"))); // NOI18N
-        jButton_Cobrar_.setText(bundle.getString("Ventas.jButton_Cobrar_.text")); // NOI18N
-        jButton_Cobrar_.setMaximumSize(new java.awt.Dimension(140, 42));
-        jButton_Cobrar_.setMinimumSize(new java.awt.Dimension(140, 42));
-        jButton_Cobrar_.setPreferredSize(new java.awt.Dimension(140, 42));
-        jButton_Cobrar_.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_Cobrar_ActionPerformed(evt);
-            }
-        });
-
-        jScrollPane_Detalle_.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
-        javax.swing.GroupLayout jPanel_Detalle_Layout = new javax.swing.GroupLayout(jPanel_Detalle_);
-        jPanel_Detalle_.setLayout(jPanel_Detalle_Layout);
-        jPanel_Detalle_Layout.setHorizontalGroup(
-            jPanel_Detalle_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_Detalle_Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel_Detalle_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane_Detalle_)
-                    .addGroup(jPanel_Detalle_Layout.createSequentialGroup()
-                        .addComponent(jButton_NuevoPedido_, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                        .addComponent(jButton_Cobrar_, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        jPanel_Detalle_Layout.setVerticalGroup(
-            jPanel_Detalle_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_Detalle_Layout.createSequentialGroup()
-                .addComponent(jScrollPane_Detalle_, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel_Detalle_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton_NuevoPedido_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_Cobrar_, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        add(jPanel_Detalle_, java.awt.BorderLayout.EAST);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTable_Factura_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_Factura_MouseClicked
-        if (evt.getClickCount() == 2) {
-            int colId = 1;
-            int row = jTable_Factura_.getSelectedRow();
-            FACTURAID = (Integer) jTable_Factura_.getValueAt(row, 1);
-            Object objId = (Object) jTable_Factura_.getValueAt(row, colId);
-
-//            mostrarDetalle();
-        }
-    }//GEN-LAST:event_jTable_Factura_MouseClicked
 
     private void jButton_ClienteNuevo_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ClienteNuevo_ActionPerformed
         NuevoCliente clienteNuevo = new NuevoCliente();
@@ -251,8 +280,7 @@ public class VentasP extends javax.swing.JPanel {
     private void jLabel_BuscarPorFecha_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_BuscarPorFecha_MouseClicked
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored) {
-        }
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored) {}
 
         JDateChooser calendario = new JDateChooser();
         Date fechaActual = new Date();
@@ -284,8 +312,7 @@ public class VentasP extends javax.swing.JPanel {
         }
         try {
             UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel");
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored) {
-        }
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored) {}
     }//GEN-LAST:event_jLabel_BuscarPorFecha_MouseClicked
 
     private void jLabel_SinCobrar_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_SinCobrar_MouseClicked
@@ -303,6 +330,17 @@ public class VentasP extends javax.swing.JPanel {
         cobrar.setVisible(true);
     }//GEN-LAST:event_jButton_Cobrar_ActionPerformed
 
+    private void jTable_Facturas_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_Facturas_MouseClicked
+        if (evt.getClickCount() == 2) {
+            int colId = 1;
+            int row = jTable_Facturas_.getSelectedRow();
+            FACTURAID = (Integer) jTable_Facturas_.getValueAt(row, 1);
+            Object objId = (Object) jTable_Facturas_.getValueAt(row, colId);
+
+            webEngine.mostrarDetalle(FACTURAID);
+        }
+    }//GEN-LAST:event_jTable_Facturas_MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_ClienteNuevo_;
@@ -310,12 +348,12 @@ public class VentasP extends javax.swing.JPanel {
     private javax.swing.JButton jButton_NuevoPedido_;
     private javax.swing.JLabel jLabel_BuscarPorFecha_;
     private javax.swing.JLabel jLabel_SinCobrar_;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel_Clientes_;
     private javax.swing.JPanel jPanel_Detalle_;
+    private javax.swing.JPanel jPanel_FacturasBtns_;
     private javax.swing.JScrollPane jScrollPane_Detalle_;
     private javax.swing.JScrollPane jScrollPane_Facturas_;
-    private javax.swing.JTable jTable_Factura_;
+    private javax.swing.JTable jTable_Facturas_;
     // End of variables declaration//GEN-END:variables
 
 }

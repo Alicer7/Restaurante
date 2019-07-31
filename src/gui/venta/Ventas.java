@@ -38,24 +38,30 @@ public class Ventas extends javax.swing.JFrame {
     
     private final core.utils.themplate.Detalle detalle = new core.utils.themplate.Detalle();
     
-    private JFXPanel jFxPanel = new JFXPanel();
+    private JFXPanel jFxPanel;
     private WebView webView;
-    private String htmlFinal = "";
+    private String htmlFinal;
     public static Integer FACTURAID = 0 ;
-
+    
     private void startViwer (){
+        htmlFinal = detalle.getDetalleClean();
         jFxPanel = new JFXPanel();
         jPanel_PreView_.add(jFxPanel,BorderLayout.CENTER);
-        jPanel_PreView_.revalidate();
-        jPanel_PreView_.repaint();
+
         // Creation of scene and future interactions with JFXPanel
         // should take place on the JavaFX Application Thread
         Platform.runLater(() -> {
             webView = new WebView();
-            jFxPanel.setScene(new Scene(webView));
             webView.getEngine().loadContent(htmlFinal);
+            jFxPanel.setScene(new Scene(webView));
         });
         
+    }
+    
+    private void limpiarTablaPedidos() {
+        Platform.runLater(() -> {
+            webView.getEngine().loadContent(detalle.getDetalleClean());
+        });
     }
     
     private void endViwer (){
@@ -148,7 +154,7 @@ public class Ventas extends javax.swing.JFrame {
         // SQL
         ArrayList<Factura> lista = facturas.listaFacturasDiaActivas(DIA);
 
-        jTable_Factura_.setSize(new java.awt.Dimension(jTable_Factura_.getWidth(), lista.size() * 16));
+        jTable_Factura_.setSize(new java.awt.Dimension(jTable_Factura_.getWidth(), lista.size() * 18));
         jTable_Factura_.revalidate();
         jTable_Factura_.repaint();
 
@@ -166,12 +172,6 @@ public class Ventas extends javax.swing.JFrame {
             model.addRow(filaData[i]);
         }
     }
-
-    private void limpiarTablaPedidos() {
-        Platform.runLater(() -> {
-            webView.getEngine().loadContent(detalle.getDetalleClean());
-        });
-    }
     
     private void mostrarDetalle() {
         this.htmlFinal = detalle.getDetalleHTML(FACTURAID);
@@ -181,9 +181,6 @@ public class Ventas extends javax.swing.JFrame {
     public Ventas() {
         
         initComponents();
-
-        limpiarTablaFacturas();
-        limpiarTablaPedidos();
 
         mostrarVentasActivas();
         borderFacturaFecha(date);
