@@ -20,7 +20,7 @@ public class WebEngine {
     private JFXPanel jFxPanel;
     private Scene scene;
     private WebView webView;
-    private String html = detalle.getDetalleClean();
+    private String html;
     
     private void showInViwer() {
         Platform.runLater(() -> {
@@ -28,17 +28,22 @@ public class WebEngine {
         });
     }
     
-    private void startView (){
+    private void startViewer (){
+        html = detalle.getDetalleClean();
         jFxPanel = new JFXPanel();
+        
+    }
+     
+    public void loadViewer (){
         Platform.runLater(() -> {
             webView = new WebView();
+            webView.getEngine().loadContent(html);
             scene = new Scene(webView);
             jFxPanel.setScene(scene);
         });
     }
     
-    
-    public void showInViwer(String html) {
+    public void showInViewer(String html) {
         Platform.runLater(() -> {
             webView.getEngine().loadContent(html);
         });
@@ -51,12 +56,12 @@ public class WebEngine {
 /******************************************************************************/
     
     public WebEngine() {
-        startView();
-        showInViwer();
+        startViewer ();
     }
     
-/******************************************************************************/
-    
+/*
+*   @return *******************************************************************/
+
     public JFXPanel getjFxPanel() {
         return jFxPanel;
     }

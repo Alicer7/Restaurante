@@ -5,7 +5,6 @@
  */
 package gui;
 
-import gui.venta.Ventas;
 import gui.venta.VentasP;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -126,6 +125,7 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel_MainContent_.removeAll();
         gui.venta.VentasP ventas = new VentasP();
         jPanel_MainContent_.add(ventas, java.awt.BorderLayout.CENTER);
+        ventas.mostrarViewer();
     }
     
     private void settings (){

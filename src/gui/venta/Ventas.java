@@ -46,6 +46,7 @@ public class Ventas extends javax.swing.JFrame {
     private void startViwer (){
         htmlFinal = detalle.getDetalleClean();
         jFxPanel = new JFXPanel();
+        
         jPanel_PreView_.add(jFxPanel,BorderLayout.CENTER);
 
         // Creation of scene and future interactions with JFXPanel

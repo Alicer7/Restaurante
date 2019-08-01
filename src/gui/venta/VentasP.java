@@ -12,7 +12,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
+import javafx.scene.Scene;
+import javafx.scene.web.WebView;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -35,11 +38,9 @@ public class VentasP extends javax.swing.JPanel {
       
     private void startViwer(){
         webEngine = new WebEngine();
+
         fxPanel = webEngine.getjFxPanel();
-        
         jPanel_Detalle_.add(fxPanel,BorderLayout.CENTER);
-        jPanel_Detalle_.revalidate();
-        jPanel_Detalle_.repaint();
     }
     
     private void limpiarTablaFacturas() {
@@ -78,6 +79,10 @@ public class VentasP extends javax.swing.JPanel {
         }
     }
     
+    public void mostrarViewer(){
+        webEngine.loadViewer();
+    }
+    
     public VentasP() {
         
         initComponents();
@@ -95,6 +100,7 @@ public class VentasP extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jEditorPane_Viwer_ = new javax.swing.JEditorPane();
         jPanel_Detalle_ = new javax.swing.JPanel();
         jButton_NuevoPedido_ = new javax.swing.JButton();
         jButton_Cobrar_ = new javax.swing.JButton();
@@ -346,6 +352,7 @@ public class VentasP extends javax.swing.JPanel {
     private javax.swing.JButton jButton_ClienteNuevo_;
     private javax.swing.JButton jButton_Cobrar_;
     private javax.swing.JButton jButton_NuevoPedido_;
+    private javax.swing.JEditorPane jEditorPane_Viwer_;
     private javax.swing.JLabel jLabel_BuscarPorFecha_;
     private javax.swing.JLabel jLabel_SinCobrar_;
     private javax.swing.JPanel jPanel_Clientes_;
