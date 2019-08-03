@@ -32,6 +32,7 @@ public class MainMenu extends javax.swing.JFrame {
     private String USUARIO = "";
     private String NIVLE = "";
     private final String SAMS = " Sam's @ ";
+    private VentasP ventas; 
     
     private Boolean switchMenuBar = false;
     private Boolean switchMenu = false;   
@@ -123,9 +124,10 @@ public class MainMenu extends javax.swing.JFrame {
     
     private void addPenel_Ventas (){
         jPanel_MainContent_.removeAll();
-        gui.venta.VentasP ventas = new VentasP();
+        ventas = new VentasP();
         jPanel_MainContent_.add(ventas, java.awt.BorderLayout.CENTER);
-        ventas.mostrarViewer();
+        jPanel_MainContent_.revalidate();
+        jPanel_MainContent_.repaint();
     }
     
     private void settings (){

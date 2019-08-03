@@ -7,7 +7,7 @@ package gui.venta;
 
 import com.toedter.calendar.JDateChooser;
 import core.utils.engine.WebEngine;
-import java.awt.BorderLayout;
+import core.utils.themplate.Detalle;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,15 +32,32 @@ public class VentasP extends javax.swing.JPanel {
     private final DateFormat outFormat = new SimpleDateFormat( "| yyyy-MM-dd | E | HH:mm:ss | ");
     private final String myDate = outFormat.format(date);
     private Date dateX = new Date();
+   
+    private final Detalle detalle = new Detalle();
     private WebEngine webEngine;
-    private JFXPanel fxPanel;
+    private JFXPanel jFxPanel;
+    private Scene scene;
+    private WebView webView;
+    private String html;
+    
     private static Integer FACTURAID = 0 ;
       
-    private void startViwer(){
+    private void startViewer (){
         webEngine = new WebEngine();
-
-        fxPanel = webEngine.getjFxPanel();
-        jPanel_Detalle_.add(fxPanel,BorderLayout.CENTER);
+        jFxPanel = webEngine.getjFxPanel();
+    }
+    
+    private void loadViewer (){
+        Platform.runLater(() -> {
+            webEngine.loadViewer ();
+        });
+    }
+    
+    private void mostrarDetalle (){
+        startViewer ();
+        jScrollPane_Detalle_.getViewport().add(jFxPanel);
+        loadViewer ();
+        
     }
     
     private void limpiarTablaFacturas() {
@@ -78,17 +95,12 @@ public class VentasP extends javax.swing.JPanel {
             model.addRow(filaData[i]);
         }
     }
-    
-    public void mostrarViewer(){
-        webEngine.loadViewer();
-    }
-    
+   
     public VentasP() {
-        
         initComponents();
         
         mostrarVentasActivas();
-        startViwer();
+        mostrarDetalle ();
     }
 
     /**
@@ -144,8 +156,6 @@ public class VentasP extends javax.swing.JPanel {
                 jButton_Cobrar_ActionPerformed(evt);
             }
         });
-
-        jScrollPane_Detalle_.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         javax.swing.GroupLayout jPanel_Detalle_Layout = new javax.swing.GroupLayout(jPanel_Detalle_);
         jPanel_Detalle_.setLayout(jPanel_Detalle_Layout);
@@ -342,7 +352,7 @@ public class VentasP extends javax.swing.JPanel {
             int row = jTable_Facturas_.getSelectedRow();
             FACTURAID = (Integer) jTable_Facturas_.getValueAt(row, 1);
             Object objId = (Object) jTable_Facturas_.getValueAt(row, colId);
-
+            System.err.println("\n\nFactura ID: "+FACTURAID);
             webEngine.mostrarDetalle(FACTURAID);
         }
     }//GEN-LAST:event_jTable_Facturas_MouseClicked

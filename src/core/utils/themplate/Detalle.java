@@ -31,20 +31,36 @@ public class Detalle {
  
     private final String tBodyH = "<tbody>";
     private final String tBocyF = "</tbody>";
-    private String tBodyB = "";
-    private String bodyFinal = "";  
+    private String tBodyB = null;
+    private String bodyFinal = null;  
     
     private final String tFootH = "<tfoot><tr>";
     private final String tFootF = "</tr></tfoot>";
-    private String tFootB = "";
-    private String footFinal = "";
+    private String tFootB = null;
+    private String footFinal = null;
 
     private String DESCRIPCION = null;
+    private String PEDIDOSX = null;
     private int CANTIDAD = 0;
     private Double COSTO = 0.0;
     private Double TOTAL = 0.0;
+    
+    
 
     public Detalle() {
+    }
+    
+    public void setDetalleNull (){
+        htmlFinal = null;
+        tBodyB = null;
+        bodyFinal = null;
+        tFootB = null;
+        footFinal = null;
+        CANTIDAD = 0;
+        COSTO = 0.0;
+        TOTAL = 0.0;
+        
+        System.err.println("set HTML Null: "+this.htmlFinal+" END");
     }
     
     public String getDetalleClean (){
@@ -54,16 +70,17 @@ public class Detalle {
                 + "     <meta charset=\"UTF-8\">"
                 + "     <meta name=\"viewport\" content=\"width=device-width, initial-scale=0.8\">"
                 + "     <title>Factura</title>"
+                + css
                 + "</head>"
                 + "<body>"
+                + imgBar
                 + "<p style=\"text-align: center;\">Sin Datos que mostrar</p>"
                 + "</body>"
                 + "</html>";
     }
     
     public String getDetalleHTML (Integer FACTURAID){
-        this.htmlFinal = "";
-        System.err.println(htmlFinal);
+        setDetalleNull();
         try {
             Conexion objCon = new Conexion();
             Connection conn = (Connection) objCon.connect();
@@ -89,21 +106,22 @@ public class Detalle {
                 Double SUBTOTAL = CANTIDAD * COSTO;
                 TOTAL = TOTAL + SUBTOTAL;
                 
-                String pedidoX
+                PEDIDOSX
                         = "<tr><td class=\"L\">"
-                        + DESCRIPCION //aquí de acuerdo al id crear un query para seleccionar el nombre del producto
+                        +   DESCRIPCION //aquí de acuerdo al id crear un query para seleccionar el nombre del producto
                         + "</td><td class=\"R\">Q "
-                        + COSTO //aquí de acuerdo al id crear un query para seleccionar el precio del producto
+                        +   COSTO //aquí de acuerdo al id crear un query para seleccionar el precio del producto
                         + "</td><td class=\"M\"> "
-                        + CANTIDAD //las unidades se toman si no son igual a 0
+                        +   CANTIDAD //las unidades se toman si no son igual a 0
                         + "</td><td class=\"R\">Q "
-                        + SUBTOTAL
+                        +   SUBTOTAL
                         + "</td></tr>"
                 ;
 
-                tBodyB = tBodyB + pedidoX;
+                tBodyB = tBodyB + PEDIDOSX;
                 
                 System.out.println("Datos: " + "desc = " + DESCRIPCION + "  cantidad: " + CANTIDAD + "  costo: " + COSTO);
+                System.out.println(PEDIDOSX);
             }
         } catch (SQLException ex) {
             System.out.println(ex.toString());
@@ -111,7 +129,7 @@ public class Detalle {
         
         String totalX 
             = "<td class=\"M\">Total</td><td></td><td></td><td class=\"R total\">Q "
-            + this.TOTAL
+            + TOTAL
             + "</td></tr>"
         ;
         
