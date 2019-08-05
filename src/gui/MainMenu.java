@@ -138,8 +138,7 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel_MainContent_.add(ventas, java.awt.BorderLayout.CENTER);
     }
     
-    private void settings (){
-        setLocale(Locale.ROOT);
+    private void settings (){   
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(ICONDIR)));
         try { 
             UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel"); 

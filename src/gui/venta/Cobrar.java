@@ -9,6 +9,8 @@ import core.utils.engine.WebEngine;
 import core.utils.themplate.Detalle;
 import java.awt.Toolkit;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
 import javafx.embed.swing.JFXPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -20,6 +22,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class Cobrar extends javax.swing.JFrame {
     private final CambioEfectivo showPanelCambio = new CambioEfectivo();
     private final Integer FACTURAID = gui.venta.VentasP.getFACTURAID();
+    
     
     private final DecimalFormat df = new DecimalFormat("###,###,###,##0.00");
     private Boolean esNumero = true;
@@ -64,7 +67,7 @@ public class Cobrar extends javax.swing.JFrame {
             esNumero = false;
         }
         
-        if ( jTextField_MoElectronico_.getText()==null ||  ("".equals(jTextField_MoElectronico_.getText())) || esNumero==false ){
+        if ( jTextField_MoElectronico_.getText()==null ||  ("".equals(jTextField_MoElectronico_.getText())) || esNumero!=true ){
             jTextField_MoElectronico_.setText("0.00");
             ELECTRONICO = Double.parseDouble(jTextField_MoElectronico_.getText());
         } else if ( (ELECTRONICO= Double.parseDouble(jTextField_MoElectronico_.getText())) > 0 ) {
@@ -89,7 +92,7 @@ public class Cobrar extends javax.swing.JFrame {
             esNumero = false;
         }
         
-        if ( jTextField_MoEfectivo_.getText()==null ||  ("".equals(jTextField_MoEfectivo_.getText())) || esNumero==false){
+        if ( jTextField_MoEfectivo_.getText()==null ||  ("".equals(jTextField_MoEfectivo_.getText())) || esNumero!=true){
             jTextField_MoEfectivo_.setText("0.00");
             EFECTIVO = Double.parseDouble(jTextField_MoEfectivo_.getText());         
         } else if ( (EFECTIVO = Double.parseDouble(jTextField_MoEfectivo_.getText())) > 0 ) {
@@ -114,7 +117,7 @@ public class Cobrar extends javax.swing.JFrame {
             esNumero = false;
         }
         
-        if ( jTextField_Descuento_.getText()==null ||  ("".equals(jTextField_Descuento_.getText())) || esNumero==false){
+        if ( jTextField_Descuento_.getText()==null ||  ("".equals(jTextField_Descuento_.getText())) || esNumero==true){
             jTextField_Descuento_.setText("0.00");
             DESCUENTO = Double.parseDouble(jTextField_Descuento_.getText());         
         } else if ( (DESCUENTO = Double.parseDouble(jTextField_Descuento_.getText())) > 0 ) {
@@ -190,8 +193,9 @@ public class Cobrar extends javax.swing.JFrame {
         try { 
             UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel"); 
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
-        df.setMinimumFractionDigits(2);
+        }catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
+        df.getDecimalFormatSymbols().setDecimalSeparator('.');
+        df.getDecimalFormatSymbols().setGroupingSeparator(',');
     }
     
     public Cobrar() {
@@ -241,7 +245,6 @@ public class Cobrar extends javax.swing.JFrame {
             }
         });
 
-        jPanel_Main_.setMaximumSize(null);
         jPanel_Main_.setLayout(new java.awt.BorderLayout());
 
         jPanel_Controlls_.setLayout(new java.awt.BorderLayout());
@@ -534,7 +537,6 @@ public class Cobrar extends javax.swing.JFrame {
         jPanel_Main_.add(jPanel_Controlls_, java.awt.BorderLayout.CENTER);
 
         jPanel_PreView_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vista Previa", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
-        jPanel_PreView_.setMaximumSize(null);
         jPanel_PreView_.setMinimumSize(new java.awt.Dimension(340, 688));
         jPanel_PreView_.setName(""); // NOI18N
         jPanel_PreView_.setPreferredSize(new java.awt.Dimension(340, 688));
