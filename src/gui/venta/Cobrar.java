@@ -5,7 +5,7 @@
  */
 package gui.venta;
 
-import core.utils.engine.WebEngine;
+import core.utils.engine.WebEngineX;
 import core.utils.themplate.Detalle;
 import java.awt.Toolkit;
 import java.text.DecimalFormat;
@@ -32,7 +32,7 @@ public class Cobrar extends javax.swing.JFrame {
     private Double ELECTRONICO = 0.0;
     private Double DESCUENTO = 0.0;
     
-    private WebEngine webEngine;
+    private WebEngineX webEngine;
     private JFXPanel jFxPanel;
     
     private void setToltips(){
@@ -135,7 +135,7 @@ public class Cobrar extends javax.swing.JFrame {
     }
     
     private void startViewer (){
-        webEngine = new WebEngine();
+        webEngine = new WebEngineX();
         jFxPanel = webEngine.getjFxPanel();
     }
     

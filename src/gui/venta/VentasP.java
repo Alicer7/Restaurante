@@ -6,7 +6,7 @@
 package gui.venta;
 
 import com.toedter.calendar.JDateChooser;
-import core.utils.engine.WebEngine;
+import core.utils.engine.WebEngineX;
 import core.utils.themplate.Detalle;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -33,13 +33,13 @@ public class VentasP extends javax.swing.JPanel {
     private Date dateX = new Date();
    
     private final Detalle detalle = new Detalle();
-    private WebEngine webEngine;
+    private WebEngineX webEngine;
     private JFXPanel jFxPanel;
     
     private static Integer FACTURAID = null ;
       
     private void startViewer(){
-        webEngine = new WebEngine();
+        webEngine = new WebEngineX();
         jFxPanel = webEngine.getjFxPanel();
     }
     
@@ -113,7 +113,7 @@ public class VentasP extends javax.swing.JPanel {
                 model.addRow(filaData[i]);
             }
         } catch (Exception e) {
-            System.err.println("mostrarVentasActivas().mostrar:"+e);
+            System.err.println("mostrarVentasActivas().mostrar: >"+e);
         }
         
     }
@@ -166,9 +166,13 @@ public class VentasP extends javax.swing.JPanel {
         jPanel_Detalle_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detalle - Pedidos Factura #" + numeroFactura, javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14)));
     }
 
-    private void nuevoCliente (){
-        NuevoCliente clienteNuevo = new NuevoCliente();
-        clienteNuevo.setVisible(true);
+    private void nuevoCliente(){
+        try {
+            NuevoCliente clienteNuevo = new NuevoCliente();
+            clienteNuevo.setVisible(true);
+        } catch (Exception e) {
+            System.err.println("nuevoCliente(): >"+e);
+        }
     }
     
     private void mensajeNoFacturaSelect (){
@@ -381,7 +385,7 @@ public class VentasP extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_ClienteNuevo_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ClienteNuevo_ActionPerformed
-        nuevoCliente ();
+        nuevoCliente();
     }//GEN-LAST:event_jButton_ClienteNuevo_ActionPerformed
 
     private void jLabel_BuscarPorFecha_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_BuscarPorFecha_MouseClicked

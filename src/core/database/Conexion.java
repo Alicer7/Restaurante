@@ -8,13 +8,14 @@ package core.database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Alicer
  */
 public class Conexion {
-    private final String host = "192.168.1.2";
+    private final String host = "192.168.10.11";
 //    private final String host = "localhost";
     private final String port="3306";
     private final String db = "cafebar"; // Nombre de la BD.
@@ -25,21 +26,37 @@ public class Conexion {
     
     private final String charset="?useUnicode=yes&characterEncoding=UTF-8";
     
+    String botones[] = {"Aceptar", "Contactar"};
+    private final String tituloMensaje = "¡Error de conexión!";
+    private final String mensajeDR = "Conexion: > Driver Not Found >";
+    private final String mensajeDB = "Conexion: > Database Not Found >";
+    private final String mensajeService = "\nVerifica que todo esté en orden o ponte en contacto con el servicio técnico.";
+    
     private Connection DBConnection;
+    
+    private void errorX (String mensaje){
+        Integer eleccion = JOptionPane.showOptionDialog(null, mensaje, tituloMensaje, 0, 0, null, botones, this);
+        if (eleccion == JOptionPane.YES_OPTION) {
+            
+        } else if (eleccion == JOptionPane.NO_OPTION) {
+            
+        }
+    }
     
     public Connection connect(){
     
         try{
             Class.forName("com.mysql.jdbc.Driver");
 //            System.out.println("MySQL Driver OK");
-        } catch(ClassNotFoundException cnfe){
-            System.err.println("Driver not found" + cnfe);
+        } catch(ClassNotFoundException err){
+            System.err.println(mensajeDR + err);
+            
         }                
         try{
-          DBConnection=DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db+charset,user, password);
+            DBConnection=DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db+charset,user, password);
 //          System.out.println("DB conection up");
-        } catch(SQLException se){
-          System.err.println("Database Not Found");  
+        } catch(SQLException err){
+            System.err.println(mensajeDB + err);
         }
         return DBConnection;        
     }

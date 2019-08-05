@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
@@ -214,7 +213,7 @@ public class MainMenu extends javax.swing.JFrame {
             .addGap(0, 640, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 661));
         setName("mainJF"); // NOI18N
         setSize(new java.awt.Dimension(1024, 661));
@@ -447,7 +446,7 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void jMenuItem_Salir_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_Salir_ActionPerformed
-        System.exit(0);
+        exit();
     }//GEN-LAST:event_jMenuItem_Salir_ActionPerformed
 
     private void jMenuItem_ShowMenuBar_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_ShowMenuBar_ActionPerformed
@@ -461,8 +460,8 @@ public class MainMenu extends javax.swing.JFrame {
     private void jMenuItem_CerrarSesion_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_CerrarSesion_ActionPerformed
         if (JOptionPane.showConfirmDialog(this, "\t\t¿Desea continuar?", "Esta a punto de cerrar la sesión", JOptionPane.YES_NO_OPTION, 0,
             new ImageIcon(getClass().getResource("/core/resources/icons/ExitX32.png"))) == JOptionPane.YES_OPTION) {
-        this.dispose();
-        new gui.login.Login().setVisible(true);
+            this.dispose();
+            new gui.login.Login().setVisible(true);
         }
     }//GEN-LAST:event_jMenuItem_CerrarSesion_ActionPerformed
 

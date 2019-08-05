@@ -1,5 +1,5 @@
 
-import core.utils.engine.WebEngine;
+import core.utils.engine.WebEngineX;
 import core.utils.themplate.Detalle;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -22,14 +22,14 @@ import javafx.scene.web.WebView;
 public class TestWebEngine extends javax.swing.JFrame {
     
     private final Detalle detalle = new Detalle();
-    private WebEngine webEngine;
+    private WebEngineX webEngine;
     private JFXPanel jFxPanel;
     private Scene scene;
     private WebView webView;
     private String html;
 
     private void startViewer (){
-        webEngine = new WebEngine();
+        webEngine = new WebEngineX();
         jFxPanel = webEngine.getjFxPanel();
     }
     
