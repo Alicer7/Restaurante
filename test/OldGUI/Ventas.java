@@ -1,9 +1,11 @@
+package OldGUI;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.venta;
+
 
 import com.toedter.calendar.JDateChooser;
 import core.database.querry.Factura;
@@ -214,7 +216,6 @@ public class Ventas extends javax.swing.JFrame {
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("gui/venta/Bundle"); // NOI18N
         setTitle(bundle.getString("Ventas.title")); // NOI18N
         setMinimumSize(new java.awt.Dimension(1024, 740));
-        setPreferredSize(new java.awt.Dimension(990, 700));
         setSize(new java.awt.Dimension(990, 700));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -427,13 +428,13 @@ public class Ventas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_Cobrar_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Cobrar_ActionPerformed
-        Cobrar cobrar = new Cobrar();
-        cobrar.setVisible(true);
+//        Cobrar cobrar = new Cobrar();
+//        cobrar.setVisible(true);
     }//GEN-LAST:event_jButton_Cobrar_ActionPerformed
 
     private void jButton_NuevoPedido_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_NuevoPedido_ActionPerformed
-        NuevoPedido pedido = new NuevoPedido();
-        pedido.setVisible(true);
+//        NuevoPedido pedido = new NuevoPedido();
+//        pedido.setVisible(true);
     }//GEN-LAST:event_jButton_NuevoPedido_ActionPerformed
 
     private void jLabel_BuscarPorFecha_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_BuscarPorFecha_MouseClicked
@@ -478,8 +479,8 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel_BuscarPorFecha_MouseClicked
 
     private void jButton_ClienteNuevo_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ClienteNuevo_ActionPerformed
-        NuevoCliente clienteNuevo = new NuevoCliente();
-        clienteNuevo.setVisible(true);
+//        NuevoCliente clienteNuevo = new NuevoCliente();
+//        clienteNuevo.setVisible(true);
     }//GEN-LAST:event_jButton_ClienteNuevo_ActionPerformed
 
     private void jTable_Factura_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_Factura_MouseClicked

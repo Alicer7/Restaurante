@@ -129,8 +129,8 @@ public class login extends javax.swing.JFrame {
 //                Inicio.frmLog = null;
                 this.dispose();
 
-                gui.MenuPrincipal frmMenu = new gui.MenuPrincipal();
-                frmMenu.setVisible(true);
+//                gui.MenuPrincipal frmMenu = new gui.MenuPrincipal();
+//                frmMenu.setVisible(true);
 
             } else {
                 JOptionPane.showMessageDialog(null, "Datos incorrectos");

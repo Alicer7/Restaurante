@@ -18,24 +18,15 @@ import javafx.scene.web.WebView;
  * @author Administrador
  */
 public class WebEngine {
-    private Printer printer;
     private final Detalle detalle = new Detalle();
+    private Double TOTAL;
     private JFXPanel jFxPanel;
     private Scene scene;
     private WebView webView;
+    private Printer printer;
     private String html;
     
-    public void setDetalleNull (){
-        this.html = "";
-        System.err.println("set HTML Null: "+this.html+" END");
-    }
     
-    private void cleanViewer (){
-        setDetalleNull ();
-        Platform.runLater(() -> {
-            webView.getEngine().loadContent(html);
-        });
-    }
     
     private void showInViewer() {
         Platform.runLater(() -> {
@@ -43,10 +34,18 @@ public class WebEngine {
         });
     }
     
+    private void cleanViewer (){
+        setDetalleClean ();
+        showInViewer();
+    }
+    
     private void startViewer (){
         html = detalle.getDetalleClean();
         jFxPanel = new JFXPanel();
-        
+    }
+    
+    public void setDetalleClean (){
+        this.html = detalle.getDetalleClean();
     }
      
     public void loadViewer (){
@@ -58,6 +57,11 @@ public class WebEngine {
         });
     }
     
+/*
+*   @Muestra el mensaje por defecto en el visor de detalles */
+    public void putDefauiltInViewer (){
+        cleanViewer ();
+    }
     public void showInViewer(String html) {
         Platform.runLater(() -> {
             webView.getEngine().loadContent(html);
@@ -65,11 +69,15 @@ public class WebEngine {
     }
     public void mostrarDetalle(Integer FACTURAID) {
         cleanViewer ();
+        detalle.setFACTURAID(FACTURAID);
         detalle.setDetalleNull ();
-        System.out.println("core.utils.engine.WebEngine.mostrarDetalle()");
-        this.html = detalle.getDetalleHTML(FACTURAID);
-        System.err.println("get Html");
+        html = detalle.getDetalleHTML(FACTURAID);
         showInViewer ();
+    }
+    
+    public Double getTOTAL() {
+        TOTAL = detalle.getTOTAL();
+        return TOTAL;
     }
     
 /******************************************************************************/
@@ -87,19 +95,37 @@ public class WebEngine {
 
     public void print() {
         
-//        printer.createPageLayout(
-//                Paper.A0, 
-//                PageOrientation.PORTRAIT, 
-//                Printer.MarginType.EQUAL
+//        Integer INCH = 72;
+//        Double mWidth= 3.15;
+//        Double mHeight= 11.00;
+//        Double mMargin = 0.0;
+//        Rectangle2D mImageableArea;
+//        mImageableArea = new Rectangle2D.Double(
+//            INCH, INCH,
+//            mWidth - mMargin * INCH,
+//            mHeight - mMargin * INCH
 //        );
+    
         
+                
         try {
+            
             PrinterJob job = PrinterJob.createPrinterJob();
+            job.getJobSettings().setJobName(webView.getEngine().getTitle());
+            
+//            PageLayout pageLayout = Printer.getDefaultPrinter().getDefaultPageLayout();
+//            job.getJobSettings().setPageLayout(pageLayout);
+            
             if (job != null) {
-                boolean success = job.printPage(webView);
-                if (success) {
+//                boolean success = false;
+//                    boolean success = job.printPage(webView);
+//                    success = job.printPage(webView);
+                    webView.getEngine().print(job);
                     job.endJob();
-                }
+//                if (success) {
+//                    job.endJob();
+//                    System.err.println("JOB: "+job);
+//                }
             }
 
         } catch (Exception e) {

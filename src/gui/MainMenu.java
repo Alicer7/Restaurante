@@ -37,6 +37,17 @@ public class MainMenu extends javax.swing.JFrame {
     private Boolean switchMenuBar = false;
     private Boolean switchMenu = false;   
     
+    private void exit() {
+        
+        String botones[] = {"Cerrar", "Cancelar"};
+        int eleccion = JOptionPane.showOptionDialog(this, "¿Desea cerrar la aplicación?", "", 0, 0, null, botones, this);
+        if (eleccion == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        } else if (eleccion == JOptionPane.NO_OPTION) {
+        }
+        
+    }
+    
     private void datosSesion (){
         Timer tiempo = new Timer(100, new gui.MainMenu.hora());
         tiempo.start();
@@ -123,18 +134,18 @@ public class MainMenu extends javax.swing.JFrame {
     }
     
     private void addPenel_Ventas (){
-        jPanel_MainContent_.removeAll();
         ventas = new VentasP();
         jPanel_MainContent_.add(ventas, java.awt.BorderLayout.CENTER);
-        jPanel_MainContent_.revalidate();
-        jPanel_MainContent_.repaint();
     }
     
     private void settings (){
         setLocale(Locale.ROOT);
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(ICONDIR)));
+        try { 
+            UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel"); 
+//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
     }
-    
     
     public static String getIconDir() {
         return ICONDIR;
@@ -151,13 +162,8 @@ public class MainMenu extends javax.swing.JFrame {
     }
     
     public MainMenu() {
-        try { 
-            UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel"); 
-//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
         settings ();
         initComponents();
-        
         addPenel_Ventas ();
     }
 
@@ -214,6 +220,9 @@ public class MainMenu extends javax.swing.JFrame {
         setName("mainJF"); // NOI18N
         setSize(new java.awt.Dimension(1024, 661));
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -493,6 +502,10 @@ public class MainMenu extends javax.swing.JFrame {
     private void jLabel_MenuVentasDelDia_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_MenuVentasDelDia_MouseClicked
         
     }//GEN-LAST:event_jLabel_MenuVentasDelDia_MouseClicked
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        exit ();
+    }//GEN-LAST:event_formWindowClosing
     
     class hora implements ActionListener {
         @Override

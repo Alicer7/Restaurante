@@ -78,7 +78,7 @@ public class vistaprevia extends javax.swing.JFrame {
                     + "     temp_pedido.`costo` AS temp_pedido_costo\n"
                     + "FROM\n"
                     + "     `bebida` bebida INNER JOIN `temp_pedido` temp_pedido ON bebida.`id` = temp_pedido.`bebida_id` where temp_venta_id = '" 
-                    + gui.venta.Ventas.FACTURAID  
+                    + gui.venta.VentasP.getFACTURAID()
                     + "'"
             ;
             ps = conn.prepareStatement(servicios);

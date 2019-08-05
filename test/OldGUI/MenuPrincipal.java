@@ -1,9 +1,11 @@
+package OldGUI;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -86,7 +88,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu");
-        setMaximumSize(new java.awt.Dimension(726, 532));
         setMinimumSize(new java.awt.Dimension(726, 532));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -466,8 +467,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         fecha.setText(formato.format(sistemaFech));
 
 //        Hora del sistema
-        Timer tiempo = new Timer(100, new gui.MenuPrincipal.hora());
-        tiempo.start();
+//        Timer tiempo = new Timer(100, new gui.MenuPrincipal.hora());
+//        tiempo.start();
         
 
     }//GEN-LAST:event_formWindowOpened
@@ -512,8 +513,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_ReportesCierreCaja_ActionPerformed
 
     private void jButton_VentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_VentasActionPerformed
-        gui.venta.Ventas ventas = new gui.venta.Ventas();
-        ventas.setVisible(true);
+//        gui.venta.Ventas ventas = new gui.venta.Ventas();
+//        ventas.setVisible(true);
     }//GEN-LAST:event_jButton_VentasActionPerformed
 
     private void jButton_AdministracionInventarioSalida_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AdministracionInventarioSalida_1ActionPerformed
