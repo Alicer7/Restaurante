@@ -11,22 +11,7 @@ public final class Splash extends javax.swing.JFrame {
      * Creates new form Splash
      */
     Cargar hilo;
-
-    public Splash() {
-        try { 
-            System.setProperty("sun.java2d.noddraw", "true");
-            UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel"); 
-//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
-        
-        initComponents();
-        iniciar();
-        
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(gui.MainMenu.getIconDir())));
-        setBackground(new Color (0,0,0,0));
-        
-    }
-
+    
     public void iniciar() {
         setLocationRelativeTo(null);
         hilo = new Cargar(getProgress());
@@ -34,6 +19,18 @@ public final class Splash extends javax.swing.JFrame {
         hilo = null;
         this.setLocationRelativeTo(null);
 
+    }
+
+    public Splash() {
+        try { 
+            System.setProperty("sun.java2d.noddraw", "true");
+            UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel"); 
+//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
+        initComponents();
+        iniciar();
+        setBackground(new Color (0,0,0,0));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(gui.MainMenu.getIconDir())));
     }
 
     /**
@@ -95,7 +92,7 @@ public final class Splash extends javax.swing.JFrame {
         jLabel_CR_1.setText("Marco Méndez / Freddy Camposeco");
         getContentPane().add(jLabel_CR_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 450, -1, 30));
 
-        jLabel_imagen_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/Restaurante-Splash.png"))); // NOI18N
+        jLabel_imagen_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/RestauranteSplash.png"))); // NOI18N
         getContentPane().add(jLabel_imagen_, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 500));
 
         pack();
