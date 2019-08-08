@@ -290,6 +290,7 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel_MenuVentas_.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel_MenuVentas_.setForeground(java.awt.Color.white);
         jLabel_MenuVentas_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_MenuVentas_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/menu/VentasX24.png"))); // NOI18N
         jLabel_MenuVentas_.setText("Ventas");
         jLabel_MenuVentas_.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jLabel_MenuVentas_.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
