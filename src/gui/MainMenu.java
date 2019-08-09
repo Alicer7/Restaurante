@@ -28,19 +28,30 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class MainMenu extends javax.swing.JFrame {
     
     private static final String ICONDIR = "/core/resources/icono.png";
+    private final String SAMS = " Sam's @ ";
     private String USUARIO = "";
     private String NIVLE = "";
-    private final String SAMS = " Sam's @ ";
-    private VentasP ventas; 
+    private VentasP ventas = null; 
     
     private Boolean switchMenuBar = false;
     private Boolean switchMenu = false;   
+    
+    private void logOut(){
+        if (JOptionPane.showConfirmDialog(this, "\t\t¿Desea continuar?", "Esta a punto de cerrar la sesión", JOptionPane.YES_NO_OPTION, 0,
+            new ImageIcon(getClass().getResource("/core/resources/icons/ExitX32.png"))) == JOptionPane.YES_OPTION) {
+            ventas.removeViewer();
+            jPanel_MainContent_.removeAll();
+            this.dispose();
+            new gui.login.Login().setVisible(true);
+        }
+    }
     
     private void exit() {
         
         String botones[] = {"Cerrar", "Cancelar"};
         int eleccion = JOptionPane.showOptionDialog(this, "¿Desea cerrar la aplicación?", "", 0, 0, null, botones, this);
         if (eleccion == JOptionPane.YES_OPTION) {
+            jPanel_MainContent_.removeAll();
             System.exit(0);
         } else if (eleccion == JOptionPane.NO_OPTION) {
         }
@@ -459,11 +470,7 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem_ShowNavBar_ActionPerformed
 
     private void jMenuItem_CerrarSesion_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_CerrarSesion_ActionPerformed
-        if (JOptionPane.showConfirmDialog(this, "\t\t¿Desea continuar?", "Esta a punto de cerrar la sesión", JOptionPane.YES_NO_OPTION, 0,
-            new ImageIcon(getClass().getResource("/core/resources/icons/ExitX32.png"))) == JOptionPane.YES_OPTION) {
-            this.dispose();
-            new gui.login.Login().setVisible(true);
-        }
+//        logOut();
     }//GEN-LAST:event_jMenuItem_CerrarSesion_ActionPerformed
 
     private void jPanel_NormalNav_MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel_NormalNav_MouseMoved
@@ -503,7 +510,7 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel_MenuVentasDelDia_MouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        exit ();
+        exit();
     }//GEN-LAST:event_formWindowClosing
     
     class hora implements ActionListener {

@@ -17,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -794,7 +795,9 @@ public class NuevoCliente extends javax.swing.JFrame {
         int cant = Integer.parseInt(txtCant1.getText());
 
         total = precio_comida * cant;
-        DecimalFormat df = new DecimalFormat("###,###.##");
+        DecimalFormat df = new DecimalFormat("###,###,##0.00");
+        df.getDecimalFormatSymbols().setDecimalSeparator('.');
+        df.getDecimalFormatSymbols().setGroupingSeparator(',');
         lblSubtotalComida.setText(df.format(Double.valueOf(total)));
 
     }//GEN-LAST:event_txtCant1KeyReleased
@@ -840,43 +843,17 @@ public class NuevoCliente extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-
-                }
-            }
-        } catch (ClassNotFoundException ex) {
+            UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(NuevoCliente.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NuevoCliente.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NuevoCliente.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NuevoCliente.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new NuevoCliente().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new NuevoCliente().setVisible(true);
         });
     }
 

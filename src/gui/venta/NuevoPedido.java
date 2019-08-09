@@ -590,16 +590,27 @@ public class NuevoPedido extends javax.swing.JFrame {
         jLabel_Factura_.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel_Factura_.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel_Factura_.setText("#");
+        jLabel_Factura_.setMaximumSize(null);
+        jLabel_Factura_.setMinimumSize(new java.awt.Dimension(13, 52));
+        jLabel_Factura_.setPreferredSize(new java.awt.Dimension(13, 52));
 
         jLabel_FactureNumero_.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel_FactureNumero_.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel_FactureNumero_.setText("1234567890");
+        jLabel_FactureNumero_.setMaximumSize(null);
+        jLabel_FactureNumero_.setMinimumSize(new java.awt.Dimension(100, 52));
+        jLabel_FactureNumero_.setPreferredSize(new java.awt.Dimension(100, 52));
 
         jLabel_Nota_.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel_Nota_.setText("Mesero Encargado: ");
         jLabel_Nota_.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel_Nota_.setMinimumSize(new java.awt.Dimension(85, 49));
-        jLabel_Nota_.setPreferredSize(new java.awt.Dimension(85, 49));
+        jLabel_Nota_.setMaximumSize(null);
+        jLabel_Nota_.setMinimumSize(new java.awt.Dimension(130, 52));
+        jLabel_Nota_.setPreferredSize(new java.awt.Dimension(130, 52));
+
+        jComboBox1.setMaximumSize(null);
+        jComboBox1.setMinimumSize(new java.awt.Dimension(100, 52));
+        jComboBox1.setPreferredSize(new java.awt.Dimension(250, 52));
 
         javax.swing.GroupLayout jPanel_Main_Layout = new javax.swing.GroupLayout(jPanel_Main_);
         jPanel_Main_.setLayout(jPanel_Main_Layout);
@@ -609,12 +620,12 @@ public class NuevoPedido extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel_Main_Layout.createSequentialGroup()
-                        .addComponent(jLabel_Nota_, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel_Nota_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(85, 85, 85)
-                        .addComponent(jLabel_Factura_)
-                        .addGap(18, 18, 18)
+                        .addComponent(jLabel_Factura_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
                         .addComponent(jLabel_FactureNumero_, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton_Cancelar_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -647,11 +658,11 @@ public class NuevoPedido extends javax.swing.JFrame {
                     .addGroup(jPanel_Main_Layout.createSequentialGroup()
                         .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel_Nota_, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel_Nota_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel_Factura_, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel_FactureNumero_, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel_Factura_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel_FactureNumero_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 

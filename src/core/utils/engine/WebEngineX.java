@@ -42,6 +42,7 @@ public class WebEngineX {
     private void startViewer (){
         html = detalle.getDetalleClean();
         jFxPanel = new JFXPanel();
+        System.err.println("StartViewer > Detalle > JFXPanel ");
     }
     
     public void setDetalleClean (){

@@ -33,14 +33,21 @@ public class VentasP extends javax.swing.JPanel {
     private Date dateX = new Date();
    
     private final Detalle detalle = new Detalle();
-    private WebEngineX webEngine;
-    private JFXPanel jFxPanel;
+    private WebEngineX webEngine = null;
+    private JFXPanel jFxPanel = null;
     
     private static Integer FACTURAID = null ;
       
     private void startViewer(){
-        webEngine = new WebEngineX();
-        jFxPanel = webEngine.getjFxPanel();
+        if (webEngine == null){
+            webEngine = new WebEngineX();
+            System.err.println("new WebEngine");
+        } if (jFxPanel == null){
+            jFxPanel = webEngine.getjFxPanel();
+            System.err.println("new jFxPanel");
+        } else {
+            System.err.println("webEngine: "+webEngine+" jFxPanel: "+jFxPanel);
+        }
     }
     
     private void loadViewer(){
@@ -186,6 +193,10 @@ public class VentasP extends javax.swing.JPanel {
     
     public static Integer getFACTURAID() {
         return FACTURAID;
+    }
+    
+    public void removeViewer(){
+        jScrollPane_Detalle_.getViewport().remove(jFxPanel);
     }
     
     public VentasP() {
@@ -425,7 +436,7 @@ public class VentasP extends javax.swing.JPanel {
     }//GEN-LAST:event_jTable_Facturas_MouseClicked
 
     private void formAncestorRemoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorRemoved
-        jScrollPane_Detalle_.getViewport().remove(jFxPanel);
+        
     }//GEN-LAST:event_formAncestorRemoved
 
 

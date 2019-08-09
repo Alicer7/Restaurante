@@ -8,6 +8,7 @@ package core.database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,7 +16,7 @@ import javax.swing.JOptionPane;
  * @author Alicer
  */
 public class Conexion {
-    private final String host = "192.168.10.11";
+    private final String host = "192.168.1.2";
 //    private final String host = "localhost";
     private final String port="3306";
     private final String db = "cafebar"; // Nombre de la BD.
@@ -31,16 +32,22 @@ public class Conexion {
     private final String mensajeDR = "Conexion: > Driver Not Found >";
     private final String mensajeDB = "Conexion: > Database Not Found >";
     private final String mensajeService = "\nVerifica que todo esté en orden o ponte en contacto con el servicio técnico.";
+    private JOptionPane jOptionPane;
     
     private Connection DBConnection;
-    
+   
     private void errorX (String mensaje){
         Integer eleccion = JOptionPane.showOptionDialog(null, mensaje, tituloMensaje, 0, 0, null, botones, this);
+        
         if (eleccion == JOptionPane.YES_OPTION) {
-            
+            System.err.println("YES!!!");
+            System.exit(0);
         } else if (eleccion == JOptionPane.NO_OPTION) {
-            
-        }
+            System.err.println("NO!!!");
+            System.exit(0);
+        } else {
+            System.err.println("Uknow!!!");
+        } 
     }
     
     public Connection connect(){
@@ -50,13 +57,14 @@ public class Conexion {
 //            System.out.println("MySQL Driver OK");
         } catch(ClassNotFoundException err){
             System.err.println(mensajeDR + err);
-            
+            errorX (mensajeDR);
         }                
         try{
             DBConnection=DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db+charset,user, password);
 //          System.out.println("DB conection up");
         } catch(SQLException err){
             System.err.println(mensajeDB + err);
+            errorX (mensajeDB);
         }
         return DBConnection;        
     }
