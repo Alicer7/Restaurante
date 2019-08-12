@@ -689,7 +689,7 @@ public class NuevoPedido extends javax.swing.JFrame {
 
     private void jButton_Aceptar_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Aceptar_ActionPerformed
 
-        int FACTURAID = gui.venta.VentasP.getFACTURAID();
+        int CLIENTEID = gui.venta.VentasP.getCLIENTEID();
         Conexion cone = new Conexion();
         com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
         PreparedStatement ps = null;
@@ -703,7 +703,7 @@ public class NuevoPedido extends javax.swing.JFrame {
                 String costo = (String) jtPedido.getValueAt(row, 3);
 
                 ps = conn.prepareStatement("INSERT INTO `temp_pedido` (`temp_venta_id`, empleado_id,  `bebida_id`, `bebida_cantidad`, `costo`) VALUES (?,?,?,?,?)");
-                ps.setInt(1, FACTURAID);
+                ps.setInt(1, CLIENTEID);
                 ps.setInt(2, jComboBox1.getSelectedIndex() + 1);
                 ps.setInt(3, id_comida);
                 ps.setString(4, cantidad);
@@ -868,20 +868,6 @@ public class NuevoPedido extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(NuevoPedido.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

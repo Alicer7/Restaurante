@@ -146,7 +146,6 @@ public class Login extends javax.swing.JFrame {
         setType(java.awt.Window.Type.POPUP);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel_Main_.setMaximumSize(null);
         jPanel_Main_.setMinimumSize(new java.awt.Dimension(360, 515));
         jPanel_Main_.setOpaque(false);
         jPanel_Main_.setPreferredSize(new java.awt.Dimension(360, 515));

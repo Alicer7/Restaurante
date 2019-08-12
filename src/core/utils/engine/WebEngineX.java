@@ -5,12 +5,23 @@
  */
 package core.utils.engine;
 
+import com.sun.javafx.geom.BaseBounds;
+import com.sun.javafx.geom.transform.BaseTransform;
+import com.sun.javafx.jmx.MXNodeAlgorithm;
+import com.sun.javafx.jmx.MXNodeAlgorithmContext;
+import com.sun.javafx.sg.prism.NGNode;
 import core.utils.themplate.Detalle;
+import java.awt.print.Paper;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
+import javafx.print.PageLayout;
+import javafx.print.PageOrientation;
+import javafx.print.PrintSides;
 import javafx.print.Printer;
 import javafx.print.PrinterJob;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.transform.Scale;
 import javafx.scene.web.WebView;
 
 /**
@@ -81,6 +92,16 @@ public class WebEngineX {
         showInViewer ();
     }
     
+    public Double mostrarDetalleD(Integer FACTURAID) {
+        cleanViewer ();
+        detalle.setFACTURAID(FACTURAID);
+        detalle.setDetalleNull ();
+        html = detalle.getDetalleHTML(FACTURAID);
+        TOTAL = detalle.getTOTAL();
+        showInViewer ();
+        return TOTAL;
+    }
+    
     public Double getTOTAL() {
         TOTAL = detalle.getTOTAL();
         return TOTAL;
@@ -101,43 +122,56 @@ public class WebEngineX {
 
     public void print() {
         
-//        Integer INCH = 72;
-//        Double mWidth= 3.15;
-//        Double mHeight= 11.00;
-//        Double mMargin = 0.0;
-//        Rectangle2D mImageableArea;
-//        mImageableArea = new Rectangle2D.Double(
-//            INCH, INCH,
-//            mWidth - mMargin * INCH,
-//            mHeight - mMargin * INCH
-//        );
-    
-        
-                
         try {
-            
             PrinterJob job = PrinterJob.createPrinterJob();
             job.getJobSettings().setJobName(webView.getEngine().getTitle());
-            
-//            PageLayout pageLayout = Printer.getDefaultPrinter().getDefaultPageLayout();
-//            job.getJobSettings().setPageLayout(pageLayout);
+//            job.getJobSettings().getPageLayout().
             
             if (job != null) {
-//                boolean success = false;
-//                    boolean success = job.printPage(webView);
-//                    success = job.printPage(webView);
                     webView.getEngine().print(job);
                     job.endJob();
-//                if (success) {
-//                    job.endJob();
-//                    System.err.println("JOB: "+job);
-//                }
             }
-
         } catch (Exception e) {
             System.err.println(e);
         }
     }
     
+    public void printNode() {
+        Node node = webView;
+        Printer printer = Printer.getDefaultPrinter();
+               
+        PageLayout pageLayout = printer.createPageLayout(printer.getDefaultPageLayout().getPaper(), PageOrientation.PORTRAIT, Printer.MarginType.HARDWARE_MINIMUM);
+        
+        double scaleX = pageLayout.getPrintableWidth() / node.getBoundsInParent().getWidth();
+        double scaleY = pageLayout.getPrintableHeight() / node.getBoundsInParent().getHeight();
+        
+        double top = pageLayout.getTopMargin();
+        double bot = pageLayout.getBottomMargin();
+        double rgt = pageLayout.getRightMargin();
+        double lef = pageLayout.getLeftMargin();
+        
+        System.out.println("Margins: T:"+top+" B:"+bot+" R:"+rgt+" L:"+lef);        
+        
+//        node.getTransforms().add(new Scale(scaleX, scaleY));
+//        System.out.println("Scale "+scaleX+" @ "+scaleY);
+        
+        try {
+            PrinterJob job = PrinterJob.createPrinterJob();
+            System.out.println("core.utils.engine.WebEngineX.printNode().1");
+            job.getJobSettings().setJobName(webView.getEngine().getTitle());
+            System.out.println("core.utils.engine.WebEngineX.printNode().2");
+            if (job != null) {
+                boolean success = job.printPage(node);
+                System.out.println("core.utils.engine.WebEngineX.printNode().3");
+                if (success) {
+                    job.endJob();
+                    System.out.println("core.utils.engine.WebEngineX.printNode().4");
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Print Node: "+e);
+        }
+    }
+  
 /******************************************************************************/
 }

@@ -156,6 +156,11 @@ public class MainMenu extends javax.swing.JFrame {
         } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
     }
     
+    private void settingsPos(){   
+//        ocultarMenuBar();
+        ocultarNavBar();
+    }
+    
     public static String getIconDir() {
         return ICONDIR;
     }
@@ -173,7 +178,9 @@ public class MainMenu extends javax.swing.JFrame {
     public MainMenu() {
         settings ();
         initComponents();
+        settingsPos();
         addPenel_Ventas ();
+        
     }
 
     /**
@@ -324,6 +331,7 @@ public class MainMenu extends javax.swing.JFrame {
                 jLabel_MenuVentas_MouseReleased(evt);
             }
         });
+        jPanel_NormalNav_.add(jLabel_MenuVentas_);
 
         jLabel_MenuVentasDelDia_.setBackground(java.awt.Color.darkGray);
         jLabel_MenuVentasDelDia_.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -351,27 +359,7 @@ public class MainMenu extends javax.swing.JFrame {
                 jLabel_MenuVentasDelDia_MouseReleased(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel_NormalNav_Layout = new javax.swing.GroupLayout(jPanel_NormalNav_);
-        jPanel_NormalNav_.setLayout(jPanel_NormalNav_Layout);
-        jPanel_NormalNav_Layout.setHorizontalGroup(
-            jPanel_NormalNav_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_NormalNav_Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel_NormalNav_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel_MenuVentasDelDia_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_MenuVentas_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-        jPanel_NormalNav_Layout.setVerticalGroup(
-            jPanel_NormalNav_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_NormalNav_Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel_MenuVentas_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel_MenuVentasDelDia_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel_NormalNav_.add(jLabel_MenuVentasDelDia_);
 
         jPanel_MenuBar_.add(jPanel_NormalNav_, java.awt.BorderLayout.CENTER);
 
@@ -388,6 +376,7 @@ public class MainMenu extends javax.swing.JFrame {
         jMenu_Archivos_.setText("Archivo");
 
         jMenuItem_CerrarSesion_.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem_CerrarSesion_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/LogOutX24.png"))); // NOI18N
         jMenuItem_CerrarSesion_.setText("Cerrar Sesión");
         jMenuItem_CerrarSesion_.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -462,11 +451,11 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem_Salir_ActionPerformed
 
     private void jMenuItem_ShowMenuBar_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_ShowMenuBar_ActionPerformed
-        ocultarMenuBar ();
+        ocultarMenuBar();
     }//GEN-LAST:event_jMenuItem_ShowMenuBar_ActionPerformed
 
     private void jMenuItem_ShowNavBar_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_ShowNavBar_ActionPerformed
-        ocultarNavBar ();
+        ocultarNavBar();
     }//GEN-LAST:event_jMenuItem_ShowNavBar_ActionPerformed
 
     private void jMenuItem_CerrarSesion_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_CerrarSesion_ActionPerformed

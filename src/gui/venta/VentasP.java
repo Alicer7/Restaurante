@@ -36,7 +36,8 @@ public class VentasP extends javax.swing.JPanel {
     private WebEngineX webEngine = null;
     private JFXPanel jFxPanel = null;
     
-    private static Integer FACTURAID = null ;
+    private static Integer CLIENTEID = null;
+    private Double TOTAL = null;
       
     private void startViewer(){
         if (webEngine == null){
@@ -67,6 +68,7 @@ public class VentasP extends javax.swing.JPanel {
     private void limpiarDetalles(){
         try {
             webEngine.putDefauiltInViewer();
+            TOTAL = null;
         } catch (Exception e) {
             System.err.println("limpiarDetalles():"+e);
         }
@@ -74,13 +76,14 @@ public class VentasP extends javax.swing.JPanel {
     
     private void limpiarTablaFacturas() {
         try {
-            DefaultTableModel modelF = (DefaultTableModel) jTable_Facturas_.getModel();
-            jTable_Facturas_.setPreferredSize(new java.awt.Dimension(jTable_Facturas_.getWidth(), 0));
+            DefaultTableModel modelF = (DefaultTableModel) jTable_Clientes_.getModel();
+            jTable_Clientes_.setPreferredSize(new java.awt.Dimension(jTable_Clientes_.getWidth(), 0));
 
             int rowCount = modelF.getRowCount();
             for (int i = rowCount-1; i >= 0; i--) {
                 modelF.removeRow(i);
             }
+            CLIENTEID = null;
         } catch (Exception e) {
             System.err.println("limpiarTablaFacturas():"+e);
         }
@@ -88,7 +91,7 @@ public class VentasP extends javax.swing.JPanel {
     
     private void restablecerBordes (){
         jPanel_Detalle_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detalle", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14)));
-        jPanel_Facturas_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Facturas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14)));
+        jPanel_Clientes_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Clientes", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14)));
     }
     
     private void mostrarVentasActivas() {
@@ -102,11 +105,11 @@ public class VentasP extends javax.swing.JPanel {
             // SQL
             ArrayList<core.database.querry.Factura> lista = facturas.listaFacturasActivas();
 
-            jTable_Facturas_.setPreferredSize(new java.awt.Dimension(jTable_Facturas_.getWidth(), lista.size() * 18));
-            jTable_Facturas_.revalidate();
-            jTable_Facturas_.repaint();
+            jTable_Clientes_.setPreferredSize(new java.awt.Dimension(jTable_Clientes_.getWidth(), lista.size() * 18));
+            jTable_Clientes_.revalidate();
+            jTable_Clientes_.repaint();
 
-            DefaultTableModel model = (DefaultTableModel) jTable_Facturas_.getModel();
+            DefaultTableModel model = (DefaultTableModel) jTable_Clientes_.getModel();
 
             Object filaData[][] = new Object[lista.size()][5];
 
@@ -166,7 +169,7 @@ public class VentasP extends javax.swing.JPanel {
     
     private void borderFacturaFecha(Date Fecha) {
         myDateDia = outFormatFechaDia.format(Fecha);
-        jPanel_Facturas_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Facturas Activas: " + myDateDia, javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14)));
+        jPanel_Clientes_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Facturas Activas: " + myDateDia, javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14)));
     }
     
     private void borderFacturaDetalle(String numeroFactura) {
@@ -191,12 +194,17 @@ public class VentasP extends javax.swing.JPanel {
         }
     }
     
-    public static Integer getFACTURAID() {
-        return FACTURAID;
+    private void mensajeNullTotal (){
+        String botones[] = {"Aceptar", "Cancelar"};
+        JOptionPane.showOptionDialog(this, "No hay un monto que cobrar, verifica que hayas seleccionado una factura y tenga algún consumo.", "No hay nada que cobrar!", 0, 0, null, botones, this);
+    }
+    
+    public static Integer getCLIENTEID() {
+        return CLIENTEID;
     }
     
     public void removeViewer(){
-        jScrollPane_Detalle_.getViewport().remove(jFxPanel);
+        jScrollPane_Detalle_.getViewport().removeAll();
     }
     
     public VentasP() {
@@ -221,13 +229,13 @@ public class VentasP extends javax.swing.JPanel {
         jButton_NuevoPedido_ = new javax.swing.JButton();
         jButton_Cobrar_ = new javax.swing.JButton();
         jScrollPane_Detalle_ = new javax.swing.JScrollPane();
-        jPanel_Facturas_ = new javax.swing.JPanel();
+        jPanel_Clientes_ = new javax.swing.JPanel();
         jPanel_DetalleBotones_1 = new javax.swing.JPanel();
         jButton_ClienteNuevo_ = new javax.swing.JButton();
         jLabel_BuscarPorFecha_ = new javax.swing.JLabel();
         jLabel_SinCobrar_ = new javax.swing.JLabel();
         jScrollPane_Facturas_ = new javax.swing.JScrollPane();
-        jTable_Facturas_ = new javax.swing.JTable();
+        jTable_Clientes_ = new javax.swing.JTable();
 
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
@@ -295,10 +303,10 @@ public class VentasP extends javax.swing.JPanel {
 
         add(jPanel_Detalle_, java.awt.BorderLayout.EAST);
 
-        jPanel_Facturas_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, bundle.getString("Ventas.jPanel_Clientes_.border.title"), javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14))); // NOI18N
-        jPanel_Facturas_.setMinimumSize(new java.awt.Dimension(478, 669));
-        jPanel_Facturas_.setPreferredSize(new java.awt.Dimension(478, 669));
-        jPanel_Facturas_.setLayout(new java.awt.BorderLayout());
+        jPanel_Clientes_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, bundle.getString("Ventas.jPanel_Clientes_.border.title"), javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14))); // NOI18N
+        jPanel_Clientes_.setMinimumSize(new java.awt.Dimension(478, 669));
+        jPanel_Clientes_.setPreferredSize(new java.awt.Dimension(478, 669));
+        jPanel_Clientes_.setLayout(new java.awt.BorderLayout());
 
         jButton_ClienteNuevo_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton_ClienteNuevo_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/FunAsClienteX32.png"))); // NOI18N
@@ -362,9 +370,9 @@ public class VentasP extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jPanel_Facturas_.add(jPanel_DetalleBotones_1, java.awt.BorderLayout.SOUTH);
+        jPanel_Clientes_.add(jPanel_DetalleBotones_1, java.awt.BorderLayout.SOUTH);
 
-        jTable_Facturas_.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_Clientes_.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -383,16 +391,16 @@ public class VentasP extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jTable_Facturas_.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTable_Clientes_.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable_Facturas_MouseClicked(evt);
+                jTable_Clientes_MouseClicked(evt);
             }
         });
-        jScrollPane_Facturas_.setViewportView(jTable_Facturas_);
+        jScrollPane_Facturas_.setViewportView(jTable_Clientes_);
 
-        jPanel_Facturas_.add(jScrollPane_Facturas_, java.awt.BorderLayout.CENTER);
+        jPanel_Clientes_.add(jScrollPane_Facturas_, java.awt.BorderLayout.CENTER);
 
-        add(jPanel_Facturas_, java.awt.BorderLayout.CENTER);
+        add(jPanel_Clientes_, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_ClienteNuevo_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ClienteNuevo_ActionPerformed
@@ -409,31 +417,39 @@ public class VentasP extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel_SinCobrar_MouseClicked
 
     private void jButton_NuevoPedido_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_NuevoPedido_ActionPerformed
-        if (FACTURAID==null){
-            mensajeNoFacturaSelect ();
+        if (CLIENTEID==null){
+            mensajeNoFacturaSelect();
         } else {
             NuevoPedido pedido = new NuevoPedido();
             pedido.setVisible(true);
         }
-            
     }//GEN-LAST:event_jButton_NuevoPedido_ActionPerformed
 
     private void jButton_Cobrar_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Cobrar_ActionPerformed
-        Cobrar cobrar = new Cobrar();
-        cobrar.setVisible(true);
+        if (TOTAL==null || TOTAL <=0){
+            mensajeNullTotal();
+        } else {
+            Cobrar cobrar = new Cobrar();
+            cobrar.setVisible(true);
+        }
+        
     }//GEN-LAST:event_jButton_Cobrar_ActionPerformed
 
-    private void jTable_Facturas_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_Facturas_MouseClicked
+    private void jTable_Clientes_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_Clientes_MouseClicked
         if (evt.getClickCount() == 2) {
             int colId = 1;
-            int row = jTable_Facturas_.getSelectedRow();
-            FACTURAID = (Integer) jTable_Facturas_.getValueAt(row, 1);
-            Object objId = (Object) jTable_Facturas_.getValueAt(row, colId);
-            System.err.println("\nFactura ID: "+FACTURAID);
-            webEngine.mostrarDetalle(FACTURAID);
-            borderFacturaDetalle(FACTURAID+"");
+            int row = jTable_Clientes_.getSelectedRow();
+            
+            CLIENTEID = (Integer) jTable_Clientes_.getValueAt(row, 1);
+            
+            Object objId = (Object) jTable_Clientes_.getValueAt(row, colId);
+            
+            TOTAL = webEngine.mostrarDetalleD(CLIENTEID);
+            
+            System.err.println("\nCliente id: "+CLIENTEID+" > Q"+TOTAL);
+            borderFacturaDetalle(CLIENTEID+"");
         }
-    }//GEN-LAST:event_jTable_Facturas_MouseClicked
+    }//GEN-LAST:event_jTable_Clientes_MouseClicked
 
     private void formAncestorRemoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorRemoved
         
@@ -447,13 +463,13 @@ public class VentasP extends javax.swing.JPanel {
     private javax.swing.JEditorPane jEditorPane_Viwer_;
     private javax.swing.JLabel jLabel_BuscarPorFecha_;
     private javax.swing.JLabel jLabel_SinCobrar_;
+    private javax.swing.JPanel jPanel_Clientes_;
     private javax.swing.JPanel jPanel_DetalleBotones_;
     private javax.swing.JPanel jPanel_DetalleBotones_1;
     private javax.swing.JPanel jPanel_Detalle_;
-    private javax.swing.JPanel jPanel_Facturas_;
     private javax.swing.JScrollPane jScrollPane_Detalle_;
     private javax.swing.JScrollPane jScrollPane_Facturas_;
-    private javax.swing.JTable jTable_Facturas_;
+    private javax.swing.JTable jTable_Clientes_;
     // End of variables declaration//GEN-END:variables
 
 }

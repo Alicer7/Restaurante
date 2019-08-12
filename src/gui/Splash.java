@@ -12,25 +12,33 @@ public final class Splash extends javax.swing.JFrame {
      */
     Cargar hilo;
     
-    public void iniciar() {
+    private void iniciar() {
         setLocationRelativeTo(null);
         hilo = new Cargar(getProgress());
         hilo.start();
         hilo = null;
         this.setLocationRelativeTo(null);
-
     }
-
-    public Splash() {
+    
+    private void settings(){
         try { 
             System.setProperty("sun.java2d.noddraw", "true");
             UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel"); 
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
-        initComponents();
-        iniciar();
-        setBackground(new Color (0,0,0,0));
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(gui.MainMenu.getIconDir())));
+    }
+    
+    private void settingsPos(){
+        setBackground(new Color (0,0,0,0));
+    }
+    
+    public Splash() {
+        settings();
+        initComponents();
+        settingsPos();
+        iniciar();
+        
     }
 
     /**
@@ -52,7 +60,6 @@ public final class Splash extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SplashArt");
-        setBackground(new java.awt.Color(102, 0, 0));
         setMaximumSize(new java.awt.Dimension(900, 500));
         setMinimumSize(new java.awt.Dimension(900, 500));
         setUndecorated(true);

@@ -6,12 +6,12 @@
 package gui.venta;
 
 import core.utils.engine.WebEngineX;
-import core.utils.themplate.Detalle;
 import java.awt.Toolkit;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 import javafx.embed.swing.JFXPanel;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -20,11 +20,12 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author Freddy Camposeco <freddy.camposeco@elementum69.com> <www.elementum69.com>
  */
 public class Cobrar extends javax.swing.JFrame {
+    private final Locale locale = new Locale("es", "GT");
     private final CambioEfectivo showPanelCambio = new CambioEfectivo();
-    private final Integer FACTURAID = gui.venta.VentasP.getFACTURAID();
-    
-    
-    private final DecimalFormat df = new DecimalFormat("###,###,###,##0.00");
+    private final Integer CLIENTEID = gui.venta.VentasP.getCLIENTEID();
+        
+    private DecimalFormatSymbols dfs;
+    private DecimalFormat df;
     private Boolean esNumero = true;
     private Double TOTAL = 0.0;
     private Double SALDO = 0.0;
@@ -117,7 +118,7 @@ public class Cobrar extends javax.swing.JFrame {
             esNumero = false;
         }
         
-        if ( jTextField_Descuento_.getText()==null ||  ("".equals(jTextField_Descuento_.getText())) || esNumero==true){
+        if ( jTextField_Descuento_.getText()==null ||  ("".equals(jTextField_Descuento_.getText())) || esNumero!=true){
             jTextField_Descuento_.setText("0.00");
             DESCUENTO = Double.parseDouble(jTextField_Descuento_.getText());         
         } else if ( (DESCUENTO = Double.parseDouble(jTextField_Descuento_.getText())) > 0 ) {
@@ -154,14 +155,18 @@ public class Cobrar extends javax.swing.JFrame {
     }
     
     private void mostrarDetalle(){
-        webEngine.mostrarDetalle(FACTURAID);
+        webEngine.mostrarDetalle(CLIENTEID);
         TOTAL=webEngine.getTOTAL();
         System.err.println("Mostrar Detalle Cobrar "+df.format(TOTAL));
         jLabel_Total_.setText(df.format(TOTAL));
     }
     
+    private void facturaSetCancellerd(){
+        
+    }
+    
     public void imprimir() {
-        webEngine.print();
+        webEngine.printNode();
     }
     
     private void sendPrint (){
@@ -184,8 +189,14 @@ public class Cobrar extends javax.swing.JFrame {
                 System.err.println(e);
             } finally {
                 dispose();
+                System.out.println("gui.venta.Cobrar.sendPrint().DISPOSE");
             }
         } 
+    }
+    
+    private void mensajeSinCobrar(){
+        String botones[] = {"Aceptar", "Cancelar"};
+        JOptionPane.showOptionDialog(this, "Por favor Indica el pago del cliente en los campos correspondientes.", "No hay nada que cobrar!", 0, 0, null, botones, this);
     }
 
     private void settings(){
@@ -194,8 +205,17 @@ public class Cobrar extends javax.swing.JFrame {
             UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel"); 
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         }catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
-        df.getDecimalFormatSymbols().setDecimalSeparator('.');
-        df.getDecimalFormatSymbols().setGroupingSeparator(',');
+        setTitle("");
+        
+        dfs = new DecimalFormatSymbols(locale);
+        dfs.setDecimalSeparator('.');
+        dfs.setGroupingSeparator(',');
+        df = new DecimalFormat("###,###,###,##0.00",dfs);
+        
+    }
+    
+    private void settingsPos(){
+        
     }
     
     public Cobrar() {
@@ -234,6 +254,7 @@ public class Cobrar extends javax.swing.JFrame {
         jScrollPane_Detalle_ = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Factura # 2019CB0000001");
         setMaximumSize(null);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -330,7 +351,6 @@ public class Cobrar extends javax.swing.JFrame {
             }
         });
 
-        jTextField_Descuento_.setEditable(false);
         jTextField_Descuento_.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTextField_Descuento_.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextField_Descuento_.setText("0.00");
@@ -443,7 +463,7 @@ public class Cobrar extends javax.swing.JFrame {
                 .addGroup(jPanel_MetodoPago_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_Descuento_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_DescuentoIcon_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField_Descuento_, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField_Descuento_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -484,9 +504,9 @@ public class Cobrar extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel_Total_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel_MetodoPago_, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
-            .addComponent(jPanel_Saldo_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel_Total_, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+            .addComponent(jPanel_MetodoPago_, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+            .addComponent(jPanel_Saldo_, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -521,7 +541,7 @@ public class Cobrar extends javax.swing.JFrame {
             jPanel_Imprimir_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_Imprimir_Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton_Imprimir_, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                .addComponent(jButton_Imprimir_, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel_Imprimir_Layout.setVerticalGroup(
@@ -610,7 +630,16 @@ public class Cobrar extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void jButton_Imprimir_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Imprimir_ActionPerformed
-        sendPrint();
+        if (SALDO<0) {
+            mensajeSinCobrar();
+        } else {
+            try {
+                facturaSetCancellerd();
+                sendPrint();
+            } catch (Exception e) {
+                System.err.println("Error al realizar la transacción "+e);
+            }
+        }
     }//GEN-LAST:event_jButton_Imprimir_ActionPerformed
 
     /**
@@ -640,7 +669,7 @@ public class Cobrar extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(() -> {
             new Cobrar().setVisible(true);
         });

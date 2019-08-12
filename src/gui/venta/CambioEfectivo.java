@@ -6,15 +6,19 @@
 package gui.venta;
 
 import java.awt.Color;
+import java.awt.Toolkit;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 /**
  *
  * @author Freddy Camposeco <ankoku.fj@gmail.com> <www.stufs.rf.gd>
  */
 public class CambioEfectivo extends javax.swing.JFrame {
-    
-    private DecimalFormat df = new DecimalFormat("Q  ###,###,##0.00");
+    private final Locale locale = new Locale("es", "GT");
+    private DecimalFormatSymbols dfs;
+    private DecimalFormat df;
     private Double cambio = 0.0;
 
     private void showCambio (){
@@ -28,8 +32,22 @@ public class CambioEfectivo extends javax.swing.JFrame {
         showCambio ();
     }
     
+    private void settings(){
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(gui.MainMenu.getIconDir())));
+        dfs = new DecimalFormatSymbols(locale);
+        dfs.setDecimalSeparator('.');
+        dfs.setGroupingSeparator(',');
+        df = new DecimalFormat("Q  ###,###,###,##0.00",dfs);
+    }
+    
+    private void settingsPos(){
+        setBackground(new Color (22,22,22,160));
+    }
+    
     public CambioEfectivo() {
+        settings();
         initComponents();
+        settingsPos();
     }
 
     /**
@@ -41,13 +59,17 @@ public class CambioEfectivo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel_Q_ = new javax.swing.JLabel();
+        jPanel_Main_ = new javax.swing.JPanel();
         jLabel_Cambio_ = new javax.swing.JLabel();
+        jLabel_Q_ = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cambio");
         setAlwaysOnTop(true);
+        setMaximumSize(null);
+        setMinimumSize(new java.awt.Dimension(555, 222));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(555, 222));
         setType(java.awt.Window.Type.POPUP);
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -61,42 +83,31 @@ public class CambioEfectivo extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel_Main_.setBackground(new java.awt.Color(204, 0, 0));
+        jPanel_Main_.setMaximumSize(null);
+        jPanel_Main_.setMinimumSize(new java.awt.Dimension(555, 222));
+        jPanel_Main_.setOpaque(false);
+        jPanel_Main_.setPreferredSize(new java.awt.Dimension(555, 222));
+        jPanel_Main_.setLayout(new java.awt.BorderLayout());
 
-        jLabel_Q_.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
-        jLabel_Q_.setForeground(new java.awt.Color(0, 255, 0));
-        jLabel_Q_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_Q_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/bankX64.png"))); // NOI18N
-
+        jLabel_Cambio_.setBackground(new java.awt.Color(255, 0, 102));
         jLabel_Cambio_.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel_Cambio_.setForeground(new java.awt.Color(0, 255, 0));
         jLabel_Cambio_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_Cambio_.setText("0.00");
+        jPanel_Main_.add(jLabel_Cambio_, java.awt.BorderLayout.CENTER);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel_Q_, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel_Cambio_, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel_Q_, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel_Cambio_, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
-        );
+        jLabel_Q_.setBackground(new java.awt.Color(255, 0, 255));
+        jLabel_Q_.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        jLabel_Q_.setForeground(new java.awt.Color(0, 255, 0));
+        jLabel_Q_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Q_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/moneyX96.png"))); // NOI18N
+        jLabel_Q_.setMaximumSize(null);
+        jLabel_Q_.setMinimumSize(new java.awt.Dimension(130, 130));
+        jLabel_Q_.setPreferredSize(new java.awt.Dimension(130, 130));
+        jPanel_Main_.add(jLabel_Q_, java.awt.BorderLayout.WEST);
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
+        getContentPane().add(jPanel_Main_, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -146,6 +157,6 @@ public class CambioEfectivo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel_Cambio_;
     private javax.swing.JLabel jLabel_Q_;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel_Main_;
     // End of variables declaration//GEN-END:variables
 }
