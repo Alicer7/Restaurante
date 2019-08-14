@@ -100,7 +100,7 @@ public class NuevoPedido extends javax.swing.JFrame {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                jComboBox1.addItem(rs.getString("nombre") + " " + rs.getString("apellido"));
+                jComboBox_Empleado_.addItem(rs.getString("nombre") + " " + rs.getString("apellido"));
 
             }
 
@@ -256,7 +256,7 @@ public class NuevoPedido extends javax.swing.JFrame {
         jLabel_Factura_ = new javax.swing.JLabel();
         jLabel_FactureNumero_ = new javax.swing.JLabel();
         jLabel_Nota_ = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox_Empleado_ = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pedidos");
@@ -608,9 +608,9 @@ public class NuevoPedido extends javax.swing.JFrame {
         jLabel_Nota_.setMinimumSize(new java.awt.Dimension(130, 52));
         jLabel_Nota_.setPreferredSize(new java.awt.Dimension(130, 52));
 
-        jComboBox1.setMaximumSize(null);
-        jComboBox1.setMinimumSize(new java.awt.Dimension(100, 52));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(250, 52));
+        jComboBox_Empleado_.setMaximumSize(null);
+        jComboBox_Empleado_.setMinimumSize(new java.awt.Dimension(100, 52));
+        jComboBox_Empleado_.setPreferredSize(new java.awt.Dimension(250, 52));
 
         javax.swing.GroupLayout jPanel_Main_Layout = new javax.swing.GroupLayout(jPanel_Main_);
         jPanel_Main_.setLayout(jPanel_Main_Layout);
@@ -622,7 +622,7 @@ public class NuevoPedido extends javax.swing.JFrame {
                     .addGroup(jPanel_Main_Layout.createSequentialGroup()
                         .addComponent(jLabel_Nota_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBox_Empleado_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(85, 85, 85)
                         .addComponent(jLabel_Factura_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
@@ -659,7 +659,7 @@ public class NuevoPedido extends javax.swing.JFrame {
                         .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel_Nota_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jComboBox_Empleado_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel_Factura_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel_FactureNumero_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -704,7 +704,7 @@ public class NuevoPedido extends javax.swing.JFrame {
 
                 ps = conn.prepareStatement("INSERT INTO `temp_pedido` (`temp_venta_id`, empleado_id,  `bebida_id`, `bebida_cantidad`, `costo`) VALUES (?,?,?,?,?)");
                 ps.setInt(1, CLIENTEID);
-                ps.setInt(2, jComboBox1.getSelectedIndex() + 1);
+                ps.setInt(2, jComboBox_Empleado_.getSelectedIndex() + 1);
                 ps.setInt(3, id_comida);
                 ps.setString(4, cantidad);
                 ps.setString(5, costo);
@@ -884,7 +884,7 @@ public class NuevoPedido extends javax.swing.JFrame {
     private javax.swing.JButton jButton_AddPedido_;
     private javax.swing.JButton jButton_AddPedido_1;
     private javax.swing.JButton jButton_Cancelar_;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox_Empleado_;
     private javax.swing.JLabel jLabel_ComboCantidad_1;
     private javax.swing.JLabel jLabel_ComboCantidad_2;
     private javax.swing.JLabel jLabel_ComboPrecioUnitario_1;
