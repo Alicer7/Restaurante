@@ -69,7 +69,6 @@ public class CambioEfectivo extends javax.swing.JFrame {
         setMaximumSize(null);
         setMinimumSize(new java.awt.Dimension(555, 222));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(555, 222));
         setType(java.awt.Window.Type.POPUP);
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -81,10 +80,8 @@ public class CambioEfectivo extends javax.swing.JFrame {
                 formKeyReleased(evt);
             }
         });
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel_Main_.setBackground(new java.awt.Color(204, 0, 0));
-        jPanel_Main_.setMaximumSize(null);
         jPanel_Main_.setMinimumSize(new java.awt.Dimension(555, 222));
         jPanel_Main_.setOpaque(false);
         jPanel_Main_.setPreferredSize(new java.awt.Dimension(555, 222));
@@ -107,7 +104,7 @@ public class CambioEfectivo extends javax.swing.JFrame {
         jLabel_Q_.setPreferredSize(new java.awt.Dimension(130, 130));
         jPanel_Main_.add(jLabel_Q_, java.awt.BorderLayout.WEST);
 
-        getContentPane().add(jPanel_Main_, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(jPanel_Main_, java.awt.BorderLayout.CENTER);
 
         pack();
         setLocationRelativeTo(null);

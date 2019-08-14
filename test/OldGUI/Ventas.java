@@ -102,7 +102,7 @@ public class Ventas extends javax.swing.JFrame {
 
         Factura facturas = new Factura();
 
-        ArrayList<Factura> lista = facturas.listaFacturasDia(dia);
+        ArrayList<Factura> lista = facturas.listaFacturasFecha(dia);
 
         jTable_Factura_.setPreferredSize(new java.awt.Dimension(jTable_Factura_.getWidth(), lista.size() * 16));
         jTable_Factura_.revalidate();
@@ -155,7 +155,7 @@ public class Ventas extends javax.swing.JFrame {
         Factura facturas = new Factura();
 
         // SQL
-        ArrayList<Factura> lista = facturas.listaFacturasDiaActivas(DIA);
+        ArrayList<Factura> lista = facturas.listaFacturasFechaActivas(DIA);
 
         jTable_Factura_.setSize(new java.awt.Dimension(jTable_Factura_.getWidth(), lista.size() * 18));
         jTable_Factura_.revalidate();

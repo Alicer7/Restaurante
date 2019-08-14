@@ -51,7 +51,7 @@ public class Factura {
     
         public ArrayList<Factura> listaFacturasActivas (){
         
-        ArrayList<Factura> listaFacturases= new ArrayList<Factura>();
+        ArrayList<Factura> listaFacturases= new ArrayList<>();
         String sql="SELECT * FROM `temp_venta` WHERE `estado` = \"Activa\"";
         
         try {
@@ -81,9 +81,9 @@ public class Factura {
         return listaFacturases;
     }
     
-    public ArrayList<Factura> listaFacturasDiaActivas (String fecha){
+    public ArrayList<Factura> listaFacturasFechaActivas (String fecha){
         
-        ArrayList<Factura> listaFacturases= new ArrayList<Factura>();
+        ArrayList<Factura> listaFacturases= new ArrayList<>();
         String sql="SELECT * FROM `temp_venta` WHERE date(`fecha`) = \""+fecha+"\"AND `solvente` = \"Activa\"";
         
         try {
@@ -113,7 +113,7 @@ public class Factura {
         return listaFacturases;
     }
     
-    public ArrayList<Factura> listaFacturasDia (String fecha){
+    public ArrayList<Factura> listaFacturasFecha (String fecha){
         
         ArrayList<Factura> listaFacturases= new ArrayList<>();
         String sql="SELECT * FROM `temp_venta` WHERE date(fecha) = \""+fecha+"\"";
@@ -176,6 +176,5 @@ public class Factura {
     public String getFecha() {
         return fecha;
     }
-
 
 }

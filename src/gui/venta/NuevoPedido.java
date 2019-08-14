@@ -96,7 +96,7 @@ public class NuevoPedido extends javax.swing.JFrame {
                 modelo.addRow(filas);
             }
 
-            ps = conn.prepareStatement("select nombre, apellido from empleado order by id desc limit 1");
+            ps = conn.prepareStatement("SELECT `nombre`, `apellido` FROM `cafebar`.`empleado` WHERE `estado` = 'Activo' ORDER BY `id`");
             rs = ps.executeQuery();
 
             while (rs.next()) {

@@ -59,11 +59,11 @@ public class NuevoCliente extends javax.swing.JFrame {
                 modelo.addRow(filas);
             }
 
-            ps = conn.prepareStatement("select nombre, apellido from empleado order by id desc limit 1");
+            ps = conn.prepareStatement("SELECT `nombre`, `apellido` FROM `cafebar`.`empleado` WHERE `estado` = 'Activo' ORDER BY `id`");
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                jComboBox1.addItem(rs.getString("nombre") + " " + rs.getString("apellido"));
+                jComboBox_Empleado_.addItem(rs.getString("nombre") + " " + rs.getString("apellido"));
 
             }
         } catch (SQLException ex) {
@@ -244,7 +244,7 @@ public class NuevoCliente extends javax.swing.JFrame {
         jLabel_Nota_ = new javax.swing.JLabel();
         jLabel_Factura_ = new javax.swing.JLabel();
         jLabel_FactureNumero_ = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox_Empleado_ = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cliente Nuevo");
@@ -599,7 +599,7 @@ public class NuevoCliente extends javax.swing.JFrame {
                     .addGroup(jPanel_Main_Layout.createSequentialGroup()
                         .addComponent(jLabel_Nota_, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBox_Empleado_, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(131, 131, 131)
                         .addComponent(jLabel_Factura_)
                         .addGap(18, 18, 18)
@@ -627,20 +627,17 @@ public class NuevoCliente extends javax.swing.JFrame {
                 .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton_Aceptar_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton_Cancelar_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel_Main_Layout.createSequentialGroup()
                         .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton_Aceptar_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton_Cancelar_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())
-                    .addGroup(jPanel_Main_Layout.createSequentialGroup()
-                        .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel_Factura_, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel_FactureNumero_, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel_Main_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel_Nota_, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(jLabel_Factura_, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel_FactureNumero_, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 5, Short.MAX_VALUE))
+                    .addComponent(jComboBox_Empleado_)
+                    .addComponent(jLabel_Nota_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -696,7 +693,7 @@ public class NuevoCliente extends javax.swing.JFrame {
 
                 ps = conn.prepareStatement("INSERT INTO `temp_pedido` (`temp_venta_id`,empleado_id,  `bebida_id`, `bebida_cantidad`, `costo`) VALUES (?,?,?,?,?)");
                 ps.setInt(1, TEST);
-                ps.setInt(2, jComboBox1.getSelectedIndex() + 1);
+                ps.setInt(2, jComboBox_Empleado_.getSelectedIndex() + 1);
                 ps.setInt(3, id_comida);
                 ps.setString(4, cantidad);
                 ps.setString(5, costo);
@@ -862,7 +859,7 @@ public class NuevoCliente extends javax.swing.JFrame {
     private javax.swing.JButton jButton_AddPedido_;
     private javax.swing.JButton jButton_AddPedido_1;
     private javax.swing.JButton jButton_Cancelar_;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox_Empleado_;
     private javax.swing.JLabel jLabel_ComboCantidad_1;
     private javax.swing.JLabel jLabel_ComboCantidad_2;
     private javax.swing.JLabel jLabel_ComboPrecioUnitario_1;

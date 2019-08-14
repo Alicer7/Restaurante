@@ -231,7 +231,7 @@ public class MainMenu extends javax.swing.JFrame {
             .addGap(0, 640, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 661));
         setName("mainJF"); // NOI18N
         setSize(new java.awt.Dimension(1024, 661));

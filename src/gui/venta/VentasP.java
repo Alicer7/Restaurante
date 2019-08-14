@@ -128,7 +128,7 @@ public class VentasP extends javax.swing.JPanel {
         
     }
     
-    private void mostrarVentasFecha (){
+    private void mostrarVentasFecha(){
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored) {}
@@ -136,18 +136,7 @@ public class VentasP extends javax.swing.JPanel {
         JDateChooser calendario = new JDateChooser();
         Date fechaActual = new Date();
         calendario.setDate(fechaActual);
-        int selectFecha;
-        
-        selectFecha = JOptionPane.showOptionDialog(
-            null,
-            add(calendario),
-            "Selecciona la Fecha",
-            JOptionPane.OK_CANCEL_OPTION,
-            JOptionPane.QUESTION_MESSAGE,
-            null,
-            null,
-            null
-        );
+        int selectFecha = JOptionPane.showOptionDialog( null, add(calendario), "Selecciona la Fecha", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null );
         
         try {
             if (selectFecha == JOptionPane.OK_OPTION) {
@@ -156,6 +145,34 @@ public class VentasP extends javax.swing.JPanel {
                 limpiarDetalles();
                 borderFacturaFecha(calendario.getDate());
                 dateX = calendario.getDate();
+                String fecha = outFormatFechaDia.format(dateX);
+                System.err.println("Buscar ventas del día: "+fecha);
+                
+                try {
+                    core.database.querry.Factura facturas = new core.database.querry.Factura();
+                    // SQL
+                    ArrayList<core.database.querry.Factura> lista = facturas.listaFacturasFecha(fecha);
+
+                    jTable_Clientes_.setPreferredSize(new java.awt.Dimension(jTable_Clientes_.getWidth(), lista.size() * 18));
+                    jTable_Clientes_.revalidate();
+                    jTable_Clientes_.repaint();
+
+                    DefaultTableModel model = (DefaultTableModel) jTable_Clientes_.getModel();
+
+                    Object filaData[][] = new Object[lista.size()][5];
+
+                    for (int i = 0; i < lista.size(); i++) {
+                        filaData[i][0] = "desc";
+                        filaData[i][1] = lista.get(i).getIdFactura();
+                        filaData[i][2] = "Q " + lista.get(i).getCosto();
+                        filaData[i][3] = lista.get(i).getFecha();
+                        filaData[i][4] = lista.get(i).getSolvente();
+
+                        model.addRow(filaData[i]);
+                    }
+                } catch (Exception e) {
+                    System.err.println("mostrarVentasFecha().mostrar: >"+e);
+                }
             } else {
             }
         } catch (Exception e) {
@@ -408,7 +425,7 @@ public class VentasP extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton_ClienteNuevo_ActionPerformed
 
     private void jLabel_BuscarPorFecha_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_BuscarPorFecha_MouseClicked
-        mostrarVentasFecha ();
+        mostrarVentasFecha();
     }//GEN-LAST:event_jLabel_BuscarPorFecha_MouseClicked
 
     private void jLabel_SinCobrar_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_SinCobrar_MouseClicked
