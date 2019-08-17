@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Freddy Camposeco <ankoku.fj@gmail.com> <www.stufs.rf.gd>
  */
-public class NuevoCliente extends javax.swing.JFrame {
+public final class NuevoCliente extends javax.swing.JFrame {
 
     public void getBuscarComida() {
         try {
