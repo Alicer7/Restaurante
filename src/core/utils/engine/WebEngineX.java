@@ -5,23 +5,15 @@
  */
 package core.utils.engine;
 
-import com.sun.javafx.geom.BaseBounds;
-import com.sun.javafx.geom.transform.BaseTransform;
-import com.sun.javafx.jmx.MXNodeAlgorithm;
-import com.sun.javafx.jmx.MXNodeAlgorithmContext;
-import com.sun.javafx.sg.prism.NGNode;
 import core.utils.themplate.Detalle;
-import java.awt.print.Paper;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.print.PageLayout;
 import javafx.print.PageOrientation;
-import javafx.print.PrintSides;
 import javafx.print.Printer;
 import javafx.print.PrinterJob;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.transform.Scale;
 import javafx.scene.web.WebView;
 
 /**

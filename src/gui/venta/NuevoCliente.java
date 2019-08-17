@@ -669,7 +669,7 @@ public class NuevoCliente extends javax.swing.JFrame {
         int TEST = 0;
         try {
 
-            ps = conn.prepareStatement("INSERT INTO `temp_venta`  (`estado`) VALUES (?)");
+            ps = conn.prepareStatement("INSERT INTO `temp_venta` (`estado`) VALUES (?)");
             ps.setString(1, "Activa");
             ps.execute();
 
@@ -678,7 +678,6 @@ public class NuevoCliente extends javax.swing.JFrame {
 
             while (rs.next()) {
                 TEST = (rs.getInt("id"));
-
             }
         } catch (SQLException ex) {
         }

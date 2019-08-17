@@ -8,7 +8,6 @@ package core.database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,8 +15,8 @@ import javax.swing.JOptionPane;
  * @author Alicer
  */
 public class Conexion {
-//    private final String host = "192.168.1.2";
-    private final String host = "localhost";
+    private final String host = "192.168.1.2";
+//    private final String host = "localhost";
     private final String port="3306";
     private final String db = "cafebar"; // Nombre de la BD.
 //    private final String user = "root";
