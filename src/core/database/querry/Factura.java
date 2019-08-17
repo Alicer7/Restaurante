@@ -7,10 +7,13 @@ package core.database.querry;
 
 import core.database.Conexion;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -51,7 +54,7 @@ public class Factura {
         this.solvente=solvente;
     }
     
-        public ArrayList<Factura> listaFacturasActivas (){
+    public ArrayList<Factura> listaFacturasActivas (){
         
         ArrayList<Factura> listaFacturases= new ArrayList<>();
         String sql="SELECT * FROM `cafebar`.`temp_venta` WHERE `estado` = \"Activa\"";
@@ -79,6 +82,12 @@ public class Factura {
             }
         } catch (SQLException e) {
             System.err.println("Error: "+e);
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Factura.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return listaFacturases;
     }
@@ -111,6 +120,12 @@ public class Factura {
             }
         } catch (SQLException e) {
             System.err.println("Error: "+e);
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Factura.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return listaFacturases;
     }
@@ -143,8 +158,48 @@ public class Factura {
             }
         } catch (SQLException e) {
             System.err.println("Error: "+e);
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Factura.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return listaFacturases;
+    }
+    
+    public void solventarFactura(Double TOTAL,Double EFECTIVO,Double ELECTRONICO,Double CAMBIO, Integer CLIENTEID){
+        Conexion cone = new Conexion();
+        com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+
+            ps = conn.prepareStatement(
+                  "UPDATE `cafebar`.`temp_venta`  SET "
+                + "`estado` = \"Solvente\", `costo` = "+TOTAL+", `pago_efectivo` = "+EFECTIVO+", "
+                + "`pago_electronico` = "+ELECTRONICO+", `cambio` = "+CAMBIO 
+                + "WHERE `id` = "+CLIENTEID+";"
+            );
+            
+//            ps.setString(1, "Solvente");
+//            ps.setDouble(2, TOTAL);
+//            ps.setDouble(3, EFECTIVO);
+//            ps.setDouble(4, ELECTRONICO);
+//            ps.setDouble(5, CAMBIO);
+//            ps.setInt(6, CLIENTEID);
+            
+            ps.execute();
+            
+        } catch (SQLException ex) {
+            System.err.println("Factura > Error al actulzar el estado: "+ex);
+        } finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Factura.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     public Integer getIdFactura() {

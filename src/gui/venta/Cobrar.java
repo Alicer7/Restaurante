@@ -201,6 +201,11 @@ public class Cobrar extends javax.swing.JFrame {
         } 
     }
     
+    private void soventarFactura(){
+        core.database.querry.Factura f = new core.database.querry.Factura();
+        f.solventarFactura(TOTAL, EFECTIVO, ELECTRONICO, SALDO, CLIENTEID);
+    }
+    
     private void mensajeSinCobrar(){
         String botones[] = {"Aceptar", "Cancelar"};
         JOptionPane.showOptionDialog(this, "Por favor Indica el pago del cliente en los campos correspondientes.", "No hay nada que cobrar!", 0, 0, null, botones, this);
@@ -646,6 +651,11 @@ public class Cobrar extends javax.swing.JFrame {
                 facturaSetCancellerd();
             } catch (Exception e) {
                 System.err.println("Error al realizar la transacción "+e);
+            }
+            try {
+                soventarFactura();
+            } catch (Exception e) {
+                System.err.println("Error al actualizar el estado de la factura: "+e);
             }
         }
     }//GEN-LAST:event_jButton_Imprimir_ActionPerformed
