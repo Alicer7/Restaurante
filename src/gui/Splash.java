@@ -60,7 +60,6 @@ public final class Splash extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SplashArt");
-        setMaximumSize(new java.awt.Dimension(900, 500));
         setMinimumSize(new java.awt.Dimension(900, 500));
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -76,13 +75,13 @@ public final class Splash extends javax.swing.JFrame {
 
         jLabel_CR_2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel_CR_2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_CR_2.setText("Versión del sistema: 0.8");
+        jLabel_CR_2.setText("Versión 0.9");
         getContentPane().add(jLabel_CR_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, -1, 30));
 
         jLabel_Credits_.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel_Credits_.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_Credits_.setText("Power By:");
-        getContentPane().add(jLabel_Credits_, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 430, -1, 30));
+        getContentPane().add(jLabel_Credits_, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 430, 220, 30));
 
         jLabel_Credits_1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel_Credits_1.setForeground(new java.awt.Color(255, 255, 255));

@@ -117,6 +117,63 @@
             </MenuItem>
           </SubComponents>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu_Recetas_">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Recetas"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem_CrearReceta_">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Crear Receta"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem_CrearReceta_ActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu_MateriaPrima_">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Materia Prima"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem_IngresarMateriaPrima_">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ingresar Materia Prima"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem_IngresarMateriaPrima_ActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <Menu class="javax.swing.JMenu" name="jMenu_MP_Bar_">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Bar"/>
+              </Properties>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem_RegistroDeLicores_">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Registro de Licores"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem_RegistroDeLicores_ActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="jMenu_MP_Restaurante_">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Restaurante"/>
+              </Properties>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem_RegistroDeCarnes_">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Registro de Carnes"/>
+                  </Properties>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+          </SubComponents>
+        </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu_Help_">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ayuda"/>

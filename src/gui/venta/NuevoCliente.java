@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Freddy Camposeco <ankoku.fj@gmail.com> <www.stufs.rf.gd>
  */
-public final class NuevoCliente extends javax.swing.JFrame {
+public class NuevoCliente extends javax.swing.JFrame {
 
     public void getBuscarComida() {
         try {
@@ -673,7 +673,7 @@ public final class NuevoCliente extends javax.swing.JFrame {
             ps.setString(1, "Activa");
             ps.execute();
 
-            ps = conn.prepareStatement("SELECT id FROM `cafebar`.`temp_venta` ORDER BY id LIMIT 1 ");
+            ps = conn.prepareStatement("SELECT id FROM `cafebar`.`temp_venta` ORDER BY id DESC LIMIT 1 ");
             rs = ps.executeQuery();
 
             while (rs.next()) {

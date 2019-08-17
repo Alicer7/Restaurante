@@ -75,15 +75,13 @@ public class RegistroLicores extends javax.swing.JDialog {
     }
     int ID_ARTICULO = 0;
 
-    /**
-     * Creates new form Almacen_materia_prima
-     */
+    
     public RegistroLicores(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         popuptable();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -133,7 +131,7 @@ public class RegistroLicores extends javax.swing.JDialog {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Stock Máximo de botellas:");
+        jLabel3.setText("Stock Máximo en Bodega:");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 112, 168, 27));
 
         txtMax.addActionListener(new java.awt.event.ActionListener() {
@@ -150,7 +148,7 @@ public class RegistroLicores extends javax.swing.JDialog {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("No. de Onzas:");
+        jLabel5.setText("En onzas:");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 168, 27));
 
         txtMin.addActionListener(new java.awt.event.ActionListener() {
@@ -176,7 +174,7 @@ public class RegistroLicores extends javax.swing.JDialog {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("Stock Mínimo en botellas:");
+        jLabel6.setText("Stock Mínimo en Barra:");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 154, 168, 27));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 42, 504, 308));

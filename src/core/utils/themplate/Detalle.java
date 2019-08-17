@@ -18,7 +18,7 @@ import java.sql.SQLException;
 public class Detalle {
     private Integer FACTURAID=null; 
     private String htmlFinal = "";
-    private final String textSize = "88%";
+    private final String textSize = "69%";
     private final String imgPaddingSize = "8%";
     private final String anchoW = "device-width";
     private final String htmlPadding = "2%";
@@ -84,7 +84,7 @@ public class Detalle {
         return htmlFinal;
     }
     
-    public String getDetalleClean (){
+    public String getDetalleClean(){
         return  "<!DOCTYPE html>"
                 + "<html lang=\"es\">"
                 + "<head>"
@@ -100,7 +100,8 @@ public class Detalle {
                 + "</html>";
     }
     
-    public String getDetalleHTML (Integer FACTURAID){
+    public String getDetalleHTML(Integer FACTURAID){
+        this.FACTURAID=FACTURAID;
         setDetalleNull();
         try {
             Conexion objCon = new Conexion();
@@ -149,10 +150,10 @@ public class Detalle {
         
         String totalX 
             = ""
-//              "<td class=\"M\">Descuento</td><td></td><td></td><td class=\"R total\">Q "
-//            + DESCUENTO
-//            + "</td></tr>"
-            + "<td class=\"M\">TOTAL</td>    <td></td><td></td><td class=\"R total\">Q "
+            + "<td class=\"M\">Descuento</td><td></td><td></td><td class=\"R total\">Q "
+            + DESCUENTO
+            + "</td></tr>"
+            + "<td class=\"M\">TOTAL</td> <td></td><td></td><td class=\"R total\">Q "
             + TOTAL
             + "</td></tr>"
         ;
@@ -162,6 +163,8 @@ public class Detalle {
         footFinal = tFootH + tFootB + tFootF;
         
         htmlFinal = head + bodyFinal + footFinal + foot;
+        
+        System.out.println("HTML > Factura ID: "+this.FACTURAID);
         return htmlFinal ;
     }
 }

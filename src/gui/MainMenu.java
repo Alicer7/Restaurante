@@ -5,6 +5,9 @@
  */
 package gui;
 
+import gui.almacen.RegistroLicores;
+import gui.cocina.MateriaprimaDeReceta;
+import gui.cocina.NuevaReceta;
 import gui.venta.VentasP;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -210,6 +213,14 @@ public class MainMenu extends javax.swing.JFrame {
         jMenu_Ver_ = new javax.swing.JMenu();
         jMenuItem_ShowMenuBar_ = new javax.swing.JMenuItem();
         jMenuItem_ShowNavBar_ = new javax.swing.JMenuItem();
+        jMenu_Recetas_ = new javax.swing.JMenu();
+        jMenuItem_CrearReceta_ = new javax.swing.JMenuItem();
+        jMenu_MateriaPrima_ = new javax.swing.JMenu();
+        jMenuItem_IngresarMateriaPrima_ = new javax.swing.JMenuItem();
+        jMenu_MP_Bar_ = new javax.swing.JMenu();
+        jMenuItem_RegistroDeLicores_ = new javax.swing.JMenuItem();
+        jMenu_MP_Restaurante_ = new javax.swing.JMenu();
+        jMenuItem_RegistroDeCarnes_ = new javax.swing.JMenuItem();
         jMenu_Help_ = new javax.swing.JMenu();
         jMenuItem_Help_ = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -421,6 +432,49 @@ public class MainMenu extends javax.swing.JFrame {
 
         jMenuBar_.add(jMenu_Ver_);
 
+        jMenu_Recetas_.setText("Recetas");
+
+        jMenuItem_CrearReceta_.setText("Crear Receta");
+        jMenuItem_CrearReceta_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_CrearReceta_ActionPerformed(evt);
+            }
+        });
+        jMenu_Recetas_.add(jMenuItem_CrearReceta_);
+
+        jMenuBar_.add(jMenu_Recetas_);
+
+        jMenu_MateriaPrima_.setText("Materia Prima");
+
+        jMenuItem_IngresarMateriaPrima_.setText("Ingresar Materia Prima");
+        jMenuItem_IngresarMateriaPrima_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_IngresarMateriaPrima_ActionPerformed(evt);
+            }
+        });
+        jMenu_MateriaPrima_.add(jMenuItem_IngresarMateriaPrima_);
+
+        jMenu_MP_Bar_.setText("Bar");
+
+        jMenuItem_RegistroDeLicores_.setText("Registro de Licores");
+        jMenuItem_RegistroDeLicores_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_RegistroDeLicores_ActionPerformed(evt);
+            }
+        });
+        jMenu_MP_Bar_.add(jMenuItem_RegistroDeLicores_);
+
+        jMenu_MateriaPrima_.add(jMenu_MP_Bar_);
+
+        jMenu_MP_Restaurante_.setText("Restaurante");
+
+        jMenuItem_RegistroDeCarnes_.setText("Registro de Carnes");
+        jMenu_MP_Restaurante_.add(jMenuItem_RegistroDeCarnes_);
+
+        jMenu_MateriaPrima_.add(jMenu_MP_Restaurante_);
+
+        jMenuBar_.add(jMenu_MateriaPrima_);
+
         jMenu_Help_.setText("Ayuda");
 
         jMenuItem_Help_.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
@@ -502,6 +556,21 @@ public class MainMenu extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         exit();
     }//GEN-LAST:event_formWindowClosing
+
+    private void jMenuItem_IngresarMateriaPrima_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_IngresarMateriaPrima_ActionPerformed
+        MateriaprimaDeReceta mdr = new MateriaprimaDeReceta();
+        mdr.setVisible(true);
+    }//GEN-LAST:event_jMenuItem_IngresarMateriaPrima_ActionPerformed
+
+    private void jMenuItem_RegistroDeLicores_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_RegistroDeLicores_ActionPerformed
+        RegistroLicores registroLicores = new RegistroLicores(this, true);
+        registroLicores.setVisible(true);
+    }//GEN-LAST:event_jMenuItem_RegistroDeLicores_ActionPerformed
+
+    private void jMenuItem_CrearReceta_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_CrearReceta_ActionPerformed
+        NuevaReceta nr = new NuevaReceta(this, true);
+        nr.setVisible(true);
+    }//GEN-LAST:event_jMenuItem_CrearReceta_ActionPerformed
     
     class hora implements ActionListener {
         @Override
@@ -533,12 +602,20 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar_;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem_CerrarSesion_;
+    private javax.swing.JMenuItem jMenuItem_CrearReceta_;
     private javax.swing.JMenuItem jMenuItem_Help_;
+    private javax.swing.JMenuItem jMenuItem_IngresarMateriaPrima_;
+    private javax.swing.JMenuItem jMenuItem_RegistroDeCarnes_;
+    private javax.swing.JMenuItem jMenuItem_RegistroDeLicores_;
     private javax.swing.JMenuItem jMenuItem_Salir_;
     private javax.swing.JMenuItem jMenuItem_ShowMenuBar_;
     private javax.swing.JMenuItem jMenuItem_ShowNavBar_;
     private javax.swing.JMenu jMenu_Archivos_;
     private javax.swing.JMenu jMenu_Help_;
+    private javax.swing.JMenu jMenu_MP_Bar_;
+    private javax.swing.JMenu jMenu_MP_Restaurante_;
+    private javax.swing.JMenu jMenu_MateriaPrima_;
+    private javax.swing.JMenu jMenu_Recetas_;
     private javax.swing.JMenu jMenu_Ver_;
     private javax.swing.JPanel jPanel_MainContent_;
     private javax.swing.JPanel jPanel_MenuBarSmall_;

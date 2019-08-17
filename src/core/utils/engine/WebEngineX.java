@@ -85,27 +85,28 @@ public class WebEngineX {
             jFxPanel.setScene(scene);
         });
     }
-    public void mostrarDetalle(Integer FACTURAID) {
-        cleanViewer ();
-        detalle.setFACTURAID(FACTURAID);
-        detalle.setDetalleNull();
-        html = detalle.getDetalleHTML(FACTURAID);
-        showInViewer ();
-    }
-    
-    public Double mostrarDetalleD(Integer FACTURAID) {
-        cleanViewer ();
-        detalle.setFACTURAID(FACTURAID);
-        detalle.setDetalleNull ();
-        html = detalle.getDetalleHTML(FACTURAID);
-        TOTAL = detalle.getTOTAL();
-        showInViewer ();
-        return TOTAL;
-    }
     
     public Double getTOTAL() {
         TOTAL = detalle.getTOTAL();
         return TOTAL;
+    }
+    
+    public Double mostrarDetalleD(Integer FACTURAID) {
+        cleanViewer();
+        detalle.setFACTURAID(FACTURAID);
+        detalle.setDetalleNull();
+        html = detalle.getDetalleHTML(FACTURAID);
+        showInViewer();
+        
+        return getTOTAL();
+    }
+    
+    public void mostrarDetalle(Integer FACTURAID) {
+        cleanViewer();
+        detalle.setFACTURAID(FACTURAID);
+        detalle.setDetalleNull();
+        html = detalle.getDetalleHTML(FACTURAID);
+        showInViewer();
     }
     
 /******************************************************************************/

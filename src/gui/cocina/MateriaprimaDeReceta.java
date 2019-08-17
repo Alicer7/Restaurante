@@ -47,22 +47,23 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
             Conexion cone = new Conexion();
             com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
 
-            String corrArticulo = "Select nombre from receta where estado = 'Inactivo' order by(id)";
+            String corrArticulo = "SELECT `nombre` FROM `cafebar`.`receta` WHERE `estado` = 'Inactiva'";
             ps = conn.prepareStatement(corrArticulo);
             rs = ps.executeQuery();
 
             while (rs.next()) {
                 this.jcReceta.addItem(rs.getString("nombre"));
             }
-            String cat_articulo = "Select nombre from categoria order by(id)";
-            ps = conn.prepareStatement(cat_articulo);
-            rs = ps.executeQuery();
 
-            while (rs.next()) {
-                this.jcCategoria.addItem(rs.getString("nombre"));
-            }
+//            String cat_articulo = "SELECT `nombre` FROM `cafebar`.`categoria`";
+//            ps = conn.prepareStatement(cat_articulo);
+//            rs = ps.executeQuery();
+//
+//            while (rs.next()) {
+//                this.jcCategoria.addItem(rs.getString("nombre"));
+//            }
         } catch (SQLException ex) {
-            System.err.println(ex.toString());
+            System.err.println(ex.toString() + "error xd");
         }
 
     }
@@ -100,8 +101,9 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
     public MateriaprimaDeReceta() {
         initComponents();
         tabla();
-        popuptable();
 
+        popuptable();
+        sqlconsulta();
         try {
             PreparedStatement ps = null;
             ResultSet rs = null;
@@ -431,7 +433,7 @@ public class MateriaprimaDeReceta extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void jcRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcRecetaActionPerformed
-        X = jcReceta.getSelectedIndex() ;
+        X = jcReceta.getSelectedIndex();
         System.out.println("   " + X);
         try {
             PreparedStatement ps = null;
