@@ -14,6 +14,7 @@ import javafx.print.Printer;
 import javafx.print.PrinterJob;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.transform.Scale;
 import javafx.scene.web.WebView;
 
 /**
@@ -43,20 +44,28 @@ public class WebEngineX {
     }
     
     private void startViewer (){
-        html = detalle.getDetalleClean();
+        setDetalleClean ();
         jFxPanel = new JFXPanel();
         System.err.println("StartViewer > Detalle > JFXPanel ");
     }
     
     public void setDetalleClean (){
-        this.html = detalle.getDetalleClean();
+        html = detalle.getDetalleClean();
     }
-     
+    
+    public void addDescuentoDetalle(Double descuento){
+        cleanViewer ();
+        detalle.setDescuento(descuento);
+        html = detalle.getHTML();
+        System.err.println("Descuento.3");
+        showInViewer();
+    }
+    
     public void loadViewer (){
         Platform.runLater(() -> {
             webView = new WebView();
             webView.getEngine().loadContent(html);
-            scene = new Scene(webView,250,300);
+            scene = new Scene(webView,70,300);
             jFxPanel.setScene(scene);
         });
     }
@@ -79,7 +88,7 @@ public class WebEngineX {
     public void mostrarDetalle(Integer FACTURAID) {
         cleanViewer ();
         detalle.setFACTURAID(FACTURAID);
-        detalle.setDetalleNull ();
+        detalle.setDetalleNull();
         html = detalle.getDetalleHTML(FACTURAID);
         showInViewer ();
     }
@@ -128,30 +137,29 @@ public class WebEngineX {
         }
     }
     
+    
+    
     public void printNode() {
         Node node = webView;
-        Printer printer = Printer.getDefaultPrinter();
+        Printer printX = Printer.getDefaultPrinter();
                
-        PageLayout pageLayout = printer.createPageLayout(printer.getDefaultPageLayout().getPaper(), PageOrientation.PORTRAIT, Printer.MarginType.HARDWARE_MINIMUM);
+        PageLayout pageLayout = printX.createPageLayout(printX.getDefaultPageLayout().getPaper(), PageOrientation.PORTRAIT, Printer.MarginType.HARDWARE_MINIMUM);
         
         double scaleX = pageLayout.getPrintableWidth() / node.getBoundsInParent().getWidth();
-        double scaleY = pageLayout.getPrintableHeight() / node.getBoundsInParent().getHeight();
+//        double scaleY = pageLayout.getPrintableHeight() / node.getBoundsInParent().getHeight();
         
-        double top = pageLayout.getTopMargin();
-        double bot = pageLayout.getBottomMargin();
-        double rgt = pageLayout.getRightMargin();
-        double lef = pageLayout.getLeftMargin();
-        
-        System.out.println("Margins: T:"+top+" B:"+bot+" R:"+rgt+" L:"+lef);        
-        
-//        node.getTransforms().add(new Scale(scaleX, scaleY));
+        node.getTransforms().add(new Scale(scaleX, scaleX));
 //        System.out.println("Scale "+scaleX+" @ "+scaleY);
+
+        System.out.println("Scale "+scaleX);
         
         try {
             PrinterJob job = PrinterJob.createPrinterJob();
             System.out.println("core.utils.engine.WebEngineX.printNode().1");
             job.getJobSettings().setJobName(webView.getEngine().getTitle());
+            job.getJobSettings().setPageLayout(pageLayout);
             System.out.println("core.utils.engine.WebEngineX.printNode().2");
+            
             if (job != null) {
                 boolean success = job.printPage(node);
                 System.out.println("core.utils.engine.WebEngineX.printNode().3");
@@ -160,6 +168,7 @@ public class WebEngineX {
                     System.out.println("core.utils.engine.WebEngineX.printNode().4");
                 }
             }
+
         } catch (Exception e) {
             System.err.println("Print Node: "+e);
         }

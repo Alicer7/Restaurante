@@ -18,13 +18,15 @@ import java.util.ArrayList;
  */
 public class Factura {
     private Connection conn= new Conexion().connect();
+    
     private Integer idFactura;
-    private String nitCliente,solvente,fecha;
-    private Double 
-            costo,
-            pagoEfectivo,
-            pagoElectronico,
-            cambio;
+    private String nitCliente;
+    private Double costo;
+    private Double pagoEfectivo;
+    private Double pagoElectronico;
+    private Double cambio;
+    private String fecha;
+    private String solvente;
 
     public Factura() {
     }
@@ -52,7 +54,7 @@ public class Factura {
         public ArrayList<Factura> listaFacturasActivas (){
         
         ArrayList<Factura> listaFacturases= new ArrayList<>();
-        String sql="SELECT * FROM `temp_venta` WHERE `estado` = \"Activa\"";
+        String sql="SELECT * FROM `cafebar`.`temp_venta` WHERE `estado` = \"Activa\"";
         
         try {
             Statement stm;
@@ -84,7 +86,7 @@ public class Factura {
     public ArrayList<Factura> listaFacturasFechaActivas (String fecha){
         
         ArrayList<Factura> listaFacturases= new ArrayList<>();
-        String sql="SELECT * FROM `temp_venta` WHERE date(`fecha`) = \""+fecha+"\"AND `solvente` = \"Activa\"";
+        String sql="SELECT * FROM `cafebar`.`temp_venta` WHERE date(`fecha`) = \""+fecha+"\"AND `solvente` = \"Activa\"";
         
         try {
             Statement stm;
@@ -116,7 +118,7 @@ public class Factura {
     public ArrayList<Factura> listaFacturasFecha (String fecha){
         
         ArrayList<Factura> listaFacturases= new ArrayList<>();
-        String sql="SELECT * FROM `temp_venta` WHERE date(fecha) = \""+fecha+"\"";
+        String sql="SELECT * FROM `cafebar`.`temp_venta` WHERE date(fecha) = \""+fecha+"\"";
         
         try {
             Statement stm;

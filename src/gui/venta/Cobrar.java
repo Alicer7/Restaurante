@@ -21,8 +21,8 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class Cobrar extends javax.swing.JFrame {
     private final Locale locale = new Locale("es", "GT");
-    private final CambioEfectivo showPanelCambio = new CambioEfectivo();
     private final Integer CLIENTEID = gui.venta.VentasP.getCLIENTEID();
+    private CambioEfectivo showPanelCambio;
         
     private DecimalFormatSymbols dfs;
     private DecimalFormat df;
@@ -130,6 +130,10 @@ public class Cobrar extends javax.swing.JFrame {
         
         try {
             mostrarSaldo();
+            System.err.println("Descuento.0: "+DESCUENTO);
+            webEngine.addDescuentoDetalle(DESCUENTO);
+            System.err.println("Descuento.4");
+            mostrarDetalle();
         } catch (Exception e) {
             System.err.println(e);
         }
@@ -162,7 +166,7 @@ public class Cobrar extends javax.swing.JFrame {
     }
     
     private void facturaSetCancellerd(){
-        
+        System.err.println("Factura Pagada");
     }
     
     public void imprimir() {
@@ -171,6 +175,7 @@ public class Cobrar extends javax.swing.JFrame {
     
     private void sendPrint (){
         if (SALDO > 0){
+            showPanelCambio = new CambioEfectivo();
             showPanelCambio.setCambio(SALDO);
             showPanelCambio.setVisible(true);
             
@@ -186,7 +191,7 @@ public class Cobrar extends javax.swing.JFrame {
             try {
                 imprimir();
             } catch (Exception e) {
-                System.err.println(e);
+                System.err.println("Error de impresión: "+e);
             } finally {
                 dispose();
                 System.out.println("gui.venta.Cobrar.sendPrint().DISPOSE");
@@ -351,6 +356,7 @@ public class Cobrar extends javax.swing.JFrame {
             }
         });
 
+        jTextField_Descuento_.setEditable(false);
         jTextField_Descuento_.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTextField_Descuento_.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextField_Descuento_.setText("0.00");
@@ -634,8 +640,8 @@ public class Cobrar extends javax.swing.JFrame {
             mensajeSinCobrar();
         } else {
             try {
-                facturaSetCancellerd();
                 sendPrint();
+                facturaSetCancellerd();
             } catch (Exception e) {
                 System.err.println("Error al realizar la transacción "+e);
             }

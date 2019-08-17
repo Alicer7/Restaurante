@@ -114,11 +114,10 @@ public class VentasP extends javax.swing.JPanel {
             Object filaData[][] = new Object[lista.size()][5];
 
             for (int i = 0; i < lista.size(); i++) {
-                filaData[i][0] = "desc";
-                filaData[i][1] = lista.get(i).getIdFactura();
-                filaData[i][2] = "Q " + lista.get(i).getCosto();
-                filaData[i][3] = lista.get(i).getFecha();
-                filaData[i][4] = lista.get(i).getSolvente();
+                filaData[i][0] = lista.get(i).getIdFactura();
+                filaData[i][1] = "Q " + lista.get(i).getCosto();
+                filaData[i][2] = lista.get(i).getFecha();
+                filaData[i][3] = lista.get(i).getSolvente();
 
                 model.addRow(filaData[i]);
             }
@@ -162,11 +161,10 @@ public class VentasP extends javax.swing.JPanel {
                     Object filaData[][] = new Object[lista.size()][5];
 
                     for (int i = 0; i < lista.size(); i++) {
-                        filaData[i][0] = "desc";
-                        filaData[i][1] = lista.get(i).getIdFactura();
-                        filaData[i][2] = "Q " + lista.get(i).getCosto();
-                        filaData[i][3] = lista.get(i).getFecha();
-                        filaData[i][4] = lista.get(i).getSolvente();
+                        filaData[i][0] = lista.get(i).getIdFactura();
+                        filaData[i][1] = lista.get(i).getCosto();
+                        filaData[i][2] = lista.get(i).getFecha();
+                        filaData[i][3] = lista.get(i).getSolvente();
 
                         model.addRow(filaData[i]);
                     }
@@ -216,12 +214,17 @@ public class VentasP extends javax.swing.JPanel {
         JOptionPane.showOptionDialog(this, "No hay un monto que cobrar, verifica que hayas seleccionado una factura y tenga algún consumo.", "No hay nada que cobrar!", 0, 0, null, botones, this);
     }
     
-    public static Integer getCLIENTEID() {
-        return CLIENTEID;
+    public void actualizarFacturas(){
+        mostrarVentasActivas();
     }
     
+       
     public void removeViewer(){
         jScrollPane_Detalle_.getViewport().removeAll();
+    }
+    
+    public static Integer getCLIENTEID() {
+        return CLIENTEID;
     }
     
     public VentasP() {
@@ -240,7 +243,6 @@ public class VentasP extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jEditorPane_Viwer_ = new javax.swing.JEditorPane();
         jPanel_Detalle_ = new javax.swing.JPanel();
         jPanel_DetalleBotones_ = new javax.swing.JPanel();
         jButton_NuevoPedido_ = new javax.swing.JButton();
@@ -391,17 +393,28 @@ public class VentasP extends javax.swing.JPanel {
 
         jTable_Clientes_.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -457,7 +470,7 @@ public class VentasP extends javax.swing.JPanel {
             int colId = 1;
             int row = jTable_Clientes_.getSelectedRow();
             
-            CLIENTEID = (Integer) jTable_Clientes_.getValueAt(row, 1);
+            CLIENTEID = (Integer) jTable_Clientes_.getValueAt(row, 0);
             
             Object objId = (Object) jTable_Clientes_.getValueAt(row, colId);
             
@@ -477,7 +490,6 @@ public class VentasP extends javax.swing.JPanel {
     private javax.swing.JButton jButton_ClienteNuevo_;
     private javax.swing.JButton jButton_Cobrar_;
     private javax.swing.JButton jButton_NuevoPedido_;
-    private javax.swing.JEditorPane jEditorPane_Viwer_;
     private javax.swing.JLabel jLabel_BuscarPorFecha_;
     private javax.swing.JLabel jLabel_SinCobrar_;
     private javax.swing.JPanel jPanel_Clientes_;

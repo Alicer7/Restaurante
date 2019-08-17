@@ -49,11 +49,12 @@ public class MainMenu extends javax.swing.JFrame {
     private void exit() {
         
         String botones[] = {"Cerrar", "Cancelar"};
-        int eleccion = JOptionPane.showOptionDialog(this, "¿Desea cerrar la aplicación?", "", 0, 0, null, botones, this);
+        int eleccion = JOptionPane.showOptionDialog(null, "¿Desea cerrar la aplicación?", "", 0, 0, null, botones, null);
         if (eleccion == JOptionPane.YES_OPTION) {
             jPanel_MainContent_.removeAll();
             System.exit(0);
         } else if (eleccion == JOptionPane.NO_OPTION) {
+            
         }
         
     }
@@ -231,7 +232,7 @@ public class MainMenu extends javax.swing.JFrame {
             .addGap(0, 640, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 661));
         setName("mainJF"); // NOI18N
         setSize(new java.awt.Dimension(1024, 661));

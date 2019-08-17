@@ -666,18 +666,18 @@ public class NuevoCliente extends javax.swing.JFrame {
         com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        int TEST = 0;
+        Integer ID = null;
         try {
 
-            ps = conn.prepareStatement("INSERT INTO `temp_venta` (`estado`) VALUES (?)");
+            ps = conn.prepareStatement("INSERT INTO `cafebar`.`temp_venta` (`estado`) VALUES (?)");
             ps.setString(1, "Activa");
             ps.execute();
 
-            ps = conn.prepareStatement("select id from temp_venta order by id desc limit 1");
+            ps = conn.prepareStatement("SELECT id FROM `cafebar`.`temp_venta` ORDER BY id LIMIT 1 ");
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                TEST = (rs.getInt("id"));
+                ID = (rs.getInt("id"));
             }
         } catch (SQLException ex) {
         }
@@ -690,19 +690,21 @@ public class NuevoCliente extends javax.swing.JFrame {
                 String cantidad = (String) jtPedido.getValueAt(row, 2);
                 String costo = (String) jtPedido.getValueAt(row, 3);
 
-                ps = conn.prepareStatement("INSERT INTO `temp_pedido` (`temp_venta_id`,empleado_id,  `bebida_id`, `bebida_cantidad`, `costo`) VALUES (?,?,?,?,?)");
-                ps.setInt(1, TEST);
+                ps = conn.prepareStatement("INSERT INTO `cafebar`.`temp_pedido` (`temp_venta_id`, `empleado_id`, `bebida_id`, `bebida_cantidad`, `costo`) VALUES (?,?,?,?,?)");
+                
+                ps.setInt(1, ID);
                 ps.setInt(2, jComboBox_Empleado_.getSelectedIndex() + 1);
                 ps.setInt(3, id_comida);
                 ps.setString(4, cantidad);
                 ps.setString(5, costo);
+                
                 ps.execute();
              
             }
             JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
-               tabla();
+                tabla();
         } catch (SQLException ex) {
-            System.out.println("eeerror " + ex);
+            System.out.println("Error " + ex);
         }
 
     }//GEN-LAST:event_jButton_Aceptar_ActionPerformed
