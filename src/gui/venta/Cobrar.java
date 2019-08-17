@@ -41,6 +41,8 @@ public class Cobrar extends javax.swing.JFrame {
         jLabel_Saldo_.setToolTipText("Q "+df.format(SALDO));
     }
     
+    int CODIGOPEDIDO = 0; 
+    
     private void mostrarSaldo(){
         SALDO = (ELECTRONICO + EFECTIVO + DESCUENTO) - TOTAL ;
         if (SALDO<0){
