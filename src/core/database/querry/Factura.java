@@ -182,7 +182,7 @@ public class Factura {
                 + "WHERE `id` = "+CLIENTEID+";"
             );
             
-//            ps.setString(1, );
+//            ps.setString(1, "Solvente");
 //            ps.setDouble(2, TOTAL);
 //            ps.setDouble(3, EFECTIVO);
 //            ps.setDouble(4, ELECTRONICO);
