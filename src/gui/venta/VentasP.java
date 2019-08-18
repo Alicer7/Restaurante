@@ -29,6 +29,10 @@ public class VentasP extends javax.swing.JPanel {
     private final DateFormat outFormat = new SimpleDateFormat( "| yyyy-MM-dd | E | HH:mm:ss | ");
     private final DateFormat outFormatFechaDia = new SimpleDateFormat("yyyy-MM-dd");
     private final String myDate = outFormat.format(date);
+    
+    private final String msjFacturaActiva = "Facturas activas: ";
+    private final String msjFacturaPorFecha = "Facturas por fecha: ";
+    
     private String myDateDia;
     private Date dateX = new Date();
    
@@ -38,6 +42,7 @@ public class VentasP extends javax.swing.JPanel {
     
     private static Integer CLIENTEID = null;
     private Double TOTAL = null;
+    private String SOLVENTE = null;
       
     private void startViewer(){
         if (webEngine == null){
@@ -89,11 +94,20 @@ public class VentasP extends javax.swing.JPanel {
         }
     }
     
-    private void restablecerBordes (){
+    private void restablecerBordes(){
         jPanel_Detalle_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detalle", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14)));
         jPanel_Clientes_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Clientes", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14)));
     }
     
+    private void borderFacturaFecha(String mensaje, Date Fecha) {
+        myDateDia = outFormatFechaDia.format(Fecha);
+        jPanel_Clientes_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, mensaje+myDateDia, javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14)));
+    }
+    
+    private void borderFacturaDetalle(String numeroFactura) {
+        jPanel_Detalle_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detalle - Pedidos Factura #" + numeroFactura, javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14)));
+    }
+        
     private void mostrarVentasActivas() {
         
         limpiarDetalles();
@@ -105,7 +119,7 @@ public class VentasP extends javax.swing.JPanel {
             // SQL
             ArrayList<core.database.querry.Factura> lista = facturas.listaFacturasActivas();
 
-            jTable_Clientes_.setPreferredSize(new java.awt.Dimension(jTable_Clientes_.getWidth(), lista.size() * 18));
+            jTable_Clientes_.setPreferredSize(new java.awt.Dimension(jTable_Clientes_.getWidth(), lista.size() * jTable_Clientes_.getRowHeight()));
             jTable_Clientes_.revalidate();
             jTable_Clientes_.repaint();
 
@@ -121,10 +135,11 @@ public class VentasP extends javax.swing.JPanel {
 
                 model.addRow(filaData[i]);
             }
+            borderFacturaFecha(msjFacturaActiva,date);
+            jLabel_BuscarPorFecha_.setText("Fecha: ");
         } catch (Exception e) {
             System.err.println("mostrarVentasActivas().mostrar: >"+e);
         }
-        
     }
     
     private void mostrarVentasFecha(){
@@ -142,7 +157,7 @@ public class VentasP extends javax.swing.JPanel {
                 restablecerBordes ();
                 limpiarTablaFacturas();
                 limpiarDetalles();
-                borderFacturaFecha(calendario.getDate());
+                borderFacturaFecha(msjFacturaPorFecha,calendario.getDate());
                 dateX = calendario.getDate();
                 String fecha = outFormatFechaDia.format(dateX);
                 System.err.println("Buscar ventas del día: "+fecha);
@@ -152,7 +167,7 @@ public class VentasP extends javax.swing.JPanel {
                     // SQL
                     ArrayList<core.database.querry.Factura> lista = facturas.listaFacturasFecha(fecha);
 
-                    jTable_Clientes_.setPreferredSize(new java.awt.Dimension(jTable_Clientes_.getWidth(), lista.size() * 18));
+                    jTable_Clientes_.setPreferredSize(new java.awt.Dimension(jTable_Clientes_.getWidth(), lista.size() * jTable_Clientes_.getRowHeight()));
                     jTable_Clientes_.revalidate();
                     jTable_Clientes_.repaint();
 
@@ -162,7 +177,7 @@ public class VentasP extends javax.swing.JPanel {
 
                     for (int i = 0; i < lista.size(); i++) {
                         filaData[i][0] = lista.get(i).getIdFactura();
-                        filaData[i][1] = lista.get(i).getCosto();
+                        filaData[i][1] = "Q "+lista.get(i).getCosto();
                         filaData[i][2] = lista.get(i).getFecha();
                         filaData[i][3] = lista.get(i).getSolvente();
 
@@ -171,7 +186,9 @@ public class VentasP extends javax.swing.JPanel {
                 } catch (Exception e) {
                     System.err.println("mostrarVentasFecha().mostrar: >"+e);
                 }
+                jLabel_BuscarPorFecha_.setText("Fecha: "+fecha);
             } else {
+                //nada
             }
         } catch (Exception e) {
             System.err.println(e);
@@ -182,21 +199,28 @@ public class VentasP extends javax.swing.JPanel {
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored) {}
     }
     
-    private void borderFacturaFecha(Date Fecha) {
-        myDateDia = outFormatFechaDia.format(Fecha);
-        jPanel_Clientes_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Facturas Activas: " + myDateDia, javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14)));
-    }
-    
-    private void borderFacturaDetalle(String numeroFactura) {
-        jPanel_Detalle_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detalle - Pedidos Factura #" + numeroFactura, javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14)));
-    }
-
     private void nuevoCliente(){
         try {
             NuevoCliente clienteNuevo = new NuevoCliente();
             clienteNuevo.setVisible(true);
         } catch (Exception e) {
             System.err.println("nuevoCliente(): >"+e);
+        }
+    }
+    
+    private void dobleClickClientes(java.awt.event.MouseEvent evt){
+        if (evt.getClickCount() == 2) {
+            int colId = 1;
+            int row = jTable_Clientes_.getSelectedRow();
+            
+            CLIENTEID = (Integer) jTable_Clientes_.getValueAt(row, 0);
+            SOLVENTE = (String) jTable_Clientes_.getValueAt(row, 3);
+            Object objId = (Object) jTable_Clientes_.getValueAt(row, colId);
+            
+            TOTAL = webEngine.mostrarDetalleD(CLIENTEID);
+            
+            System.err.println("\nCliente id: "+CLIENTEID+" > Q"+TOTAL);
+            borderFacturaDetalle(CLIENTEID+"");
         }
     }
     
@@ -214,10 +238,41 @@ public class VentasP extends javax.swing.JPanel {
         JOptionPane.showOptionDialog(this, "No hay un monto que cobrar, verifica que hayas seleccionado una factura y tenga algún consumo.", "No hay nada que cobrar!", 0, 0, null, botones, this);
     }
     
-    public void actualizarFacturas(){
-        mostrarVentasActivas();
+    private void mensajeSolventeP(){
+        String botones[] = {"Aceptar"};
+        JOptionPane.showOptionDialog(this, "No se pueden agregar más pedidos.", "La Factura ya ha sido Cancelada.", 0, 0, null, botones, this);
     }
     
+    private void mensajeSolventeC(){
+        String botones[] = {"Aceptar"};
+        JOptionPane.showOptionDialog(this, "La Factura ya ha sido Cancelada.", "Factura \"Solvente\"", 0, 0, null, botones, this);
+    }
+    
+    private void addPedido(){
+        if (CLIENTEID==null){
+            mensajeNoFacturaSelect();
+        } else if (SOLVENTE.equals("Solvente")){
+            mensajeSolventeP();
+        } else {
+            NuevoPedido pedido = new NuevoPedido();
+            pedido.setVisible(true);
+        }
+    }
+    
+    private void cobrar(){
+        if (TOTAL==null || TOTAL <=0){
+            mensajeNullTotal();
+        } else if (SOLVENTE.equals("Solvente")){
+            mensajeSolventeC();
+        } else {
+            Cobrar cobrar = new Cobrar();
+            cobrar.setVisible(true);
+        }
+    }
+       
+    public static void actualizarFacturasActivas(){
+//        mostrarVentasActivas();
+    }    
        
     public void removeViewer(){
         jScrollPane_Detalle_.getViewport().removeAll();
@@ -231,7 +286,7 @@ public class VentasP extends javax.swing.JPanel {
         initComponents();
         addDetallePanel();
         mostrarVentasActivas();
-        borderFacturaFecha(date);
+        
     }
 
     /**
@@ -256,15 +311,6 @@ public class VentasP extends javax.swing.JPanel {
         jScrollPane_Facturas_ = new javax.swing.JScrollPane();
         jTable_Clientes_ = new javax.swing.JTable();
 
-        addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-                formAncestorRemoved(evt);
-            }
-        });
         setLayout(new java.awt.BorderLayout());
 
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("gui/venta/Bundle"); // NOI18N
@@ -373,10 +419,10 @@ public class VentasP extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jButton_ClienteNuevo_, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel_BuscarPorFecha_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jLabel_BuscarPorFecha_, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel_SinCobrar_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel_DetalleBotones_1Layout.setVerticalGroup(
             jPanel_DetalleBotones_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -410,7 +456,7 @@ public class VentasP extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "# Comanda", "Monto", "Fecha", "Estado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -421,6 +467,7 @@ public class VentasP extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable_Clientes_.setRowHeight(18);
         jTable_Clientes_.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable_Clientes_MouseClicked(evt);
@@ -443,47 +490,19 @@ public class VentasP extends javax.swing.JPanel {
 
     private void jLabel_SinCobrar_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_SinCobrar_MouseClicked
         mostrarVentasActivas();
-        borderFacturaFecha(date);
     }//GEN-LAST:event_jLabel_SinCobrar_MouseClicked
 
     private void jButton_NuevoPedido_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_NuevoPedido_ActionPerformed
-        if (CLIENTEID==null){
-            mensajeNoFacturaSelect();
-        } else {
-            NuevoPedido pedido = new NuevoPedido();
-            pedido.setVisible(true);
-        }
+        addPedido();
     }//GEN-LAST:event_jButton_NuevoPedido_ActionPerformed
 
     private void jButton_Cobrar_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Cobrar_ActionPerformed
-        if (TOTAL==null || TOTAL <=0){
-            mensajeNullTotal();
-        } else {
-            Cobrar cobrar = new Cobrar();
-            cobrar.setVisible(true);
-        }
-        
+        cobrar();
     }//GEN-LAST:event_jButton_Cobrar_ActionPerformed
 
     private void jTable_Clientes_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_Clientes_MouseClicked
-        if (evt.getClickCount() == 2) {
-            int colId = 1;
-            int row = jTable_Clientes_.getSelectedRow();
-            
-            CLIENTEID = (Integer) jTable_Clientes_.getValueAt(row, 0);
-            
-            Object objId = (Object) jTable_Clientes_.getValueAt(row, colId);
-            
-            TOTAL = webEngine.mostrarDetalleD(CLIENTEID);
-            
-            System.err.println("\nCliente id: "+CLIENTEID+" > Q"+TOTAL);
-            borderFacturaDetalle(CLIENTEID+"");
-        }
+        dobleClickClientes(evt);
     }//GEN-LAST:event_jTable_Clientes_MouseClicked
-
-    private void formAncestorRemoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorRemoved
-        
-    }//GEN-LAST:event_formAncestorRemoved
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

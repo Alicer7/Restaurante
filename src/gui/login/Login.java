@@ -14,6 +14,7 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.UIManager;
 import com.placeholder.PlaceHolder;
+import java.awt.event.WindowEvent;
 
 /**
  *
@@ -25,7 +26,7 @@ public class Login extends javax.swing.JFrame {
         txtUsuario.setText("");
         txtPassword.setText(""); 
     }
-    
+           
     private void ingresar(){
         SqlUsuarios modSql = new SqlUsuarios();
         Usuarios mod = new Usuarios();
@@ -42,25 +43,60 @@ public class Login extends javax.swing.JFrame {
             if (modSql.login(mod)) {
                 this.dispose();
 
-                if (mod.getIdTipo() == 1) {
-                    gui.MainMenu mainMenu = new MainMenu();
-                    mainMenu.setVisible(true);
-
-                    mainMenu.setUSUARIO(mod.getNombre());
-                    mainMenu.setNIVLE("Administrador");
-                } else if (mod.getIdTipo() != 1) {
-                    gui.MainMenu mainMenu = new MainMenu();
-                    mainMenu.setVisible(true);
-
-                    mainMenu.setUSUARIO(mod.getNombre());
-                    mainMenu.setNIVLE("Usuario");
-
-                    //                    menu.lblUser.setText(mod.getNombre());
-                    //                    MenuPrincipal.lblCargo.setText("Usuario");
-                } else {
-                    System.err.println("Error");
-                    limpiar();
-                    txtUsuario.requestFocus();
+                switch (mod.getIdTipo()) {
+                    case 1:
+                        {
+                            gui.MainMenu mainMenu = new MainMenu();
+                            mainMenu.setVisible(true);
+                            mainMenu.setUSUARIO(mod.getNombre());
+                            mainMenu.setNIVLE("ROOT");
+                            break;
+                        }
+                    case 2:
+                        {
+                            gui.MainMenu mainMenu = new MainMenu();
+                            mainMenu.setVisible(true);
+                            mainMenu.setUSUARIO(mod.getNombre());
+                            mainMenu.setNIVLE("Administrador");
+                            break;
+                        }
+                    case 3:
+                        {
+                            gui.MainMenu mainMenu = new MainMenu();
+                            mainMenu.setVisible(true);
+                            mainMenu.setUSUARIO(mod.getNombre());
+                            mainMenu.setNIVLE("Contador");
+                            break;
+                        }
+                    case 4:
+                        {
+                            gui.MainMenu mainMenu = new MainMenu();
+                            mainMenu.setVisible(true);
+                            mainMenu.setUSUARIO(mod.getNombre());
+                            mainMenu.setNIVLE("Encargado");
+                            break;
+                        }
+                    case 5:
+                        {
+                            gui.MainMenu mainMenu = new MainMenu();
+                            mainMenu.setVisible(true);
+                            mainMenu.setUSUARIO(mod.getNombre());
+                            mainMenu.setNIVLE("Cajero");
+                            break;
+                        }
+                    case 6:
+                        {
+                            gui.MainMenu mainMenu = new MainMenu();
+                            mainMenu.setVisible(true);
+                            mainMenu.setUSUARIO(mod.getNombre());
+                            mainMenu.setNIVLE("Mesero");
+                            break;
+                        }
+                    default:
+                        System.err.println("Error");
+                        limpiar();
+                        txtUsuario.requestFocus();
+                        break;
                 }
 
             } else {
@@ -74,7 +110,12 @@ public class Login extends javax.swing.JFrame {
             txtUsuario.requestFocus();
         }
     }
-        
+    
+    private void onExit(){
+        WindowEvent winClosingEvent = new WindowEvent(null,WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+    }
+    
     private void opacityIn(){
         setOpacity(1f);
     }

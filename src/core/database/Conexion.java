@@ -19,11 +19,11 @@ public class Conexion {
 //    private final String host = "localhost";
     private final String port="3306";
     private final String db = "cafebar"; // Nombre de la BD.
-    private final String user = "root";
-//    private final String user = "freddy";
+//    private final String user = "root";
+    private final String user = "freddy";
 //    private final String password = "";
-//    private final String password = "%Freddy101";
-    private final String password = "fe95aca7184807452_7";
+    private final String password = "%Freddy101";
+//    private final String password = "fe95aca7184807452_7";
     
     private final String charset="?useUnicode=yes&characterEncoding=UTF-8";
     
@@ -34,24 +34,25 @@ public class Conexion {
     private final String mensajeService = "\nVerifica que todo esté en orden o ponte en contacto con el servicio técnico.";
     private JOptionPane jOptionPane;
     
-    private Connection DBConnection;
+    private Connection DBConnection=null;
    
     private void errorX (String mensaje){
         Integer eleccion = JOptionPane.showOptionDialog(null, mensaje, tituloMensaje, 0, 0, null, botones, this);
         
-        if (eleccion == JOptionPane.YES_OPTION) {
-            System.err.println("YES!!!");
-            System.exit(0);
-        } else if (eleccion == JOptionPane.NO_OPTION) {
-            System.err.println("NO!!!");
-            System.exit(0);
-        } else {
-            System.err.println("Uknow!!!");
-        } 
+        switch (eleccion) {
+            case JOptionPane.YES_OPTION:
+                System.err.println("YES!!!");
+                System.exit(0);
+            case JOptionPane.NO_OPTION:
+                System.err.println("NO!!!");
+                System.exit(0);
+            default:
+                System.err.println("Uknow!!!"); 
+                break;
+        }
     }
     
     public Connection connect(){
-    
         try{
             Class.forName("com.mysql.jdbc.Driver");
 //            System.out.println("MySQL Driver OK");
@@ -60,11 +61,13 @@ public class Conexion {
             errorX (mensajeDR);
         }                
         try{
+            
             DBConnection=DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db+charset,user, password);
 //          System.out.println("DB conection up");
         } catch(SQLException err){
             System.err.println(mensajeDB + err);
             errorX (mensajeDB);
+            return DBConnection;
         }
         return DBConnection;        
     }

@@ -65,8 +65,8 @@ public class MainMenu extends javax.swing.JFrame {
     private void datosSesion (){
         Timer tiempo = new Timer(100, new gui.MainMenu.hora());
         tiempo.start();
-        System.err.println(SAMS+USUARIO.replaceAll("\\s+","")+" | "+NIVLE);
-        setTitle(SAMS+USUARIO.replaceAll("\\s+","")+" | "+NIVLE);
+        System.err.println(SAMS+USUARIO.replaceAll("\\s+","")+" | como "+NIVLE);
+        setTitle(SAMS+USUARIO.replaceAll("\\s+","")+" | como "+NIVLE);
     }
     
     private void colorNavDef(){

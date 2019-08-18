@@ -177,17 +177,16 @@ public class Factura {
 
             ps = conn.prepareStatement(
                   "UPDATE `cafebar`.`temp_venta`  SET "
-                + "`estado` = \"Solvente\", `costo` = "+TOTAL+", `pago_efectivo` = "+EFECTIVO+", "
-                + "`pago_electronico` = "+ELECTRONICO+", `cambio` = "+CAMBIO 
-                + "WHERE `id` = "+CLIENTEID+";"
+                + "`estado` = ?, `costo` = ?, `pago_efectivo` = ?, `pago_electronico` = ?, `cambio` = ? "
+                + "WHERE `id` = ?;"
             );
             
-//            ps.setString(1, "Solvente");
-//            ps.setDouble(2, TOTAL);
-//            ps.setDouble(3, EFECTIVO);
-//            ps.setDouble(4, ELECTRONICO);
-//            ps.setDouble(5, CAMBIO);
-//            ps.setInt(6, CLIENTEID);
+            ps.setString(1, "Solvente");
+            ps.setDouble(2, TOTAL);
+            ps.setDouble(3, EFECTIVO);
+            ps.setDouble(4, ELECTRONICO);
+            ps.setDouble(5, CAMBIO);
+            ps.setInt(6, CLIENTEID);
             
             ps.execute();
             

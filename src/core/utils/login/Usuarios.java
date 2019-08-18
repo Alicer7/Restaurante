@@ -67,6 +67,4 @@ public class Usuarios {
         this.idTipo = idTipo;
     }
     
-    
-
 }

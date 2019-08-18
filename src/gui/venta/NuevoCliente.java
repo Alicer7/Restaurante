@@ -699,14 +699,13 @@ public class NuevoCliente extends javax.swing.JFrame {
                 ps.setString(5, costo);
                 
                 ps.execute();
-             
             }
             JOptionPane.showMessageDialog(null, "Ingresado Correctamente");
-                tabla();
+            tabla();
+            gui.venta.VentasP.getCLIENTEID();
         } catch (SQLException ex) {
             System.out.println("Error " + ex);
         }
-
     }//GEN-LAST:event_jButton_Aceptar_ActionPerformed
 
     private void jButton_Cancelar_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Cancelar_ActionPerformed

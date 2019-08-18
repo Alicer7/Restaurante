@@ -5,11 +5,16 @@
  */
 package gui.usuario;
 
+import core.database.Conexion;
 import core.utils.login.Hash;
 import javax.swing.JOptionPane;
 import core.utils.login.SqlUsuarios;
 import core.utils.login.Usuarios;
 import java.awt.Toolkit;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -17,19 +22,46 @@ import javax.swing.UnsupportedLookAndFeelException;
  *
  * @author Marko
  */
-public class NuevoUsuario extends javax.swing.JFrame {
+public final class NuevoUsuario extends javax.swing.JFrame {
+    
+    public void getRoles(){
+        DefaultComboBoxModel boxModel = new DefaultComboBoxModel();
+        String sql = "SELECT * FROM `cafebar`.`rol` ORDER BY `id` desc LIMIT 5";
+        Conexion conexion = new Conexion();
+        try {
+            Statement stmt = conexion.connect().createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            conexion.connect().close();
+            while (rs.next()){
+                boxModel.addElement(rs.getString("nombre"));
+            }
+        } catch (SQLException e) {
+            System.out.println("gui.usuario.NuevoUsuario.getRoles() > "+e);
+        }
+        jcTipo.setModel(boxModel);
+    }
+    
+    private void limpiar() {
+        txtUsuario.setText("");
+        txtPassword.setText("");
+        txtConfirmaPassword.setText("");
+        txtNombre.setText("");
+        txtEmail.setText("");
+    }
+    
+    private void settings(){
+        try { 
+            UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel");
+        } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(gui.MainMenu.getIconDir())));
 
+    }
     /**
      * Creates new form registro
      */
     public NuevoUsuario() {
-        try { 
-            UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel");
-        } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored){}
-        
+        settings();
         initComponents();
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(gui.MainMenu.getIconDir())));
-
     }
 
     /**
@@ -41,7 +73,7 @@ public class NuevoUsuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanel_Main_ = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -59,26 +91,31 @@ public class NuevoUsuario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setType(java.awt.Window.Type.UTILITY);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel_Main_.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Usuario:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, -1, 20));
+        jPanel_Main_.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, -1, 20));
 
         txtUsuario.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 200, -1));
+        jPanel_Main_.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 200, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("<html>Confirmar Contraseña:</html>");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 90, 32));
+        jPanel_Main_.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 90, 32));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Password:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, -1, 20));
+        jPanel_Main_.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, -1, 20));
 
         btnRegistrar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnRegistrar.setText("Registrar");
@@ -87,13 +124,13 @@ public class NuevoUsuario extends javax.swing.JFrame {
                 btnRegistrarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, -1, -1));
+        jPanel_Main_.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, -1, -1));
 
         txtEmail.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 200, -1));
+        jPanel_Main_.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 200, -1));
 
         txtNombre.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 200, -1));
+        jPanel_Main_.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 200, -1));
 
         btnRegistrar1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnRegistrar1.setText("Cancelar");
@@ -102,55 +139,44 @@ public class NuevoUsuario extends javax.swing.JFrame {
                 btnRegistrar1ActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegistrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 310, -1, -1));
+        jPanel_Main_.add(btnRegistrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 310, -1, -1));
 
         txtConfirmaPassword.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        txtConfirmaPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtConfirmaPasswordActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtConfirmaPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 200, -1));
+        jPanel_Main_.add(txtConfirmaPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 200, -1));
 
         txtPassword.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 200, -1));
+        jPanel_Main_.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 200, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Tipo de Permisos:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 130, 30));
+        jPanel_Main_.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 130, 30));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Nombre:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 70, 20));
+        jPanel_Main_.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 70, 20));
 
         jcTipo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jcTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Usuario" }));
-        jcTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcTipoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jcTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 200, -1));
+        jPanel_Main_.add(jcTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 200, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Email:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 60, 30));
+        jPanel_Main_.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 60, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel_Main_, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel_Main_, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -207,21 +233,9 @@ public class NuevoUsuario extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnRegistrar1ActionPerformed
 
-    private void jcTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcTipoActionPerformed
-
-    }//GEN-LAST:event_jcTipoActionPerformed
-
-    private void txtConfirmaPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConfirmaPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtConfirmaPasswordActionPerformed
-
-    private void limpiar() {
-        txtUsuario.setText("");
-        txtPassword.setText("");
-        txtConfirmaPassword.setText("");
-        txtNombre.setText("");
-        txtEmail.setText("");
-    }
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        getRoles();
+    }//GEN-LAST:event_formWindowOpened
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -240,19 +254,6 @@ public class NuevoUsuario extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(NuevoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
-        //</editor-fold>
-        //</editor-fold>
-        
-        //</editor-fold>
-        //</editor-fold>
-        
-        //</editor-fold>
-        //</editor-fold>
-        
-        //</editor-fold>
-
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new NuevoUsuario().setVisible(true);
@@ -268,7 +269,7 @@ public class NuevoUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel_Main_;
     private javax.swing.JComboBox<String> jcTipo;
     public javax.swing.JPasswordField txtConfirmaPassword;
     public javax.swing.JTextField txtEmail;
