@@ -8,6 +8,9 @@ package gui.venta;
 import com.toedter.calendar.JDateChooser;
 import core.utils.engine.WebEngineX;
 import core.utils.themplate.Detalle;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,96 +27,98 @@ import javax.swing.table.DefaultTableModel;
  * <www.elementum69.com>
  */
 public class VentasP extends javax.swing.JPanel {
+
     private final Date date = new Date();
-    private final DateFormat inFormat = new SimpleDateFormat( "| dd-MM-yyyy | E | hh:mm:ss aa |");
-    private final DateFormat outFormat = new SimpleDateFormat( "| yyyy-MM-dd | E | HH:mm:ss | ");
+    private final DateFormat inFormat = new SimpleDateFormat("| dd-MM-yyyy | E | hh:mm:ss aa |");
+    private final DateFormat outFormat = new SimpleDateFormat("| yyyy-MM-dd | E | HH:mm:ss | ");
     private final DateFormat outFormatFechaDia = new SimpleDateFormat("yyyy-MM-dd");
     private final String myDate = outFormat.format(date);
-    
+
     private final String msjFacturaActiva = "Facturas activas: ";
     private final String msjFacturaPorFecha = "Facturas por fecha: ";
-    
+
     private String myDateDia;
     private Date dateX = new Date();
-   
+
     private final Detalle detalle = new Detalle();
     private WebEngineX webEngine = null;
     private JFXPanel jFxPanel = null;
-    
+
     private static Integer CLIENTEID = null;
     private Double TOTAL = null;
     private String SOLVENTE = null;
-      
-    private void startViewer(){
-        if (webEngine == null){
+
+    private void startViewer() {
+        if (webEngine == null) {
             webEngine = new WebEngineX();
             System.err.println("new WebEngine");
-        } if (jFxPanel == null){
+        }
+        if (jFxPanel == null) {
             jFxPanel = webEngine.getjFxPanel();
             System.err.println("new jFxPanel");
         } else {
-            System.err.println("webEngine: "+webEngine+" jFxPanel: "+jFxPanel);
+            System.err.println("webEngine: " + webEngine + " jFxPanel: " + jFxPanel);
         }
     }
-    
-    private void loadViewer(){
+
+    private void loadViewer() {
         webEngine.loadViewer();
     }
-    
-    private void addDetallePanel (){
+
+    private void addDetallePanel() {
         try {
             startViewer();
             jScrollPane_Detalle_.getViewport().add(jFxPanel);
             loadViewer();
         } catch (Exception e) {
-            System.err.println("mostrarDetalle ():"+e);
+            System.err.println("mostrarDetalle ():" + e);
         }
     }
-    
-    private void limpiarDetalles(){
+
+    private void limpiarDetalles() {
         try {
             webEngine.putDefauiltInViewer();
             TOTAL = null;
         } catch (Exception e) {
-            System.err.println("limpiarDetalles():"+e);
+            System.err.println("limpiarDetalles():" + e);
         }
     }
-    
+
     private void limpiarTablaFacturas() {
         try {
             DefaultTableModel modelF = (DefaultTableModel) jTable_Clientes_.getModel();
             jTable_Clientes_.setPreferredSize(new java.awt.Dimension(jTable_Clientes_.getWidth(), 0));
 
             int rowCount = modelF.getRowCount();
-            for (int i = rowCount-1; i >= 0; i--) {
+            for (int i = rowCount - 1; i >= 0; i--) {
                 modelF.removeRow(i);
             }
             CLIENTEID = null;
         } catch (Exception e) {
-            System.err.println("limpiarTablaFacturas():"+e);
+            System.err.println("limpiarTablaFacturas():" + e);
         }
     }
-    
-    private void restablecerBordes(){
+
+    private void restablecerBordes() {
         jPanel_Detalle_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detalle", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14)));
         jPanel_Clientes_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Clientes", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14)));
     }
-    
+
     private void borderFacturaFecha(String mensaje, Date Fecha) {
         myDateDia = outFormatFechaDia.format(Fecha);
-        jPanel_Clientes_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, mensaje+myDateDia, javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14)));
+        jPanel_Clientes_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, mensaje + myDateDia, javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14)));
     }
-    
+
     private void borderFacturaDetalle(String numeroFactura) {
         jPanel_Detalle_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detalle - Pedidos Factura #" + numeroFactura, javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14)));
     }
-        
+
     private void mostrarVentasActivas() {
-        
+
         limpiarDetalles();
         limpiarTablaFacturas();
-        restablecerBordes ();
-        
+        restablecerBordes();
+
         try {
             core.database.querry.Factura facturas = new core.database.querry.Factura();
             // SQL
@@ -135,33 +140,63 @@ public class VentasP extends javax.swing.JPanel {
 
                 model.addRow(filaData[i]);
             }
-            borderFacturaFecha(msjFacturaActiva,date);
+            borderFacturaFecha(msjFacturaActiva, date);
             jLabel_BuscarPorFecha_.setText("Fecha: ");
         } catch (Exception e) {
-            System.err.println("mostrarVentasActivas().mostrar: >"+e);
+            System.err.println("mostrarVentasActivas().mostrar: >" + e);
         }
     }
-    
-    private void mostrarVentasFecha(){
+
+    private void AnularVenta() {
+
+        try {
+            core.database.querry.Factura facturas = new core.database.querry.Factura();
+            // SQL
+
+            PreparedStatement ps = null;
+
+            core.database.Conexion objCon = new core.database.Conexion();
+            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) objCon.connect();
+
+            ps = conn.prepareStatement(" DELETE FROM  temp_pedido WHERE temp_venta_id = '" + CLIENTEID + "'");
+            ps.execute();
+
+            ps = conn.prepareStatement("DELETE FROM `cafebar`.`temp_venta` WHERE `id`= '" + CLIENTEID + "'");
+            ps.execute();
+
+            JOptionPane.showMessageDialog(null, "Registro Eliminado");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al Eliminar Registro");
+            System.out.println(ex.toString());
+        }
+
+        limpiarDetalles();
+        limpiarTablaFacturas();
+        restablecerBordes();
+    }
+
+    private void mostrarVentasFecha() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored) {}
-        
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored) {
+        }
+
         JDateChooser calendario = new JDateChooser();
         Date fechaActual = new Date();
         calendario.setDate(fechaActual);
-        int selectFecha = JOptionPane.showOptionDialog( null, add(calendario), "Selecciona la Fecha", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null );
-        
+        int selectFecha = JOptionPane.showOptionDialog(null, add(calendario), "Selecciona la Fecha", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
         try {
             if (selectFecha == JOptionPane.OK_OPTION) {
-                restablecerBordes ();
+                restablecerBordes();
                 limpiarTablaFacturas();
                 limpiarDetalles();
-                borderFacturaFecha(msjFacturaPorFecha,calendario.getDate());
+                borderFacturaFecha(msjFacturaPorFecha, calendario.getDate());
                 dateX = calendario.getDate();
                 String fecha = outFormatFechaDia.format(dateX);
-                System.err.println("Buscar ventas del día: "+fecha);
-                
+                System.err.println("Buscar ventas del día: " + fecha);
+
                 try {
                     core.database.querry.Factura facturas = new core.database.querry.Factura();
                     // SQL
@@ -177,116 +212,117 @@ public class VentasP extends javax.swing.JPanel {
 
                     for (int i = 0; i < lista.size(); i++) {
                         filaData[i][0] = lista.get(i).getIdFactura();
-                        filaData[i][1] = "Q "+lista.get(i).getCosto();
+                        filaData[i][1] = "Q " + lista.get(i).getCosto();
                         filaData[i][2] = lista.get(i).getFecha();
                         filaData[i][3] = lista.get(i).getSolvente();
 
                         model.addRow(filaData[i]);
                     }
                 } catch (Exception e) {
-                    System.err.println("mostrarVentasFecha().mostrar: >"+e);
+                    System.err.println("mostrarVentasFecha().mostrar: >" + e);
                 }
-                jLabel_BuscarPorFecha_.setText("Fecha: "+fecha);
+                jLabel_BuscarPorFecha_.setText("Fecha: " + fecha);
             } else {
                 //nada
             }
         } catch (Exception e) {
             System.err.println(e);
         }
-        
+
         try {
             UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel");
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored) {}
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ignored) {
+        }
     }
-    
-    private void nuevoCliente(){
+
+    private void nuevoCliente() {
         try {
             NuevoCliente clienteNuevo = new NuevoCliente();
             clienteNuevo.setVisible(true);
         } catch (Exception e) {
-            System.err.println("nuevoCliente(): >"+e);
+            System.err.println("nuevoCliente(): >" + e);
         }
     }
-    
-    private void dobleClickClientes(java.awt.event.MouseEvent evt){
+
+    private void dobleClickClientes(java.awt.event.MouseEvent evt) {
         if (evt.getClickCount() == 2) {
             int colId = 1;
             int row = jTable_Clientes_.getSelectedRow();
-            
+
             CLIENTEID = (Integer) jTable_Clientes_.getValueAt(row, 0);
             SOLVENTE = (String) jTable_Clientes_.getValueAt(row, 3);
             Object objId = (Object) jTable_Clientes_.getValueAt(row, colId);
-            
+
             TOTAL = webEngine.mostrarDetalleD(CLIENTEID);
-            
-            System.err.println("\nCliente id: "+CLIENTEID+" > Q"+TOTAL);
-            borderFacturaDetalle(CLIENTEID+"");
+
+            System.err.println("\nCliente id: " + CLIENTEID + " > Q" + TOTAL);
+            borderFacturaDetalle(CLIENTEID + "");
         }
     }
-    
-    private void mensajeNoFacturaSelect (){
+
+    private void mensajeNoFacturaSelect() {
         String botones[] = {"Añadir Cliente", "Cancelar"};
         int eleccion = JOptionPane.showOptionDialog(this, "Selecciona una factura para añadir un pedido, o crea una nuevo cliente.", "No hay una factura selecionada!", 0, 0, null, botones, this);
         if (eleccion == JOptionPane.YES_OPTION) {
-            nuevoCliente ();
+            nuevoCliente();
         } else if (eleccion == JOptionPane.NO_OPTION) {
         }
     }
-    
-    private void mensajeNullTotal (){
+
+    private void mensajeNullTotal() {
         String botones[] = {"Aceptar", "Cancelar"};
         JOptionPane.showOptionDialog(this, "No hay un monto que cobrar, verifica que hayas seleccionado una factura y tenga algún consumo.", "No hay nada que cobrar!", 0, 0, null, botones, this);
     }
-    
-    private void mensajeSolventeP(){
+
+    private void mensajeSolventeP() {
         String botones[] = {"Aceptar"};
         JOptionPane.showOptionDialog(this, "No se pueden agregar más pedidos.", "La Factura ya ha sido Cancelada.", 0, 0, null, botones, this);
     }
-    
-    private void mensajeSolventeC(){
+
+    private void mensajeSolventeC() {
         String botones[] = {"Aceptar"};
         JOptionPane.showOptionDialog(this, "La Factura ya ha sido Cancelada.", "Factura \"Solvente\"", 0, 0, null, botones, this);
     }
-    
-    private void addPedido(){
-        if (CLIENTEID==null){
+
+    private void addPedido() {
+        if (CLIENTEID == null) {
             mensajeNoFacturaSelect();
-        } else if (SOLVENTE.equals("Solvente")){
+        } else if (SOLVENTE.equals("Solvente")) {
             mensajeSolventeP();
         } else {
             NuevoPedido pedido = new NuevoPedido();
             pedido.setVisible(true);
         }
     }
-    
-    private void cobrar(){
-        if (TOTAL==null || TOTAL <=0){
+
+    private void cobrar() {
+        if (TOTAL == null || TOTAL <= 0) {
             mensajeNullTotal();
-        } else if (SOLVENTE.equals("Solvente")){
+        } else if (SOLVENTE.equals("Solvente")) {
             mensajeSolventeC();
         } else {
             Cobrar cobrar = new Cobrar();
             cobrar.setVisible(true);
         }
     }
-       
-    public static void actualizarFacturasActivas(){
+
+    public static void actualizarFacturasActivas() {
 //        mostrarVentasActivas();
-    }    
-       
-    public void removeViewer(){
+    }
+
+    public void removeViewer() {
         jScrollPane_Detalle_.getViewport().removeAll();
     }
-    
+
     public static Integer getCLIENTEID() {
         return CLIENTEID;
     }
-    
+
     public VentasP() {
         initComponents();
         addDetallePanel();
         mostrarVentasActivas();
-        
+
     }
 
     /**
@@ -308,6 +344,7 @@ public class VentasP extends javax.swing.JPanel {
         jButton_ClienteNuevo_ = new javax.swing.JButton();
         jLabel_BuscarPorFecha_ = new javax.swing.JLabel();
         jLabel_SinCobrar_ = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jScrollPane_Facturas_ = new javax.swing.JScrollPane();
         jTable_Clientes_ = new javax.swing.JTable();
 
@@ -411,6 +448,14 @@ public class VentasP extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton1.setText("Anular");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel_DetalleBotones_1Layout = new javax.swing.GroupLayout(jPanel_DetalleBotones_1);
         jPanel_DetalleBotones_1.setLayout(jPanel_DetalleBotones_1Layout);
         jPanel_DetalleBotones_1Layout.setHorizontalGroup(
@@ -419,19 +464,24 @@ public class VentasP extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jButton_ClienteNuevo_, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel_BuscarPorFecha_, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel_BuscarPorFecha_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel_SinCobrar_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE))
         );
         jPanel_DetalleBotones_1Layout.setVerticalGroup(
             jPanel_DetalleBotones_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_DetalleBotones_1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel_DetalleBotones_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton_ClienteNuevo_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_BuscarPorFecha_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_SinCobrar_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel_DetalleBotones_1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel_DetalleBotones_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_DetalleBotones_1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel_DetalleBotones_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton_ClienteNuevo_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel_BuscarPorFecha_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel_SinCobrar_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -504,8 +554,13 @@ public class VentasP extends javax.swing.JPanel {
         dobleClickClientes(evt);
     }//GEN-LAST:event_jTable_Clientes_MouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        AnularVenta();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton_ClienteNuevo_;
     private javax.swing.JButton jButton_Cobrar_;
     private javax.swing.JButton jButton_NuevoPedido_;
