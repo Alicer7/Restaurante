@@ -8,6 +8,7 @@ package gui.venta;
 import com.toedter.calendar.JDateChooser;
 import core.utils.engine.WebEngineX;
 import core.utils.themplate.Detalle;
+import java.awt.event.InputEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import javafx.embed.swing.JFXPanel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
@@ -174,6 +176,7 @@ public class VentasP extends javax.swing.JPanel {
         limpiarDetalles();
         limpiarTablaFacturas();
         restablecerBordes();
+        mostrarVentasActivas();
     }
 
     private void mostrarVentasFecha() {
@@ -334,6 +337,7 @@ public class VentasP extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         jPanel_Detalle_ = new javax.swing.JPanel();
         jPanel_DetalleBotones_ = new javax.swing.JPanel();
         jButton_NuevoPedido_ = new javax.swing.JButton();
@@ -344,9 +348,19 @@ public class VentasP extends javax.swing.JPanel {
         jButton_ClienteNuevo_ = new javax.swing.JButton();
         jLabel_BuscarPorFecha_ = new javax.swing.JLabel();
         jLabel_SinCobrar_ = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jScrollPane_Facturas_ = new javax.swing.JScrollPane();
         jTable_Clientes_ = new javax.swing.JTable();
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton1.setText("Anular");
+        jButton1.setMaximumSize(null);
+        jButton1.setMinimumSize(new java.awt.Dimension(77, 42));
+        jButton1.setPreferredSize(new java.awt.Dimension(77, 42));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         setLayout(new java.awt.BorderLayout());
 
@@ -401,6 +415,8 @@ public class VentasP extends javax.swing.JPanel {
         );
 
         jPanel_Detalle_.add(jPanel_DetalleBotones_, java.awt.BorderLayout.SOUTH);
+
+        jScrollPane_Detalle_.setMaximumSize(null);
         jPanel_Detalle_.add(jScrollPane_Detalle_, java.awt.BorderLayout.CENTER);
 
         add(jPanel_Detalle_, java.awt.BorderLayout.EAST);
@@ -448,14 +464,6 @@ public class VentasP extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("Anular");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel_DetalleBotones_1Layout = new javax.swing.GroupLayout(jPanel_DetalleBotones_1);
         jPanel_DetalleBotones_1.setLayout(jPanel_DetalleBotones_1Layout);
         jPanel_DetalleBotones_1Layout.setHorizontalGroup(
@@ -467,21 +475,16 @@ public class VentasP extends javax.swing.JPanel {
                 .addComponent(jLabel_BuscarPorFecha_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel_SinCobrar_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel_DetalleBotones_1Layout.setVerticalGroup(
             jPanel_DetalleBotones_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_DetalleBotones_1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel_DetalleBotones_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_DetalleBotones_1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel_DetalleBotones_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton_ClienteNuevo_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel_BuscarPorFecha_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel_SinCobrar_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel_DetalleBotones_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton_ClienteNuevo_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_BuscarPorFecha_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_SinCobrar_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -551,7 +554,28 @@ public class VentasP extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton_Cobrar_ActionPerformed
 
     private void jTable_Clientes_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_Clientes_MouseClicked
-        dobleClickClientes(evt);
+//        dobleClickClientes(evt);
+//        int modifiers = evt.getModifiers();
+//        if ((modifiers & InputEvent.BUTTON1_MASK) == InputEvent.BUTTON1_MASK) {
+//          System.out.println("Left button pressed.");
+//        }
+//        if ((modifiers & InputEvent.BUTTON2_MASK) == InputEvent.BUTTON2_MASK) {
+//          System.out.println("Middle button pressed.");
+//        }
+//        if ((modifiers & InputEvent.BUTTON3_MASK) == InputEvent.BUTTON3_MASK) {
+//          System.out.println("Right button pressed.");
+//        }
+        
+        if (SwingUtilities.isLeftMouseButton(evt)) {
+          System.out.println("Left button released.");
+        }
+        if (SwingUtilities.isMiddleMouseButton(evt)) {
+          System.out.println("Middle button released.");
+        }
+        if (SwingUtilities.isRightMouseButton(evt)) {
+          System.out.println("Right button released.");
+        }
+        System.out.println();
     }//GEN-LAST:event_jTable_Clientes_MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
