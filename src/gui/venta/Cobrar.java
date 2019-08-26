@@ -56,7 +56,7 @@ public class Cobrar extends javax.swing.JFrame {
             jLabel_SaldoQ_.setForeground(new java.awt.Color(0, 255, 0));
             jLabel_Saldo_.setForeground(new java.awt.Color(0, 255, 0));
         } else {
-            System.out.println("Error Desconocido gui.venta.Cobrar.mostrarCostoPago()");
+            System.out.println("Cobrar > mostrarSaldo > Error no especificado");
         }
         jLabel_Saldo_.setText(df.format(SALDO));
         setToltips();
@@ -133,9 +133,8 @@ public class Cobrar extends javax.swing.JFrame {
         
         try {
             mostrarSaldo();
-            System.err.println("Descuento.0: Cobrar > "+DESCUENTO);
             webEngine.addDescuentoDetalle(DESCUENTO);
-            System.err.println("Descuento.4 Cobrar > webEngine: "+DESCUENTO);
+            System.err.println("Cobrar > moDescuentoFormat > webEngine:Descuento >> Q. "+DESCUENTO);
         } catch (Exception e) {
             System.err.println(e);
         }
@@ -150,20 +149,20 @@ public class Cobrar extends javax.swing.JFrame {
         webEngine.loadViewer(false);
     }
     
-    private void addDetallePanel (){
+    private void addDetallePanel(){
         try {
             startViewer ();
             jScrollPane_Detalle_.getViewport().add(jFxPanel);
             loadViewer ();
         } catch (Exception e) {
-            System.err.println("mostrarDetalle ():"+e);
+            System.err.println("addDetallePanel"+e);
         }
     }
     
     private void mostrarDetalle(){
         webEngine.mostrarDetalle(CLIENTEID);
         TOTAL=webEngine.getTOTAL();
-        System.err.println("Cobrar > Mostrar Detalle Cobrar "+df.format(TOTAL));
+        System.err.println("Cobrar > mostrarDetalle >> Total: "+df.format(TOTAL));
         jLabel_Total_.setText(df.format(TOTAL));
     }
         
@@ -185,11 +184,11 @@ public class Cobrar extends javax.swing.JFrame {
                 dispose();
             }
         } else {
-            System.err.println("Sin cambio en efectivo.");
+            System.out.println("Cobrar > sendPrint > Sin cambio en efectivo.");
             try {
                 imprimir();
             } catch (Exception e) {
-                System.err.println("Error de impresión: "+e);
+                System.err.println("Cobrar > sendPrint > Error de impresión: "+e);
             } finally {
                 dispose();
             }
@@ -692,9 +691,11 @@ public class Cobrar extends javax.swing.JFrame {
         } else {
             try {
                 soventarFactura();
+                System.out.println("Cobrar > jButton_Imprimir_ActionPerformed >> soventarFactura");
                 sendPrint();
+                System.out.println("Cobrar > jButton_Imprimir_ActionPerformed >> sendPrint");
             } catch (Exception e) {
-                System.err.println("Error al realizar la transacción "+e);
+                System.err.println("Cobrar > jButton_Imprimir_ActionPerformed >> Error: "+e);
             }
         }
     }//GEN-LAST:event_jButton_Imprimir_ActionPerformed
