@@ -326,7 +326,7 @@ public class OnDemandLogin extends javax.swing.JFrame {
                 txtPasswordKeyReleased(evt);
             }
         });
-        jPanel_Login_.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 340, -1));
+        jPanel_Login_.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 340, -1));
 
         btnAceptar_.setBackground(new java.awt.Color(153, 0, 51));
         btnAceptar_.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -334,7 +334,7 @@ public class OnDemandLogin extends javax.swing.JFrame {
         btnAceptar_.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAceptar_.setMinimumSize(new java.awt.Dimension(150, 64));
         btnAceptar_.setNextFocusableComponent(btnCancelar_);
-        btnAceptar_.setPreferredSize(new java.awt.Dimension(150, 64));
+        btnAceptar_.setPreferredSize(new java.awt.Dimension(150, 48));
         btnAceptar_.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnAceptar_MouseEntered(evt);
@@ -345,14 +345,14 @@ public class OnDemandLogin extends javax.swing.JFrame {
                 btnAceptar_ActionPerformed(evt);
             }
         });
-        jPanel_Login_.add(btnAceptar_, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 121, -1, -1));
+        jPanel_Login_.add(btnAceptar_, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, -1, -1));
 
         btnCancelar_.setBackground(new java.awt.Color(153, 0, 51));
         btnCancelar_.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         btnCancelar_.setText("Cancelar");
         btnCancelar_.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelar_.setMinimumSize(new java.awt.Dimension(150, 64));
-        btnCancelar_.setPreferredSize(new java.awt.Dimension(150, 64));
+        btnCancelar_.setPreferredSize(new java.awt.Dimension(150, 48));
         btnCancelar_.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnCancelar_MouseEntered(evt);
@@ -363,7 +363,7 @@ public class OnDemandLogin extends javax.swing.JFrame {
                 btnCancelar_ActionPerformed(evt);
             }
         });
-        jPanel_Login_.add(btnCancelar_, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 121, -1, -1));
+        jPanel_Login_.add(btnCancelar_, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
 
         jPanel_Main_.add(jPanel_Login_, java.awt.BorderLayout.CENTER);
 
