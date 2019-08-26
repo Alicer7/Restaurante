@@ -27,6 +27,7 @@ public class Cobrar extends javax.swing.JFrame {
     private DecimalFormatSymbols dfs;
     private DecimalFormat df;
     private Boolean esNumero = true;
+    private String NIT = "CF";
     private Double TOTAL = 0.0;
     private Double SALDO = 0.0;
     private Double EFECTIVO = 0.0;
@@ -132,10 +133,9 @@ public class Cobrar extends javax.swing.JFrame {
         
         try {
             mostrarSaldo();
-            System.err.println("Descuento.0: "+DESCUENTO);
+            System.err.println("Descuento.0: Cobrar > "+DESCUENTO);
             webEngine.addDescuentoDetalle(DESCUENTO);
-            System.err.println("Descuento.4");
-            mostrarDetalle();
+            System.err.println("Descuento.4 Cobrar > webEngine: "+DESCUENTO);
         } catch (Exception e) {
             System.err.println(e);
         }
@@ -163,14 +163,10 @@ public class Cobrar extends javax.swing.JFrame {
     private void mostrarDetalle(){
         webEngine.mostrarDetalle(CLIENTEID);
         TOTAL=webEngine.getTOTAL();
-        System.err.println("Mostrar Detalle Cobrar "+df.format(TOTAL));
+        System.err.println("Cobrar > Mostrar Detalle Cobrar "+df.format(TOTAL));
         jLabel_Total_.setText(df.format(TOTAL));
     }
-    
-    private void facturaSetCancellerd(){
-        System.err.println("Factura Pagada");
-    }
-    
+        
     public void imprimir() {
         webEngine.printNode();
     }
@@ -196,14 +192,13 @@ public class Cobrar extends javax.swing.JFrame {
                 System.err.println("Error de impresión: "+e);
             } finally {
                 dispose();
-                System.out.println("gui.venta.Cobrar.sendPrint().DISPOSE");
             }
         } 
     }
     
     private void soventarFactura(){
         core.database.querry.Factura f = new core.database.querry.Factura();
-        f.solventarFactura(TOTAL, EFECTIVO, ELECTRONICO, SALDO, CLIENTEID);
+        f.solventarFactura(webEngine.getTOTAL(), DESCUENTO, EFECTIVO, ELECTRONICO, SALDO, CLIENTEID, NIT);
     }
     
     private void mensajeSinCobrar(){
@@ -251,12 +246,15 @@ public class Cobrar extends javax.swing.JFrame {
         jTextField_MoElectronico_ = new javax.swing.JTextField();
         jTextField_MoEfectivo_ = new javax.swing.JTextField();
         jTextField_Descuento_ = new javax.swing.JTextField();
+        jTextField_NIT_ = new javax.swing.JTextField();
         jLabel_MoElectronico_ = new javax.swing.JLabel();
         jLabel_MoElectronicoIcon_ = new javax.swing.JLabel();
         jLabel_MoEfectivo_ = new javax.swing.JLabel();
         jLabel_MoEfectivoIcon_ = new javax.swing.JLabel();
         jLabel_Descuento_ = new javax.swing.JLabel();
         jLabel_DescuentoIcon_ = new javax.swing.JLabel();
+        jLabel_NIT_ = new javax.swing.JLabel();
+        jLabel_NITIcon_ = new javax.swing.JLabel();
         jPanel_Saldo_ = new javax.swing.JPanel();
         jLabel_SaldoQ_ = new javax.swing.JLabel();
         jLabel_Saldo_ = new javax.swing.JLabel();
@@ -320,8 +318,8 @@ public class Cobrar extends javax.swing.JFrame {
 
         jPanel_MetodoPago_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Método de Pago", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
         jPanel_MetodoPago_.setMaximumSize(null);
-        jPanel_MetodoPago_.setMinimumSize(new java.awt.Dimension(328, 252));
-        jPanel_MetodoPago_.setPreferredSize(new java.awt.Dimension(328, 252));
+        jPanel_MetodoPago_.setMinimumSize(new java.awt.Dimension(328, 294));
+        jPanel_MetodoPago_.setPreferredSize(new java.awt.Dimension(328, 294));
 
         jTextField_MoElectronico_.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTextField_MoElectronico_.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -363,7 +361,6 @@ public class Cobrar extends javax.swing.JFrame {
             }
         });
 
-        jTextField_Descuento_.setEditable(false);
         jTextField_Descuento_.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTextField_Descuento_.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextField_Descuento_.setText("0.00");
@@ -381,6 +378,26 @@ public class Cobrar extends javax.swing.JFrame {
         jTextField_Descuento_.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField_Descuento_KeyReleased(evt);
+            }
+        });
+
+        jTextField_NIT_.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextField_NIT_.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jTextField_NIT_.setText("CF");
+        jTextField_NIT_.setMaximumSize(null);
+        jTextField_NIT_.setMinimumSize(new java.awt.Dimension(148, 48));
+        jTextField_NIT_.setPreferredSize(new java.awt.Dimension(148, 48));
+        jTextField_NIT_.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField_NIT_FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField_NIT_FocusLost(evt);
+            }
+        });
+        jTextField_NIT_.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField_NIT_KeyReleased(evt);
             }
         });
 
@@ -432,6 +449,22 @@ public class Cobrar extends javax.swing.JFrame {
         jLabel_DescuentoIcon_.setPreferredSize(new java.awt.Dimension(28, 48));
         jLabel_DescuentoIcon_.setRequestFocusEnabled(false);
 
+        jLabel_NIT_.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel_NIT_.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel_NIT_.setText("NIT:");
+        jLabel_NIT_.setMaximumSize(new java.awt.Dimension(110, 48));
+        jLabel_NIT_.setMinimumSize(new java.awt.Dimension(110, 48));
+        jLabel_NIT_.setOpaque(true);
+        jLabel_NIT_.setPreferredSize(new java.awt.Dimension(110, 48));
+
+        jLabel_NITIcon_.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel_NITIcon_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_NITIcon_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/help0X32.png"))); // NOI18N
+        jLabel_NITIcon_.setMaximumSize(new java.awt.Dimension(28, 48));
+        jLabel_NITIcon_.setMinimumSize(new java.awt.Dimension(28, 48));
+        jLabel_NITIcon_.setPreferredSize(new java.awt.Dimension(28, 48));
+        jLabel_NITIcon_.setRequestFocusEnabled(false);
+
         javax.swing.GroupLayout jPanel_MetodoPago_Layout = new javax.swing.GroupLayout(jPanel_MetodoPago_);
         jPanel_MetodoPago_.setLayout(jPanel_MetodoPago_Layout);
         jPanel_MetodoPago_Layout.setHorizontalGroup(
@@ -456,7 +489,13 @@ public class Cobrar extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel_MoEfectivoIcon_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_MoEfectivo_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jTextField_MoEfectivo_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel_MetodoPago_Layout.createSequentialGroup()
+                        .addComponent(jLabel_NIT_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel_NITIcon_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_NIT_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel_MetodoPago_Layout.setVerticalGroup(
@@ -472,12 +511,17 @@ public class Cobrar extends javax.swing.JFrame {
                     .addComponent(jLabel_MoEfectivo_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_MoEfectivoIcon_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField_MoEfectivo_, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel_MetodoPago_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_Descuento_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_DescuentoIcon_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField_Descuento_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addGroup(jPanel_MetodoPago_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_NIT_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_NITIcon_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_NIT_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel_Saldo_.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Saldo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -609,7 +653,7 @@ public class Cobrar extends javax.swing.JFrame {
     private void jTextField_Descuento_KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_Descuento_KeyReleased
         int key = evt.getKeyCode();
         if ( java.awt.event.KeyEvent.VK_ENTER == key){
-            jButton_Imprimir_.requestFocus();
+            jTextField_NIT_.requestFocus();
         }
     }//GEN-LAST:event_jTextField_Descuento_KeyReleased
 
@@ -647,18 +691,28 @@ public class Cobrar extends javax.swing.JFrame {
             mensajeSinCobrar();
         } else {
             try {
+                soventarFactura();
                 sendPrint();
-                facturaSetCancellerd();
             } catch (Exception e) {
                 System.err.println("Error al realizar la transacción "+e);
             }
-            try {
-                soventarFactura();
-            } catch (Exception e) {
-                System.err.println("Error al actualizar el estado de la factura: "+e);
-            }
         }
     }//GEN-LAST:event_jButton_Imprimir_ActionPerformed
+
+    private void jTextField_NIT_FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_NIT_FocusGained
+        jTextField_NIT_.selectAll();
+    }//GEN-LAST:event_jTextField_NIT_FocusGained
+
+    private void jTextField_NIT_FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_NIT_FocusLost
+        NIT=jTextField_NIT_.getText();
+    }//GEN-LAST:event_jTextField_NIT_FocusLost
+
+    private void jTextField_NIT_KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_NIT_KeyReleased
+        int key = evt.getKeyCode();
+        if ( java.awt.event.KeyEvent.VK_ENTER == key){
+            jButton_Imprimir_.requestFocus();
+        }
+    }//GEN-LAST:event_jTextField_NIT_KeyReleased
 
     /**
      * @param args the command line arguments
@@ -701,6 +755,8 @@ public class Cobrar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_MoEfectivo_;
     private javax.swing.JLabel jLabel_MoElectronicoIcon_;
     private javax.swing.JLabel jLabel_MoElectronico_;
+    private javax.swing.JLabel jLabel_NITIcon_;
+    private javax.swing.JLabel jLabel_NIT_;
     private javax.swing.JLabel jLabel_SaldoQ_;
     private javax.swing.JLabel jLabel_Saldo_;
     private javax.swing.JLabel jLabel_TotalQ_;
@@ -717,5 +773,6 @@ public class Cobrar extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField_Descuento_;
     private javax.swing.JTextField jTextField_MoEfectivo_;
     private javax.swing.JTextField jTextField_MoElectronico_;
+    private javax.swing.JTextField jTextField_NIT_;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,11 +7,8 @@ package core.utils.engine;
 
 import core.utils.themplate.Detalle;
 import gui.login.OnDemandLogin;
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.print.PageLayout;
 import javafx.print.PageOrientation;
 import javafx.print.Printer;
@@ -20,21 +17,17 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.transform.Scale;
 import javafx.scene.web.WebView;
-import javafx.stage.Stage;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author Administrador
  */
-public class WebEngineX extends Application{
+public class WebEngineX{
     private final Detalle detalle = new Detalle();
     private Integer FACTURAID;
     private Double TOTAL;
@@ -51,20 +44,29 @@ public class WebEngineX extends Application{
     }
     
     private void cleanViewer (){
-        setDetalleClean ();
+        setDetalleClean();
         showInViewer();
     }
     
     private void startViewer (){
-        setDetalleClean ();
+        setDetalleClean();
         jFxPanel = new JFXPanel();
         System.err.println("StartViewer > Detalle > JFXPanel ");
+    }
+    
+    private boolean esSolvente(){
+        if (FACTURAID==null){
+            return true;
+        } else {
+            return detalle.esSolventeFactura(FACTURAID);
+        }
     }
     
     private void onDemandLogin(){
         OnDemandLogin L = new OnDemandLogin("AnularFactura",FACTURAID);
         L.setVisible(true);
     }
+    
     private boolean createContextMenuAnularFactura() {
         
         try {
@@ -95,12 +97,13 @@ public class WebEngineX extends Application{
         html = detalle.getDetalleClean();
     }
     
-    public void addDescuentoDetalle(Double descuento){
-        cleanViewer ();
-        detalle.setDescuento(descuento);
-        html = detalle.getHTML();
-        System.err.println("Descuento.3");
-        showInViewer();
+    public void addDescuentoDetalle(Double DESCUENTO){
+        cleanViewer();
+        detalle.setDetalleNull();
+        detalle.setDescuento(DESCUENTO);
+        html = detalle.getDetalleHTML(FACTURAID);
+        System.err.println("Descuento.3 id:  WebEngine >: "+FACTURAID+" Descuento: "+DESCUENTO);
+        showInViewer(html);
     }
     
     public void loadViewer (boolean esDetalle){
@@ -109,7 +112,7 @@ public class WebEngineX extends Application{
             webView.getEngine().loadContent(html);
             webView.setContextMenuEnabled(false);
             System.err.println("setContextMenuEnable >> off");
-            if (esDetalle == true){
+            if (esDetalle == true && esSolvente() == false){
                 createContextMenuAnularFactura();
             }
             scene = new Scene(webView,70,300);
@@ -124,12 +127,7 @@ public class WebEngineX extends Application{
     }
     public void showInViewer(String html) {
         Platform.runLater(() -> {
-            webView = new WebView();
-            webView.getEngine().setJavaScriptEnabled(true);
-            webView.getEngine().load(html);
-//            webView.getEngine().loadContent(html);
-            scene = new Scene(webView,250,300);
-            jFxPanel.setScene(scene);
+            webView.getEngine().loadContent(html);
         });
     }
     
@@ -141,8 +139,8 @@ public class WebEngineX extends Application{
     public Double mostrarDetalleD(Integer FACTURAID) {
         this.FACTURAID = FACTURAID;
         cleanViewer();
-        detalle.setFACTURAID(FACTURAID);
         detalle.setDetalleNull();
+        detalle.setFACTURAID(FACTURAID);
         html = detalle.getDetalleHTML(FACTURAID);
         showInViewer();
         
@@ -152,8 +150,8 @@ public class WebEngineX extends Application{
     public void mostrarDetalle(Integer FACTURAID) {
         this.FACTURAID = FACTURAID;
         cleanViewer();
-        detalle.setFACTURAID(FACTURAID);
         detalle.setDetalleNull();
+        detalle.setFACTURAID(FACTURAID);
         html = detalle.getDetalleHTML(FACTURAID);
         showInViewer();
     }
@@ -214,10 +212,5 @@ public class WebEngineX extends Application{
         }
     }
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-  
 /******************************************************************************/
 }

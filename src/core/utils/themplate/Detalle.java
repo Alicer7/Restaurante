@@ -8,10 +8,12 @@ package core.utils.themplate;
 import com.mysql.jdbc.Connection;
 import core.database.Conexion;
 import core.database.querry.Factura;
-import gui.venta.VentasP;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -52,7 +54,7 @@ public class Detalle {
     private Double COSTO = 0.0;
     private Double DESCUENTO = 0.0;
     private Double TOTAL = 0.0;
-
+    
     public void setFACTURAID(Integer FACTURAID) {
         this.FACTURAID = FACTURAID;
     }
@@ -69,12 +71,6 @@ public class Detalle {
         return facturaAnuladaSucces;
     }
     
-    
-    public void setDescuento(Double DESCUENTO){
-        System.err.println("Descuento.1: "+DESCUENTO);
-        this.DESCUENTO = DESCUENTO;
-    }
-    
     public void setDetalleNull (){
         htmlFinal = "";
         tBodyB = "";
@@ -86,6 +82,11 @@ public class Detalle {
         DESCUENTO = 0.0;
         TOTAL = 0.0;
         
+    }
+    
+    public void setDescuento(Double DESCUENTO){
+        this.DESCUENTO = DESCUENTO;
+        System.err.println("Descuento.1: Detalle > setDescuento = "+this.DESCUENTO);
     }
     
     public String getHTML(){
@@ -108,64 +109,66 @@ public class Detalle {
                 + "</body>"
                 + "</html>";
     }
-    
+        
     public String getDetalleHTML(Integer FACTURAID){
         this.FACTURAID=FACTURAID;
-        setDetalleNull();
         try {
             Conexion objCon = new Conexion();
-            Connection conn = (Connection) objCon.connect();
-            ResultSet rs = null;
-            PreparedStatement ps = null;
-
-            String servicios
-                    = "SELECT\n"
-                    + "     bebida.`nombre` AS bebida_nombre,\n"
-                    + "     temp_pedido.`bebida_cantidad` AS temp_pedido_bebida_cantidad,\n"
-                    + "     temp_pedido.`costo` AS temp_pedido_costo\n"
-                    + "FROM\n"
-                    + "     `bebida` bebida INNER JOIN `temp_pedido` temp_pedido ON bebida.`id` = temp_pedido.`bebida_id` where temp_venta_id = '" 
-                    + FACTURAID  
-                    + "'"
-            ;
-            ps = conn.prepareStatement(servicios);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                DESCRIPCION = (rs.getString("bebida_nombre"));
-                CANTIDAD = (rs.getInt("temp_pedido_bebida_cantidad"));
-                COSTO = (rs.getDouble("temp_pedido_costo"));
-                Double SUBTOTAL = CANTIDAD * COSTO;
-                TOTAL = TOTAL + SUBTOTAL;
+            try (Connection conn = (Connection) objCon.connect()) {
+                ResultSet rs = null;
+                PreparedStatement ps = null;
                 
-                PEDIDOSX
-                        = "<tr><td class=\"L\">"
-                        +   DESCRIPCION //aquí de acuerdo al id crear un query para seleccionar el nombre del producto
-                        + "</td><td class=\"R\">Q "
-                        +   COSTO //aquí de acuerdo al id crear un query para seleccionar el precio del producto
-                        + "</td><td class=\"M\"> "
-                        +   CANTIDAD //las unidades se toman si no son igual a 0
-                        + "</td><td class=\"R\">Q "
-                        +   SUBTOTAL
-                        + "</td></tr>"
-                ;
-
-                tBodyB = tBodyB + PEDIDOSX;
-                
-                System.out.println("Datos: " + "desc = " + DESCRIPCION + "  cantidad: " + CANTIDAD + "  costo: " + COSTO);
+                String servicios
+                        = "SELECT\n"
+                        + "     bebida.`nombre` AS bebida_nombre,\n"
+                        + "     temp_pedido.`bebida_cantidad` AS temp_pedido_bebida_cantidad,\n"
+                        + "     temp_pedido.`costo` AS temp_pedido_costo\n"
+                        + "FROM\n"
+                        + "     `bebida` bebida INNER JOIN `temp_pedido` temp_pedido ON bebida.`id` = temp_pedido.`bebida_id` where temp_venta_id = '"
+                        + FACTURAID
+                        + "'"
+                        ;
+                ps = conn.prepareStatement(servicios);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    DESCRIPCION = (rs.getString("bebida_nombre"));
+                    CANTIDAD = (rs.getInt("temp_pedido_bebida_cantidad"));
+                    COSTO = (rs.getDouble("temp_pedido_costo"));
+                    Double SUBTOTAL = CANTIDAD * COSTO;
+                    TOTAL += SUBTOTAL;
+                    
+                    PEDIDOSX
+                            = "<tr><td class=\"L\">"
+                            +   DESCRIPCION //aquí de acuerdo al id crear un query para seleccionar el nombre del producto
+                            + "</td><td class=\"R\">Q "
+                            +   COSTO //aquí de acuerdo al id crear un query para seleccionar el precio del producto
+                            + "</td><td class=\"M\"> "
+                            +   CANTIDAD //las unidades se toman si no son igual a 0
+                            + "</td><td class=\"R\">Q "
+                            +   SUBTOTAL
+                            + "</td></tr>"
+                            ;
+                    
+                    tBodyB = tBodyB + PEDIDOSX;
+                    
+                    System.out.println("Datos: " + "desc = " + DESCRIPCION + "  cantidad: " + CANTIDAD + "  costo: " + COSTO);
+                }
             }
         } catch (SQLException ex) {
             System.out.println(ex.toString());
         }
-        
         String totalX 
             = ""
             + "<td class=\"M\">Descuento</td><td></td><td></td><td class=\"R total\">Q "
             + DESCUENTO
             + "</td></tr>"
             + "<td class=\"M\">TOTAL</td> <td></td><td></td><td class=\"R total\">Q "
-            + TOTAL
+            + (TOTAL -= DESCUENTO)
             + "</td></tr>"
         ;
+        
+        System.out.println("\nDetalle > getDetalleHTML > Factura ID: "+this.FACTURAID);
+        System.out.println("Detalle > getDetalleHTML > Descuento: "+DESCUENTO+"\n");
         
         tFootB = totalX;
         bodyFinal = tBodyH + tBodyB + tBocyF;
@@ -173,10 +176,29 @@ public class Detalle {
         
         htmlFinal = head + bodyFinal + footFinal + foot;
         
-        System.out.println("HTML > Factura ID: "+this.FACTURAID);
         return htmlFinal ;
     }
     
+    public boolean esSolventeFactura(Integer FACTURAID){
+        boolean solvente = true;
+        java.sql.Connection conn= new Conexion().connect();
+        String sql="SELECT * FROM `cafebar`.`temp_venta` WHERE `id` = '"+FACTURAID+"'";
+        try {
+            
+            Statement stm;
+            stm = conn.createStatement();
+            ResultSet rst;
+            rst = stm.executeQuery(sql);
+            if ("Activa".equals(rst.getString(8))) {
+                solvente = false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Detalle.class.getName()).log(Level.SEVERE, null, ex);
+            solvente = true;
+        }
+        return solvente;
+    }
+   
     public boolean anularFactura(Integer FACTURAID){
         facturaAnuladaSucces = false;
         factura = new Factura();

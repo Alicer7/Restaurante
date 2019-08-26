@@ -26,6 +26,7 @@ public class Factura {
     private Integer idFactura;
     private String nitCliente;
     private Double costo;
+    private Double descuento;
     private Double pagoEfectivo;
     private Double pagoElectronico;
     private Double cambio;
@@ -39,6 +40,7 @@ public class Factura {
             Integer idFactura, 
             String nitCliente,
             Double costo,
+            Double descuento,
             Double pagoEfectifo,
             Double pagoElectronico,
             Double cambio,
@@ -48,6 +50,7 @@ public class Factura {
         this.idFactura=idFactura;
         this.nitCliente=nitCliente;
         this.costo=costo;
+        this.descuento=descuento;
         this.pagoEfectivo=pagoEfectifo;
         this.pagoElectronico=pagoElectronico;
         this.cambio=cambio;
@@ -73,9 +76,10 @@ public class Factura {
                         rst.getDouble(3), 
                         rst.getDouble(4), 
                         rst.getDouble(5), 
-                        rst.getDouble(6), 
-                        rst.getString(7), 
-                        rst.getString(8)
+                        rst.getDouble(6),
+                        rst.getDouble(7), 
+                        rst.getString(8), 
+                        rst.getString(9)
                 );
                 
                 listaFacturases.add(factura);
@@ -111,9 +115,10 @@ public class Factura {
                         rst.getDouble(3), 
                         rst.getDouble(4), 
                         rst.getDouble(5), 
-                        rst.getDouble(6), 
-                        rst.getString(7), 
-                        rst.getString(8)
+                        rst.getDouble(6),
+                        rst.getDouble(7), 
+                        rst.getString(8), 
+                        rst.getString(9)
                 );
                 
                 listaFacturases.add(factura);
@@ -149,9 +154,10 @@ public class Factura {
                         rst.getDouble(3), 
                         rst.getDouble(4), 
                         rst.getDouble(5), 
-                        rst.getDouble(6), 
-                        rst.getString(7), 
-                        rst.getString(8)
+                        rst.getDouble(6),
+                        rst.getDouble(7), 
+                        rst.getString(8), 
+                        rst.getString(9)
                 );
                 
                 listaFacturases.add(factura);
@@ -169,7 +175,7 @@ public class Factura {
         return listaFacturases;
     }
     
-    public void solventarFactura(Double TOTAL,Double EFECTIVO,Double ELECTRONICO,Double CAMBIO, Integer CLIENTEID){
+    public void solventarFactura(Double TOTAL, Double DESCUENTO, Double EFECTIVO, Double ELECTRONICO, Double CAMBIO, Integer CLIENTEID, String NIT){
         Conexion cone = new Conexion();
         com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) cone.connect();
         PreparedStatement ps = null;
@@ -178,16 +184,18 @@ public class Factura {
 
             ps = conn.prepareStatement(
                   "UPDATE `cafebar`.`temp_venta`  SET "
-                + "`estado` = ?, `costo` = ?, `pago_efectivo` = ?, `pago_electronico` = ?, `cambio` = ? "
-                + "WHERE `id` = ?;"
+                + "`estado` = ?, `costo` = ?, `descuento` = ?, `pago_efectivo` = ?, `pago_electronico` = ?, `cambio` = ?, `cliente_nit` = ?"
+                + "WHERE `id` = ?"
             );
             
             ps.setString(1, "Solvente");
             ps.setDouble(2, TOTAL);
-            ps.setDouble(3, EFECTIVO);
-            ps.setDouble(4, ELECTRONICO);
-            ps.setDouble(5, CAMBIO);
-            ps.setInt(6, CLIENTEID);
+            ps.setDouble(3, DESCUENTO);
+            ps.setDouble(4, EFECTIVO);
+            ps.setDouble(5, ELECTRONICO);
+            ps.setDouble(6, CAMBIO);
+            ps.setString(7, NIT);
+            ps.setInt(8, CLIENTEID);
             
             ps.execute();
             
@@ -243,6 +251,10 @@ public class Factura {
 
     public Double getCosto() {
         return costo;
+    }
+
+    public Double getDescuento() {
+        return descuento;
     }
 
     public Double getPagoEfectivo() {
