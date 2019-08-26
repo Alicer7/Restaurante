@@ -29,6 +29,7 @@ import javafx.scene.web.WebView;
  */
 public class WebEngineX{
     private final Detalle detalle = new Detalle();
+    private boolean esDetalle;
     private Integer FACTURAID;
     private Double TOTAL;
     private JFXPanel jFxPanel;
@@ -51,14 +52,17 @@ public class WebEngineX{
     private void startViewer (){
         setDetalleClean();
         jFxPanel = new JFXPanel();
-        System.err.println("StartViewer > Detalle > JFXPanel ");
+        System.out.println("WebEngineX > StartViewer >> JFXPanel ");
     }
     
     private boolean esSolvente(){
         if (FACTURAID==null){
             return true;
         } else {
-            return detalle.esSolventeFactura(FACTURAID);
+            boolean es;
+            es = detalle.esSolventeFactura(FACTURAID);
+            System.out.println("WebEngineX > loadViewer > Es Solvente: "+String.valueOf(es));
+            return es;            
         }
     }
     
@@ -102,17 +106,19 @@ public class WebEngineX{
         detalle.setDetalleNull();
         detalle.setDescuento(DESCUENTO);
         html = detalle.getDetalleHTML(FACTURAID);
-        System.err.println("Descuento.3 id:  WebEngine >: "+FACTURAID+" Descuento: "+DESCUENTO);
+        System.out.println("WebEngineX > addDescuentoDetalle >> "+FACTURAID+" Descuento: "+DESCUENTO);
         showInViewer(html);
     }
     
     public void loadViewer (boolean esDetalle){
+        this.esDetalle=esDetalle;
         Platform.runLater(() -> {
             webView = new WebView();
             webView.getEngine().loadContent(html);
             webView.setContextMenuEnabled(false);
-            System.err.println("setContextMenuEnable >> off");
-            if (esDetalle == true && esSolvente() == false){
+            System.out.println("WebEngineX > loadViewer > setContextMenuEnable >> off");
+            if (esDetalle == true && esSolvente() == false ){
+                System.out.println("WebEngineX > loadViewer >> passed");
                 createContextMenuAnularFactura();
             }
             scene = new Scene(webView,70,300);
@@ -143,6 +149,10 @@ public class WebEngineX{
         detalle.setFACTURAID(FACTURAID);
         html = detalle.getDetalleHTML(FACTURAID);
         showInViewer();
+        if (esDetalle == true && esSolvente() == false ){
+            System.out.println("WebEngineX > mostrarDetalleD >> passed");
+            createContextMenuAnularFactura();
+        }
         
         return getTOTAL();
     }
@@ -153,6 +163,10 @@ public class WebEngineX{
         detalle.setDetalleNull();
         detalle.setFACTURAID(FACTURAID);
         html = detalle.getDetalleHTML(FACTURAID);
+        if (esDetalle == true && esSolvente() == false ){
+            System.out.println("WebEngineX > mostrarDetalle >> passed");
+            createContextMenuAnularFactura();
+        }
         showInViewer();
     }
     
@@ -181,7 +195,7 @@ public class WebEngineX{
                     job.endJob();
             }
         } catch (Exception e) {
-            System.err.println(e);
+            System.err.println("WebEngineX > print >> Error: "+e);
         }
     }
     
@@ -204,11 +218,11 @@ public class WebEngineX{
                 boolean success = job.printPage(node);
                 if (success) {
                     job.endJob();
-                    System.out.println("Print Successfull");
+                    System.out.println("WebEngineX > printNode >>Print Successfull");
                 }
             }
         } catch (Exception e) {
-            System.err.println("Print Node: "+e);
+            System.err.println("WebEngineX > printNode > Error: "+e);
         }
     }
 

@@ -55,13 +55,13 @@ public class VentasP extends javax.swing.JPanel {
     private void startViewer() {
         if (webEngine == null) {
             webEngine = new WebEngineX();
-            System.err.println("new WebEngine");
+            System.out.println("VentasP > startViewer >> new WebEngine");
         }
         if (jFxPanel == null) {
             jFxPanel = webEngine.getjFxPanel();
-            System.err.println("new jFxPanel");
+            System.out.println("VentasP > startViewer >> new jFxPanel");
         } else {
-            System.err.println("webEngine: " + webEngine + " jFxPanel: " + jFxPanel);
+            System.out.println("VentasP > startViewer >> webEngine: " + webEngine + " jFxPanel: " + jFxPanel);
         }
     }
 
@@ -75,7 +75,7 @@ public class VentasP extends javax.swing.JPanel {
             jScrollPane_Detalle_.getViewport().add(jFxPanel);
             loadViewer();
         } catch (Exception e) {
-            System.err.println("mostrarDetalle ():" + e);
+            System.err.println("VentasP > addDetallePanel >> Error:" + e);
         }
     }
 
@@ -84,7 +84,7 @@ public class VentasP extends javax.swing.JPanel {
             webEngine.putDefauiltInViewer();
             TOTAL = null;
         } catch (Exception e) {
-            System.err.println("limpiarDetalles():" + e);
+            System.err.println("VentasP > limpiarDetalles >> Error:" + e);
         }
     }
 
@@ -99,7 +99,7 @@ public class VentasP extends javax.swing.JPanel {
             }
             CLIENTEID = null;
         } catch (Exception e) {
-            System.err.println("limpiarTablaFacturas():" + e);
+            System.err.println("VentasP > limpiarTablaFacturas >> Error: " + e);
         }
     }
 
@@ -147,7 +147,7 @@ public class VentasP extends javax.swing.JPanel {
             borderFacturaFecha(msjFacturaActiva, date);
             jLabel_BuscarPorFecha_.setText("Fecha: ");
         } catch (Exception e) {
-            System.err.println("mostrarVentasActivas().mostrar: >" + e);
+            System.err.println("VentasP > mostrarVentasActivas >> Error: " + e);
         }
     }
 
@@ -170,7 +170,7 @@ public class VentasP extends javax.swing.JPanel {
                 borderFacturaFecha(msjFacturaPorFecha, calendario.getDate());
                 dateX = calendario.getDate();
                 String fecha = outFormatFechaDia.format(dateX);
-                System.err.println("Buscar ventas del día: " + fecha);
+                System.out.println("VentasP > mostrarVentasFecha >> Buscar ventas del día: " + fecha);
 
                 try {
                     core.database.querry.Factura facturas = new core.database.querry.Factura();
@@ -194,7 +194,7 @@ public class VentasP extends javax.swing.JPanel {
                         model.addRow(filaData[i]);
                     }
                 } catch (Exception e) {
-                    System.err.println("mostrarVentasFecha().mostrar: >" + e);
+                    System.err.println("VentasP > mostrarVentasFecha >> Error: >" + e);
                 }
                 jLabel_BuscarPorFecha_.setText("Fecha: " + fecha);
             } else {
@@ -215,7 +215,7 @@ public class VentasP extends javax.swing.JPanel {
             NuevoCliente clienteNuevo = new NuevoCliente();
             clienteNuevo.setVisible(true);
         } catch (Exception e) {
-            System.err.println("nuevoCliente(): >" + e);
+            System.err.println("VentasP > nuevoCliente >> Error: " + e);
         }
     }
 
@@ -230,7 +230,7 @@ public class VentasP extends javax.swing.JPanel {
 
             TOTAL = webEngine.mostrarDetalleD(CLIENTEID);
 
-            System.err.println("\nCliente id: " + CLIENTEID + " > Q" + TOTAL);
+            System.out.println("VentasP > dobleClickClientes >>\nCliente id: " + CLIENTEID + " > Q" + TOTAL);
             borderFacturaDetalle(CLIENTEID + "");
         }
     }

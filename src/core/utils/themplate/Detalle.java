@@ -181,20 +181,28 @@ public class Detalle {
     
     public boolean esSolventeFactura(Integer FACTURAID){
         boolean solvente = true;
+        String rstString = "";
         java.sql.Connection conn= new Conexion().connect();
-        String sql="SELECT * FROM `cafebar`.`temp_venta` WHERE `id` = '"+FACTURAID+"'";
+        String sql="SELECT `estado` FROM `cafebar`.`temp_venta` WHERE `id` = '"+FACTURAID+"';";
         try {
-            
             Statement stm;
             stm = conn.createStatement();
             ResultSet rst;
             rst = stm.executeQuery(sql);
-            if ("Activa".equals(rst.getString(8))) {
+            while(rst.next()) {
+                rstString = rst.getString("estado");
+            }
+            if ("Activa".equals(rstString)) {
                 solvente = false;
             }
         } catch (SQLException ex) {
             Logger.getLogger(Detalle.class.getName()).log(Level.SEVERE, null, ex);
             solvente = true;
+        }
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Detalle.class.getName()).log(Level.SEVERE, null, ex);
         }
         return solvente;
     }
