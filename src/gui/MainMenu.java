@@ -128,23 +128,23 @@ public class MainMenu extends javax.swing.JFrame {
     }
     
     private void ocultarNavBar (){
-        if (switchMenu == true){
-            remove(jPanel_MenuBarSmall_);
-            add(jPanel_MenuBar_, java.awt.BorderLayout.WEST);
-            repaint();
-            jMenuItem_ShowNavBar_.setText("Iconificar Barra de Navegación");
-            switchMenu = false;
-        }
-        else if (switchMenu == false) {
-            remove(jPanel_MenuBar_);
-            add(jPanel_MenuBarSmall_, java.awt.BorderLayout.WEST);
-            repaint();
-            jMenuItem_ShowNavBar_.setText("Mostrar Barra de Navegación");
-            switchMenu = true;
-        }
-        else {
-            System.err.println("Error al mostrar el menu");
-        }
+//        if (switchMenu == true){
+//            remove(jPanel_MenuBarSmall_);
+//            add(jPanel_MenuBar_, java.awt.BorderLayout.WEST);
+//            repaint();
+//            jMenuItem_ShowNavBar_.setText("Iconificar Barra de Navegación");
+//            switchMenu = false;
+//        }
+//        else if (switchMenu == false) {
+//            remove(jPanel_MenuBar_);
+//            add(jPanel_MenuBarSmall_, java.awt.BorderLayout.WEST);
+//            repaint();
+//            jMenuItem_ShowNavBar_.setText("Mostrar Barra de Navegación");
+//            switchMenu = true;
+//        }
+//        else {
+//            System.err.println("Error al mostrar el menu");
+//        }
     }
     
     private void addPenel_Ventas (){
@@ -197,13 +197,13 @@ public class MainMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel_MenuBarSmall_ = new javax.swing.JPanel();
-        jPanel_StatusBar_ = new javax.swing.JPanel();
-        jLabel_HORA_ = new javax.swing.JLabel();
-        jLabel_ResizeIcono_ = new javax.swing.JLabel();
         jPanel_MenuBar_ = new javax.swing.JPanel();
         jPanel_NormalNav_ = new javax.swing.JPanel();
         jLabel_MenuVentas_ = new javax.swing.JLabel();
         jLabel_MenuVentasDelDia_ = new javax.swing.JLabel();
+        jPanel_StatusBar_ = new javax.swing.JPanel();
+        jLabel_HORA_ = new javax.swing.JLabel();
+        jLabel_ResizeIcono_ = new javax.swing.JLabel();
         jPanel_MainContent_ = new javax.swing.JPanel();
         jMenuBar_ = new javax.swing.JMenuBar();
         jMenu_Archivos_ = new javax.swing.JMenu();
@@ -242,63 +242,6 @@ public class MainMenu extends javax.swing.JFrame {
             jPanel_MenuBarSmall_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 640, Short.MAX_VALUE)
         );
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1024, 661));
-        setName("mainJF"); // NOI18N
-        setSize(new java.awt.Dimension(1024, 661));
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
-
-        jPanel_StatusBar_.setBackground(java.awt.Color.darkGray);
-        jPanel_StatusBar_.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel_StatusBar_.setForeground(java.awt.Color.white);
-        jPanel_StatusBar_.setMaximumSize(null);
-        jPanel_StatusBar_.setMinimumSize(new java.awt.Dimension(1024, 21));
-        jPanel_StatusBar_.setPreferredSize(new java.awt.Dimension(1024, 21));
-
-        jLabel_HORA_.setBackground(java.awt.Color.darkGray);
-        jLabel_HORA_.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel_HORA_.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_HORA_.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel_HORA_.setText("| 2019-01-01 | dom | 00:00:00 AM |");
-        jLabel_HORA_.setMaximumSize(null);
-        jLabel_HORA_.setMinimumSize(new java.awt.Dimension(210, 16));
-        jLabel_HORA_.setPreferredSize(new java.awt.Dimension(210, 16));
-
-        jLabel_ResizeIcono_.setBackground(java.awt.Color.darkGray);
-        jLabel_ResizeIcono_.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_ResizeIcono_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_ResizeIcono_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/ResizeCornerW0X16.gif"))); // NOI18N
-        jLabel_ResizeIcono_.setMaximumSize(null);
-
-        javax.swing.GroupLayout jPanel_StatusBar_Layout = new javax.swing.GroupLayout(jPanel_StatusBar_);
-        jPanel_StatusBar_.setLayout(jPanel_StatusBar_Layout);
-        jPanel_StatusBar_Layout.setHorizontalGroup(
-            jPanel_StatusBar_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_StatusBar_Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel_HORA_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel_ResizeIcono_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel_StatusBar_Layout.setVerticalGroup(
-            jPanel_StatusBar_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_StatusBar_Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel_StatusBar_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel_HORA_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_ResizeIcono_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        getContentPane().add(jPanel_StatusBar_, java.awt.BorderLayout.SOUTH);
 
         jPanel_MenuBar_.setBackground(java.awt.Color.darkGray);
         jPanel_MenuBar_.setForeground(java.awt.Color.white);
@@ -375,7 +318,62 @@ public class MainMenu extends javax.swing.JFrame {
 
         jPanel_MenuBar_.add(jPanel_NormalNav_, java.awt.BorderLayout.CENTER);
 
-        getContentPane().add(jPanel_MenuBar_, java.awt.BorderLayout.WEST);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1024, 661));
+        setName("mainJF"); // NOI18N
+        setSize(new java.awt.Dimension(1024, 661));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
+
+        jPanel_StatusBar_.setBackground(java.awt.Color.darkGray);
+        jPanel_StatusBar_.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel_StatusBar_.setForeground(java.awt.Color.white);
+        jPanel_StatusBar_.setMaximumSize(null);
+        jPanel_StatusBar_.setMinimumSize(new java.awt.Dimension(1024, 21));
+        jPanel_StatusBar_.setPreferredSize(new java.awt.Dimension(1024, 21));
+
+        jLabel_HORA_.setBackground(java.awt.Color.darkGray);
+        jLabel_HORA_.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel_HORA_.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_HORA_.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel_HORA_.setText("| 2019-01-01 | dom | 00:00:00 AM |");
+        jLabel_HORA_.setMaximumSize(null);
+        jLabel_HORA_.setMinimumSize(new java.awt.Dimension(210, 16));
+        jLabel_HORA_.setPreferredSize(new java.awt.Dimension(210, 16));
+
+        jLabel_ResizeIcono_.setBackground(java.awt.Color.darkGray);
+        jLabel_ResizeIcono_.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_ResizeIcono_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_ResizeIcono_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/ResizeCornerW0X16.gif"))); // NOI18N
+        jLabel_ResizeIcono_.setMaximumSize(null);
+
+        javax.swing.GroupLayout jPanel_StatusBar_Layout = new javax.swing.GroupLayout(jPanel_StatusBar_);
+        jPanel_StatusBar_.setLayout(jPanel_StatusBar_Layout);
+        jPanel_StatusBar_Layout.setHorizontalGroup(
+            jPanel_StatusBar_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_StatusBar_Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel_HORA_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel_ResizeIcono_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel_StatusBar_Layout.setVerticalGroup(
+            jPanel_StatusBar_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_StatusBar_Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel_StatusBar_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel_HORA_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_ResizeIcono_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        getContentPane().add(jPanel_StatusBar_, java.awt.BorderLayout.SOUTH);
 
         jPanel_MainContent_.setLayout(new java.awt.BorderLayout());
         getContentPane().add(jPanel_MainContent_, java.awt.BorderLayout.CENTER);

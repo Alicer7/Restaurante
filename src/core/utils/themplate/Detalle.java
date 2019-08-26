@@ -7,6 +7,8 @@ package core.utils.themplate;
 
 import com.mysql.jdbc.Connection;
 import core.database.Conexion;
+import core.database.querry.Factura;
+import gui.venta.VentasP;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,7 +18,9 @@ import java.sql.SQLException;
  * @author Freddy Camposeco <freddy.camposeco@elementum69.com> <www.elementum69.com>
  */
 public class Detalle {
+    private Factura factura;
     private Integer FACTURAID=null; 
+    private boolean facturaAnuladaSucces;
     private String htmlFinal = "";
     private final String textSize = "69%";
     private final String imgPaddingSize = "8%";
@@ -60,6 +64,11 @@ public class Detalle {
     public Double getTOTAL() {
         return TOTAL;
     }
+
+    public boolean isFacturaAnuladaSucces() {
+        return facturaAnuladaSucces;
+    }
+    
     
     public void setDescuento(Double DESCUENTO){
         System.err.println("Descuento.1: "+DESCUENTO);
@@ -166,6 +175,12 @@ public class Detalle {
         
         System.out.println("HTML > Factura ID: "+this.FACTURAID);
         return htmlFinal ;
+    }
+    
+    public boolean anularFactura(Integer FACTURAID){
+        facturaAnuladaSucces = false;
+        factura = new Factura();
+        return facturaAnuladaSucces = factura.anulaFactura(FACTURAID);
     }
 }
  

@@ -20,11 +20,11 @@ public class Conexion {
 //    private final String host = "localhost";
     private final String port = "3306";
     private final String db = "cafebar"; // Nombre de la BD.
-    private final String user = "root";
-//    private final String user = "freddy";
+//    private final String user = "root";
+    private final String user = "freddy";
 //    private final String password = "";
-//    private final String password = "%Freddy101";
-    private final String password = "fe95aca7184807452_7";
+    private final String password = "%Freddy101";
+//    private final String password = "fe95aca7184807452_7";
 
     private final String charset = "?useUnicode=yes&characterEncoding=UTF-8";
 

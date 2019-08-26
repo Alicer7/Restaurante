@@ -8,6 +8,8 @@ package gui.venta;
 import com.toedter.calendar.JDateChooser;
 import core.utils.engine.WebEngineX;
 import core.utils.themplate.Detalle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -64,7 +66,7 @@ public class VentasP extends javax.swing.JPanel {
     }
 
     private void loadViewer() {
-        webEngine.loadViewer();
+        webEngine.loadViewer(true);
     }
 
     private void addDetallePanel() {
@@ -147,36 +149,6 @@ public class VentasP extends javax.swing.JPanel {
         } catch (Exception e) {
             System.err.println("mostrarVentasActivas().mostrar: >" + e);
         }
-    }
-
-    private void AnularVenta() {
-
-        try {
-            core.database.querry.Factura facturas = new core.database.querry.Factura();
-            // SQL
-
-            PreparedStatement ps = null;
-
-            core.database.Conexion objCon = new core.database.Conexion();
-            com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) objCon.connect();
-
-            ps = conn.prepareStatement(" DELETE FROM  temp_pedido WHERE temp_venta_id = '" + CLIENTEID + "'");
-            ps.execute();
-
-            ps = conn.prepareStatement("DELETE FROM `cafebar`.`temp_venta` WHERE `id`= '" + CLIENTEID + "'");
-            ps.execute();
-
-            JOptionPane.showMessageDialog(null, "Registro Eliminado");
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al Eliminar Registro");
-            System.out.println(ex.toString());
-        }
-
-        limpiarDetalles();
-        limpiarTablaFacturas();
-        restablecerBordes();
-        mostrarVentasActivas();
     }
 
     private void mostrarVentasFecha() {
@@ -262,7 +234,35 @@ public class VentasP extends javax.swing.JPanel {
             borderFacturaDetalle(CLIENTEID + "");
         }
     }
+    
+    
+    private void onClick(java.awt.event.MouseEvent evt){
+//        dobleClickClientes(evt);
+//        int modifiers = evt.getModifiers();
+//        if ((modifiers & InputEvent.BUTTON1_MASK) == InputEvent.BUTTON1_MASK) {
+//          System.out.println("Left button pressed.");
+//        }
+//        if ((modifiers & InputEvent.BUTTON2_MASK) == InputEvent.BUTTON2_MASK) {
+//          System.out.println("Middle button pressed.");
+//        }
+//        if ((modifiers & InputEvent.BUTTON3_MASK) == InputEvent.BUTTON3_MASK) {
+//          System.out.println("Right button pressed.");
+//        }
+        
+        if (SwingUtilities.isLeftMouseButton(evt)) {
+            dobleClickClientes(evt);
+//            System.out.println("Left button released.");
+        }
+        if (SwingUtilities.isMiddleMouseButton(evt)) {
+//            System.out.println("Middle button released.");
+        }
+        if (SwingUtilities.isRightMouseButton(evt)) {
+//            System.out.println("Right button released.");
+        }
+        
+    };
 
+    
     private void mensajeNoFacturaSelect() {
         String botones[] = {"Añadir Cliente", "Cancelar"};
         int eleccion = JOptionPane.showOptionDialog(this, "Selecciona una factura para añadir un pedido, o crea una nuevo cliente.", "No hay una factura selecionada!", 0, 0, null, botones, this);
@@ -309,8 +309,15 @@ public class VentasP extends javax.swing.JPanel {
         }
     }
 
-    public static void actualizarFacturasActivas() {
-//        mostrarVentasActivas();
+    public void ventaAnulada() {
+        limpiarDetalles();
+        limpiarTablaFacturas();
+        restablecerBordes();
+        mostrarVentasActivas();
+    }
+    
+    public void showVentasActivas() {
+        mostrarVentasActivas();
     }
 
     public void removeViewer() {
@@ -337,7 +344,6 @@ public class VentasP extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
         jPanel_Detalle_ = new javax.swing.JPanel();
         jPanel_DetalleBotones_ = new javax.swing.JPanel();
         jButton_NuevoPedido_ = new javax.swing.JButton();
@@ -351,17 +357,6 @@ public class VentasP extends javax.swing.JPanel {
         jScrollPane_Facturas_ = new javax.swing.JScrollPane();
         jTable_Clientes_ = new javax.swing.JTable();
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("Anular");
-        jButton1.setMaximumSize(null);
-        jButton1.setMinimumSize(new java.awt.Dimension(77, 42));
-        jButton1.setPreferredSize(new java.awt.Dimension(77, 42));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         setLayout(new java.awt.BorderLayout());
 
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("gui/venta/Bundle"); // NOI18N
@@ -371,10 +366,14 @@ public class VentasP extends javax.swing.JPanel {
         jPanel_Detalle_.setPreferredSize(new java.awt.Dimension(300, 300));
         jPanel_Detalle_.setLayout(new java.awt.BorderLayout());
 
+        jPanel_DetalleBotones_.setMaximumSize(null);
+        jPanel_DetalleBotones_.setMinimumSize(new java.awt.Dimension(296, 64));
+        jPanel_DetalleBotones_.setName(""); // NOI18N
+
         jButton_NuevoPedido_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton_NuevoPedido_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/clocheX32.png"))); // NOI18N
         jButton_NuevoPedido_.setText(bundle.getString("Ventas.jButton_NuevoPedido_.text")); // NOI18N
-        jButton_NuevoPedido_.setMaximumSize(new java.awt.Dimension(140, 42));
+        jButton_NuevoPedido_.setMaximumSize(null);
         jButton_NuevoPedido_.setMinimumSize(new java.awt.Dimension(140, 42));
         jButton_NuevoPedido_.setPreferredSize(new java.awt.Dimension(140, 42));
         jButton_NuevoPedido_.addActionListener(new java.awt.event.ActionListener() {
@@ -386,7 +385,7 @@ public class VentasP extends javax.swing.JPanel {
         jButton_Cobrar_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton_Cobrar_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/CashBoxX32.png"))); // NOI18N
         jButton_Cobrar_.setText(bundle.getString("Ventas.jButton_Cobrar_.text")); // NOI18N
-        jButton_Cobrar_.setMaximumSize(new java.awt.Dimension(140, 42));
+        jButton_Cobrar_.setMaximumSize(null);
         jButton_Cobrar_.setMinimumSize(new java.awt.Dimension(140, 42));
         jButton_Cobrar_.setPreferredSize(new java.awt.Dimension(140, 42));
         jButton_Cobrar_.addActionListener(new java.awt.event.ActionListener() {
@@ -400,9 +399,10 @@ public class VentasP extends javax.swing.JPanel {
         jPanel_DetalleBotones_Layout.setHorizontalGroup(
             jPanel_DetalleBotones_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_DetalleBotones_Layout.createSequentialGroup()
-                .addComponent(jButton_NuevoPedido_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addComponent(jButton_Cobrar_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jButton_NuevoPedido_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton_Cobrar_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel_DetalleBotones_Layout.setVerticalGroup(
             jPanel_DetalleBotones_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -410,7 +410,7 @@ public class VentasP extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel_DetalleBotones_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_NuevoPedido_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_Cobrar_, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton_Cobrar_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -425,6 +425,9 @@ public class VentasP extends javax.swing.JPanel {
         jPanel_Clientes_.setMinimumSize(new java.awt.Dimension(478, 669));
         jPanel_Clientes_.setPreferredSize(new java.awt.Dimension(478, 669));
         jPanel_Clientes_.setLayout(new java.awt.BorderLayout());
+
+        jPanel_DetalleBotones_1.setMaximumSize(null);
+        jPanel_DetalleBotones_1.setMinimumSize(new java.awt.Dimension(466, 64));
 
         jButton_ClienteNuevo_.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton_ClienteNuevo_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/FunAsClienteX32.png"))); // NOI18N
@@ -473,9 +476,9 @@ public class VentasP extends javax.swing.JPanel {
                 .addComponent(jButton_ClienteNuevo_, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel_BuscarPorFecha_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel_SinCobrar_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel_DetalleBotones_1Layout.setVerticalGroup(
             jPanel_DetalleBotones_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -554,37 +557,11 @@ public class VentasP extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton_Cobrar_ActionPerformed
 
     private void jTable_Clientes_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_Clientes_MouseClicked
-//        dobleClickClientes(evt);
-//        int modifiers = evt.getModifiers();
-//        if ((modifiers & InputEvent.BUTTON1_MASK) == InputEvent.BUTTON1_MASK) {
-//          System.out.println("Left button pressed.");
-//        }
-//        if ((modifiers & InputEvent.BUTTON2_MASK) == InputEvent.BUTTON2_MASK) {
-//          System.out.println("Middle button pressed.");
-//        }
-//        if ((modifiers & InputEvent.BUTTON3_MASK) == InputEvent.BUTTON3_MASK) {
-//          System.out.println("Right button pressed.");
-//        }
-        
-        if (SwingUtilities.isLeftMouseButton(evt)) {
-          System.out.println("Left button released.");
-        }
-        if (SwingUtilities.isMiddleMouseButton(evt)) {
-          System.out.println("Middle button released.");
-        }
-        if (SwingUtilities.isRightMouseButton(evt)) {
-          System.out.println("Right button released.");
-        }
-        System.out.println();
+       onClick(evt);
     }//GEN-LAST:event_jTable_Clientes_MouseClicked
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        AnularVenta();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton_ClienteNuevo_;
     private javax.swing.JButton jButton_Cobrar_;
     private javax.swing.JButton jButton_NuevoPedido_;

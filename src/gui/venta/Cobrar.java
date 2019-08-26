@@ -147,7 +147,7 @@ public class Cobrar extends javax.swing.JFrame {
     }
     
     private void loadViewer(){
-        webEngine.loadViewer();
+        webEngine.loadViewer(false);
     }
     
     private void addDetallePanel (){

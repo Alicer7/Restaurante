@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -192,6 +193,33 @@ public class Factura {
             
         } catch (SQLException ex) {
             System.err.println("Factura > Error al actulzar el estado: "+ex);
+        } finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Factura.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    public boolean anulaFactura(Integer FACTURAID){
+        try {
+            Conexion cone = new Conexion();
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+
+            ps = conn.prepareStatement(" DELETE FROM  temp_pedido WHERE temp_venta_id = '" + FACTURAID + "'");
+            ps.execute();
+
+            ps = conn.prepareStatement("DELETE FROM `cafebar`.`temp_venta` WHERE `id`= '" + FACTURAID + "'");
+            ps.execute();
+
+            JOptionPane.showMessageDialog(null, "Registro Eliminado");
+            return true;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al Eliminar Registro");
+            System.out.println(ex.toString());
+            return false;
         } finally{
             try {
                 conn.close();

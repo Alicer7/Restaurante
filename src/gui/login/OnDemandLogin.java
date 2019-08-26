@@ -5,11 +5,11 @@
  */
 package gui.login;
 
+import core.utils.themplate.Detalle;
 import core.utils.login.Hash;
 import javax.swing.JOptionPane;
 import core.utils.login.SqlUsuarios;
 import core.utils.login.Usuarios;
-import gui.MainMenu;
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.UIManager;
@@ -20,7 +20,12 @@ import java.awt.event.WindowEvent;
  *
  * @author Marko
  */
-public class Login extends javax.swing.JFrame {
+public class OnDemandLogin extends javax.swing.JFrame {
+    private String tipo = null;
+    private Integer FACTURAID= null;
+    private String lvl = null;
+    private Integer LVL = null;
+    private boolean logged = false;
     
     private void limpiar() {
         txtUsuario.setText("");
@@ -46,50 +51,44 @@ public class Login extends javax.swing.JFrame {
                 switch (mod.getIdTipo()) {
                     case 1:
                         {
-                            gui.MainMenu mainMenu = new MainMenu();
-                            mainMenu.setUSUARIO(mod.getNombre());
-                            mainMenu.setNIVLE("ROOT");
-                            mainMenu.setVisible(true);
+                            logged=true;
+                            lvl="ROOT";
+                            LVL=1;
                             break;
                         }
                     case 2:
                         {
-                            gui.MainMenu mainMenu = new MainMenu();
-                            mainMenu.setUSUARIO(mod.getNombre());
-                            mainMenu.setNIVLE("Administrador");
-                            mainMenu.setVisible(true);
+                            lvl="Administrador";
+                            logged=true;
+                            LVL=2;
                             break;
                         }
                     case 3:
                         {
-                            gui.MainMenu mainMenu = new MainMenu();
-                            mainMenu.setUSUARIO(mod.getNombre());
-                            mainMenu.setNIVLE("Contador");
-                            mainMenu.setVisible(true);
+                            logged=true;
+                            lvl="Contador";
+                            LVL=3;
                             break;
                         }
                     case 4:
                         {
-                            gui.MainMenu mainMenu = new MainMenu();
-                            mainMenu.setUSUARIO(mod.getNombre());
-                            mainMenu.setNIVLE("Encargado");
-                            mainMenu.setVisible(true);
+                            logged=true;
+                            lvl="Encargado";
+                            LVL=4;
                             break;
                         }
                     case 5:
                         {
-                            gui.MainMenu mainMenu = new MainMenu();
-                            mainMenu.setUSUARIO(mod.getNombre());
-                            mainMenu.setNIVLE("Cajero");
-                            mainMenu.setVisible(true);
+                            logged=true;
+                            lvl="Cajero";
+                            LVL=5;
                             break;
                         }
                     case 6:
                         {
-                            gui.MainMenu mainMenu = new MainMenu();
-                            mainMenu.setUSUARIO(mod.getNombre());
-                            mainMenu.setNIVLE("Mesero");
-                            mainMenu.setVisible(true);
+                            logged=true;
+                            lvl="Mesero";
+                            LVL=6;
                             break;
                         }
                     default:
@@ -122,16 +121,54 @@ public class Login extends javax.swing.JFrame {
     private void opacityOut(){
         setOpacity(0.75f);
     }
-    private void settings (){
+    private void settings(){
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(gui.MainMenu.getIconDir())));
-        setBackground(new Color (0,0,0,0));
+        setBackground(new Color (0,0,0,0.8f));
         jPanel_Main_.setBackground(new Color (0,0,0,0));
     }
     
+    public void setDefault(){
+        lvl=null;
+        LVL=null;
+        logged=false;
+    }
+
+    public String getLvL() {
+        return lvl;
+    }
+    
+    public Integer getLVL() {
+        return LVL;
+    }
+
+    public boolean isLogged() {
+        return logged;
+    }
    
-    public Login() {
+    private void runTipo(){
+        if ("AnularFactura".equals(tipo)) {
+            adminAnularFactura();
+        }
+    }
+    
+    public OnDemandLogin() {
         initComponents();
-        settings ();
+        settings();
+    }
+    
+    public OnDemandLogin(String tipo) {
+        this.tipo = tipo;
+        initComponents();
+        settings();
+    }
+    
+    public OnDemandLogin(String tipo, Integer FACTURAID) {
+        initComponents();
+        settings();
+        if ("AnularFactura".equals(tipo)) {
+            this.tipo = tipo;
+            this.FACTURAID = FACTURAID;
+        } 
     }
 
     /**
@@ -145,15 +182,15 @@ public class Login extends javax.swing.JFrame {
 
         jLabel_User_ = new javax.swing.JLabel();
         jLabel_Password_ = new javax.swing.JLabel();
-        jPanel_Main_ = new javax.swing.JPanel();
         jPanel_Logo_ = new javax.swing.JPanel();
         jLabel_LogoUser_ = new javax.swing.JLabel();
+        Background = new javax.swing.JLabel();
+        jPanel_Main_ = new javax.swing.JPanel();
         jPanel_Login_ = new javax.swing.JPanel();
         txtUsuario = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
         btnEntrar_ = new javax.swing.JButton();
         btnCancelar_ = new javax.swing.JButton();
-        Background = new javax.swing.JLabel();
 
         jLabel_User_.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel_User_.setForeground(new java.awt.Color(255, 255, 255));
@@ -173,25 +210,6 @@ public class Login extends javax.swing.JFrame {
         jLabel_Password_.setMinimumSize(new java.awt.Dimension(42, 48));
         jLabel_Password_.setPreferredSize(new java.awt.Dimension(42, 48));
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Login");
-        setBackground(new java.awt.Color(0, 0, 0));
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMaximumSize(null);
-        setMinimumSize(new java.awt.Dimension(360, 515));
-        setName("frameLogin"); // NOI18N
-        setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(360, 515));
-        setResizable(false);
-        setSize(new java.awt.Dimension(360, 515));
-        setType(java.awt.Window.Type.POPUP);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel_Main_.setMinimumSize(new java.awt.Dimension(360, 515));
-        jPanel_Main_.setOpaque(false);
-        jPanel_Main_.setPreferredSize(new java.awt.Dimension(360, 515));
-        jPanel_Main_.setLayout(new java.awt.BorderLayout());
-
         jPanel_Logo_.setMinimumSize(new java.awt.Dimension(360, 320));
         jPanel_Logo_.setOpaque(false);
         jPanel_Logo_.setPreferredSize(new java.awt.Dimension(360, 320));
@@ -207,13 +225,43 @@ public class Login extends javax.swing.JFrame {
         jLabel_LogoUser_.setPreferredSize(new java.awt.Dimension(300, 310));
         jPanel_Logo_.add(jLabel_LogoUser_, java.awt.BorderLayout.CENTER);
 
-        jPanel_Main_.add(jPanel_Logo_, java.awt.BorderLayout.NORTH);
+        Background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/Login.png"))); // NOI18N
+        Background.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Background.setMaximumSize(null);
+        Background.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BackgroundMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BackgroundMouseExited(evt);
+            }
+        });
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Login");
+        setBackground(new java.awt.Color(0, 0, 0));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setMaximumSize(null);
+        setMinimumSize(new java.awt.Dimension(360, 196));
+        setName("frameLogin"); // NOI18N
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(360, 196));
+        setResizable(false);
+        setSize(new java.awt.Dimension(360, 196));
+        setType(java.awt.Window.Type.POPUP);
+
+        jPanel_Main_.setMaximumSize(null);
+        jPanel_Main_.setMinimumSize(new java.awt.Dimension(360, 196));
+        jPanel_Main_.setOpaque(false);
+        jPanel_Main_.setPreferredSize(new java.awt.Dimension(360, 196));
+        jPanel_Main_.setLayout(new java.awt.BorderLayout());
 
         jPanel_Login_.setBackground(java.awt.Color.darkGray);
-        jPanel_Login_.setMaximumSize(null);
         jPanel_Login_.setMinimumSize(new java.awt.Dimension(360, 196));
         jPanel_Login_.setOpaque(false);
         jPanel_Login_.setPreferredSize(new java.awt.Dimension(360, 196));
+        jPanel_Login_.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtUsuario.setBackground(new java.awt.Color(51, 51, 51, 127));
         txtUsuario.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -246,6 +294,7 @@ public class Login extends javax.swing.JFrame {
                 txtUsuarioKeyReleased(evt);
             }
         });
+        jPanel_Login_.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 340, -1));
 
         txtPassword.setBackground(new java.awt.Color(51, 51, 51, 127));
         txtPassword.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -278,6 +327,7 @@ public class Login extends javax.swing.JFrame {
                 txtPasswordKeyReleased(evt);
             }
         });
+        jPanel_Login_.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 340, -1));
 
         btnEntrar_.setBackground(new java.awt.Color(153, 0, 51));
         btnEntrar_.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -296,6 +346,7 @@ public class Login extends javax.swing.JFrame {
                 btnEntrar_ActionPerformed(evt);
             }
         });
+        jPanel_Login_.add(btnEntrar_, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 121, -1, -1));
 
         btnCancelar_.setBackground(new java.awt.Color(153, 0, 51));
         btnCancelar_.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -313,53 +364,11 @@ public class Login extends javax.swing.JFrame {
                 btnCancelar_ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel_Login_Layout = new javax.swing.GroupLayout(jPanel_Login_);
-        jPanel_Login_.setLayout(jPanel_Login_Layout);
-        jPanel_Login_Layout.setHorizontalGroup(
-            jPanel_Login_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Login_Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel_Login_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel_Login_Layout.createSequentialGroup()
-                        .addComponent(btnCancelar_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                        .addComponent(btnEntrar_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel_Login_Layout.setVerticalGroup(
-            jPanel_Login_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_Login_Layout.createSequentialGroup()
-                .addGap(1, 1, 1)
-                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel_Login_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEntrar_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancelar_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel_Login_.add(btnCancelar_, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 121, -1, -1));
 
         jPanel_Main_.add(jPanel_Login_, java.awt.BorderLayout.CENTER);
 
-        getContentPane().add(jPanel_Main_, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        Background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/Login.png"))); // NOI18N
-        Background.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        Background.setMaximumSize(null);
-        Background.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BackgroundMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                BackgroundMouseExited(evt);
-            }
-        });
-        getContentPane().add(Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(jPanel_Main_, java.awt.BorderLayout.CENTER);
 
         getAccessibleContext().setAccessibleDescription("Sam's Login");
 
@@ -369,10 +378,12 @@ public class Login extends javax.swing.JFrame {
 
     private void btnEntrar_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrar_ActionPerformed
         ingresar();
+        runTipo();
+        setDefault();
     }//GEN-LAST:event_btnEntrar_ActionPerformed
 
     private void btnCancelar_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar_ActionPerformed
-        System.exit(0);
+        dispose();
     }//GEN-LAST:event_btnCancelar_ActionPerformed
 
     private void BackgroundMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackgroundMouseEntered
@@ -429,6 +440,27 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtPasswordKeyReleased
 
+    private boolean checkAdmin(){
+        if (    
+            logged == true 
+            && ( LVL== 1 || LVL== 2 || LVL== 4 ) 
+            && ( "ROOT".equals(lvl) || "Administrador".equals(lvl) || "Encargado".equals(lvl) ) 
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    private void adminAnularFactura(){
+        Detalle detalle = new Detalle();
+        if (checkAdmin()) {
+            detalle.anularFactura(FACTURAID);
+        } else {
+            JOptionPane.showMessageDialog(null, "Sin permisos para ésta acción!");
+        }
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -439,16 +471,13 @@ public class Login extends javax.swing.JFrame {
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel");
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OnDemandLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         
-        //</editor-fold>
-
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new Login().setVisible(true);
+            new OnDemandLogin().setVisible(true);
         });
     }
 
