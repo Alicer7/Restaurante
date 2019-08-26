@@ -123,7 +123,7 @@ public class OnDemandLogin extends javax.swing.JFrame {
     }
     private void settings(){
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(gui.MainMenu.getIconDir())));
-        setBackground(new Color (0,0,0,0.8f));
+        setBackground(new Color (200,0,0,200));
         jPanel_Main_.setBackground(new Color (0,0,0,0));
     }
     
@@ -189,7 +189,7 @@ public class OnDemandLogin extends javax.swing.JFrame {
         jPanel_Login_ = new javax.swing.JPanel();
         txtUsuario = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
-        btnEntrar_ = new javax.swing.JButton();
+        btnAceptar_ = new javax.swing.JButton();
         btnCancelar_ = new javax.swing.JButton();
 
         jLabel_User_.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -251,7 +251,6 @@ public class OnDemandLogin extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(360, 196));
         setType(java.awt.Window.Type.POPUP);
 
-        jPanel_Main_.setMaximumSize(null);
         jPanel_Main_.setMinimumSize(new java.awt.Dimension(360, 196));
         jPanel_Main_.setOpaque(false);
         jPanel_Main_.setPreferredSize(new java.awt.Dimension(360, 196));
@@ -306,7 +305,7 @@ public class OnDemandLogin extends javax.swing.JFrame {
         txtPassword.setDisabledTextColor(java.awt.Color.lightGray);
         txtPassword.setMaximumSize(null);
         txtPassword.setMinimumSize(new java.awt.Dimension(256, 48));
-        txtPassword.setNextFocusableComponent(btnEntrar_);
+        txtPassword.setNextFocusableComponent(btnAceptar_);
         txtPassword.setPreferredSize(new java.awt.Dimension(256, 48));
         txtPassword.setSelectionColor(new java.awt.Color(153, 0, 0));
         txtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -329,24 +328,24 @@ public class OnDemandLogin extends javax.swing.JFrame {
         });
         jPanel_Login_.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 340, -1));
 
-        btnEntrar_.setBackground(new java.awt.Color(153, 0, 51));
-        btnEntrar_.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        btnEntrar_.setText("Entrar");
-        btnEntrar_.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEntrar_.setMinimumSize(new java.awt.Dimension(150, 64));
-        btnEntrar_.setNextFocusableComponent(btnCancelar_);
-        btnEntrar_.setPreferredSize(new java.awt.Dimension(150, 64));
-        btnEntrar_.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnAceptar_.setBackground(new java.awt.Color(153, 0, 51));
+        btnAceptar_.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        btnAceptar_.setText("Aceptar");
+        btnAceptar_.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAceptar_.setMinimumSize(new java.awt.Dimension(150, 64));
+        btnAceptar_.setNextFocusableComponent(btnCancelar_);
+        btnAceptar_.setPreferredSize(new java.awt.Dimension(150, 64));
+        btnAceptar_.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnEntrar_MouseEntered(evt);
+                btnAceptar_MouseEntered(evt);
             }
         });
-        btnEntrar_.addActionListener(new java.awt.event.ActionListener() {
+        btnAceptar_.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEntrar_ActionPerformed(evt);
+                btnAceptar_ActionPerformed(evt);
             }
         });
-        jPanel_Login_.add(btnEntrar_, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 121, -1, -1));
+        jPanel_Login_.add(btnAceptar_, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 121, -1, -1));
 
         btnCancelar_.setBackground(new java.awt.Color(153, 0, 51));
         btnCancelar_.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -376,11 +375,11 @@ public class OnDemandLogin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEntrar_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrar_ActionPerformed
+    private void btnAceptar_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptar_ActionPerformed
         ingresar();
         runTipo();
         setDefault();
-    }//GEN-LAST:event_btnEntrar_ActionPerformed
+    }//GEN-LAST:event_btnAceptar_ActionPerformed
 
     private void btnCancelar_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar_ActionPerformed
         dispose();
@@ -418,9 +417,9 @@ public class OnDemandLogin extends javax.swing.JFrame {
         opacityIn();
     }//GEN-LAST:event_txtPasswordKeyTyped
 
-    private void btnEntrar_MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntrar_MouseEntered
+    private void btnAceptar_MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptar_MouseEntered
         opacityIn();
-    }//GEN-LAST:event_btnEntrar_MouseEntered
+    }//GEN-LAST:event_btnAceptar_MouseEntered
 
     private void btnCancelar_MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelar_MouseEntered
         opacityIn();
@@ -436,7 +435,7 @@ public class OnDemandLogin extends javax.swing.JFrame {
     private void txtPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyReleased
         int key = evt.getKeyCode();
         if ( java.awt.event.KeyEvent.VK_ENTER == key){
-            btnEntrar_.requestFocus();
+            btnAceptar_.requestFocus();
         }
     }//GEN-LAST:event_txtPasswordKeyReleased
 
@@ -483,8 +482,8 @@ public class OnDemandLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;
+    public javax.swing.JButton btnAceptar_;
     public javax.swing.JButton btnCancelar_;
-    public javax.swing.JButton btnEntrar_;
     private javax.swing.JLabel jLabel_LogoUser_;
     private javax.swing.JLabel jLabel_Password_;
     private javax.swing.JLabel jLabel_User_;
