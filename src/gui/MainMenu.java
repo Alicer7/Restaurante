@@ -172,12 +172,12 @@ public class MainMenu extends javax.swing.JFrame {
 
     public void setUSUARIO(String USUARIO) {
         this.USUARIO = USUARIO;
-        System.err.println("Set User: "+USUARIO+" > "+this.USUARIO);
+        System.err.println("MainMenu > setUSUARIO > Set User: "+USUARIO+" >> "+this.USUARIO);
     }
 
     public void setNIVLE(String NIVLE) {
         this.NIVLE = NIVLE;
-        System.err.println("Set LvL: "+NIVLE+" > "+this.NIVLE);
+        System.err.println("MainMenu > setUSUARIO > Set LvL: "+NIVLE+" >> "+this.NIVLE);
     }
     
     public MainMenu() {
@@ -185,7 +185,6 @@ public class MainMenu extends javax.swing.JFrame {
         initComponents();
         settingsPos();
         addPenel_Ventas ();
-        
     }
 
     /**
