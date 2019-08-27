@@ -35,6 +35,7 @@ public class OnDemandLogin extends javax.swing.JFrame {
     private void ingresar(){
         SqlUsuarios modSql = new SqlUsuarios();
         Usuarios mod = new Usuarios();
+        Integer id=null;
 
         String pass = new String(txtPassword.getPassword());
 
@@ -44,11 +45,14 @@ public class OnDemandLogin extends javax.swing.JFrame {
 
             mod.setUsuario(txtUsuario.getText());
             mod.setPassword(nuevoPass);
-
+            
+            id=mod.getIdTipo();
+            
             if (modSql.login(mod)) {
+                
                 this.dispose();
-
-                switch (mod.getIdTipo()) {
+                
+                switch (id) {
                     case 1:
                         {
                             logged=true;
@@ -446,7 +450,10 @@ public class OnDemandLogin extends javax.swing.JFrame {
             && ( "ROOT".equals(lvl) || "Administrador".equals(lvl) || "Encargado".equals(lvl) ) 
         ) {
             return true;
+        } else if ( logged == false && LVL==null && lvl==null ) {
+            return false;
         } else {
+            JOptionPane.showMessageDialog(null, "Sin permisos para ésta acción!");
             return false;
         }
     }
@@ -455,8 +462,6 @@ public class OnDemandLogin extends javax.swing.JFrame {
         Detalle detalle = new Detalle();
         if (checkAdmin()) {
             detalle.anularFactura(FACTURAID);
-        } else {
-            JOptionPane.showMessageDialog(null, "Sin permisos para ésta acción!");
         }
     }
     

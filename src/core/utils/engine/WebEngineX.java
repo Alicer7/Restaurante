@@ -86,6 +86,7 @@ public class WebEngineX{
 
             webView.setOnMousePressed(e -> {
                 if (e.getButton() == MouseButton.SECONDARY) {
+//                    webView.requestFocus();
                     contextMenu.show(webView, e.getScreenX(), e.getScreenY());
                 } else {
                     contextMenu.hide();

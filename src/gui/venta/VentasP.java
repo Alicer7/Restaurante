@@ -417,6 +417,11 @@ public class VentasP extends javax.swing.JPanel {
         jPanel_Detalle_.add(jPanel_DetalleBotones_, java.awt.BorderLayout.SOUTH);
 
         jScrollPane_Detalle_.setMaximumSize(null);
+        jScrollPane_Detalle_.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jScrollPane_Detalle_MousePressed(evt);
+            }
+        });
         jPanel_Detalle_.add(jScrollPane_Detalle_, java.awt.BorderLayout.CENTER);
 
         add(jPanel_Detalle_, java.awt.BorderLayout.EAST);
@@ -474,11 +479,11 @@ public class VentasP extends javax.swing.JPanel {
             .addGroup(jPanel_DetalleBotones_1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton_ClienteNuevo_, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel_BuscarPorFecha_, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+                .addComponent(jLabel_BuscarPorFecha_, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel_SinCobrar_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel_DetalleBotones_1Layout.setVerticalGroup(
             jPanel_DetalleBotones_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -559,6 +564,12 @@ public class VentasP extends javax.swing.JPanel {
     private void jTable_Clientes_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_Clientes_MouseClicked
        onClick(evt);
     }//GEN-LAST:event_jTable_Clientes_MouseClicked
+
+    private void jScrollPane_Detalle_MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane_Detalle_MousePressed
+        if (SwingUtilities.isRightMouseButton(evt)) {
+            jScrollPane_Detalle_.requestFocus();
+        }
+    }//GEN-LAST:event_jScrollPane_Detalle_MousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
