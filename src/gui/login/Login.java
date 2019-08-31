@@ -122,16 +122,19 @@ public class Login extends javax.swing.JFrame {
     private void opacityOut(){
         setOpacity(0.75f);
     }
-    private void settings (){
+    private void settings(){
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(gui.MainMenu.getIconDir())));
-        setBackground(new Color (0,0,0,0));
-        jPanel_Main_.setBackground(new Color (0,0,0,0));
     }
     
+    private void settingsPos(){
+        setBackground(new Color (0,0,0,160));
+        jPanel_Main_.setBackground(new Color (0,0,0,2));
+    }
    
     public Login() {
+        settings();
         initComponents();
-        settings ();
+        settingsPos();
     }
 
     /**
@@ -177,14 +180,13 @@ public class Login extends javax.swing.JFrame {
         setTitle("Login");
         setBackground(new java.awt.Color(0, 0, 0));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setMaximizedBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setMaximumSize(null);
         setMinimumSize(new java.awt.Dimension(360, 515));
         setName("frameLogin"); // NOI18N
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(360, 515));
-        setResizable(false);
         setSize(new java.awt.Dimension(360, 515));
-        setType(java.awt.Window.Type.POPUP);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel_Main_.setMinimumSize(new java.awt.Dimension(360, 515));

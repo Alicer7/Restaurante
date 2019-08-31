@@ -69,7 +69,6 @@ public class CambioEfectivo extends javax.swing.JFrame {
         setMaximumSize(null);
         setMinimumSize(new java.awt.Dimension(555, 222));
         setUndecorated(true);
-        setType(java.awt.Window.Type.POPUP);
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
@@ -93,6 +92,7 @@ public class CambioEfectivo extends javax.swing.JFrame {
         jLabel_Cambio_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_Cambio_.setText("0.00");
         jPanel_Main_.add(jLabel_Cambio_, java.awt.BorderLayout.CENTER);
+        jLabel_Cambio_.getAccessibleContext().setAccessibleName("Cambio");
 
         jLabel_Q_.setBackground(new java.awt.Color(255, 0, 255));
         jLabel_Q_.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
