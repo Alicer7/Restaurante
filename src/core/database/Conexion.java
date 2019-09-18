@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 public class Conexion {
 
     private final String host = "192.168.1.2";
+//    private final String host = "roadpower69.ddns.net";
 //    private final String host = "localhost";
     private final String port = "3306";
     private final String db = "cafebar"; // Nombre de la BD.

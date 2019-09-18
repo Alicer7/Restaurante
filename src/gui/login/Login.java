@@ -124,6 +124,7 @@ public class Login extends javax.swing.JFrame {
     }
     private void settings(){
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(gui.MainMenu.getIconDir())));
+        setAlwaysOnTop(true);
     }
     
     private void settingsPos(){

@@ -126,9 +126,12 @@ public class OnDemandLogin extends javax.swing.JFrame {
         setOpacity(0.75f);
     }
     private void settings(){
+        setAlwaysOnTop( true );
+        
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(gui.MainMenu.getIconDir())));
-        setBackground(new Color (200,0,0,200));
+        setBackground(new Color (0,0,0,0));
         jPanel_Main_.setBackground(new Color (0,0,0,0));
+        Background.setBackground(new Color (0,0,0,0));
     }
     
     public void setDefault(){
@@ -184,66 +187,15 @@ public class OnDemandLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel_User_ = new javax.swing.JLabel();
-        jLabel_Password_ = new javax.swing.JLabel();
-        jPanel_Logo_ = new javax.swing.JPanel();
-        jLabel_LogoUser_ = new javax.swing.JLabel();
-        Background = new javax.swing.JLabel();
         jPanel_Main_ = new javax.swing.JPanel();
         jPanel_Login_ = new javax.swing.JPanel();
         txtUsuario = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
         btnAceptar_ = new javax.swing.JButton();
         btnCancelar_ = new javax.swing.JButton();
-
-        jLabel_User_.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel_User_.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_User_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_User_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/login/userWX32.png"))); // NOI18N
-        jLabel_User_.setToolTipText("");
-        jLabel_User_.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel_User_.setMaximumSize(null);
-        jLabel_User_.setMinimumSize(new java.awt.Dimension(42, 48));
-        jLabel_User_.setPreferredSize(new java.awt.Dimension(42, 48));
-
-        jLabel_Password_.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel_Password_.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_Password_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_Password_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/login/passwordWX32.png"))); // NOI18N
-        jLabel_Password_.setMaximumSize(null);
-        jLabel_Password_.setMinimumSize(new java.awt.Dimension(42, 48));
-        jLabel_Password_.setPreferredSize(new java.awt.Dimension(42, 48));
-
-        jPanel_Logo_.setMinimumSize(new java.awt.Dimension(360, 320));
-        jPanel_Logo_.setOpaque(false);
-        jPanel_Logo_.setPreferredSize(new java.awt.Dimension(360, 320));
-        jPanel_Logo_.setLayout(new java.awt.BorderLayout());
-
-        jLabel_LogoUser_.setBackground(java.awt.Color.darkGray);
-        jLabel_LogoUser_.setForeground(java.awt.Color.white);
-        jLabel_LogoUser_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_LogoUser_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/userGx300.png"))); // NOI18N
-        jLabel_LogoUser_.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel_LogoUser_.setMaximumSize(null);
-        jLabel_LogoUser_.setMinimumSize(new java.awt.Dimension(300, 310));
-        jLabel_LogoUser_.setPreferredSize(new java.awt.Dimension(300, 310));
-        jPanel_Logo_.add(jLabel_LogoUser_, java.awt.BorderLayout.CENTER);
-
-        Background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/Login.png"))); // NOI18N
-        Background.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        Background.setMaximumSize(null);
-        Background.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BackgroundMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                BackgroundMouseExited(evt);
-            }
-        });
+        Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Login");
         setBackground(new java.awt.Color(0, 0, 0));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMaximumSize(null);
@@ -254,6 +206,7 @@ public class OnDemandLogin extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(360, 196));
         setType(java.awt.Window.Type.POPUP);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel_Main_.setMinimumSize(new java.awt.Dimension(360, 196));
         jPanel_Main_.setOpaque(false);
@@ -371,7 +324,20 @@ public class OnDemandLogin extends javax.swing.JFrame {
 
         jPanel_Main_.add(jPanel_Login_, java.awt.BorderLayout.CENTER);
 
-        getContentPane().add(jPanel_Main_, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jPanel_Main_, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        Background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/lod.png"))); // NOI18N
+        Background.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Background.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BackgroundMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BackgroundMouseExited(evt);
+            }
+        });
+        getContentPane().add(Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         getAccessibleContext().setAccessibleDescription("Sam's Login");
 
@@ -489,11 +455,7 @@ public class OnDemandLogin extends javax.swing.JFrame {
     private javax.swing.JLabel Background;
     public javax.swing.JButton btnAceptar_;
     public javax.swing.JButton btnCancelar_;
-    private javax.swing.JLabel jLabel_LogoUser_;
-    private javax.swing.JLabel jLabel_Password_;
-    private javax.swing.JLabel jLabel_User_;
     private javax.swing.JPanel jPanel_Login_;
-    private javax.swing.JPanel jPanel_Logo_;
     private javax.swing.JPanel jPanel_Main_;
     public javax.swing.JPasswordField txtPassword;
     public javax.swing.JTextField txtUsuario;

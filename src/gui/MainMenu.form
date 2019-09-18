@@ -253,7 +253,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu_MateriaPrima_">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Materia Prima"/>
+            <Property name="text" type="java.lang.String" value="Ingredientes"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem_IngresarMateriaPrima_">

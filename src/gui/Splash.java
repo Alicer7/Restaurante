@@ -75,8 +75,8 @@ public final class Splash extends javax.swing.JFrame {
 
         jLabel_CR_2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel_CR_2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_CR_2.setText("Versión 0.9");
-        getContentPane().add(jLabel_CR_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, -1, 30));
+        jLabel_CR_2.setText("Versión 0.9.0.5");
+        getContentPane().add(jLabel_CR_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 110, 30));
 
         jLabel_Credits_.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel_Credits_.setForeground(new java.awt.Color(255, 255, 255));
@@ -99,7 +99,7 @@ public final class Splash extends javax.swing.JFrame {
         getContentPane().add(jLabel_CR_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 450, -1, 30));
 
         jLabel_imagen_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/RestauranteSplash.png"))); // NOI18N
-        getContentPane().add(jLabel_imagen_, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 500));
+        getContentPane().add(jLabel_imagen_, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
         setLocationRelativeTo(null);

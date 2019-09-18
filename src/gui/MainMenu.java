@@ -442,7 +442,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         jMenuBar_.add(jMenu_Recetas_);
 
-        jMenu_MateriaPrima_.setText("Materia Prima");
+        jMenu_MateriaPrima_.setText("Ingredientes");
 
         jMenuItem_IngresarMateriaPrima_.setText("Ingresar Materia Prima");
         jMenuItem_IngresarMateriaPrima_.addActionListener(new java.awt.event.ActionListener() {
