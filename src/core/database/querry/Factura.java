@@ -100,7 +100,7 @@ public class Factura {
     public ArrayList<Factura> listaFacturasFechaActivas (String fecha){
         
         ArrayList<Factura> listaFacturases= new ArrayList<>();
-        String sql="SELECT * FROM `cafebar`.`temp_venta` WHERE date(`fecha`) = \""+fecha+"\"AND `solvente` = \"Activa\"";
+        String sql="SELECT * FROM `cafebar`.`temp_venta` WHERE date(`fecha`) = \""+fecha+"\"AND `estado` = \"Activa\"";
         
         try {
             Statement stm;

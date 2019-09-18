@@ -323,6 +323,7 @@ public class NuevoPedido extends javax.swing.JFrame {
 
         jButton_AddPedido_.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton_AddPedido_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/clocheX32.png"))); // NOI18N
+        jButton_AddPedido_.setText("+");
         jButton_AddPedido_.setMaximumSize(new java.awt.Dimension(292, 93));
         jButton_AddPedido_.setMinimumSize(new java.awt.Dimension(292, 93));
         jButton_AddPedido_.setPreferredSize(new java.awt.Dimension(292, 93));
@@ -450,6 +451,7 @@ public class NuevoPedido extends javax.swing.JFrame {
 
         jButton_AddPedido_1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton_AddPedido_1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/clocheX32.png"))); // NOI18N
+        jButton_AddPedido_1.setText("+");
         jButton_AddPedido_1.setMaximumSize(new java.awt.Dimension(292, 93));
         jButton_AddPedido_1.setMinimumSize(new java.awt.Dimension(292, 93));
         jButton_AddPedido_1.setPreferredSize(new java.awt.Dimension(292, 93));
@@ -557,10 +559,10 @@ public class NuevoPedido extends javax.swing.JFrame {
         );
         jPanel_Pedidos_Layout.setVerticalGroup(
             jPanel_Pedidos_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Pedidos_Layout.createSequentialGroup()
+            .addGroup(jPanel_Pedidos_Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
-                .addGap(85, 85, 85))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jScrollPane.setViewportView(jPanel_Pedidos_);

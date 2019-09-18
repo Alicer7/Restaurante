@@ -201,11 +201,6 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel_NormalNav_ = new javax.swing.JPanel();
         jLabel_MenuVentas_ = new javax.swing.JLabel();
         jLabel_MenuVentasDelDia_ = new javax.swing.JLabel();
-        jPanel_StatusBar_ = new javax.swing.JPanel();
-        jLabel_HORA_ = new javax.swing.JLabel();
-        jLabel_ResizeIcono_ = new javax.swing.JLabel();
-        jPanel_MainContent_ = new javax.swing.JPanel();
-        jMenuBar_ = new javax.swing.JMenuBar();
         jMenu_Archivos_ = new javax.swing.JMenu();
         jMenuItem_CerrarSesion_ = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
@@ -224,6 +219,11 @@ public class MainMenu extends javax.swing.JFrame {
         jMenu_Help_ = new javax.swing.JMenu();
         jMenuItem_Help_ = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jPanel_StatusBar_ = new javax.swing.JPanel();
+        jLabel_HORA_ = new javax.swing.JLabel();
+        jLabel_ResizeIcono_ = new javax.swing.JLabel();
+        jPanel_MainContent_ = new javax.swing.JPanel();
+        jMenuBar_ = new javax.swing.JMenuBar();
 
         jPanel_MenuBarSmall_.setBackground(java.awt.Color.darkGray);
         jPanel_MenuBarSmall_.setForeground(java.awt.Color.white);
@@ -318,6 +318,99 @@ public class MainMenu extends javax.swing.JFrame {
 
         jPanel_MenuBar_.add(jPanel_NormalNav_, java.awt.BorderLayout.CENTER);
 
+        jMenu_Archivos_.setText("Archivo");
+
+        jMenuItem_CerrarSesion_.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem_CerrarSesion_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/LogOutX24.png"))); // NOI18N
+        jMenuItem_CerrarSesion_.setText("Cerrar Sesión");
+        jMenuItem_CerrarSesion_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_CerrarSesion_ActionPerformed(evt);
+            }
+        });
+        jMenu_Archivos_.add(jMenuItem_CerrarSesion_);
+        jMenu_Archivos_.add(jSeparator1);
+
+        jMenuItem_Salir_.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem_Salir_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/Exit0X24.png"))); // NOI18N
+        jMenuItem_Salir_.setText("Salir");
+        jMenuItem_Salir_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_Salir_ActionPerformed(evt);
+            }
+        });
+        jMenu_Archivos_.add(jMenuItem_Salir_);
+
+        jMenu_Ver_.setText("Ver");
+
+        jMenuItem_ShowMenuBar_.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem_ShowMenuBar_.setText("Mostrar Barra de Herramientas");
+        jMenuItem_ShowMenuBar_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_ShowMenuBar_ActionPerformed(evt);
+            }
+        });
+        jMenu_Ver_.add(jMenuItem_ShowMenuBar_);
+
+        jMenuItem_ShowNavBar_.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem_ShowNavBar_.setText("Iconificar Barra de Navegación");
+        jMenuItem_ShowNavBar_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_ShowNavBar_ActionPerformed(evt);
+            }
+        });
+        jMenu_Ver_.add(jMenuItem_ShowNavBar_);
+
+        jMenu_Recetas_.setText("Recetas");
+
+        jMenuItem_CrearReceta_.setText("Crear Receta");
+        jMenuItem_CrearReceta_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_CrearReceta_ActionPerformed(evt);
+            }
+        });
+        jMenu_Recetas_.add(jMenuItem_CrearReceta_);
+
+        jMenu_MateriaPrima_.setText("Ingredientes");
+
+        jMenuItem_IngresarMateriaPrima_.setText("Ingresar Materia Prima");
+        jMenuItem_IngresarMateriaPrima_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_IngresarMateriaPrima_ActionPerformed(evt);
+            }
+        });
+        jMenu_MateriaPrima_.add(jMenuItem_IngresarMateriaPrima_);
+
+        jMenu_MP_Bar_.setText("Bar");
+
+        jMenuItem_RegistroDeLicores_.setText("Registro de Licores");
+        jMenuItem_RegistroDeLicores_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_RegistroDeLicores_ActionPerformed(evt);
+            }
+        });
+        jMenu_MP_Bar_.add(jMenuItem_RegistroDeLicores_);
+
+        jMenu_MateriaPrima_.add(jMenu_MP_Bar_);
+
+        jMenu_MP_Restaurante_.setText("Restaurante");
+
+        jMenuItem_RegistroDeCarnes_.setText("Registro de Carnes");
+        jMenu_MP_Restaurante_.add(jMenuItem_RegistroDeCarnes_);
+
+        jMenu_MateriaPrima_.add(jMenu_MP_Restaurante_);
+
+        jMenu_Help_.setText("Ayuda");
+
+        jMenuItem_Help_.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
+        jMenuItem_Help_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/help0X24.png"))); // NOI18N
+        jMenuItem_Help_.setText("Ayuda");
+        jMenu_Help_.add(jMenuItem_Help_);
+
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/heartX24.png"))); // NOI18N
+        jMenuItem1.setText("Acerca de ..");
+        jMenu_Help_.add(jMenuItem1);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 661));
         setName("mainJF"); // NOI18N
@@ -382,110 +475,6 @@ public class MainMenu extends javax.swing.JFrame {
         jMenuBar_.setForeground(java.awt.Color.lightGray);
         jMenuBar_.setMinimumSize(new java.awt.Dimension(0, 0));
         jMenuBar_.setPreferredSize(new java.awt.Dimension(1024, 21));
-
-        jMenu_Archivos_.setText("Archivo");
-
-        jMenuItem_CerrarSesion_.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem_CerrarSesion_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/LogOutX24.png"))); // NOI18N
-        jMenuItem_CerrarSesion_.setText("Cerrar Sesión");
-        jMenuItem_CerrarSesion_.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem_CerrarSesion_ActionPerformed(evt);
-            }
-        });
-        jMenu_Archivos_.add(jMenuItem_CerrarSesion_);
-        jMenu_Archivos_.add(jSeparator1);
-
-        jMenuItem_Salir_.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem_Salir_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/Exit0X24.png"))); // NOI18N
-        jMenuItem_Salir_.setText("Salir");
-        jMenuItem_Salir_.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem_Salir_ActionPerformed(evt);
-            }
-        });
-        jMenu_Archivos_.add(jMenuItem_Salir_);
-
-        jMenuBar_.add(jMenu_Archivos_);
-
-        jMenu_Ver_.setText("Ver");
-
-        jMenuItem_ShowMenuBar_.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem_ShowMenuBar_.setText("Mostrar Barra de Herramientas");
-        jMenuItem_ShowMenuBar_.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem_ShowMenuBar_ActionPerformed(evt);
-            }
-        });
-        jMenu_Ver_.add(jMenuItem_ShowMenuBar_);
-
-        jMenuItem_ShowNavBar_.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem_ShowNavBar_.setText("Iconificar Barra de Navegación");
-        jMenuItem_ShowNavBar_.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem_ShowNavBar_ActionPerformed(evt);
-            }
-        });
-        jMenu_Ver_.add(jMenuItem_ShowNavBar_);
-
-        jMenuBar_.add(jMenu_Ver_);
-
-        jMenu_Recetas_.setText("Recetas");
-
-        jMenuItem_CrearReceta_.setText("Crear Receta");
-        jMenuItem_CrearReceta_.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem_CrearReceta_ActionPerformed(evt);
-            }
-        });
-        jMenu_Recetas_.add(jMenuItem_CrearReceta_);
-
-        jMenuBar_.add(jMenu_Recetas_);
-
-        jMenu_MateriaPrima_.setText("Ingredientes");
-
-        jMenuItem_IngresarMateriaPrima_.setText("Ingresar Materia Prima");
-        jMenuItem_IngresarMateriaPrima_.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem_IngresarMateriaPrima_ActionPerformed(evt);
-            }
-        });
-        jMenu_MateriaPrima_.add(jMenuItem_IngresarMateriaPrima_);
-
-        jMenu_MP_Bar_.setText("Bar");
-
-        jMenuItem_RegistroDeLicores_.setText("Registro de Licores");
-        jMenuItem_RegistroDeLicores_.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem_RegistroDeLicores_ActionPerformed(evt);
-            }
-        });
-        jMenu_MP_Bar_.add(jMenuItem_RegistroDeLicores_);
-
-        jMenu_MateriaPrima_.add(jMenu_MP_Bar_);
-
-        jMenu_MP_Restaurante_.setText("Restaurante");
-
-        jMenuItem_RegistroDeCarnes_.setText("Registro de Carnes");
-        jMenu_MP_Restaurante_.add(jMenuItem_RegistroDeCarnes_);
-
-        jMenu_MateriaPrima_.add(jMenu_MP_Restaurante_);
-
-        jMenuBar_.add(jMenu_MateriaPrima_);
-
-        jMenu_Help_.setText("Ayuda");
-
-        jMenuItem_Help_.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
-        jMenuItem_Help_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/help0X24.png"))); // NOI18N
-        jMenuItem_Help_.setText("Ayuda");
-        jMenu_Help_.add(jMenuItem_Help_);
-
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/core/resources/icons/heartX24.png"))); // NOI18N
-        jMenuItem1.setText("Acerca de ..");
-        jMenu_Help_.add(jMenuItem1);
-
-        jMenuBar_.add(jMenu_Help_);
-
         setJMenuBar(jMenuBar_);
 
         getAccessibleContext().setAccessibleName("MainJF");
